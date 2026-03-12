@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://chltjso0ke0fe"]
+
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="1_h0uo0"]
+
+[node name="Manager" type="Node" unique_id=965861676]
+script = ExtResource("1_h0uo0")
+metadata/_custom_type_script = "uid://htdxvtahxgnw"

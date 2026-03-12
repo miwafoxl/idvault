@@ -1,5 +1,5 @@
 extends Resource
-class_name Thing
+class_name Entry
 
 @export var id: int = 0;
 @export var elements: Array[Element] = [];
@@ -21,7 +21,7 @@ func remove_elements(__elements: Array[int]) -> bool:
 			elements.remove_at(__element_id)
 	return true
 
-func new(__id: int, __elements: Array[Element] = []) -> Thing:
+func new(__id: int, __elements: Array[Element] = []) -> Entry:
 	self.id = __id
 	self.elements = __elements
 	return self
