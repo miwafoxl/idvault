@@ -26,7 +26,7 @@ func test2() -> bool:
 		return false
 	return true
 
-## Creates a single entry, give it a element then delete it
+## Creates a single entry, give it a element then delete the entry
 func test3() -> bool:
 	var __id: int = randi() % 100
 	var __entry: Entry = Entry.new(__id, [
@@ -42,6 +42,20 @@ func test3() -> bool:
 		return false
 	return true
 
+## Creates a single entry, give it a element, delete the element then the entry
+func test4() -> bool:
+	var __id: int = randi() % 100
+	var __entry: Entry = Entry.new(__id)
+	__entry.append_elements([
+		Link.new([__entry.id])
+	])
+	if not manager.append_entries([__entry]):
+		return false
+	manager.unordered_entries[0].remove_elements([0])
+	if not manager.remove_entries([0]):
+		return false
+	return true
+
 func _ready() -> void:
 	
 	if not test1():
@@ -50,3 +64,5 @@ func _ready() -> void:
 		printerr("Test2 failed")
 	if not test3():
 		printerr("Test3 failed")
+	if not test4():
+		printerr("Test4 failed")

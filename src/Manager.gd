@@ -34,8 +34,8 @@ func remove_entries(__entry_arr_indexes: Array[int]) -> bool:
 				entries array size (%s))" % [__entry_id, __entries_size])
 				return false
 			unordered_entries.set(__entry_id, null)
-		descriptor_entries = reload_descriptor_entries(unordered_entries)
 		clean_entries()
+		descriptor_entries = reload_descriptor_entries(unordered_entries)
 	return true
 
 func clean_entries() -> void:
@@ -51,10 +51,11 @@ func clean_entries() -> void:
 func reload_descriptor_entries(__entries: Array[Entry]) \
 		-> Dictionary[int, WeakRef]:
 	var __descriptor_refs: Dictionary[int, WeakRef] = {}
+	if __entries.is_empty():
+		return __descriptor_refs
 	for __entry_id: int in __entries.size():
 		var __entry: Entry = __entries[__entry_id]
 		if __entry.has_descriptor():
 			var __ref: WeakRef = weakref(__entry)
 			__descriptor_refs.set(__entry_id, __ref)
-	print_debug(__descriptor_refs)
 	return __descriptor_refs
