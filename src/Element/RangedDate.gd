@@ -8,8 +8,8 @@ class_name RangedDate
 
 enum RangedDateTypes {
 	DATE_RANGED,
-	DATE_BIRTH,  # Birth and Death
-	DATE_ACTIVITY,  # Active since x, artist disbanded in y
+	DATE_ALIVE,  # Ex: Birth and Death
+	DATE_ACTIVITY,  # Ex: Active since x, artist disbanded in y
 }
 
 func is_range_inverted(__bound_1: Date, __bound_2: Date) -> bool:
