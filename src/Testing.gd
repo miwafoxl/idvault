@@ -56,13 +56,31 @@ func test4() -> bool:
 		return false
 	return true
 
-func _ready() -> void:
+## Create an entry, retrieves it as if only ID was known, then deletes it
+func test5() -> bool:
+	var __id: int = randi() % 100
+	var __entry: Entry = Entry.new(__id)
+	if not manager.append_entries([__entry]):
+		return false
+	var __get_entry: Array[Entry] = manager.get_entry_by_id([__id])
+	if __get_entry.is_empty() or __get_entry[0] == null:
+		return false
+	if not manager.remove_entries([0]):
+		return false
+	return true
+
+func do_tests() -> Array[int]:
+	var __failed_at: Array[int] = []
+	if not test1(): __failed_at.append(1)
+	if not test2(): __failed_at.append(2)
+	if not test3(): __failed_at.append(3)
+	if not test4(): __failed_at.append(4)
+	if not test5(): __failed_at.append(5)
+	return __failed_at
 	
-	if not test1():
-		printerr("Test1 failed")
-	if not test2():
-		printerr("Test2 failed")
-	if not test3():
-		printerr("Test3 failed")
-	if not test4():
-		printerr("Test4 failed")
+func _ready() -> void:
+	var __test_results: Array[int] = do_tests()
+	if __test_results.is_empty():
+		print("All tests passed")
+	else:
+		printerr("Test failed: ", __test_results)

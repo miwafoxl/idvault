@@ -4,6 +4,25 @@ class_name Manager
 @export var unordered_entries: Array[Entry] = [];
 var descriptor_entries: Dictionary[int, WeakRef] = {};
 
+# TODO: Separate thread
+func get_entry_by_id(__id: Array[int]) -> Array[Entry]:
+	var __entries: Array[Entry] = []
+	__entries.resize(__id.size())
+	if unordered_entries.is_empty():
+		return __entries
+	for i: int in unordered_entries.size():
+		if unordered_entries[i].id in __id:
+			for u: int in __id.size():
+				if __id[u] == unordered_entries[i].id:
+					__entries[u] = unordered_entries[i]
+	var __nulls: int = 0
+	for __entry_check: Entry in __entries: # Check if it's busted
+		if __entry_check == null:
+			__nulls += 1
+	if __entries.size() == __nulls:
+		__entries = []
+	return __entries
+
 func append_elements_to_entry(__entry_arr_indexes: Array[int], \
 		__elements: Array[Element]) -> bool:
 	var __err: bool = true
@@ -47,7 +66,7 @@ func clean_entries() -> void:
 	for __index: int in __rm_indexes:
 		unordered_entries.remove_at(__index)
 
-# TODO: This probably needs to be ran in a separate thread
+# TODO: Separate thread
 func reload_descriptor_entries(__entries: Array[Entry]) \
 		-> Dictionary[int, WeakRef]:
 	var __descriptor_refs: Dictionary[int, WeakRef] = {}
