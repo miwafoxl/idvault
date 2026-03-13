@@ -21,5 +21,5 @@ func remove_from_linked_entries(__linking: Array[int]) -> bool:
 			to.remove_at(__linked_entry_id)
 	return true
 
-func new(__link_to: Array[Entry]) -> Link:
-	return self
+func _init(__link_to: Array[Entry]) -> void:
+	pass

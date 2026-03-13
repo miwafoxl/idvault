@@ -18,10 +18,19 @@ func remove_elements(__elements: Array[int]) -> bool:
 				printerr("Failed to remove element %s (larger than \
 				elements size (%s))" % [__element_id, __elements_size])
 				return false
-			elements.remove_at(__element_id)
+			elements.set(__element_id, null)
+		clean_elements()
 	return true
 
-func new(__id: int, __elements: Array[Element] = []) -> Entry:
+func clean_elements() -> void:
+	var __rm_indexes: Array[int] = []
+	for __element_id: int in elements.size():
+		if elements[__element_id] == null:
+			__rm_indexes.append(__element_id)
+	__rm_indexes.reverse()
+	for __index: int in __rm_indexes:
+		elements.remove_at(__index)
+
+func _init(__id: int, __elements: Array[Element] = []) -> void:
 	self.id = __id
 	self.elements = __elements
-	return self

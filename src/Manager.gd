@@ -27,9 +27,19 @@ func remove_entries(__entry_arr_indexes: Array[int]) -> bool:
 	var __entries_size: int = unordered_entries.size() # Potentially bad to do everytime
 	if not __entry_arr_indexes.is_empty():
 		for __entry_id: int in __entry_arr_indexes:
-			if __entry_id < __entries_size: 
+			if __entry_id > __entries_size: 
 				printerr("Failed to remove entry %s (larger than \
 				entries array size (%s))" % [__entry_id, __entries_size])
 				return false
-			unordered_entries.remove_at(__entry_id)
+			unordered_entries.set(__entry_id, null)
+		clean_entries()
 	return true
+
+func clean_entries() -> void:
+	var __rm_indexes: Array[int] = []
+	for __entry_id: int in unordered_entries.size():
+		if unordered_entries[__entry_id] == null:
+			__rm_indexes.append(__entry_id)
+	__rm_indexes.reverse()
+	for __index: int in __rm_indexes:
+		unordered_entries.remove_at(__index)

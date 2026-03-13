@@ -19,7 +19,7 @@ func is_range_inverted(__bound_1: Date, __bound_2: Date) -> bool:
 		return true
 	return false
 
-func new(__range: Array[Date]) -> RangedDate:
+func _init(__range: Array[Date]) -> void:
 	var __bound_1: Date = __range[0];
 	var __bound_2: Date = __range[1];
 	var __invert_op: bool = is_range_inverted(__bound_1, __bound_2)
@@ -29,4 +29,3 @@ func new(__range: Array[Date]) -> RangedDate:
 	else:
 		self.start_date = __bound_2
 		self.end_date = __bound_1
-	return self

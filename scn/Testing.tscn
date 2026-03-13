@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cjuakrb1vso45"]
+
+[ext_resource type="Script" uid="uid://bq2wjdstkp3by" path="res://src/Testing.gd" id="1_68vgf"]
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="2_kena2"]
+
+[node name="Testing" type="Node" unique_id=1650119604 node_paths=PackedStringArray("manager")]
+script = ExtResource("1_68vgf")
+manager = NodePath("Manager")
+
+[node name="Manager" type="Node" parent="." unique_id=1453702057]
+script = ExtResource("2_kena2")
+metadata/_custom_type_script = "uid://htdxvtahxgnw"

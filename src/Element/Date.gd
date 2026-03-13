@@ -18,7 +18,6 @@ func get_difference(__yyyymmdd: Vector3i) -> int:
 	})
 	return abs(__timestamp_2 - __timestamp_1)
 
-func new(__year: int, __month: int, __day: int = 0, __utc: int = 0) -> Date:
+func _init(__year: int, __month: int, __day: int = 0, __utc: int = 0) -> void:
 	self.yyyymmdd = Vector3i(__year, __month, __day)
 	self.utc = __utc
-	return self
