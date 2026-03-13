@@ -29,10 +29,10 @@ func test2() -> bool:
 func test3() -> bool:
 	var __id: int = randi() % 100
 	var __entry: Entry = Entry.new(__id, [
-		Title.new("Momento",)
+		Title.new("Momento")
 	])
 	__entry.append_elements([
-		Link.new([__entry])
+		Link.new([__entry.id])
 	])
 	if not manager.append_entries([__entry]):
 		return false
