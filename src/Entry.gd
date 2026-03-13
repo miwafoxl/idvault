@@ -4,6 +4,10 @@ class_name Entry
 @export var id: int = 0;
 @export var elements: Array[Element] = [];
 
+func _init(__id: int, __elements: Array[Element] = []) -> void:
+	self.id = __id
+	self.elements = __elements
+
 func append_elements(__elements: Array[Element]) -> bool:
 	if not __elements.is_empty():
 		elements.append_array(__elements)
@@ -31,6 +35,14 @@ func clean_elements() -> void:
 	for __index: int in __rm_indexes:
 		elements.remove_at(__index)
 
-func _init(__id: int, __elements: Array[Element] = []) -> void:
-	self.id = __id
-	self.elements = __elements
+func has_descriptor() -> bool:
+	for __element: Element in elements:
+		if __element is Descriptor:
+			return true
+	return false
+
+func has_link() -> bool:
+	for __element: Element in elements:
+		if __element is Link:
+			return true
+	return false

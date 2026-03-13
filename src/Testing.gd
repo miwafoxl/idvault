@@ -2,6 +2,7 @@ extends Node
 
 @export var manager: Manager
 
+
 ## Creates and removes a single entry
 func test1() -> bool:
 	var __id: int = randi() % 100
@@ -32,7 +33,8 @@ func test3() -> bool:
 		Title.new("Momento")
 	])
 	__entry.append_elements([
-		Link.new([__entry.id])
+		Link.new([__entry.id]),
+		Descriptor.new("test")
 	])
 	if not manager.append_entries([__entry]):
 		return false
@@ -41,6 +43,7 @@ func test3() -> bool:
 	return true
 
 func _ready() -> void:
+	
 	if not test1():
 		printerr("Test1 failed")
 	if not test2():
