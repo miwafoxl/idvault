@@ -22,7 +22,7 @@ func remove_from_linked_entries(__rm_indexes: Array[int]) -> bool:
 			to.remove_at(__linked_entry_id)
 	return true
 
-func append_paremeter(__parameters: Dictionary[String, Variant]) -> bool:
+func append_parameter(__parameters: Dictionary[String, Variant]) -> bool:
 	if not __parameters.is_empty():
 		parameters.merge(__parameters)
 		return true
@@ -38,4 +38,4 @@ func remove_parameter(__rm_parameter_id: Array[String]) -> bool:
 func _init(__link_entry_id: Array[int], \
 		__parameters: Dictionary[String, Variant] = {}) -> void:
 	self.to = __link_entry_id
-	append_paremeter(__parameters)
+	append_parameter(__parameters)

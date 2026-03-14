@@ -4,6 +4,7 @@ class_name Manager
 @export var unordered_entries: Array[Entry] = [];
 var descriptors_cx: Array # [0: entry ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: entry ref, 1: parameter ref, 2: param id]
+var links_cx: Array # [0: entry ref, 1: link ref, 2: linked entry id]
 
 # TODO: Separate thread
 func get_entry_by_id(__id: Array[int]) -> Array[Entry]:
@@ -43,6 +44,7 @@ func append_entries(__entries: Array[Entry]) -> bool:
 		unordered_entries.append_array(__entries)
 		descriptors_cx.append(reload_descriptor_context(__entries))
 		parameters_cx.append(reload_parameters_context(__entries))
+		links_cx.append(reload_links_context(__entries))
 		return true
 	return false 
 
@@ -58,6 +60,7 @@ func remove_entries(__entry_arr_indexes: Array[int]) -> bool:
 		clean_entries()
 		descriptors_cx = reload_descriptor_context(unordered_entries)
 		parameters_cx = reload_parameters_context(unordered_entries)
+		links_cx = reload_links_context(unordered_entries)
 	return true
 
 func clean_entries() -> void:
@@ -92,4 +95,17 @@ func reload_parameters_context(__entries: Array[Entry]) \
 			if not __entry.has_parameters(): continue
 			for __param: Parameter in __entry.retrieve_parameters():
 				__cx.append([weakref(__entry), weakref(__param), __param.id])
+	return __cx
+
+# TODO: Separate thread
+func reload_links_context(__entries: Array[Entry]) \
+		-> Array: # links_cx model
+	var __cx: Array[Array]
+	if not __entries.is_empty():
+		for __entry_idx: int in __entries.size():
+			var __entry: Entry = __entries[__entry_idx]
+			if not __entry.has_link(): continue
+			for __link: Link in __entry.retrieve_links():
+				__cx.append([weakref(__entry), weakref(__link), 
+				__link.to, __link.parameters])
 	return __cx

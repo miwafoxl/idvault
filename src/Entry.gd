@@ -61,15 +61,25 @@ func retrieve_links() -> Array[Link]:
 			__elements_filtered.append(__element)
 	return __elements_filtered
 
+func count_parameters() -> int:
+	var __count: int = 0
+	for __element: Element in elements:
+		if __element is Parameter:
+			__count += 1
+	return __count
+	
 func has_parameters() -> bool:
 	for __element: Element in elements:
 		if __element is Parameter:
 			return true
 	return false
-
-func retrieve_parameters() -> Array[Parameter]:
+	
+func retrieve_parameters(__order: int = -1) -> Array[Parameter]:
 	var __elements_filtered: Array[Parameter] = []
 	for __element: Element in elements:
 		if __element is Parameter:
-			__elements_filtered.append(__element)
+			if (__order >= 0) and __element.order == __order:
+				__elements_filtered.append(__element)
+			else:
+				__elements_filtered.append(__element)
 	return __elements_filtered
