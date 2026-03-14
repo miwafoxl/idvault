@@ -9,5 +9,5 @@ class Subquery:
 	var parameters: Array = []
 	var negate: bool = false
 
-func _init() -> void:
+func _init(__raw_query: String, __cx_parameters) -> void:
 	pass

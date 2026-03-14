@@ -3,6 +3,7 @@ class_name Manager
 
 @export var unordered_entries: Array[Entry] = [];
 var descriptor_entries: Dictionary[int, WeakRef] = {};
+var parameter_list: Dictionary[String, WeakRef] = {};
 
 # TODO: Separate thread
 func get_entry_by_id(__id: Array[int]) -> Array[Entry]:
@@ -40,7 +41,8 @@ func append_elements_to_entry(__entry_arr_indexes: Array[int], \
 func append_entries(__entries: Array[Entry]) -> bool:
 	if not __entries.is_empty():
 		unordered_entries.append_array(__entries)
-		descriptor_entries = reload_descriptor_entries(unordered_entries)
+		descriptor_entries.merge(reload_descriptor_entries(__entries), true)
+		parameter_list.merge(reload_parameter_list(__entries), true)
 		return true
 	return false 
 
@@ -55,6 +57,7 @@ func remove_entries(__entry_arr_indexes: Array[int]) -> bool:
 			unordered_entries.set(__entry_id, null)
 		clean_entries()
 		descriptor_entries = reload_descriptor_entries(unordered_entries)
+		parameter_list = reload_parameter_list(unordered_entries)
 	return true
 
 func clean_entries() -> void:
@@ -70,11 +73,21 @@ func clean_entries() -> void:
 func reload_descriptor_entries(__entries: Array[Entry]) \
 		-> Dictionary[int, WeakRef]:
 	var __descriptor_refs: Dictionary[int, WeakRef] = {}
-	if __entries.is_empty():
-		return __descriptor_refs
-	for __entry_id: int in __entries.size():
-		var __entry: Entry = __entries[__entry_id]
-		if __entry.has_descriptor():
-			var __ref: WeakRef = weakref(__entry)
-			__descriptor_refs.set(__entry_id, __ref)
+	if not __entries.is_empty():
+		for __entry_idx: int in __entries.size():
+			var __entry: Entry = __entries[__entry_idx]
+			if __entry.has_descriptor():
+				var __ref: WeakRef = weakref(__entry)
+				__descriptor_refs.set(__entry_idx, __ref)
 	return __descriptor_refs
+
+# TODO: Separate thread
+func reload_parameter_list(__entries: Array[Entry]) \
+		-> Dictionary[String, WeakRef]:
+	var __parameters: Dictionary[String, WeakRef] = {}
+	if not __entries.is_empty():
+		for __entry: Entry in __entries:
+			if not __entry.has_parameters(): continue
+			for __param: Parameter in __entry.retrieve_parameters():
+				__parameters.set(__param.id, weakref(__param))
+	return __parameters

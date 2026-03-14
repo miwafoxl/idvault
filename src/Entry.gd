@@ -41,14 +41,35 @@ func has_descriptor() -> bool:
 			return true
 	return false
 
+func retrieve_descriptors() -> Array[Descriptor]:
+	var __elements_filtered: Array[Descriptor] = []
+	for __element: Element in elements:
+		if __element is Descriptor:
+			__elements_filtered.append(__element)
+	return __elements_filtered
+
 func has_link() -> bool:
 	for __element: Element in elements:
 		if __element is Link:
 			return true
 	return false
 
+func retrieve_links() -> Array[Link]:
+	var __elements_filtered: Array[Link] = []
+	for __element: Element in elements:
+		if __element is Link:
+			__elements_filtered.append(__element)
+	return __elements_filtered
+
 func has_parameters() -> bool:
 	for __element: Element in elements:
 		if __element is Parameter:
 			return true
 	return false
+
+func retrieve_parameters() -> Array[Parameter]:
+	var __elements_filtered: Array[Parameter] = []
+	for __element: Element in elements:
+		if __element is Parameter:
+			__elements_filtered.append(__element)
+	return __elements_filtered
