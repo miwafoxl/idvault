@@ -70,13 +70,13 @@ func test5() -> bool:
 		return false
 	return true
 
-## Create an entry, add a parameter and a links to itself with \
+## Create an entry with a parameter and validly links to itself with \
 ## a link parameter
 func test6() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
 	var __entry: Entry = Entry.new(__id, [
-		Title.new("Nomati"),
+		Title.new("Fodendo"),
 		__param
 	])
 	__entry.append_elements([
@@ -85,8 +85,8 @@ func test6() -> bool:
 	])
 	if not manager.append_entries([__entry]):
 		return false
-	#if not manager.remove_entries([0]): #      CLEANUP
-		#return false
+	if not manager.remove_entries([0]): #      CLEANUP
+		return false
 	return true
 
 
