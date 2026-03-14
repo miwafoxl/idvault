@@ -2,8 +2,8 @@ extends Node
 class_name Manager
 
 @export var unordered_entries: Array[Entry] = [];
-var descriptor_entries: Dictionary[int, WeakRef] = {};
-var parameter_list: Dictionary[String, WeakRef] = {};
+var descriptors_cx: Array # [entry ref, descriptor ref, alias]
+var parameters_cx: Array # [entry ref, parameter ref, param id]
 
 # TODO: Separate thread
 func get_entry_by_id(__id: Array[int]) -> Array[Entry]:
@@ -21,7 +21,7 @@ func get_entry_by_id(__id: Array[int]) -> Array[Entry]:
 		if __entry_check == null:
 			__nulls += 1
 	if __entries.size() == __nulls:
-		__entries = []
+		__entries = [] # Yeah, it's busted
 	return __entries
 
 func append_elements_to_entry(__entry_arr_indexes: Array[int], \
@@ -41,8 +41,8 @@ func append_elements_to_entry(__entry_arr_indexes: Array[int], \
 func append_entries(__entries: Array[Entry]) -> bool:
 	if not __entries.is_empty():
 		unordered_entries.append_array(__entries)
-		descriptor_entries.merge(reload_descriptor_entries(__entries), true)
-		parameter_list.merge(reload_parameter_list(__entries), true)
+		descriptors_cx.append(reload_descriptor_context(__entries))
+		parameters_cx.append(reload_parameters_context(__entries))
 		return true
 	return false 
 
@@ -56,8 +56,8 @@ func remove_entries(__entry_arr_indexes: Array[int]) -> bool:
 				return false
 			unordered_entries.set(__entry_id, null)
 		clean_entries()
-		descriptor_entries = reload_descriptor_entries(unordered_entries)
-		parameter_list = reload_parameter_list(unordered_entries)
+		descriptors_cx = reload_descriptor_context(unordered_entries)
+		parameters_cx = reload_parameters_context(unordered_entries)
 	return true
 
 func clean_entries() -> void:
@@ -70,24 +70,26 @@ func clean_entries() -> void:
 		unordered_entries.remove_at(__index)
 
 # TODO: Separate thread
-func reload_descriptor_entries(__entries: Array[Entry]) \
-		-> Dictionary[int, WeakRef]:
-	var __descriptor_refs: Dictionary[int, WeakRef] = {}
+func reload_descriptor_context(__entries: Array[Entry]) \
+		-> Array: # descriptors_cx model
+	var __cx: Array[Array]
 	if not __entries.is_empty():
 		for __entry_idx: int in __entries.size():
 			var __entry: Entry = __entries[__entry_idx]
-			if __entry.has_descriptor():
-				var __ref: WeakRef = weakref(__entry)
-				__descriptor_refs.set(__entry_idx, __ref)
-	return __descriptor_refs
+			if not __entry.has_descriptor(): continue
+			for __descriptor: Descriptor in __entry.retrieve_descriptors():
+				__cx.append([weakref(__entry), weakref(__descriptor), \
+				__descriptor.alias])
+	return __cx
 
 # TODO: Separate thread
-func reload_parameter_list(__entries: Array[Entry]) \
-		-> Dictionary[String, WeakRef]:
-	var __parameters: Dictionary[String, WeakRef] = {}
+func reload_parameters_context(__entries: Array[Entry]) \
+		-> Array: # parameters_cx model
+	var __cx: Array[Array]
 	if not __entries.is_empty():
-		for __entry: Entry in __entries:
+		for __entry_idx: int in __entries.size():
+			var __entry: Entry = __entries[__entry_idx]
 			if not __entry.has_parameters(): continue
 			for __param: Parameter in __entry.retrieve_parameters():
-				__parameters.set(__param.id, weakref(__param))
-	return __parameters
+				__cx.append([weakref(__entry), weakref(__param), __param.id])
+	return __cx
