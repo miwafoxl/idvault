@@ -1,6 +1,7 @@
 extends Element
 class_name Date
 
+@export var description: String = ""
 @export var yyyymmdd: Vector3i = Vector3i.ZERO;
 @export var utc: int = 0;
 
@@ -18,6 +19,8 @@ func get_difference(__yyyymmdd: Vector3i) -> int:
 	})
 	return abs(__timestamp_2 - __timestamp_1)
 
-func _init(__year: int, __month: int, __day: int = 0, __utc: int = 0) -> void:
+func _init(__year: int, __month: int, __day: int = 0,\
+		__description: String = "", __utc: int = 0) -> void:
 	self.yyyymmdd = Vector3i(__year, __month, __day)
 	self.utc = __utc
+	self.description = __description
