@@ -11,7 +11,7 @@ enum ParameterTypes {
 	NUMBER,
 }
 
-func flush_id() -> void:
+func flush_id() -> String:
 	const __ID_CHARSET: Array[String] = [
 		"a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "m", "n", "p", "q",
 		"r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E",
@@ -21,4 +21,10 @@ func flush_id() -> void:
 	var __id: String = ""
 	for i: int in range(__ID_LENGTH):
 		__id += __ID_CHARSET.pick_random()
-	id = __id
+	return id
+
+func _init(__id: String = flush_id(), __type: ParameterTypes = \
+		ParameterTypes.NUMBER, __value: Variant = 0):
+	self.id = __id
+	self.type = __type
+	self.value = __value

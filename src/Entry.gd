@@ -46,3 +46,9 @@ func has_link() -> bool:
 		if __element is Link:
 			return true
 	return false
+
+func has_parameters() -> bool:
+	for __element: Element in elements:
+		if __element is Parameter:
+			return true
+	return false
