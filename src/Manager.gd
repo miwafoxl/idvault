@@ -2,8 +2,8 @@ extends Node
 class_name Manager
 
 @export var unordered_entries: Array[Entry] = [];
-var descriptors_cx: Array # [entry ref, descriptor ref, alias]
-var parameters_cx: Array # [entry ref, parameter ref, param id]
+var descriptors_cx: Array # [0: entry ref, 1: descriptor ref, 2: alias]
+var parameters_cx: Array # [0: entry ref, 1: parameter ref, 2: param id]
 
 # TODO: Separate thread
 func get_entry_by_id(__id: Array[int]) -> Array[Entry]:

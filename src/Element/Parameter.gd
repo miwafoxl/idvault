@@ -2,6 +2,7 @@ extends Element
 class_name Parameter
 
 @export var id: String = "";
+@export var order: int = 0;
 @export var type: ParameterTypes = ParameterTypes.PARAMETER;
 
 enum ParameterTypes {
@@ -22,7 +23,8 @@ func flush_id() -> String:
 		__id += __ID_CHARSET.pick_random()
 	return __id
 
-func _init(__type: ParameterTypes = ParameterTypes.NUMBER, \
+func _init(__type: ParameterTypes = ParameterTypes.NUMBER, __order: int = 0, \
 		__id: String = flush_id()):
 	self.id = __id
+	self.order = __order
 	self.type = __type
