@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://qwnt8iblsa3l"]
+
+[ext_resource type="Script" uid="uid://bgl0w67mhmb04" path="res://src/UI.gd" id="1_2ka8v"]
+
+[node name="Ui" type="Control" unique_id=2117910557]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ka8v")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1599995273]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=140571579]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=1643508452]
+layout_mode = 2

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dkuonxuts2f4e"]
+
+[node name="EntryList" type="MarginContainer" unique_id=1272008251]
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="." unique_id=429211911]
+layout_mode = 2

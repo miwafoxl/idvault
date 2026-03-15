@@ -114,7 +114,6 @@ func test7() -> bool:
 	print_debug(__q_result)
 	return true
 
-
 func do_tests() -> Array[int]:
 	var __failed_at: Array[int] = []
 	if not test1(): __failed_at.append(1)
