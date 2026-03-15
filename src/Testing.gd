@@ -89,6 +89,31 @@ func test6() -> bool:
 		return false
 	return true
 
+## Create an entry with a parameter and validly links to itself with \
+## a link parameter, then queries it.
+func test7() -> bool:
+	var __id: int = randi() % 100
+	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
+	var __entry: Entry = Entry.new(__id, [
+		Title.new("Fodendo"),
+		__param
+	])
+	__entry.append_elements([
+		Link.new([__entry.id], {__param.id: 7}),
+		Descriptor.new("test")
+	])
+	if not manager.append_entries([__entry]):
+		return false
+	
+	var __q: Query = Query.new("test", manager.unordered_entries, \
+			manager.descriptors_cx, manager.parameters_cx, manager.links_cx)
+	if not __q.parse_raw():
+		return false
+	__q.compute()
+	var __q_result: Array[Entry] = await __q.done
+	print_debug(__q_result)
+	return true
+
 
 func do_tests() -> Array[int]:
 	var __failed_at: Array[int] = []
@@ -98,11 +123,13 @@ func do_tests() -> Array[int]:
 	if not test4(): __failed_at.append(4)
 	if not test5(): __failed_at.append(5)
 	if not test6(): __failed_at.append(6)
+	if not await test7(): __failed_at.append(7)
 	return __failed_at
 	
 func _ready() -> void:
-	var __test_results: Array[int] = do_tests()
+	var __test_results: Array[int] = await do_tests()
 	if __test_results.is_empty():
 		print("All tests passed")
 	else:
 		printerr("Test failed: ", __test_results)
+	

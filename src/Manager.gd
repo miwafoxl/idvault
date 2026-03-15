@@ -42,9 +42,9 @@ func append_elements_to_entry(__entry_arr_indexes: Array[int], \
 func append_entries(__entries: Array[Entry]) -> bool:
 	if not __entries.is_empty():
 		unordered_entries.append_array(__entries)
-		descriptors_cx.append(reload_descriptor_context(__entries))
-		parameters_cx.append(reload_parameters_context(__entries))
-		links_cx.append(reload_links_context(__entries))
+		descriptors_cx = reload_descriptor_context(unordered_entries)
+		parameters_cx = reload_parameters_context(unordered_entries)
+		links_cx = reload_links_context(unordered_entries)
 		return true
 	return false 
 
@@ -75,7 +75,7 @@ func clean_entries() -> void:
 # TODO: Separate thread
 func reload_descriptor_context(__entries: Array[Entry]) \
 		-> Array: # descriptors_cx model
-	var __cx: Array[Array]
+	var __cx: Array
 	if not __entries.is_empty():
 		for __entry_idx: int in __entries.size():
 			var __entry: Entry = __entries[__entry_idx]
@@ -88,7 +88,7 @@ func reload_descriptor_context(__entries: Array[Entry]) \
 # TODO: Separate thread
 func reload_parameters_context(__entries: Array[Entry]) \
 		-> Array: # parameters_cx model
-	var __cx: Array[Array]
+	var __cx: Array
 	if not __entries.is_empty():
 		for __entry_idx: int in __entries.size():
 			var __entry: Entry = __entries[__entry_idx]
@@ -100,7 +100,7 @@ func reload_parameters_context(__entries: Array[Entry]) \
 # TODO: Separate thread
 func reload_links_context(__entries: Array[Entry]) \
 		-> Array: # links_cx model
-	var __cx: Array[Array]
+	var __cx: Array
 	if not __entries.is_empty():
 		for __entry_idx: int in __entries.size():
 			var __entry: Entry = __entries[__entry_idx]
