@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://crtk73wxrxvkq"]
+
+[ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/Panel/EntryList.gd" id="1_pof3a"]
+[ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/Widgets/WidgetEntryItem.tscn" id="2_bhnnn"]
+
+[node name="PanelEntryList" type="Control" unique_id=1192789613 node_paths=PackedStringArray("entry_list_parent")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_pof3a")
+widget_entryitem = ExtResource("2_bhnnn")
+entry_list_parent = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+metadata/_custom_type_script = "uid://mpumg4pxy8il"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1283702624]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.054
+offset_bottom = 0.00799942
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=529340556]
+layout_mode = 2
+
+[node name="NewEntryButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=602861986]
+layout_mode = 2
+text = "+ New Entry"
+
+[node name="QueryLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=649090237]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+placeholder_text = "Query..."
+
+[node name="QueryButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1214248633]
+layout_mode = 2
+text = "Query"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1620681293]
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=1536254369]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/NewEntryButton" to="." method="_on_new_entry_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/QueryButton" to="." method="_on_query_button_button_down"]

@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://qwnt8iblsa3l"]
 
 [ext_resource type="Script" uid="uid://bgl0w67mhmb04" path="res://src/UI.gd" id="1_2ka8v"]
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="2_ffxes"]
+[ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/UI/Panel_EntryList.tscn" id="2_x8v7u"]
 
-[node name="Ui" type="Control" unique_id=2117910557]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
+bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
+
+[node name="Ui" type="Control" unique_id=2117910557 node_paths=PackedStringArray("manager", "node_panels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,6 +15,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2ka8v")
+manager = NodePath("Manager")
+node_panels = NodePath("MarginContainer/HBoxContainer")
+
+[node name="Manager" type="Node" parent="." unique_id=2042373046]
+script = ExtResource("2_ffxes")
+metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
 layout_mode = 1
@@ -23,16 +34,19 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=2075197168]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x8v7u")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1599995273]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=140571579]
+[node name="PanelEntryList" parent="MarginContainer/HBoxContainer" unique_id=1192789613 instance=ExtResource("2_x8v7u")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=1870618833]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=1643508452]
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=1327811748]
 layout_mode = 2

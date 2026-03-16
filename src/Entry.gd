@@ -83,3 +83,16 @@ func retrieve_parameters(__order: int = -1) -> Array[Parameter]:
 			else:
 				__elements_filtered.append(__element)
 	return __elements_filtered
+
+func has_title() -> bool:
+	for __element: Element in elements:
+		if __element is Title:
+			return true
+	return false
+
+func retrieve_titles() -> Array[Title]:
+	var __elements_filtered: Array[Title] = []
+	for __element: Element in elements:
+		if __element is Title:
+			__elements_filtered.append(__element)
+	return __elements_filtered
