@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bgl0w67mhmb04" path="res://src/UI.gd" id="1_2ka8v"]
 [ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="2_ffxes"]
 [ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/UI/Panel_EntryList.tscn" id="2_x8v7u"]
+[ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="3_bf3yq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
@@ -21,6 +22,8 @@ node_panels = NodePath("MarginContainer/HBoxContainer")
 [node name="Manager" type="Node" parent="." unique_id=2042373046]
 script = ExtResource("2_ffxes")
 metadata/_custom_type_script = "uid://htdxvtahxgnw"
+
+[node name="Testing" parent="." unique_id=1650119604 instance=ExtResource("3_bf3yq")]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
 layout_mode = 1

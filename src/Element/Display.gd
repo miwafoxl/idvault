@@ -1,5 +1,5 @@
 extends Element
-class_name Title
+class_name Display
 
 @export var text: String = "";
 @export var alt: String = "";

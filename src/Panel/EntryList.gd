@@ -15,7 +15,7 @@ func update() -> void:
 		__item.queue_free()
 	for __entry: Entry in items_ref:
 		var __entry_widget: WidgetEntryItem = widget_entryitem.instantiate()
-		var __entry_title: Array[Title] = __entry.retrieve_titles()
+		var __entry_title: Array[Display] = __entry.retrieve_displays()
 		__entry_widget.related_id = __entry.id
 		if not __entry_title.is_empty():
 			__entry_widget.title = __entry_title[0].text

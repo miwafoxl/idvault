@@ -5,9 +5,9 @@ class_name UI
 @export var node_panels: Control
 
 func add_entry() -> void:
-	manager.append_entries([
-		Entry.new(manager.unordered_entries.size(), [])
-	])
+	manager.append_entries([Entry.new(manager.unordered_entries.size(), [
+		Display.new("a".repeat(randi() % 10), "first test here".repeat(randi() % 2))
+	])])
 	update_panels.call_deferred()
 
 func select_entry(__id: int) -> void:

@@ -30,7 +30,7 @@ func test2() -> bool:
 func test3() -> bool:
 	var __id: int = randi() % 100
 	var __entry: Entry = Entry.new(__id, [
-		Title.new("Momento")
+		Display.new("Momento")
 	])
 	__entry.append_elements([
 		Link.new([__entry.id]),
@@ -76,7 +76,7 @@ func test6() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
 	var __entry: Entry = Entry.new(__id, [
-		Title.new("Fodendo"),
+		Display.new("Fodendo"),
 		__param
 	])
 	__entry.append_elements([
@@ -95,7 +95,7 @@ func test7() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
 	var __entry: Entry = Entry.new(__id, [
-		Title.new("Fodendo"),
+		Display.new("Fodendo"),
 		__param
 	])
 	__entry.append_elements([
@@ -111,7 +111,6 @@ func test7() -> bool:
 		return false
 	__q.compute()
 	var __q_result: Array[Entry] = await __q.done
-	print_debug(__q_result)
 	return true
 
 func do_tests() -> Array[int]:
