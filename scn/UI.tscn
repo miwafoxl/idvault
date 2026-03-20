@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgl0w67mhmb04" path="res://src/UI.gd" id="1_2ka8v"]
 [ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="2_ffxes"]
-[ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/UI/Panel_EntryList.tscn" id="2_x8v7u"]
+[ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/Panels/ItemListPanel.tscn" id="2_x8v7u"]
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="3_bf3yq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
@@ -44,7 +44,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_x8v7u")
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1599995273]
 layout_mode = 2
 
-[node name="PanelEntryList" parent="MarginContainer/HBoxContainer" unique_id=1192789613 instance=ExtResource("2_x8v7u")]
+[node name="ItemListPanel" parent="MarginContainer/HBoxContainer" unique_id=1192789613 instance=ExtResource("2_x8v7u")]
 layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=1870618833]

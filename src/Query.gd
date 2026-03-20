@@ -9,12 +9,12 @@ const QUERY_NEGATOR: String = "!";
 var error_at_splice: Array # [Splice index, QueryError or ParseError]
 var parsed_query: Array[Subquery] = []
 
-var available_entries: Array[Entry] = []
+var available_items: Array[Item] = []
 var available_descriptors: Array = []
 var available_parameters: Array = []
 var available_links: Array = []
 
-signal done(selected_entries: Array[Entry])
+signal done(selected_items: Array[Item])
 
 class Subquery: 
 	var alias: String = "";
@@ -57,7 +57,7 @@ func check_descriptor_availability(__alias: String) -> bool:
 			return true
 	return false
 
-func entry_via_descriptor_alias(__alias: String) -> Entry:
+func item_via_descriptor_alias(__alias: String) -> Item:
 	for __descriptor_arr: Array in available_descriptors:
 		if __descriptor_arr[2] == __alias:
 			return (__descriptor_arr[0] as WeakRef).get_ref()
@@ -96,42 +96,42 @@ func parse_raw() -> bool:
 
 # TODO: Separate thread (please)
 func compute(__subqueries: Array[Subquery] = parsed_query) -> void:
-	var __unsorted_entry_ref: Array[Entry] = []
+	var __unsorted_items: Array[Item] = []
 	if __subqueries.is_empty():
 		printerr("QCompute: empty subquery array provided")
 		error_at_splice = [0, ComputeError.EMPTY_QUERY]
-		done.emit.call_deferred(__unsorted_entry_ref)
+		done.emit.call_deferred(__unsorted_items)
 		return
 	for i: int in __subqueries.size():
 		var __alias: String = __subqueries[i].alias
 		if not check_descriptor_availability(__alias):
-			printerr("QCompute: unknown entry with descriptor '%s'" % __alias)
+			printerr("QCompute: unknown item with descriptor '%s'" % __alias)
 			error_at_splice = [0, ComputeError.DESCRIPTOR_UNKNOWN]
 			break 
-		var __entry: Entry = entry_via_descriptor_alias(__alias)
-		if __entry in __unsorted_entry_ref: continue
-		var __param: Parameter = __entry.retrieve_parameters(0)[0] # TODO: support multiple param
+		var __item: Item = item_via_descriptor_alias(__alias)
+		if __item in __unsorted_items: continue
+		var __param: Parameter = __item.retrieve_parameters(0)[0] # TODO: support multiple param
 		var __parameter_parse: Array = []
 		if not __subqueries[i].parameters.is_empty(): 
 			__parameter_parse = parse_parameter(__subqueries[i].parameters[0])
 			if __parameter_parse.is_empty(): 
-				printerr("QCompute: entry with descriptor '%s' has no parameters" % __alias)
+				printerr("QCompute: item with descriptor '%s' has no parameters" % __alias)
 				error_at_splice = [0, ComputeError.PARAMETER_UNKNOWN]
 				break
 			if not __param.type == __parameter_parse[0]:
-				printerr("QCompute: type mismatch while querying entry with descriptor '%s'" % __alias)
+				printerr("QCompute: type mismatch while querying item with descriptor '%s'" % __alias)
 				error_at_splice = [0, ComputeError.PARAMETER_TYPE_MISMATCH]
 				break
 		for u: int in available_links.size():
-			var __linked_entry_id: int = (available_links[u])[2][0] # Linking entry ID
+			var __linked_item_id: int = (available_links[u])[2][0] # Linking item ID
 			var __linked_parameter_value: Variant = (available_links[u])[3] \
 					as Dictionary[String, Variant].get(__param.id)
-			if not __entry.id == __linked_entry_id: continue
+			if not __item.id == __linked_item_id: continue
 			if not __parameter_parse.is_empty() and not solve_parameter(\
 					__parameter_parse, __linked_parameter_value):
 				continue # Not passed
-			__unsorted_entry_ref.append(__entry)
-	done.emit.call_deferred(__unsorted_entry_ref)
+			__unsorted_items.append(__item)
+	done.emit.call_deferred(__unsorted_items)
 
 func solve_parameter(__parsed_parameter: Array, __link_value: Variant) -> bool:
 	var __passed_value: Variant = __parsed_parameter[2]
@@ -212,10 +212,10 @@ func parse_parameter(__parameter: String) -> Array: # [ParameterType, Mode, Valu
 				__param_value = String(__parameter)
 	return [__param_type, __param_mode, __param_value]
 
-func _init(__raw_query: String, __entries: Array[Entry], __descr_cx: Array,
+func _init(__raw_query: String, __items: Array[Item], __descr_cx: Array,
 		__param_cx: Array, __links_cx: Array, __parse: bool = false) -> void:
 	self.raw_query = __raw_query.strip_edges().strip_escapes()
-	self.available_entries = __entries
+	self.available_items = __items
 	self.available_descriptors = __descr_cx
 	self.available_parameters = __param_cx
 	self.available_links = __links_cx

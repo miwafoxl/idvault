@@ -1,111 +1,111 @@
 extends Node
 class_name Manager
 
-@export var unordered_entries: Array[Entry] = [];
-var descriptors_cx: Array # [0: entry ref, 1: descriptor ref, 2: alias]
-var parameters_cx: Array # [0: entry ref, 1: parameter ref, 2: param id]
-var links_cx: Array # [0: entry ref, 1: link ref, 2: linked entry id]
+@export var unordered_items: Array[Item] = [];
+var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
+var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
+var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
 
 # TODO: Separate thread
-func get_entry_by_id(__id: Array[int]) -> Array[Entry]:
-	var __entries: Array[Entry] = []
-	__entries.resize(__id.size())
-	if unordered_entries.is_empty():
-		return __entries
-	for i: int in unordered_entries.size():
-		if unordered_entries[i].id in __id:
+func get_item_by_id(__id: Array[int]) -> Array[Item]:
+	var __items: Array[Item] = []
+	__items.resize(__id.size())
+	if unordered_items.is_empty():
+		return __items
+	for i: int in unordered_items.size():
+		if unordered_items[i].id in __id:
 			for u: int in __id.size():
-				if __id[u] == unordered_entries[i].id:
-					__entries[u] = unordered_entries[i]
+				if __id[u] == unordered_items[i].id:
+					__items[u] = unordered_items[i]
 	var __nulls: int = 0
-	for __entry_check: Entry in __entries: # Check if it's busted
-		if __entry_check == null:
+	for __item_check: Item in __items: # Check if it's busted
+		if __item_check == null:
 			__nulls += 1
-	if __entries.size() == __nulls:
-		__entries = [] # Yeah, it's busted
-	return __entries
+	if __items.size() == __nulls:
+		__items = [] # Yeah, it's busted
+	return __items
 
-func append_elements_to_entry(__entry_arr_indexes: Array[int], \
+func append_elements_to_item(__item_arr_indexes: Array[int], \
 		__elements: Array[Element]) -> bool:
 	var __err: bool = true
-	var __entries_size: int = unordered_entries.size() # Potentially bad to do everytime
-	if not __entry_arr_indexes.is_empty():
-		for __entry_id: int in __entry_arr_indexes:
-			if __entry_id < __entries_size: 
-				printerr("Failed to append element to entry %s (larger than \
-				entries array size (%s))" % [__entry_id, __entries_size])
+	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
+	if not __item_arr_indexes.is_empty():
+		for __item_id: int in __item_arr_indexes:
+			if __item_id < __items_size: 
+				printerr("Failed to append element to item %s (larger than \
+				items array size (%s))" % [__item_id, __items_size])
 				__err = false
 				break
-			unordered_entries[__entry_id].append_elements(__elements)
+			unordered_items[__item_id].append_elements(__elements)
 	return __err
 
-func append_entries(__entries: Array[Entry]) -> bool:
+func append_items(__entries: Array[Item]) -> bool:
 	if not __entries.is_empty():
-		unordered_entries.append_array(__entries)
-		descriptors_cx = reload_descriptor_context(unordered_entries)
-		parameters_cx = reload_parameters_context(unordered_entries)
-		links_cx = reload_links_context(unordered_entries)
+		unordered_items.append_array(__entries)
+		descriptors_cx = reload_descriptor_context(unordered_items)
+		parameters_cx = reload_parameters_context(unordered_items)
+		links_cx = reload_links_context(unordered_items)
 		return true
 	return false 
 
-func remove_entries(__entry_arr_indexes: Array[int]) -> bool:
-	var __entries_size: int = unordered_entries.size() # Potentially bad to do everytime
-	if not __entry_arr_indexes.is_empty():
-		for __entry_id: int in __entry_arr_indexes:
-			if __entry_id > __entries_size: 
-				printerr("Failed to remove entry %s (larger than \
-				entries array size (%s))" % [__entry_id, __entries_size])
+func remove_items(__item_arr_indexes: Array[int]) -> bool:
+	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
+	if not __item_arr_indexes.is_empty():
+		for __item_id: int in __item_arr_indexes:
+			if __item_id > __items_size: 
+				printerr("Failed to remove item %s (larger than \
+				items array size (%s))" % [__item_id, __items_size])
 				return false
-			unordered_entries.set(__entry_id, null)
+			unordered_items.set(__item_id, null)
 		clean_entries()
-		descriptors_cx = reload_descriptor_context(unordered_entries)
-		parameters_cx = reload_parameters_context(unordered_entries)
-		links_cx = reload_links_context(unordered_entries)
+		descriptors_cx = reload_descriptor_context(unordered_items)
+		parameters_cx = reload_parameters_context(unordered_items)
+		links_cx = reload_links_context(unordered_items)
 	return true
 
 func clean_entries() -> void:
 	var __rm_indexes: Array[int] = []
-	for __entry_id: int in unordered_entries.size():
-		if unordered_entries[__entry_id] == null:
-			__rm_indexes.append(__entry_id)
+	for __item_id: int in unordered_items.size():
+		if unordered_items[__item_id] == null:
+			__rm_indexes.append(__item_id)
 	__rm_indexes.reverse()
 	for __index: int in __rm_indexes:
-		unordered_entries.remove_at(__index)
+		unordered_items.remove_at(__index)
 
 # TODO: Separate thread
-func reload_descriptor_context(__entries: Array[Entry]) \
+func reload_descriptor_context(__items: Array[Item]) \
 		-> Array: # descriptors_cx model
 	var __cx: Array
-	if not __entries.is_empty():
-		for __entry_idx: int in __entries.size():
-			var __entry: Entry = __entries[__entry_idx]
-			if not __entry.has_descriptor(): continue
-			for __descriptor: Descriptor in __entry.retrieve_descriptors():
-				__cx.append([weakref(__entry), weakref(__descriptor), \
+	if not __items.is_empty():
+		for __item_idx: int in __items.size():
+			var __item: Item = __items[__item_idx]
+			if not __item.has_descriptor(): continue
+			for __descriptor: Descriptor in __item.retrieve_descriptors():
+				__cx.append([weakref(__item), weakref(__descriptor), \
 				__descriptor.alias])
 	return __cx
 
 # TODO: Separate thread
-func reload_parameters_context(__entries: Array[Entry]) \
+func reload_parameters_context(__items: Array[Item]) \
 		-> Array: # parameters_cx model
 	var __cx: Array
-	if not __entries.is_empty():
-		for __entry_idx: int in __entries.size():
-			var __entry: Entry = __entries[__entry_idx]
-			if not __entry.has_parameters(): continue
-			for __param: Parameter in __entry.retrieve_parameters():
-				__cx.append([weakref(__entry), weakref(__param), __param.id])
+	if not __items.is_empty():
+		for __item_idx: int in __items.size():
+			var __item: Item = __items[__item_idx]
+			if not __item.has_parameters(): continue
+			for __param: Parameter in __item.retrieve_parameters():
+				__cx.append([weakref(__item), weakref(__param), __param.id])
 	return __cx
 
 # TODO: Separate thread
-func reload_links_context(__entries: Array[Entry]) \
+func reload_links_context(__items: Array[Item]) \
 		-> Array: # links_cx model
 	var __cx: Array
-	if not __entries.is_empty():
-		for __entry_idx: int in __entries.size():
-			var __entry: Entry = __entries[__entry_idx]
-			if not __entry.has_link(): continue
-			for __link: Link in __entry.retrieve_links():
-				__cx.append([weakref(__entry), weakref(__link), 
+	if not __items.is_empty():
+		for __item_idx: int in __items.size():
+			var __item: Item = __items[__item_idx]
+			if not __item.has_parameters(): continue
+			for __link: Link in __item.retrieve_links():
+				__cx.append([weakref(__item), weakref(__link), 
 				__link.to, __link.parameters])
 	return __cx

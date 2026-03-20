@@ -1,5 +1,5 @@
 extends Widget
-class_name WidgetEntryItem
+class_name ItemDisplayWidget
 
 @export var related_id: int = 0
 @export var title: String = "";

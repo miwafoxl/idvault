@@ -1,5 +1,5 @@
 extends Resource
-class_name Entry
+class_name Item
 
 @export var id: int = 0;
 @export var elements: Array[Element] = [];

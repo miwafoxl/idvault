@@ -3,114 +3,114 @@ extends Node
 @export var manager: Manager
 
 
-## Creates a single entry
+## Creates a single item
 func test1() -> bool:
 	var __id: int = randi() % 100
-	var __entry: Entry = Entry.new(__id)
-	if not manager.append_entries([__entry]):
+	var __item: Item = Item.new(__id)
+	if not manager.append_items([__item]):
 		return false
-	if not manager.remove_entries([0]): #      CLEANUP
+	if not manager.remove_items([0]): #      CLEANUP
 		return false
 	return true
 
-## Creates 10 entries
+## Creates 10 items
 func test2() -> bool:
-	var __entries: Array[Entry] = []
+	var __items: Array[Item] = []
 	var __id: int = randi() % 100
 	for i: int in range(10):
-		var __entry: Entry = Entry.new(__id + i)
-		__entries.append(__entry)
-	if not manager.append_entries(__entries):
+		var __item: Item = Item.new(__id + i)
+		__items.append(__item)
+	if not manager.append_items(__items):
 		return false
-	if not manager.remove_entries([0,1,2,3,4,5,6,7,8,9]): #      CLEANUP
+	if not manager.remove_items([0,1,2,3,4,5,6,7,8,9]): #      CLEANUP
 		return false
 	return true
 
-## Creates a single entry and gives it a element afterwards
+## Creates a single item and gives it a element afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
-	var __entry: Entry = Entry.new(__id, [
+	var __item: Item = Item.new(__id, [
 		Display.new("Momento")
 	])
-	__entry.append_elements([
-		Link.new([__entry.id]),
+	__item.append_elements([
+		Link.new([__item.id]),
 		Descriptor.new("test")
 	])
-	if not manager.append_entries([__entry]):
+	if not manager.append_items([__item]):
 		return false
-	if not manager.remove_entries([0]): #      CLEANUP
+	if not manager.remove_items([0]): #      CLEANUP
 		return false
 	return true
 
-## Creates a single entry, give it a element, then delete the element \
-## without deleting the whole entry
+## Creates a single item, give it a element, then delete the element \
+## without deleting the whole item
 func test4() -> bool:
 	var __id: int = randi() % 100
-	var __entry: Entry = Entry.new(__id)
-	__entry.append_elements([
-		Link.new([__entry.id])
+	var __item: Item = Item.new(__id)
+	__item.append_elements([
+		Link.new([__item.id])
 	])
-	if not manager.append_entries([__entry]):
+	if not manager.append_items([__item]):
 		return false
-	manager.unordered_entries[0].remove_elements([0])
-	if not manager.remove_entries([0]): #      CLEANUP
+	manager.unordered_items[0].remove_elements([0])
+	if not manager.remove_items([0]): #      CLEANUP
 		return false
 	return true
 
-## Create an entry and retrieves it as if only ID was known
+## Create an item and retrieves it as if only ID was known
 func test5() -> bool:
 	var __id: int = randi() % 100
-	var __entry: Entry = Entry.new(__id)
-	if not manager.append_entries([__entry]):
+	var __item: Item = Item.new(__id)
+	if not manager.append_items([__item]):
 		return false
-	var __get_entry: Array[Entry] = manager.get_entry_by_id([__id])
-	if __get_entry.is_empty() or __get_entry[0] == null:
+	var __get_item: Array[Item] = manager.get_item_by_id([__id])
+	if __get_item.is_empty() or __get_item[0] == null:
 		return false
-	if not manager.remove_entries([0]): #      CLEANUP
+	if not manager.remove_items([0]): #      CLEANUP
 		return false
 	return true
 
-## Create an entry with a parameter and validly links to itself with \
+## Create an item with a parameter and validly links to itself with \
 ## a link parameter
 func test6() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
-	var __entry: Entry = Entry.new(__id, [
+	var __item: Item = Item.new(__id, [
 		Display.new("Fodendo"),
 		__param
 	])
-	__entry.append_elements([
-		Link.new([__entry.id], {__param.id: 7}),
+	__item.append_elements([
+		Link.new([__item.id], {__param.id: 7}),
 		Descriptor.new("test")
 	])
-	if not manager.append_entries([__entry]):
+	if not manager.append_items([__item]):
 		return false
-	if not manager.remove_entries([0]): #      CLEANUP
+	if not manager.remove_items([0]): #      CLEANUP
 		return false
 	return true
 
-## Create an entry with a parameter and validly links to itself with \
+## Create an item with a parameter and validly links to itself with \
 ## a link parameter, then queries it.
 func test7() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
-	var __entry: Entry = Entry.new(__id, [
+	var __item: Item = Item.new(__id, [
 		Display.new("Fodendo"),
 		__param
 	])
-	__entry.append_elements([
-		Link.new([__entry.id], {__param.id: 7}),
+	__item.append_elements([
+		Link.new([__item.id], {__param.id: 7}),
 		Descriptor.new("test")
 	])
-	if not manager.append_entries([__entry]):
+	if not manager.append_items([__item]):
 		return false
 	
-	var __q: Query = Query.new("test", manager.unordered_entries, \
+	var __q: Query = Query.new("test", manager.unordered_items, \
 			manager.descriptors_cx, manager.parameters_cx, manager.links_cx)
 	if not __q.parse_raw():
 		return false
 	__q.compute()
-	var __q_result: Array[Entry] = await __q.done
+	var __q_result: Array[Item] = await __q.done
 	return true
 
 func do_tests() -> Array[int]:

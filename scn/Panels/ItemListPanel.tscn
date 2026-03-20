@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://crtk73wxrxvkq"]
 
-[ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/Panel/EntryList.gd" id="1_pof3a"]
-[ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/Widgets/WidgetEntryItem.tscn" id="2_bhnnn"]
+[ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/Panel/ItemListPanel.gd" id="1_pof3a"]
+[ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/Widgets/ItemDisplayWidget.tscn" id="2_f0ka7"]
 
-[node name="PanelEntryList" type="Control" unique_id=1192789613 node_paths=PackedStringArray("entry_list_parent")]
+[node name="ItemListPanel" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,8 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_pof3a")
-widget_entryitem = ExtResource("2_bhnnn")
-entry_list_parent = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
+widget_item = ExtResource("2_f0ka7")
+item_list_parent = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
 metadata/_custom_type_script = "uid://mpumg4pxy8il"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1283702624]
