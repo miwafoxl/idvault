@@ -26,13 +26,13 @@ func test2() -> bool:
 		return false
 	return true
 
-## Creates a single item and gives it a element afterwards
+## Creates a single item and gives it a propriety afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
 	var __item: Item = Item.new(__id, [
 		Display.new("Momento")
 	])
-	__item.append_elements([
+	__item.append_proprieties([
 		Link.new([__item.id]),
 		Descriptor.new("test")
 	])
@@ -42,17 +42,17 @@ func test3() -> bool:
 		return false
 	return true
 
-## Creates a single item, give it a element, then delete the element \
+## Creates a single item, give it a propriety, then delete the propriety \
 ## without deleting the whole item
 func test4() -> bool:
 	var __id: int = randi() % 100
 	var __item: Item = Item.new(__id)
-	__item.append_elements([
+	__item.append_proprieties([
 		Link.new([__item.id])
 	])
 	if not manager.append_items([__item]):
 		return false
-	manager.unordered_items[0].remove_elements([0])
+	manager.unordered_items[0].remove_proprieties([0])
 	if not manager.remove_items([0]): #      CLEANUP
 		return false
 	return true
@@ -79,7 +79,7 @@ func test6() -> bool:
 		Display.new("Fodendo"),
 		__param
 	])
-	__item.append_elements([
+	__item.append_proprieties([
 		Link.new([__item.id], {__param.id: 7}),
 		Descriptor.new("test")
 	])
@@ -98,7 +98,7 @@ func test7() -> bool:
 		Display.new("Fodendo"),
 		__param
 	])
-	__item.append_elements([
+	__item.append_proprieties([
 		Link.new([__item.id], {__param.id: 7}),
 		Descriptor.new("test")
 	])

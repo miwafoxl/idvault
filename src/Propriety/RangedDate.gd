@@ -1,4 +1,4 @@
-extends Element
+extends Propriety
 class_name RangedDate
 
 # NULL values can be set as Unknown in UI

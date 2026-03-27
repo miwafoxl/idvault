@@ -1,4 +1,4 @@
-extends Element
+extends Propriety
 class_name Display
 
 @export var text: String = "";

@@ -1,4 +1,4 @@
-extends Element
+extends Propriety
 class_name Link
 
 @export var to: Array[int] = [];
@@ -16,8 +16,8 @@ func remove_from_linked_id_arr(__rm_indexes: Array[int]) -> bool:
 	if not __rm_indexes.is_empty():
 		for __linked_item_id: int in __rm_indexes:
 			if __linked_item_id > __links: 
-				printerr("Failed to remove element %s (larger than \
-				elements size (%s))" % [__linked_item_id, __links])
+				printerr("Failed to remove propriety %s (larger than \
+				proprieties size (%s))" % [__linked_item_id, __links])
 				return false
 			to.remove_at(__linked_item_id)
 	return true

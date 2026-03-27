@@ -1,4 +1,4 @@
-extends Element
+extends Propriety
 class_name Descriptor
 
 @export var alias: String = "" # Required: Lowercase, no symbols or spaces

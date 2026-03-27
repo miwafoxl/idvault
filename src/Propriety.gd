@@ -1,6 +1,6 @@
 @abstract
 extends Resource
-class_name Element
+class_name Propriety
 
 @export var default: StringName = &"default"
 @export var category: StringName = &"general";

@@ -2,97 +2,97 @@ extends Resource
 class_name Item
 
 @export var id: int = 0;
-@export var elements: Array[Element] = [];
+@export var proprietes: Array[Propriety] = [];
 
-func _init(__id: int, __elements: Array[Element] = []) -> void:
+func _init(__id: int, __proprietes: Array[Propriety] = []) -> void:
 	self.id = __id
-	self.elements = __elements
+	self.proprietes = __proprietes
 
-func append_elements(__elements: Array[Element]) -> bool:
-	if not __elements.is_empty():
-		elements.append_array(__elements)
+func append_proprieties(__proprietes: Array[Propriety]) -> bool:
+	if not __proprietes.is_empty():
+		proprietes.append_array(__proprietes)
 		return true
 	return false
 
-func remove_elements(__elements: Array[int]) -> bool:
-	var __elements_size: int = elements.size()
-	if not __elements.is_empty():
-		for __element_id: int in __elements:
-			if __element_id > __elements_size: 
-				printerr("Failed to remove element %s (larger than \
-				elements size (%s))" % [__element_id, __elements_size])
+func remove_proprieties(__rm_proprietes_id: Array[int]) -> bool:
+	var __prop_size: int = proprietes.size()
+	if not __rm_proprietes_id.is_empty():
+		for __propriety_id: int in __rm_proprietes_id:
+			if __propriety_id > __prop_size: 
+				printerr("Failed to remove propriety %s (larger than \
+				proprietes size (%s))" % [__propriety_id, __prop_size])
 				return false
-			elements.set(__element_id, null)
-		clean_elements()
+			proprietes.set(__propriety_id, null)
+		clean_proprietes()
 	return true
 
-func clean_elements() -> void:
+func clean_proprietes() -> void:
 	var __rm_indexes: Array[int] = []
-	for __element_id: int in elements.size():
-		if elements[__element_id] == null:
-			__rm_indexes.append(__element_id)
+	for __propriety_id: int in proprietes.size():
+		if proprietes[__propriety_id] == null:
+			__rm_indexes.append(__propriety_id)
 	__rm_indexes.reverse()
 	for __index: int in __rm_indexes:
-		elements.remove_at(__index)
+		proprietes.remove_at(__index)
 
 func has_descriptor() -> bool:
-	for __element: Element in elements:
-		if __element is Descriptor:
+	for __prop: Propriety in proprietes:
+		if __prop is Descriptor:
 			return true
 	return false
 
 func retrieve_descriptors() -> Array[Descriptor]:
-	var __elements_filtered: Array[Descriptor] = []
-	for __element: Element in elements:
-		if __element is Descriptor:
-			__elements_filtered.append(__element)
-	return __elements_filtered
+	var __proprietes_filtered: Array[Descriptor] = []
+	for __prop: Propriety in proprietes:
+		if __prop is Descriptor:
+			__proprietes_filtered.append(__prop)
+	return __proprietes_filtered
 
 func has_link() -> bool:
-	for __element: Element in elements:
-		if __element is Link:
+	for __prop: Propriety in proprietes:
+		if __prop is Link:
 			return true
 	return false
 
 func retrieve_links() -> Array[Link]:
-	var __elements_filtered: Array[Link] = []
-	for __element: Element in elements:
-		if __element is Link:
-			__elements_filtered.append(__element)
-	return __elements_filtered
+	var __proprietes_filtered: Array[Link] = []
+	for __prop: Propriety in proprietes:
+		if __prop is Link:
+			__proprietes_filtered.append(__prop)
+	return __proprietes_filtered
 
 func count_parameters() -> int:
 	var __count: int = 0
-	for __element: Element in elements:
-		if __element is Parameter:
+	for __prop: Propriety in proprietes:
+		if __prop is Parameter:
 			__count += 1
 	return __count
 	
 func has_parameters() -> bool:
-	for __element: Element in elements:
-		if __element is Parameter:
+	for __prop: Propriety in proprietes:
+		if __prop is Parameter:
 			return true
 	return false
 	
 func retrieve_parameters(__order: int = -1) -> Array[Parameter]:
-	var __elements_filtered: Array[Parameter] = []
-	for __element: Element in elements:
-		if __element is Parameter:
-			if (__order >= 0) and __element.order == __order:
-				__elements_filtered.append(__element)
+	var __proprietes_filtered: Array[Parameter] = []
+	for __prop: Propriety in proprietes:
+		if __prop is Parameter:
+			if (__order >= 0) and __prop.order == __order:
+				__proprietes_filtered.append(__prop)
 			else:
-				__elements_filtered.append(__element)
-	return __elements_filtered
+				__proprietes_filtered.append(__prop)
+	return __proprietes_filtered
 
 func has_display() -> bool:
-	for __element: Element in elements:
-		if __element is Display:
+	for __prop: Propriety in proprietes:
+		if __prop is Display:
 			return true
 	return false
 
 func retrieve_displays() -> Array[Display]:
-	var __elements_filtered: Array[Display] = []
-	for __element: Element in elements:
-		if __element is Display:
-			__elements_filtered.append(__element)
-	return __elements_filtered
+	var __proprietes_filtered: Array[Display] = []
+	for __prop: Propriety in proprietes:
+		if __prop is Display:
+			__proprietes_filtered.append(__prop)
+	return __proprietes_filtered

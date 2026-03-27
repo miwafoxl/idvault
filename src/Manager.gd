@@ -25,18 +25,18 @@ func get_item_by_id(__id: Array[int]) -> Array[Item]:
 		__items = [] # Yeah, it's busted
 	return __items
 
-func append_elements_to_item(__item_arr_indexes: Array[int], \
-		__elements: Array[Element]) -> bool:
+func append_proprietes_to_item(__item_arr_indexes: Array[int], \
+		__proprietes: Array[Propriety]) -> bool:
 	var __err: bool = true
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id < __items_size: 
-				printerr("Failed to append element to item %s (larger than \
+				printerr("Failed to append propriety to item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				__err = false
 				break
-			unordered_items[__item_id].append_elements(__elements)
+			unordered_items[__item_id].append_propriety(__proprietes)
 	return __err
 
 func append_items(__entries: Array[Item]) -> bool:
