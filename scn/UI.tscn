@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bgl0w67mhmb04" path="res://src/UI.gd" id="1_2ka8v"]
 [ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="2_ffxes"]
+[ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/ActionManager.gd" id="2_radts"]
 [ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/Panels/ItemListPanel.tscn" id="2_x8v7u"]
+[ext_resource type="Resource" uid="uid://3k0mj4fvnbh7" path="res://actions/res/ItemAppendEmpty.tres" id="3_b3e2c"]
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="3_bf3yq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
 
-[node name="Ui" type="Control" unique_id=2117910557 node_paths=PackedStringArray("manager", "node_panels")]
+[node name="Ui" type="Control" unique_id=2117910557 node_paths=PackedStringArray("manager", "action_manager", "node_panels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +19,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2ka8v")
 manager = NodePath("Manager")
+action_manager = NodePath("ActionManager")
 node_panels = NodePath("MarginContainer/HBoxContainer")
+
+[node name="ActionManager" type="Node" parent="." unique_id=1071773374]
+script = ExtResource("2_radts")
+default = Array[Object]([ExtResource("3_b3e2c")])
+loaded = null
+metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
 [node name="Manager" type="Node" parent="." unique_id=2042373046]
 script = ExtResource("2_ffxes")

@@ -2,12 +2,14 @@ extends Control
 class_name UI
 
 @export var manager: Manager
+@export var action_manager: ActionManager
 @export var node_panels: Control
 
 func add_item() -> void:
 	manager.append_items([Item.new(manager.unordered_items.size(), [
 		Display.new("a".repeat(randi() % 10), "first test here".repeat(randi() % 2))
 	])])
+	action_manager.run(&"item.append.empty")
 	update_panels.call_deferred()
 
 func select_item(__id: int) -> void:
@@ -30,5 +32,6 @@ func update_signals() -> void:
 				(panel as ItemListPanel).query.connect(query)
 
 func _ready() -> void:
+	action_manager.append_actions(action_manager.default)
 	update_signals()
 	update_panels()

@@ -28,9 +28,9 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=529340556]
 layout_mode = 2
 
-[node name="NewEntryButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=602861986]
+[node name="ItemButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=602861986]
 layout_mode = 2
-text = "+ New Entry"
+text = "+ Item"
 
 [node name="QueryLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=649090237]
 layout_mode = 2
@@ -52,5 +52,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="button_down" from="VBoxContainer/HBoxContainer/NewEntryButton" to="." method="_on_new_entry_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/ItemButton" to="." method="_on_new_item_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/HBoxContainer/QueryButton" to="." method="_on_query_button_button_down"]
