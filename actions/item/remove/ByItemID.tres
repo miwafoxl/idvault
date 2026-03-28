@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://bd5ienu2ywjxl"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_031e1"]
+[ext_resource type="Script" uid="uid://u7w1wuin2e0p" path="res://actions/item/remove/ByItemID.gd" id="2_lv5l5"]
+
+[resource]
+script = ExtResource("1_031e1")
+alias = &"item.remove.by_item_id"
+author = "idvault"
+src = ExtResource("2_lv5l5")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"

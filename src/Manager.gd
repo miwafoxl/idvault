@@ -41,7 +41,7 @@ func append_proprietes_to_item(__item_arr_indexes: Array[int], \
 
 func append_items(__entries: Array[Item]) -> bool:
 	if not __entries.is_empty():
-		unordered_items.append_array(__entries)
+		unordered_items += __entries
 		descriptors_cx = reload_descriptor_context(unordered_items)
 		parameters_cx = reload_parameters_context(unordered_items)
 		links_cx = reload_links_context(unordered_items)
@@ -52,7 +52,7 @@ func remove_items(__item_arr_indexes: Array[int]) -> bool:
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
-			if __item_id > __items_size: 
+			if __item_id >= __items_size: 
 				printerr("Failed to remove item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				return false

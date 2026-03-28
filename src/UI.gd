@@ -10,10 +10,10 @@ func add_item() -> void:
 	update_panels.call_deferred()
 
 func select_item(__id: int) -> void:
-	pass
+	action_manager.run(&"item.select.id")
 
 func query(__text: String) -> void:
-	pass
+	action_manager.run(&"items.query.text")
 
 func update_panels() -> void:
 	for panel: Control in node_panels.get_children():
@@ -29,6 +29,5 @@ func update_signals() -> void:
 				(panel as ItemListPanel).query.connect(query)
 
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default)
 	update_signals()
 	update_panels()

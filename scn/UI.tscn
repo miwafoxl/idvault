@@ -5,9 +5,12 @@
 [ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/ActionManager.gd" id="2_radts"]
 [ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/Panels/ItemListPanel.tscn" id="2_x8v7u"]
 [ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="3_8aj3b"]
-[ext_resource type="Resource" uid="uid://3k0mj4fvnbh7" path="res://actions/res/ItemAppendEmpty.tres" id="3_b3e2c"]
+[ext_resource type="Resource" uid="uid://cd1r6vnrbo6tk" path="res://actions/item/append/Empty.tres" id="3_b3e2c"]
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="3_bf3yq"]
-[ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://actions/res/ItemAppendTestItem.tres" id="5_fk8bs"]
+[ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://actions/item/append/TestItem.tres" id="5_fk8bs"]
+[ext_resource type="Resource" uid="uid://cqonmv4nxai8m" path="res://actions/item/append/Properties.tres" id="6_k3da1"]
+[ext_resource type="Resource" uid="uid://cafjqoq577we1" path="res://actions/item/remove/ByItemIndex.tres" id="7_vbk85"]
+[ext_resource type="Resource" uid="uid://bd5ienu2ywjxl" path="res://actions/item/remove/ByItemID.tres" id="8_urd2x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
@@ -27,14 +30,16 @@ node_panels = NodePath("MarginContainer/HBoxContainer")
 [node name="ActionManager" type="Node" parent="." unique_id=1071773374 node_paths=PackedStringArray("manager")]
 script = ExtResource("2_radts")
 manager = NodePath("../Manager")
-default = Array[ExtResource("3_8aj3b")]([ExtResource("3_b3e2c"), ExtResource("5_fk8bs")])
+default = Array[ExtResource("3_8aj3b")]([ExtResource("5_fk8bs"), ExtResource("6_k3da1"), ExtResource("3_b3e2c"), ExtResource("7_vbk85"), ExtResource("8_urd2x")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
 [node name="Manager" type="Node" parent="." unique_id=2042373046]
 script = ExtResource("2_ffxes")
 metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
-[node name="Testing" parent="." unique_id=1650119604 instance=ExtResource("3_bf3yq")]
+[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "manager") instance=ExtResource("3_bf3yq")]
+action_manager = NodePath("../ActionManager")
+manager = NodePath("../Manager")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
 layout_mode = 1

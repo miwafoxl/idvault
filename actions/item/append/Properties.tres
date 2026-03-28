@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://cqonmv4nxai8m"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_ncqk7"]
+[ext_resource type="Script" uid="uid://5wfvwff3nfsx" path="res://actions/item/append/Properties.gd" id="2_sngv4"]
+
+[resource]
+script = ExtResource("1_ncqk7")
+alias = &"item.append.properties"
+author = "idvault"
+src = ExtResource("2_sngv4")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"
