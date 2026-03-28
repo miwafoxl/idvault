@@ -3,7 +3,6 @@ class_name Action
 
 @export var alias: StringName = &"";
 @export var author: String = "";
-@export var dev_description: String = ""
 @export var src: GDScript = null
 var checked: bool = false
 
@@ -20,13 +19,14 @@ func check() -> bool:
 	__obj.free()
 	return checked
 
-func execute(__args: Array[Variant] = []) -> bool: # TODO: Args are not used here yet
+func execute(__manager: Manager, __args: Array[Variant] = [])\
+		 -> bool: # TODO: Args are not used here yet
 	if not checked:
 		printerr("Action: can't run action '%s' because it has not been checked by ActionManager." % alias)
 		return false
 	var __obj: Object = Object.new()
 	var __result: bool = false
 	__obj.set_script(src)
-	__result = __obj.run()
+	__result = __obj.run(__manager, __args)
 	__obj.free()
 	return __result

@@ -6,10 +6,7 @@ class_name UI
 @export var node_panels: Control
 
 func add_item() -> void:
-	manager.append_items([Item.new(manager.unordered_items.size(), [
-		Display.new("a".repeat(randi() % 10), "first test here".repeat(randi() % 2))
-	])])
-	action_manager.run(&"item.append.empty")
+	action_manager.run(&"item.append.testitem")
 	update_panels.call_deferred()
 
 func select_item(__id: int) -> void:
