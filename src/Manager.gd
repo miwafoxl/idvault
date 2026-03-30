@@ -53,6 +53,20 @@ func deselect_items(__deselec_items: Array[Item]) -> void:
 			if __item in __deselec_items:
 				selected_items.erase(__item)
 
+func select_items_at_index(__item_index: Array[int], __append: bool = false) -> void:
+	if not __item_index.is_empty(): # TODO: everything related to 'unordered_items' index will change
+		if not __append: selected_items.clear()
+		for __item_idx: int in __item_index:
+			var __item: Item = unordered_items[__item_idx]
+			selected_items.append(__item)
+
+func deselect_items_at_index(__deselec_item_index: Array[int]) -> void:
+	if not __deselec_item_index.is_empty(): # TODO: everything related to 'unordered_items' index will change
+		for __item_idx: int in __deselec_item_index:
+			var __item: Item = unordered_items[__item_idx]
+			if __item in selected_items:
+				selected_items.erase(__item)
+
 func retrieve_selected_items_id() -> Array[int]:
 	var __selected_ids: Array[int] = []
 	for __item: Item in selected_items:
