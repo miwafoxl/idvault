@@ -1,6 +1,6 @@
 extends Object
 
-## Removes items by ID
+## Removes items by index
 func run(__manager: Manager, __args: Array) -> bool: 
 	# Each int in the args array is an Item index
 	var __indexes: Array[int]
