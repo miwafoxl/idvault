@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://cgkdbus2xj5tg"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_klef8"]
+[ext_resource type="Script" uid="uid://bgwoqfll1gbjx" path="res://actions/item/deselect/ByItemIndex.gd" id="2_1utam"]
+
+[resource]
+script = ExtResource("1_klef8")
+alias = &"items.deselect.by_item_index"
+author = "idvault"
+src = ExtResource("2_1utam")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"
