@@ -121,7 +121,7 @@ func do_tests() -> Array[int]:
 	return __failed_at
 	
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default)
+	action_manager.append_actions(action_manager.default, true)
 	var __test_results: Array[int] = do_tests()
 	if __test_results.is_empty():
 		print("All tests passed")
