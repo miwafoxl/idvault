@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bq2wjdstkp3by" path="res://src/Testing.gd" id="1_68vgf"]
 
-[node name="Testing" type="Node" unique_id=1650119604 node_paths=PackedStringArray("manager")]
+[node name="Testing" type="Node" unique_id=1650119604]
 script = ExtResource("1_68vgf")
-manager = NodePath("")

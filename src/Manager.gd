@@ -2,6 +2,7 @@ extends Node
 class_name Manager
 
 @export var unordered_items: Array[Item] = [];
+@export var selected_items: Array[Item] = [];
 var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
 var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
@@ -38,6 +39,26 @@ func append_proprietes_to_item(__item_arr_indexes: Array[int], \
 				break
 			unordered_items[__item_id].append_propriety(__proprietes)
 	return __err
+
+func select_items(__items: Array[Item], __append: bool = false) -> void:
+	if not __items.is_empty():
+		if __append:
+			selected_items += __items
+		else:
+			selected_items = __items
+
+func deselect_items(__deselec_items: Array[Item]) -> void:
+	if not __deselec_items.is_empty():
+		for __item: Item in selected_items:
+			if __item in __deselec_items:
+				selected_items.erase(__item)
+
+func retrieve_selected_items_id() -> Array[int]:
+	var __selected_ids: Array[int] = []
+	for __item: Item in selected_items:
+		__selected_ids.append(__item.id)
+	__selected_ids.sort()
+	return __selected_ids
 
 func append_items(__entries: Array[Item]) -> bool:
 	if not __entries.is_empty():
