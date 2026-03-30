@@ -7,6 +7,15 @@ var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
 var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
 
+enum PropertyTypes {
+	PROPERTY,
+	DESCRIPTOR,
+	DISPLAY,
+	LINK,
+	PARAMETER,
+	RANGED_DATE,
+}
+
 # TODO: Separate thread
 func get_item_by_id(__id: Array[int]) -> Array[Item]:
 	var __items: Array[Item] = []
