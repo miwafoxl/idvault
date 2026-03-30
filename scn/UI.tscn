@@ -9,7 +9,14 @@
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="3_bf3yq"]
 [ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://actions/item/append/TestItem.tres" id="5_fk8bs"]
 [ext_resource type="Resource" uid="uid://cafjqoq577we1" path="res://actions/item/remove/ByItemIndex.tres" id="7_vbk85"]
+[ext_resource type="Resource" uid="uid://cr805tmang8f7" path="res://actions/item/select/ByItemID.tres" id="8_0unq6"]
 [ext_resource type="Resource" uid="uid://bd5ienu2ywjxl" path="res://actions/item/remove/ByItemID.tres" id="8_urd2x"]
+[ext_resource type="Resource" uid="uid://d3o86l2eydwg6" path="res://actions/item/select/ByItemID_Append.tres" id="9_dguqu"]
+[ext_resource type="Resource" uid="uid://btpmamuie5ss" path="res://actions/item/deselect/All.tres" id="10_khqd3"]
+[ext_resource type="Resource" uid="uid://kd8il6gvhpfm" path="res://actions/item/deselect/ByItemID.tres" id="11_dmqk5"]
+[ext_resource type="Resource" uid="uid://cgkdbus2xj5tg" path="res://actions/item/deselect/ByItemIndex.tres" id="12_ow84f"]
+[ext_resource type="Resource" uid="uid://clfbxt6aenhar" path="res://actions/item/select/ByItemIndex.tres" id="13_jo5xa"]
+[ext_resource type="Resource" uid="uid://cyyks5xald400" path="res://actions/item/select/ByItemIndex_Append.tres" id="14_om6lc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
@@ -29,7 +36,7 @@ node_panels = NodePath("MarginContainer/HBoxContainer")
 [node name="ActionManager" type="Node" parent="." unique_id=1071773374 node_paths=PackedStringArray("manager")]
 script = ExtResource("2_radts")
 manager = NodePath("../Manager")
-default = Array[ExtResource("3_8aj3b")]([ExtResource("5_fk8bs"), ExtResource("3_b3e2c"), ExtResource("7_vbk85"), ExtResource("8_urd2x")])
+default = Array[ExtResource("3_8aj3b")]([ExtResource("5_fk8bs"), ExtResource("3_b3e2c"), ExtResource("7_vbk85"), ExtResource("8_urd2x"), ExtResource("8_0unq6"), ExtResource("9_dguqu"), ExtResource("10_khqd3"), ExtResource("11_dmqk5"), ExtResource("12_ow84f"), ExtResource("13_jo5xa"), ExtResource("14_om6lc")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
 [node name="Manager" type="Node" parent="." unique_id=2042373046]
