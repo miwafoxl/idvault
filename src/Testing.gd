@@ -6,7 +6,7 @@ extends Node
 ## Creates a single empty item
 func test1() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"item.append.empty", __id):
+	if not action_manager.run(&"item.append.items", __id):
 		return false
 	if not action_manager.run(&"item.remove.by_item_id", __id): #      CLEANUP
 		return false
@@ -15,7 +15,7 @@ func test1() -> bool:
 ## Creates 10 empty items
 func test2() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"item.append.empty", __id, 10):
+	if not action_manager.run(&"item.append.items", __id, 10):
 		return false
 	if not action_manager.run.callv([&"item.remove.by_item_id"] + \
 			range(__id, __id + 10)): #      CLEANUP
