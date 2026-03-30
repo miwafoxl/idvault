@@ -2,7 +2,7 @@ extends Object
 
 ## Creates and appends a specified amount of empty items
 func run(__manager: Manager, __args: Array) -> bool: 
-	# [0 = starting id, 1 = count, 2 = parameters]
+	# [0 = starting id, 1 = count, 2 = proprietes]
 	var __id: int = __manager.unordered_items.size()
 	var __range: int = 1
 	var __init_props: Array[Propriety] = []

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_031e1")
-alias = &"item.remove.by_item_id"
+alias = &"items.remove.by_item_id"
 author = "idvault"
 src = ExtResource("2_lv5l5")
 metadata/_custom_type_script = "uid://b475asnp2gx0l"

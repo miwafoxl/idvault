@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_iehk6")
-alias = &"item.append.items"
+alias = &"items.append.items"
 author = "idvault"
 src = ExtResource("2_pfkvj")
 metadata/_custom_type_script = "uid://b475asnp2gx0l"
