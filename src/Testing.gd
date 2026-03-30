@@ -25,16 +25,16 @@ func test2() -> bool:
 ## Creates a single item and gives it a propriety afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
-	var __item: Item = Item.new(__id, [
+	if not action_manager.run(&"item.append.items", __id, 1, [
 		Display.new("Momento")
-	])
-	__item.append_proprieties([
-		Link.new([__item.id]),
-		Descriptor.new("test")
-	])
-	if not manager.append_items([__item]):
+	]):
 		return false
-	if not manager.remove_items([0]): #      CLEANUP
+	if not action_manager.run(&"item.select.by_item_id", __id):
+		return false
+	if not action_manager.run(&"item.append.properties_to_selected", \
+			Link.new([__id]), Descriptor.new("test")):
+		return false
+	if not action_manager.run(&"item.remove.selected"): # CLEANUP
 		return false
 	return true
 
