@@ -6,8 +6,9 @@ class_name ActionManager
 @export var loaded: Dictionary[StringName, Variant] = {}; # {action alias: action ref}
 
 
-func append_actions(__actions: Array[Action]) -> void:
+func append_actions(__actions: Array[Action], __log: bool = false) -> void:
 	if __actions.is_empty(): return
+	var __loaded_actions: PackedStringArray
 	for i: int in __actions.size():
 		var __cur: Action = __actions[i]
 		var __ref: WeakRef = null
@@ -17,7 +18,13 @@ func append_actions(__actions: Array[Action]) -> void:
 			printerr("ActionManager: action '%s' did not pass Action.check()." % __cur.alias)
 		__ref = weakref(__cur)
 		loaded.set(__cur.alias, __ref)
+		__loaded_actions.append(__cur.alias)
 	loaded.sort()
+	if __log:
+		__loaded_actions.sort()
+		print("ActionManager: loaded %s actions successfully:\n- %s" % [__loaded_actions.size(), \
+			"\n- ".join(__loaded_actions)
+		])
 
 func remove_actions(__rm_action_aliases: Array[StringName]) -> void:
 	if __rm_action_aliases.is_empty(): return
