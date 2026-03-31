@@ -57,3 +57,7 @@ text_overrun_behavior = 5
 [node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=601609658]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
