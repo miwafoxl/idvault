@@ -3,6 +3,7 @@ class_name Item
 
 @export var id: int = 0;
 @export var properties: Array[Property] = [];
+# TODO: add Dictionary[property_id: weakref(Property)] to optimize line 34
 
 func _init(__id: int, __properties: Array[Property] = []) -> void:
 	self.id = __id
@@ -14,17 +15,27 @@ func append_proprieties(__properties: Array[Property]) -> bool:
 		return true
 	return false
 
-func remove_proprieties(__rm_properties_id: Array[int]) -> bool:
+func remove_proprieties_index(__rm_properties_idx: Array[int]) -> bool:
 	var __prop_size: int = properties.size()
-	if not __rm_properties_id.is_empty():
-		for __property_id: int in __rm_properties_id:
-			if __property_id > __prop_size: 
-				printerr("Failed to remove property %s (larger than \
-				properties size (%s))" % [__property_id, __prop_size])
+	if not __rm_properties_idx.is_empty():
+		for __property_idx: int in __rm_properties_idx:
+			if __property_idx > __prop_size: 
+				printerr("Failed to remove property %s by index (larger than \
+				properties size (%s))" % [__property_idx, __prop_size])
 				return false
-			properties.set(__property_id, null)
+			properties.set(__property_idx, null)
 		clean_properties()
 	return true
+
+func remove_proprieties(__rm_properties_id: Array[String]) -> void:
+	var __prop_size: int = properties.size()
+	if not __rm_properties_id.is_empty():
+		for __rm_property_id: String in __rm_properties_id:
+			for i: int in properties.size():
+				var __property: Property = properties[i]
+				if __property.id == __rm_property_id:
+					properties.set(i, null)
+		clean_properties()
 
 func clean_properties() -> void:
 	var __rm_indexes: Array[int] = []
