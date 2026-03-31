@@ -1,7 +1,7 @@
 extends Property
 class_name Parameter
 
-@export var id: String = "";
+@export var param_id: String = "";
 @export var order: int = 0;
 @export var type: ParameterTypes = ParameterTypes.PARAMETER;
 
@@ -25,6 +25,7 @@ func flush_id() -> String:
 
 func _init(__type: ParameterTypes = ParameterTypes.NUMBER, __order: int = 0, \
 		__id: String = flush_id()):
-	self.id = __id
+	self.param_id = __id
 	self.order = __order
 	self.type = __type
+	self.flush_id()
