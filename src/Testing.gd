@@ -42,14 +42,15 @@ func test3() -> bool:
 ## without deleting the whole item
 func test4() -> bool:
 	var __id: int = randi() % 100
-	var __item: Item = Item.new(__id)
-	__item.append_proprieties([
-		Link.new([__item.id])
-	])
-	if not manager.append_items([__item]):
+	if not action_manager.run(&"items.append.items", __id, 1):
 		return false
-	manager.unordered_items[0].remove_proprieties([0])
-	if not manager.remove_items([0]): #      CLEANUP
+	if not action_manager.run(&"items.select.by_item_id", __id):
+		return false
+	if not action_manager.run(&"items.append.properties_to_selected", \
+			Link.new([__id]), Display.new("coc")):
+		return false
+	manager.unordered_items[0].remove_proprieties_index([0])
+	if not action_manager.run(&"items.remove.selected"): # CLEANUP
 		return false
 	return true
 
@@ -113,8 +114,8 @@ func do_tests() -> Array[int]:
 	var __failed_at: Array[int] = []
 	if not test1(): __failed_at.append(1)
 	if not test2(): __failed_at.append(2)
-	#if not test3(): __failed_at.append(3)
-	#if not test4(): __failed_at.append(4)
+	if not test3(): __failed_at.append(3)
+	if not test4(): __failed_at.append(4)
 	#if not test5(): __failed_at.append(5)
 	#if not test6(): __failed_at.append(6)
 	#if not await test7(): __failed_at.append(7)
