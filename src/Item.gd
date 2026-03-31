@@ -46,6 +46,19 @@ func clean_properties() -> void:
 	for __index: int in __rm_indexes:
 		properties.remove_at(__index)
 
+func retrieve_property_ids() -> Array[String]:
+	var __ids: Array[String] = []
+	for __prop: Property in self.properties:
+		__ids.append(__prop.id)
+	return __ids
+
+func has_property_id(__id: Array[String]) -> bool:
+	var __property_ids: Array[String] = retrieve_property_ids()
+	for __has_id: String in __id:
+		if __has_id in __property_ids:
+			return true
+	return false
+	
 func has_descriptor() -> bool:
 	for __prop: Property in properties:
 		if __prop is Descriptor:
