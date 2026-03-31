@@ -14,15 +14,20 @@ func append_actions(__actions: Array[Action], __log: bool = false) -> void:
 		var __ref: WeakRef = null
 		if __cur.alias.is_empty():
 			printerr("ActionManager: action on index %s has no alias. Skipping it." % i)
+			continue
+		if __cur.alias in __loaded_actions:
+			printerr("ActionManager: action '%s' has the same alias as a previously loaded action. Please unload that one then append it." % i)
+			continue
 		if not __cur.check():
 			printerr("ActionManager: action '%s' did not pass Action.check()." % __cur.alias)
+			continue
 		__ref = weakref(__cur)
 		loaded.set(__cur.alias, __ref)
 		__loaded_actions.append(__cur.alias)
 	loaded.sort()
 	if __log:
 		__loaded_actions.sort()
-		print("ActionManager: loaded %s actions successfully:\n- %s" % [__loaded_actions.size(), \
+		print("ActionManager: %s loaded:\n- %s" % [__loaded_actions.size(), \
 			"\n- ".join(__loaded_actions)
 		])
 
