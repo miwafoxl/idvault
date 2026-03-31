@@ -6,18 +6,18 @@ extends Node
 ## Creates a single empty item
 func test1() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"item.append.items", __id):
+	if not action_manager.run(&"items.append.items", __id):
 		return false
-	if not action_manager.run(&"item.remove.by_item_id", __id): #      CLEANUP
+	if not action_manager.run(&"items.remove.by_item_id", __id): #      CLEANUP
 		return false
 	return true
 
 ## Creates 10 empty items
 func test2() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"item.append.items", __id, 10):
+	if not action_manager.run(&"items.append.items", __id, 10):
 		return false
-	if not action_manager.run.callv([&"item.remove.by_item_id"] + \
+	if not action_manager.run.callv([&"items.remove.by_item_id"] + \
 			range(__id, __id + 10)): #      CLEANUP
 		return false
 	return true
@@ -25,16 +25,16 @@ func test2() -> bool:
 ## Creates a single item and gives it a propriety afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"item.append.items", __id, 1, [
+	if not action_manager.run(&"items.append.items", __id, 1, [
 		Display.new("Momento")
 	]):
 		return false
-	if not action_manager.run(&"item.select.by_item_id", __id):
+	if not action_manager.run(&"items.select.by_item_id", __id):
 		return false
-	if not action_manager.run(&"item.append.properties_to_selected", \
+	if not action_manager.run(&"items.append.properties_to_selected", \
 			Link.new([__id]), Descriptor.new("test")):
 		return false
-	if not action_manager.run(&"item.remove.selected"): # CLEANUP
+	if not action_manager.run(&"items.remove.selected"): # CLEANUP
 		return false
 	return true
 
