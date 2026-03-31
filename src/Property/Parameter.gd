@@ -1,4 +1,4 @@
-extends Propriety
+extends Property
 class_name Parameter
 
 @export var id: String = "";

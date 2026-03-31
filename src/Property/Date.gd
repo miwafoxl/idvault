@@ -1,4 +1,4 @@
-extends Propriety
+extends Property
 class_name Date
 
 @export var description: String = ""

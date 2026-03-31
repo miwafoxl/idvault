@@ -22,7 +22,7 @@ func test2() -> bool:
 		return false
 	return true
 
-## Creates a single item and gives it a propriety afterwards
+## Creates a single item and gives it a property afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
 	if not action_manager.run(&"items.append.items", __id, 1, [
@@ -38,7 +38,7 @@ func test3() -> bool:
 		return false
 	return true
 
-## Creates a single item, give it a propriety, then delete the propriety \
+## Creates a single item, give it a property, then delete the property \
 ## without deleting the whole item
 func test4() -> bool:
 	var __id: int = randi() % 100
