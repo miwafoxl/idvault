@@ -35,8 +35,8 @@ func get_item_by_id(__id: Array[int]) -> Array[Item]:
 		__items = [] # Yeah, it's busted
 	return __items
 
-func append_proprietes_to_item(__item_arr_indexes: Array[int], \
-		__proprietes: Array[Property]) -> bool:
+func append_properties_to_item(__item_arr_indexes: Array[int], \
+		__properties: Array[Property]) -> bool:
 	var __err: bool = true
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
 	if not __item_arr_indexes.is_empty():
@@ -46,7 +46,7 @@ func append_proprietes_to_item(__item_arr_indexes: Array[int], \
 				items array size (%s))" % [__item_id, __items_size])
 				__err = false
 				break
-			unordered_items[__item_id].append_property(__proprietes)
+			unordered_items[__item_id].append_property(__properties)
 	return __err
 
 func select_items(__items: Array[Item], __append: bool = false) -> void:
