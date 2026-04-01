@@ -25,9 +25,7 @@ func test2() -> bool:
 ## Creates a single item and gives it a property afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", __id, 1, [
-		Display.new("Momento")
-	]):
+	if not action_manager.run(&"items.append.items", __id, 1, [Display.new("Momento")]):
 		return false
 	if not action_manager.run(&"items.select.by_item_id", __id):
 		return false
@@ -46,15 +44,19 @@ func test4() -> bool:
 		return false
 	if not action_manager.run(&"items.select.by_item_id", __id):
 		return false
+	var __display: Display = Display.new("coc");
 	if not action_manager.run(&"items.append.properties_to_selected", \
-			Link.new([__id]), Display.new("coc")):
+			Link.new([__id]), __display):
 		return false
-	manager.unordered_items[0].remove_proprieties_index([0])
+	if not action_manager.run(&"items.remove.property_id", \
+			manager.selected_items, [__display.id]): # CLEANUP
+		return false
 	if not action_manager.run(&"items.remove.selected"): # CLEANUP
 		return false
 	return true
 
-## Create an item and retrieves it as if only ID was known
+## Create an item and retrieves it as if only ID was known.\
+## This can't be done using actions. The UI handles retrieval of items.
 func test5() -> bool:
 	var __id: int = randi() % 100
 	var __item: Item = Item.new(__id)
@@ -72,17 +74,14 @@ func test5() -> bool:
 func test6() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
-	var __item: Item = Item.new(__id, [
-		Display.new("Fodendo"),
-		__param
-	])
-	__item.append_proprieties([
-		Link.new([__item.id], {__param.id: 7}),
-		Descriptor.new("test")
-	])
-	if not manager.append_items([__item]):
+	if not action_manager.run(&"items.append.items", __id, 1, [Display.new("Kek"), __param]):
 		return false
-	if not manager.remove_items([0]): #      CLEANUP
+	if not action_manager.run(&"items.select.by_item_id", __id):
+		return false
+	if not action_manager.run(&"items.append.properties_to_selected", \
+			Link.new([__id], {__param.id: 7}), Descriptor.new("test")):
+		return false
+	if not action_manager.run(&"items.remove.selected"): # CLEANUP
 		return false
 	return true
 
@@ -116,8 +115,8 @@ func do_tests() -> Array[int]:
 	if not test2(): __failed_at.append(2)
 	if not test3(): __failed_at.append(3)
 	if not test4(): __failed_at.append(4)
-	#if not test5(): __failed_at.append(5)
-	#if not test6(): __failed_at.append(6)
+	if not test5(): __failed_at.append(5)
+	if not test6(): __failed_at.append(6)
 	#if not await test7(): __failed_at.append(7)
 	return __failed_at
 	

@@ -15,7 +15,8 @@ func run(__manager: Manager, __args: Array) -> bool:
 			1: # Array of strings (property IDs to remove)
 				assert(__args[i] is Array)
 				for __arg in __args[i]:
-					if __arg is String: __rm_property_ids.append(__arg as String)
+					if __arg is String: 
+						__rm_property_ids.append(__arg as String)
 				if __rm_property_ids.is_empty():
 					return false
 	for __item: Item in __items:
