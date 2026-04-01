@@ -3,6 +3,7 @@ class_name Manager
 
 @export var unordered_items: Array[Item] = [];
 @export var selected_items: Array[Item] = [];
+var staged_items: Array[WeakRef] = [];
 var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
 var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
@@ -153,3 +154,33 @@ func reload_links_context(__items: Array[Item]) \
 				__cx.append([weakref(__item), weakref(__link), 
 				__link.to, __link.parameters])
 	return __cx
+
+#region ITEM STAGING
+
+func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
+	if __items.is_empty(): return
+	if not __append_stage: staged_items.clear()
+	for __item: Item in __items:
+		var __ref: WeakRef = weakref(__item)
+		staged_items.append(__ref)
+
+func get_staged_item_index(__indexes: Array[int]) -> Array[Item]:
+	var __items: Array[Item] = []
+	var __stage_size: int = staged_items.size() - 1
+	if __indexes.is_empty(): return __items
+	for __idx: int in __indexes:
+		if __idx > __stage_size: 
+			printerr("Item Manager: Tried to access stage index %s greater than stage size %s" % \
+					[__idx, __stage_size])
+			continue
+		var __deref_item: Item = staged_items[__idx].get_ref()
+		if __deref_item == null:
+			printerr("Item Manager: Failed to get reference for item in stage index %s" % __idx)
+			continue
+		__items.append(__items)
+	return __items
+	
+#func get_staged_items(__page_size: int = 0, __offset: int = 0) -> Array[Item]:
+	#pass
+
+#endregion ITEM STAGING
