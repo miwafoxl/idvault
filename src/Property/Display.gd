@@ -10,4 +10,4 @@ func _init(__text: String = "", __alt: String = "", \
 	self.text = __text
 	self.alt = __alt
 	self.iso_639_1 = __iso_639_1
-	self.flush_id()
+	self.id = super.flush_id()

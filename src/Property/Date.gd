@@ -24,4 +24,4 @@ func _init(__year: int, __month: int, __day: int = 0,\
 	self.yyyymmdd = Vector3i(__year, __month, __day)
 	self.utc = __utc
 	self.description = __description
-	self.flush_id()
+	self.id = super.flush_id()

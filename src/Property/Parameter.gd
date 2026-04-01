@@ -28,4 +28,4 @@ func _init(__type: ParameterTypes = ParameterTypes.NUMBER, __order: int = 0, \
 	self.param_id = __id
 	self.order = __order
 	self.type = __type
-	self.flush_id()
+	self.id = super.flush_id()
