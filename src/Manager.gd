@@ -43,7 +43,7 @@ func append_properties_to_item(__item_arr_indexes: Array[int], \
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id < __items_size: 
-				printerr("Failed to append property to item %s (larger than \
+				printerr("Item Manager: Failed to append property to item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				__err = false
 				break
@@ -98,7 +98,7 @@ func remove_items(__item_arr_indexes: Array[int]) -> bool:
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id >= __items_size: 
-				printerr("Failed to remove item %s (larger than \
+				printerr("Item Manager: Failed to remove item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				return false
 			unordered_items.set(__item_id, null)
