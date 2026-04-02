@@ -120,3 +120,10 @@ func retrieve_displays() -> Array[Display]:
 		if __prop is Display:
 			__properties_filtered.append(__prop)
 	return __properties_filtered
+
+func get_valid_string_display_or_empty() -> String:
+	var __displays: Array[Display] = retrieve_displays()
+	for __display: Display in __displays:
+		var __string: String = __display.get_any_valid_str()
+		if not __string.is_empty(): return __string
+	return ""
