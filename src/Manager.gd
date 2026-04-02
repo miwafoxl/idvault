@@ -180,7 +180,19 @@ func get_staged_item_index(__indexes: Array[int]) -> Array[Item]:
 		__items.append(__items)
 	return __items
 	
-#func get_staged_items(__page_size: int = 0, __offset: int = 0) -> Array[Item]:
-	#pass
+func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Array[Item]:
+	var __stage: Array[Item] = []
+	var __max_pages: int = 1 # TODO: Unused
+	var __stage_size: int = staged_items.size()
+	if staged_items.is_empty(): return __stage
+	if (__page_size == 0) or (__page_size > 0 and __page_size > __stage_size):
+		var __items: Array[Item] = get_staged_item_index(range(0, __stage_size))
+		__stage.append_array(__items)
+	else:
+		__max_pages = ceil(float(__stage_size) / float(__page_size))
+		var __items: Array[Item] = get_staged_item_index(range(__page_size * __page_index, \
+				(__page_size * __page_index) + __page_size))
+		__stage.append_array(__items)
+	return __stage
 
 #endregion ITEM STAGING
