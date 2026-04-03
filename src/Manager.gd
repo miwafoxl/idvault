@@ -177,13 +177,13 @@ func get_staged_item_index(__indexes: Array[int]) -> Array[Item]:
 		if __deref_item == null:
 			printerr("Item Manager: Failed to get reference for item in stage index %s" % __idx)
 			continue
-		__items.append(__items)
+		__items.append(__deref_item)
 	return __items
 	
 func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Array[Item]:
 	var __stage: Array[Item] = []
 	var __max_pages: int = 1 # TODO: Unused
-	var __stage_size: int = staged_items.size()
+	var __stage_size: int = get_stage_size()
 	if staged_items.is_empty(): return __stage
 	if (__page_size == 0) or (__page_size > 0 and __page_size > __stage_size):
 		var __items: Array[Item] = get_staged_item_index(range(0, __stage_size))

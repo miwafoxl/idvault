@@ -55,6 +55,7 @@ func update_item_display() -> void:
 
 func _on_new_item_button_button_down() -> void:
 	add_item.emit()
+	
 
 func _on_query_button_button_down() -> void:
 	var __text: LineEdit = $VBoxContainer/HBoxContainer/QueryLine
