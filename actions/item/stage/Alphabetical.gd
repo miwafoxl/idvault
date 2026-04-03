@@ -18,12 +18,13 @@ func order(a: Item, b: Item) -> bool:
 ## Stage items in alphabetically
 func run(__manager: Manager, __args: Array) -> bool:
 	var __items: Array[Item] = []
-	for __item: Variant in __items:
+	for __item: Variant in __args:
 		if __item is Item:
 			__items.append(__item as Item)
 	if __items.is_empty():
-		push_warning("items.stage.unordered: No items to stage")
+		push_warning("items.stage.alphabetical: No items to stage")
 		return false
 	__items.sort_custom(order)
 	__manager.stage_items(__items)
+	__manager.reverse_staged()
 	return true
