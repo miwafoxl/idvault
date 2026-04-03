@@ -7,6 +7,7 @@ class_name UI
 
 func add_item() -> void:
 	action_manager.run(&"items.append.testitem")
+	action_manager.run.callv([&"items.stage.alphabetical"] + manager.unordered_items)
 	update_panels.call_deferred()
 
 func select_item(__id: int) -> void:
@@ -32,7 +33,7 @@ func query(__text: String) -> void:
 func update_panels() -> void:
 	for panel: Control in node_panels.get_children():
 		if (panel is UI_Panel) and (panel is ItemListPanel):
-			(panel as ItemListPanel).items_ref = manager.unordered_items
+			(panel as ItemListPanel).items_ref = manager.get_staged_items_pages()
 			(panel as ItemListPanel).update(manager.retrieve_selected_items_id())
 		
 func update_signals() -> void:
