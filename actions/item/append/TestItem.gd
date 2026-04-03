@@ -1,7 +1,19 @@
 extends Object
 
+func test_text() -> String:
+	const __ID_CHARSET: Array[String] = [
+		"a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "m", "n", "p", "q",
+		"r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E",
+		"F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U",
+		"V", "W", "X", "Y", "Z", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+	const __ID_LENGTH: int = 12
+	var __id: String = ""
+	for i: int in range(__ID_LENGTH):
+		__id += __ID_CHARSET.pick_random()
+	return __id
+
 ## Creates and appends an empty item
 func run(__manager: Manager, __args: Array[Variant]) -> bool:
-	return __manager.append_items([Item.new(__manager.unordered_items.size(), [
-		Display.new("a".repeat(randi() % 10), "first test here".repeat(randi() % 2))
+	return __manager.append_items([Item.new(__manager.get_stage_size(), [
+		Display.new(test_text(), "first test here".repeat(randi() % 2))
 	])])
