@@ -4,6 +4,8 @@ class_name Manager
 @export var unordered_items: Array[Item] = [];
 @export var selected_items: Array[Item] = [];
 var staged_items: Array[WeakRef] = [];
+
+# Context
 var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
 var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
