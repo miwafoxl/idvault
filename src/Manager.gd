@@ -164,9 +164,15 @@ func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
 		var __ref: WeakRef = weakref(__item)
 		staged_items.append(__ref)
 
-func get_staged_item_index(__indexes: Array[int]) -> Array[Item]:
+func reverse_staged() -> void:
+	return staged_items.reverse()
+
+func get_stage_size() -> int:
+	return staged_items.size()
+
+func get_staged_item_index(__indexes: Array) -> Array[Item]:
 	var __items: Array[Item] = []
-	var __stage_size: int = staged_items.size() - 1
+	var __stage_size: int = get_stage_size() - 1
 	if __indexes.is_empty(): return __items
 	for __idx: int in __indexes:
 		if __idx > __stage_size: 
