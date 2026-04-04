@@ -20,5 +20,5 @@ func run(__manager: Manager, __args: Array) -> bool:
 				if __rm_property_ids.is_empty():
 					return false
 	for __item: Item in __items:
-		__item.remove_proprieties(__rm_property_ids)
+		__item.remove_properties(__rm_property_ids)
 	return true

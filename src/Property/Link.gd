@@ -17,7 +17,7 @@ func remove_from_linked_id_arr(__rm_indexes: Array[int]) -> bool:
 		for __linked_item_id: int in __rm_indexes:
 			if __linked_item_id > __links: 
 				printerr("Failed to remove property %s (larger than \
-				proprieties size (%s))" % [__linked_item_id, __links])
+				properties size (%s))" % [__linked_item_id, __links])
 				return false
 			to.remove_at(__linked_item_id)
 	return true

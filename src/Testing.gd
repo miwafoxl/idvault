@@ -95,7 +95,7 @@ func test6_5() -> bool:
 		Display.new("Fodendo"),
 		__param
 	])
-	__item.append_proprieties([
+	__item.append_properties([
 		Link.new([__item.id], {__param.id: 7}),
 		Descriptor.new("test")
 	])
