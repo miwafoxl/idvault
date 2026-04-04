@@ -1,6 +1,7 @@
 extends Node
 
 @export var action_manager: ActionManager
+@export var dialog_manager: DialogManager
 @export var manager: Manager
 
 ## Creates a single empty item
@@ -117,11 +118,13 @@ func do_tests() -> Array[int]:
 	if not test4(): __failed_at.append(4)
 	if not test5(): __failed_at.append(5)
 	if not test6(): __failed_at.append(6)
-	#if not await test7(): __failed_at.append(7)
+	#if not await test6_5(): __failed_at.append(65)
+	if not test7(): __failed_at.append(7)
 	return __failed_at
 	
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default, true)
+	action_manager.append_actions(action_manager.default, false)
+	dialog_manager.append_dialog(dialog_manager.default, true)
 	var __test_results: Array[int] = do_tests()
 	if __test_results.is_empty():
 		print("All tests passed")
