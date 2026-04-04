@@ -39,4 +39,4 @@ func _init(__link_item_id: Array[int], \
 		__parameters: Dictionary[String, Variant] = {}) -> void:
 	self.to = __link_item_id
 	append_parameter(__parameters)
-	self.id = super.flush_id()
+	self.id = RandomString.new("P_").value

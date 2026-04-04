@@ -24,4 +24,4 @@ func _init(__range: Array[Date], __description: String = "") -> void:
 	else:
 		self.start_date = __bound_2
 		self.end_date = __bound_1
-	self.id = super.flush_id()
+	self.id = RandomString.new("P_").value

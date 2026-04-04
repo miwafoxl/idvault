@@ -9,4 +9,4 @@ func _init(__alias: String, __short: String = "", __long: String = "") -> void:
 	self.alias = __alias
 	self.short = __short
 	self.long = __long
-	self.id = super.flush_id()
+	self.id = RandomString.new("P_").value
