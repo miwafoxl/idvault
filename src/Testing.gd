@@ -88,7 +88,7 @@ func test6() -> bool:
 
 ## Create an item with a parameter and validly links to itself with \
 ## a link parameter, then queries it.
-func test7() -> bool:
+func test6_5() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
 	var __item: Item = Item.new(__id, [
@@ -108,6 +108,13 @@ func test7() -> bool:
 		return false
 	__q.compute()
 	var __q_result: Array[Item] = await __q.done
+	return true
+
+## Opens a test dialog to check if value is returning from dialog
+func test7() -> bool:
+	var return_id: String = dialog_manager.open_return(&"test_return")
+	if return_id.is_empty():
+		return false
 	return true
 
 func do_tests() -> Array[int]:
