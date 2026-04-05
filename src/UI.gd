@@ -6,28 +6,32 @@ class_name UI
 @export var node_panels: Control
 
 func add_item() -> void:
-	action_manager.run(&"items.append.testitem")
-	action_manager.run.callv([&"items.stage.alphabetical"] + manager.unordered_items)
+	action_manager.run(&"items.append.testitem", {})
+	action_manager.run(&"items.stage.alphabetical", {
+		"item": manager.unordered_items })
 	update_panels.call_deferred()
 
 func select_item(__id: int) -> void:
-	action_manager.run(&"items.select.by_item_id", __id)
+	action_manager.run(&"items.select.by_item_id", {
+		"item_id": [__id] })
 	update_panels.call_deferred()
 
 func select_item_append(__id: int) -> void:
-	action_manager.run(&"items.select.by_item_id_append", __id)
+	action_manager.run(&"items.select.by_item_id_append", {
+		"item_id": [__id] })
 	update_panels.call_deferred()
 
 func deselect_item(__id: int) -> void:
-	action_manager.run(&"items.deselect.by_item_id", __id)
+	action_manager.run(&"items.deselect.by_item_id", {
+		"item_id": [__id] })
 	update_panels.call_deferred()
 
 func deselect_all() -> void:
-	action_manager.run(&"items.deselect.all")
+	action_manager.run(&"items.deselect.all", {})
 	update_panels.call_deferred()
 
 func query(__text: String) -> void:
-	action_manager.run(&"items.query.text")
+	action_manager.run(&"items.query.text", {})
 	update_panels.call_deferred()
 
 func update_panels() -> void:
