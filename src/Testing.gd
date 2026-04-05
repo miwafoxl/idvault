@@ -143,13 +143,3 @@ func do_tests() -> Array[int]:
 	#if not await test6_5(): __failed_at.append(65)
 	if not test7(): __failed_at.append(7)
 	return __failed_at
-	
-func _ready() -> void:
-	action_manager.append_actions(action_manager.default, true)
-	dialog_manager.append_dialog(dialog_manager.default, false)
-	var __test_results: Array[int] = do_tests()
-	if __test_results.is_empty():
-		print("All tests passed")
-	else:
-		printerr("Test failed: ", __test_results)
-	

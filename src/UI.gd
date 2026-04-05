@@ -5,6 +5,16 @@ class_name UI
 @export var action_manager: ActionManager
 @export var node_panels: Control
 
+func give_managers(__managers: Dictionary) -> void:
+	for __key: String in __managers:
+		match __key:
+			"item":
+				manager = __managers[__key]
+			"action":
+				action_manager = __managers[__key]
+			_:
+				printerr("UI: unknown manager '%s' provided to UI" % __key)
+
 func add_item() -> void:
 	action_manager.run(&"items.append.testitem", {})
 	action_manager.run(&"items.stage.alphabetical", {

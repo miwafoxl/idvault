@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://d3mw360ur5mac"]
+
+[ext_resource type="Script" uid="uid://by3xvk1tboofk" path="res://src/Application.gd" id="1_tbfir"]
+[ext_resource type="PackedScene" uid="uid://qwnt8iblsa3l" path="res://scn/Default UI.tscn" id="2_1bq3j"]
+[ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/ActionManager.gd" id="2_xwlb1"]
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="3_1v7vn"]
+[ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://actions/item/append/TestItem.tres" id="4_gl6yv"]
+[ext_resource type="Resource" uid="uid://cd1r6vnrbo6tk" path="res://actions/item/append/Items.tres" id="5_1bq3j"]
+[ext_resource type="Resource" uid="uid://cafjqoq577we1" path="res://actions/item/remove/ByItemIndex.tres" id="6_5yf8b"]
+[ext_resource type="Resource" uid="uid://bd5ienu2ywjxl" path="res://actions/item/remove/ByItemID.tres" id="7_sg3l2"]
+[ext_resource type="Resource" uid="uid://cr805tmang8f7" path="res://actions/item/select/ByItemID.tres" id="8_2nqum"]
+[ext_resource type="Resource" uid="uid://d3o86l2eydwg6" path="res://actions/item/select/ByItemID_Append.tres" id="9_ldrk5"]
+[ext_resource type="Resource" uid="uid://btpmamuie5ss" path="res://actions/item/deselect/All.tres" id="10_0slqf"]
+[ext_resource type="Resource" uid="uid://kd8il6gvhpfm" path="res://actions/item/deselect/ByItemID.tres" id="11_pucfs"]
+[ext_resource type="Resource" uid="uid://cgkdbus2xj5tg" path="res://actions/item/deselect/ByItemIndex.tres" id="12_s2ijd"]
+[ext_resource type="Resource" uid="uid://clfbxt6aenhar" path="res://actions/item/select/ByItemIndex.tres" id="13_bnnxs"]
+[ext_resource type="Resource" uid="uid://cyyks5xald400" path="res://actions/item/select/ByItemIndex_Append.tres" id="14_33pya"]
+[ext_resource type="Resource" uid="uid://bckjplgug86rj" path="res://actions/item/append/PropertiesToSelected.tres" id="15_62eh1"]
+[ext_resource type="Resource" uid="uid://cxgp6sjyya64u" path="res://actions/item/remove/PropertyID.tres" id="16_v4htx"]
+[ext_resource type="Resource" uid="uid://dp2kjjnttef3o" path="res://actions/item/remove/Selected.tres" id="17_ajmq0"]
+[ext_resource type="Resource" uid="uid://dh4ys308mmwj8" path="res://actions/item/stage/Alphabetical.tres" id="18_4w571"]
+[ext_resource type="Resource" uid="uid://dl2u5de4plemq" path="res://actions/item/stage/Unordered.tres" id="19_qonqs"]
+[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/DialogManager.gd" id="20_hg2lc"]
+[ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/MessageBox.tscn" id="21_1m14j"]
+[ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/NewItem.tscn" id="22_g87cj"]
+[ext_resource type="PackedScene" uid="uid://bwd3pwft1ywa5" path="res://scn/Dialogs/TestReturn.tscn" id="23_cnxrv"]
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="24_1v7vn"]
+[ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="26_1bq3j"]
+
+[node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "dialog_manager")]
+script = ExtResource("1_tbfir")
+default_ui = ExtResource("2_1bq3j")
+item_manager = NodePath("ItemManager")
+action_manager = NodePath("ActionManager")
+dialog_manager = NodePath("DialogManager")
+metadata/_custom_type_script = "uid://by3xvk1tboofk"
+
+[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "dialog_manager", "manager") instance=ExtResource("26_1bq3j")]
+action_manager = NodePath("../ActionManager")
+dialog_manager = NodePath("../DialogManager")
+manager = NodePath("../ItemManager")
+
+[node name="ActionManager" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("manager")]
+script = ExtResource("2_xwlb1")
+manager = NodePath("../ItemManager")
+default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs")])
+metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
+
+[node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node", "manager")]
+script = ExtResource("20_hg2lc")
+spawn_node = NodePath("..")
+manager = NodePath("../ItemManager")
+default = Dictionary[StringName, PackedScene]({
+&"message": ExtResource("21_1m14j"),
+&"new_item": ExtResource("22_g87cj"),
+&"test_return": ExtResource("23_cnxrv")
+})
+metadata/_custom_type_script = "uid://bwxtawgolorsm"
+
+[node name="ItemManager" type="Node" parent="." unique_id=1855138344]
+script = ExtResource("24_1v7vn")
+metadata/_custom_type_script = "uid://htdxvtahxgnw"
