@@ -1,10 +1,19 @@
 extends Object
 
 ## Removes items by index
-func run(__manager: Manager, __args: Array) -> bool: 
+func run(__manager: Manager, __param: Dictionary) -> bool: 
 	# Each int in the args array is an Item index
 	var __indexes: Array[int]
-	for __idx: int in __args:
-		if __idx is int:
-			__indexes.append(__idx)
+	#region Parameter processing
+	for __key: String in __param:
+		var __value: Variant = __param[__key]
+		match __key:
+			"item_idx" when __value is Array:
+				for __id: int in __value:
+					if __id is int:
+						__indexes.append(__id)
+			_:
+				push_warning("items.remove.by_item_index: invalid key '%s'\
+				-> item_idx" % __key)
+	#endregion Parameter processing
 	return __manager.remove_items(__indexes)
