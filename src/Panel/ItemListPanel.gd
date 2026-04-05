@@ -48,7 +48,7 @@ func update_item_display() -> void:
 		else:
 			__item_widget.title = str(__item.id)
 		__item_widget.click.connect(interaction_item_display_click)
-		#__item_widget.hover.connect(hover.emit)
+		__item_widget.request_menu.connect(request_menu.emit)
 		__item_widget.update()
 		item_list_parent.add_child(__item_widget)
 
@@ -56,7 +56,6 @@ func update_item_display() -> void:
 func _on_new_item_button_button_down() -> void:
 	add_item.emit()
 	
-
 func _on_query_button_button_down() -> void:
 	var __text: LineEdit = $VBoxContainer/HBoxContainer/QueryLine
 	query.emit(__text.text.strip_edges())
