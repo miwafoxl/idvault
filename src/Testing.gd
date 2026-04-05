@@ -7,33 +7,41 @@ extends Node
 ## Creates a single empty item
 func test1() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", __id):
-		return false
-	if not action_manager.run(&"items.remove.by_item_id", __id): #      CLEANUP
-		return false
+	if not action_manager.run(&"items.append.items", {
+		"item_id": __id }):
+			return false
+	if not action_manager.run(&"items.remove.by_item_id", {
+		"item_id": [__id] }): # Cleanup
+			return false
 	return true
 
 ## Creates 10 empty items
 func test2() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", __id, 10):
-		return false
-	if not action_manager.run.callv([&"items.remove.by_item_id"] + \
-			range(__id, __id + 10)): #      CLEANUP
-		return false
+	if not action_manager.run(&"items.append.items", {
+		"item_id": __id, 
+		"count": 10 }):
+			return false
+	if not action_manager.run(&"items.remove.by_item_id", {
+		"item_id": range(__id, __id + 10)}): # Cleanup
+			return false
 	return true
 
 ## Creates a single item and gives it a property afterwards
 func test3() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", __id, 1, [Display.new("Momento")]):
-		return false
-	if not action_manager.run(&"items.select.by_item_id", __id):
-		return false
-	if not action_manager.run(&"items.append.properties_to_selected", \
-			Link.new([__id]), Descriptor.new("test")):
-		return false
-	if not action_manager.run(&"items.remove.selected"): # CLEANUP
+	if not action_manager.run(&"items.append.items", {
+		"item_id": __id, 
+		"properties": [Display.new("Momento")] }):
+			return false
+	if not action_manager.run(&"items.select.by_item_id", {
+		"item_id": [__id] }):
+			return false
+	if not action_manager.run(&"items.append.properties_to_selected", {
+		"properties": [Link.new([__id]), 
+					   Descriptor.new("test")] }):
+			return false
+	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
 		return false
 	return true
 
