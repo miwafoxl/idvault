@@ -37,6 +37,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 placeholder_text = "Query..."
+caret_blink = true
 
 [node name="QueryButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1214248633]
 layout_mode = 2
