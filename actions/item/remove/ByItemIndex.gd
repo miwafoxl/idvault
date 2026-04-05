@@ -2,7 +2,6 @@ extends Object
 
 ## Removes items by index
 func run(__manager: Manager, __param: Dictionary) -> bool: 
-	# Each int in the args array is an Item index
 	var __indexes: Array[int]
 	#region Parameter processing
 	for __key: String in __param:
@@ -16,4 +15,4 @@ func run(__manager: Manager, __param: Dictionary) -> bool:
 				push_warning("items.remove.by_item_index: invalid key '%s'\
 				-> item_idx" % __key)
 	#endregion Parameter processing
-	return __manager.remove_items(__indexes)
+	return __manager.remove_items_stage_index(__indexes)

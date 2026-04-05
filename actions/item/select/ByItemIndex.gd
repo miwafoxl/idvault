@@ -17,9 +17,5 @@ func run(__manager: Manager, __param: Dictionary) -> bool:
 				push_warning("items.select.by_item_index: invalid key '%s'\
 				-> item_idx" % __key)
 	#endregion Parameter processing
-	var __get_id: Array[Item] = __manager.get_item_by_id(__item_ids)
-	for __item: Item in __get_id:
-		var __idx: int = __manager.unordered_items.find(__item)
-		__select_indexes.append(__idx)
-	__manager.select_items_at_index(__select_indexes, false)
+	__manager.select_items_at_stage_index(__select_indexes)
 	return true
