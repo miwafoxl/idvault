@@ -13,7 +13,7 @@ signal deselect_item(id: int)
 signal deselect_all()
 signal select_item_append(id: int)
 
-func item_display_widget_click(__id: int) -> void:
+func interaction_item_display_click(__id: int) -> void:
 	if KeyboardModifiers.is_shift_modifier:
 		if __id in selected_item_ids:
 			deselect_item.emit(__id)
@@ -47,7 +47,7 @@ func update_item_display() -> void:
 			__item_widget.subtitle = __item_title[0].alt
 		else:
 			__item_widget.title = str(__item.id)
-		__item_widget.click.connect(item_display_widget_click)
+		__item_widget.click.connect(interaction_item_display_click)
 		#__item_widget.hover.connect(hover.emit)
 		__item_widget.update()
 		item_list_parent.add_child(__item_widget)

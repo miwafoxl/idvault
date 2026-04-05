@@ -22,16 +22,10 @@ func update_color() -> void:
 		self.set_modulate(Color(0.537, 0.537, 1.0, 1.0))
 	else:
 		self.set_modulate(Color.WHITE)
-
-#region Theming
-
-func _on_gui_input(event: InputEvent) -> void:
-	if event is not InputEventMouseButton: return
-	var __mouse_act: InputEventMouseButton = event 
-	match __mouse_act.button_index:
-		MouseButton.MOUSE_BUTTON_LEFT:
-			if event.pressed and not display_selected:
-				click.emit(related_id)
-				self.display_selected = true
-
-#endregion
+	
+func _on_button_up() -> void:
+	click.emit(related_id)
+	if not display_selected:
+		self.display_selected = true
+	else:
+		self.display_selected = false
