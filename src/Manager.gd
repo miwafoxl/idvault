@@ -109,6 +109,22 @@ func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 		links_cx = reload_links_context(unordered_items)
 	return true
 
+func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
+	var __items_size: int = staged_items.size()
+	if not __rm_stage_index.is_empty():
+		var __items: Array[Item] = get_staged_item_index(__rm_stage_index)
+		for __item: Item in __items:
+			if __item.id >= __items_size: 
+				printerr("Item Manager: Failed to remove item %s (larger than \
+				stage size (%s))" % [__item.id, __items_size])
+				return false
+			unordered_items.set(__item.id, null)
+		clean_entries()
+		descriptors_cx = reload_descriptor_context(unordered_items)
+		parameters_cx = reload_parameters_context(unordered_items)
+		links_cx = reload_links_context(unordered_items)
+	return true
+
 func clean_entries() -> void:
 	var __rm_indexes: Array[int] = []
 	for __item_id: int in unordered_items.size():
