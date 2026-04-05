@@ -49,18 +49,21 @@ func test3() -> bool:
 ## without deleting the whole item
 func test4() -> bool:
 	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", __id, 1):
-		return false
-	if not action_manager.run(&"items.select.by_item_id", __id):
-		return false
+	if not action_manager.run(&"items.append.items", {
+		"item_id": __id}):
+			return false
+	if not action_manager.run(&"items.select.by_item_id", {
+		"item_id": [__id] }):
+			return false
 	var __display: Display = Display.new("coc");
-	if not action_manager.run(&"items.append.properties_to_selected", \
-			Link.new([__id]), __display):
-		return false
-	if not action_manager.run(&"items.remove.property_id", \
-			manager.selected_items, [__display.id]): # CLEANUP
-		return false
-	if not action_manager.run(&"items.remove.selected"): # CLEANUP
+	if not action_manager.run(&"items.append.properties_to_selected", {
+		"properties": [Link.new([__id]), __display] }):
+			return false
+	if not action_manager.run(&"items.remove.property_id", {
+		"item": manager.selected_items, 
+		"property_id": [__display.id] }):
+			return false
+	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
 		return false
 	return true
 
