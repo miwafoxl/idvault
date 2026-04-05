@@ -11,6 +11,7 @@ var display_selected: bool = false
 
 signal click()
 signal hover()
+signal request_menu()
 
 func update() -> void:
 	node_title.set_text(self.title)
