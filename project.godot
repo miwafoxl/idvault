@@ -14,11 +14,16 @@ config/name="idvault"
 config/version="0.01"
 run/main_scene="uid://qwnt8iblsa3l"
 config/features=PackedStringArray("4.6", "Mobile")
+run/low_processor_mode=true
 config/icon="res://icon.svg"
 
 [autoload]
 
 KeyboardModifiers="*uid://d1p6olc3jg60n"
+
+[display]
+
+window/vsync/vsync_mode=0
 
 [physics]
 
