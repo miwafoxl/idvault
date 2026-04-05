@@ -86,14 +86,18 @@ func test5() -> bool:
 func test6() -> bool:
 	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
-	if not action_manager.run(&"items.append.items", __id, 1, [Display.new("Kek"), __param]):
-		return false
-	if not action_manager.run(&"items.select.by_item_id", __id):
-		return false
-	if not action_manager.run(&"items.append.properties_to_selected", \
-			Link.new([__id], {__param.id: 7}), Descriptor.new("test")):
-		return false
-	if not action_manager.run(&"items.remove.selected"): # CLEANUP
+	if not action_manager.run(&"items.append.items", {
+		"item_id": __id,
+		"properties": [Display.new("Kek"), __param] }):
+			return false
+	if not action_manager.run(&"items.select.by_item_id", {
+		"item_id": [__id] }):
+			return false
+	if not action_manager.run(&"items.append.properties_to_selected", {
+		"properties": [Link.new([__id], {__param.id: 7}), 
+					   Descriptor.new("test")] }):
+			return false
+	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
 		return false
 	return true
 
