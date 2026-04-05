@@ -20,4 +20,4 @@ func run(__manager: Manager, __param: Dictionary) -> bool:
 	for __item: Item in __get_id:
 		var __idx: int = __manager.unordered_items.find(__item)
 		__rm_indexes.append(__idx)
-	return __manager.remove_items(__rm_indexes)
+	return __manager.remove_items_unordered(__rm_indexes)
