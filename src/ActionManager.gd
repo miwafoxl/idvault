@@ -37,7 +37,7 @@ func remove_actions(__rm_action_aliases: Array[StringName]) -> void:
 		if __alias in __rm_action_aliases:
 			loaded.erase(__alias)
 
-func run(__action: StringName, ...args: Array) -> bool:
+func run(__action: StringName, __param_dict: Dictionary) -> bool:
 	var __ref: WeakRef = loaded.get(__action, null)
 	var __act: Action = null
 	if __ref == null:
@@ -47,7 +47,7 @@ func run(__action: StringName, ...args: Array) -> bool:
 	if __act == null:
 		printerr("ActionManager: failed to get a reference to action '%s'." % __action)
 		return false
-	var __result: bool = __act.execute(manager, args)
+	var __result: bool = __act.execute(manager, __param_dict)
 	if not __result:
 		push_warning("ActionManager: action '%s' failed." % __action)
 	return __result

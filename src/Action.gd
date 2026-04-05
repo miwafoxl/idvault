@@ -19,7 +19,7 @@ func check() -> bool:
 	__obj.free()
 	return checked
 
-func execute(__manager: Manager, __args: Array)\
+func execute(__manager: Manager, __param: Dictionary)\
 		 -> bool: # TODO: Args are not used here yet
 	if not checked:
 		printerr("Action: can't run action '%s' because it has not been checked by ActionManager." % alias)
@@ -27,6 +27,6 @@ func execute(__manager: Manager, __args: Array)\
 	var __obj: Object = Object.new()
 	var __result: bool = false
 	__obj.set_script(src)
-	__result = __obj.run(__manager, __args)
+	__result = __obj.run(__manager, __param)
 	__obj.free()
 	return __result
