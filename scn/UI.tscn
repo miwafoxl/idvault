@@ -26,7 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/NewItem.tscn" id="21_ux2no"]
 [ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/MessageBox.tscn" id="22_ux2no"]
 [ext_resource type="PackedScene" uid="uid://bwd3pwft1ywa5" path="res://scn/Dialogs/TestReturn.tscn" id="23_qsylf"]
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default.tres" id="25_tk2vq"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="25_tk2vq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
