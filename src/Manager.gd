@@ -3,6 +3,9 @@ class_name Manager
 
 @export var unordered_items: Array[Item] = [];
 @export var selected_items: Array[Item] = [];
+var staged_items: Array[WeakRef] = [];
+
+# Context
 var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
 var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
@@ -35,18 +38,18 @@ func get_item_by_id(__id: Array[int]) -> Array[Item]:
 		__items = [] # Yeah, it's busted
 	return __items
 
-func append_proprietes_to_item(__item_arr_indexes: Array[int], \
-		__proprietes: Array[Propriety]) -> bool:
+func append_properties_to_item(__item_arr_indexes: Array[int], \
+		__properties: Array[Property]) -> bool:
 	var __err: bool = true
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id < __items_size: 
-				printerr("Failed to append propriety to item %s (larger than \
+				printerr("Item Manager: Failed to append property to item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				__err = false
 				break
-			unordered_items[__item_id].append_propriety(__proprietes)
+			unordered_items[__item_id].append_property(__properties)
 	return __err
 
 func select_items(__items: Array[Item], __append: bool = false) -> void:
@@ -97,7 +100,7 @@ func remove_items(__item_arr_indexes: Array[int]) -> bool:
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id >= __items_size: 
-				printerr("Failed to remove item %s (larger than \
+				printerr("Item Manager: Failed to remove item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				return false
 			unordered_items.set(__item_id, null)
@@ -153,3 +156,51 @@ func reload_links_context(__items: Array[Item]) \
 				__cx.append([weakref(__item), weakref(__link), 
 				__link.to, __link.parameters])
 	return __cx
+
+#region ITEM STAGING
+
+func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
+	if __items.is_empty(): return
+	if not __append_stage: staged_items.clear()
+	for __item: Item in __items:
+		var __ref: WeakRef = weakref(__item)
+		staged_items.append(__ref)
+
+func reverse_staged() -> void:
+	return staged_items.reverse()
+
+func get_stage_size() -> int:
+	return staged_items.size()
+
+func get_staged_item_index(__indexes: Array) -> Array[Item]:
+	var __items: Array[Item] = []
+	var __stage_size: int = get_stage_size() - 1
+	if __indexes.is_empty(): return __items
+	for __idx: int in __indexes:
+		if __idx > __stage_size: 
+			printerr("Item Manager: Tried to access stage index %s greater than stage size %s" % \
+					[__idx, __stage_size])
+			continue
+		var __deref_item: Item = staged_items[__idx].get_ref()
+		if __deref_item == null:
+			printerr("Item Manager: Failed to get reference for item in stage index %s" % __idx)
+			continue
+		__items.append(__deref_item)
+	return __items
+	
+func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Array[Item]:
+	var __stage: Array[Item] = []
+	var __max_pages: int = 1 # TODO: Unused
+	var __stage_size: int = get_stage_size()
+	if staged_items.is_empty(): return __stage
+	if (__page_size == 0) or (__page_size > 0 and __page_size > __stage_size):
+		var __items: Array[Item] = get_staged_item_index(range(0, __stage_size))
+		__stage.append_array(__items)
+	else:
+		__max_pages = ceil(float(__stage_size) / float(__page_size))
+		var __items: Array[Item] = get_staged_item_index(range(__page_size * __page_index, \
+				(__page_size * __page_index) + __page_size))
+		__stage.append_array(__items)
+	return __stage
+
+#endregion ITEM STAGING

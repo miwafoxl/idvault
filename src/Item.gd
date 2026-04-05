@@ -2,97 +2,128 @@ extends Resource
 class_name Item
 
 @export var id: int = 0;
-@export var proprietes: Array[Propriety] = [];
+@export var properties: Array[Property] = [];
+# TODO: add Dictionary[property_id: weakref(Property)] to optimize line 34
 
-func _init(__id: int, __proprietes: Array[Propriety] = []) -> void:
+func _init(__id: int, __properties: Array[Property] = []) -> void:
 	self.id = __id
-	self.proprietes = __proprietes
+	self.properties = __properties
 
-func append_proprieties(__proprietes: Array[Propriety]) -> bool:
-	if not __proprietes.is_empty():
-		proprietes.append_array(__proprietes)
+func append_properties(__properties: Array[Property]) -> bool:
+	if not __properties.is_empty():
+		properties.append_array(__properties)
 		return true
 	return false
 
-func remove_proprieties(__rm_proprietes_id: Array[int]) -> bool:
-	var __prop_size: int = proprietes.size()
-	if not __rm_proprietes_id.is_empty():
-		for __propriety_id: int in __rm_proprietes_id:
-			if __propriety_id > __prop_size: 
-				printerr("Failed to remove propriety %s (larger than \
-				proprietes size (%s))" % [__propriety_id, __prop_size])
+func remove_properties_index(__rm_properties_idx: Array[int]) -> bool:
+	var __prop_size: int = properties.size()
+	if not __rm_properties_idx.is_empty():
+		for __property_idx: int in __rm_properties_idx:
+			if __property_idx > __prop_size: 
+				printerr("Failed to remove property %s by index (larger than \
+				properties size (%s))" % [__property_idx, __prop_size])
 				return false
-			proprietes.set(__propriety_id, null)
-		clean_proprietes()
+			properties.set(__property_idx, null)
+		clean_properties()
 	return true
 
-func clean_proprietes() -> void:
+func remove_properties(__rm_properties_id: Array[String]) -> void:
+	var __prop_size: int = properties.size()
+	if not __rm_properties_id.is_empty():
+		for __rm_property_id: String in __rm_properties_id:
+			for i: int in properties.size():
+				var __property: Property = properties[i]
+				if __property.id == __rm_property_id:
+					properties.set(i, null)
+		clean_properties()
+
+func clean_properties() -> void:
 	var __rm_indexes: Array[int] = []
-	for __propriety_id: int in proprietes.size():
-		if proprietes[__propriety_id] == null:
-			__rm_indexes.append(__propriety_id)
+	for __property_id: int in properties.size():
+		if properties[__property_id] == null:
+			__rm_indexes.append(__property_id)
 	__rm_indexes.reverse()
 	for __index: int in __rm_indexes:
-		proprietes.remove_at(__index)
+		properties.remove_at(__index)
 
+func retrieve_property_ids() -> Array[String]:
+	var __ids: Array[String] = []
+	for __prop: Property in self.properties:
+		__ids.append(__prop.id)
+	return __ids
+
+func has_property_id(__id: Array[String]) -> bool:
+	var __property_ids: Array[String] = retrieve_property_ids()
+	for __has_id: String in __id:
+		if __has_id in __property_ids:
+			return true
+	return false
+	
 func has_descriptor() -> bool:
-	for __prop: Propriety in proprietes:
+	for __prop: Property in properties:
 		if __prop is Descriptor:
 			return true
 	return false
 
 func retrieve_descriptors() -> Array[Descriptor]:
-	var __proprietes_filtered: Array[Descriptor] = []
-	for __prop: Propriety in proprietes:
+	var __properties_filtered: Array[Descriptor] = []
+	for __prop: Property in properties:
 		if __prop is Descriptor:
-			__proprietes_filtered.append(__prop)
-	return __proprietes_filtered
+			__properties_filtered.append(__prop)
+	return __properties_filtered
 
 func has_link() -> bool:
-	for __prop: Propriety in proprietes:
+	for __prop: Property in properties:
 		if __prop is Link:
 			return true
 	return false
 
 func retrieve_links() -> Array[Link]:
-	var __proprietes_filtered: Array[Link] = []
-	for __prop: Propriety in proprietes:
+	var __properties_filtered: Array[Link] = []
+	for __prop: Property in properties:
 		if __prop is Link:
-			__proprietes_filtered.append(__prop)
-	return __proprietes_filtered
+			__properties_filtered.append(__prop)
+	return __properties_filtered
 
 func count_parameters() -> int:
 	var __count: int = 0
-	for __prop: Propriety in proprietes:
+	for __prop: Property in properties:
 		if __prop is Parameter:
 			__count += 1
 	return __count
 	
 func has_parameters() -> bool:
-	for __prop: Propriety in proprietes:
+	for __prop: Property in properties:
 		if __prop is Parameter:
 			return true
 	return false
 	
 func retrieve_parameters(__order: int = -1) -> Array[Parameter]:
-	var __proprietes_filtered: Array[Parameter] = []
-	for __prop: Propriety in proprietes:
+	var __properties_filtered: Array[Parameter] = []
+	for __prop: Property in properties:
 		if __prop is Parameter:
 			if (__order >= 0) and __prop.order == __order:
-				__proprietes_filtered.append(__prop)
+				__properties_filtered.append(__prop)
 			else:
-				__proprietes_filtered.append(__prop)
-	return __proprietes_filtered
+				__properties_filtered.append(__prop)
+	return __properties_filtered
 
 func has_display() -> bool:
-	for __prop: Propriety in proprietes:
+	for __prop: Property in properties:
 		if __prop is Display:
 			return true
 	return false
 
 func retrieve_displays() -> Array[Display]:
-	var __proprietes_filtered: Array[Display] = []
-	for __prop: Propriety in proprietes:
+	var __properties_filtered: Array[Display] = []
+	for __prop: Property in properties:
 		if __prop is Display:
-			__proprietes_filtered.append(__prop)
-	return __proprietes_filtered
+			__properties_filtered.append(__prop)
+	return __properties_filtered
+
+func get_valid_string_display_or_empty() -> String:
+	var __displays: Array[Display] = retrieve_displays()
+	for __display: Display in __displays:
+		var __string: String = __display.get_any_valid_str()
+		if not __string.is_empty(): return __string
+	return ""

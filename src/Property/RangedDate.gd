@@ -1,4 +1,4 @@
-extends Propriety
+extends Property
 class_name RangedDate
 
 # NULL values can be set as Unknown in UI
@@ -24,4 +24,4 @@ func _init(__range: Array[Date], __description: String = "") -> void:
 	else:
 		self.start_date = __bound_2
 		self.end_date = __bound_1
-	
+	self.id = RandomString.new("P_").value

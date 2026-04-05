@@ -1,4 +1,4 @@
-extends Propriety
+extends Property
 class_name Date
 
 @export var description: String = ""
@@ -24,3 +24,4 @@ func _init(__year: int, __month: int, __day: int = 0,\
 	self.yyyymmdd = Vector3i(__year, __month, __day)
 	self.utc = __utc
 	self.description = __description
+	self.id = RandomString.new("P_").value

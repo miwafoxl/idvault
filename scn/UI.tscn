@@ -17,6 +17,16 @@
 [ext_resource type="Resource" uid="uid://cgkdbus2xj5tg" path="res://actions/item/deselect/ByItemIndex.tres" id="12_ow84f"]
 [ext_resource type="Resource" uid="uid://clfbxt6aenhar" path="res://actions/item/select/ByItemIndex.tres" id="13_jo5xa"]
 [ext_resource type="Resource" uid="uid://cyyks5xald400" path="res://actions/item/select/ByItemIndex_Append.tres" id="14_om6lc"]
+[ext_resource type="Resource" uid="uid://bckjplgug86rj" path="res://actions/item/append/PropertiesToSelected.tres" id="15_dmqk5"]
+[ext_resource type="Resource" uid="uid://cxgp6sjyya64u" path="res://actions/item/remove/PropertyID.tres" id="16_jo5xa"]
+[ext_resource type="Resource" uid="uid://dp2kjjnttef3o" path="res://actions/item/remove/Selected.tres" id="17_om6lc"]
+[ext_resource type="Resource" uid="uid://dh4ys308mmwj8" path="res://actions/item/stage/Alphabetical.tres" id="18_aud3x"]
+[ext_resource type="Resource" uid="uid://dl2u5de4plemq" path="res://actions/item/stage/Unordered.tres" id="19_0wj7y"]
+[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/DialogManager.gd" id="20_36mdt"]
+[ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/NewItem.tscn" id="21_ux2no"]
+[ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/MessageBox.tscn" id="22_ux2no"]
+[ext_resource type="PackedScene" uid="uid://bwd3pwft1ywa5" path="res://scn/Dialogs/TestReturn.tscn" id="23_qsylf"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default.tres" id="25_tk2vq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
@@ -36,15 +46,27 @@ node_panels = NodePath("MarginContainer/HBoxContainer")
 [node name="ActionManager" type="Node" parent="." unique_id=1071773374 node_paths=PackedStringArray("manager")]
 script = ExtResource("2_radts")
 manager = NodePath("../Manager")
-default = Array[ExtResource("3_8aj3b")]([ExtResource("5_fk8bs"), ExtResource("3_b3e2c"), ExtResource("7_vbk85"), ExtResource("8_urd2x"), ExtResource("8_0unq6"), ExtResource("9_dguqu"), ExtResource("10_khqd3"), ExtResource("11_dmqk5"), ExtResource("12_ow84f"), ExtResource("13_jo5xa"), ExtResource("14_om6lc")])
+default = Array[ExtResource("3_8aj3b")]([ExtResource("5_fk8bs"), ExtResource("3_b3e2c"), ExtResource("7_vbk85"), ExtResource("8_urd2x"), ExtResource("8_0unq6"), ExtResource("9_dguqu"), ExtResource("10_khqd3"), ExtResource("11_dmqk5"), ExtResource("12_ow84f"), ExtResource("13_jo5xa"), ExtResource("14_om6lc"), ExtResource("15_dmqk5"), ExtResource("16_jo5xa"), ExtResource("17_om6lc"), ExtResource("18_aud3x"), ExtResource("19_0wj7y")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
+
+[node name="DialogManager" type="Node" parent="." unique_id=1556975710 node_paths=PackedStringArray("spawn_node", "manager")]
+script = ExtResource("20_36mdt")
+spawn_node = NodePath("..")
+manager = NodePath("../Manager")
+default = Dictionary[StringName, PackedScene]({
+&"message": ExtResource("22_ux2no"),
+&"new_item": ExtResource("21_ux2no"),
+&"test_return": ExtResource("23_qsylf")
+})
+metadata/_custom_type_script = "uid://bwxtawgolorsm"
 
 [node name="Manager" type="Node" parent="." unique_id=2042373046]
 script = ExtResource("2_ffxes")
 metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
-[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "manager") instance=ExtResource("3_bf3yq")]
+[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "dialog_manager", "manager") instance=ExtResource("3_bf3yq")]
 action_manager = NodePath("../ActionManager")
+dialog_manager = NodePath("../DialogManager")
 manager = NodePath("../Manager")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
@@ -54,6 +76,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("25_tk2vq")
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
