@@ -94,7 +94,7 @@ func append_items(__entries: Array[Item]) -> bool:
 		return true
 	return false 
 
-func remove_items(__item_arr_indexes: Array[int]) -> bool:
+func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
