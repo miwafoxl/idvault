@@ -30,18 +30,18 @@ layout_mode = 2
 
 [node name="ItemButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=602861986]
 layout_mode = 2
-text = "+ Item"
+text = "PANEL.ITEMLIST.NEW_ITEM"
 
 [node name="QueryLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=649090237]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
-placeholder_text = "Query..."
+placeholder_text = "PANEL.ITEMLIST.QUERY_PLACEHOLDER"
 caret_blink = true
 
 [node name="QueryButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1214248633]
 layout_mode = 2
-text = "Query"
+text = "PANEL.ITEMLIST.QUERY"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1620681293]
 custom_minimum_size = Vector2(0, 500)
