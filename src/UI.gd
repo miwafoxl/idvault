@@ -5,6 +5,8 @@ class_name UI
 @export var action_manager: ActionManager
 @export var node_panels: Control
 
+signal request_menu(menu_id: StringName, param: Dictionary)
+	
 func give_managers(__managers: Dictionary) -> void:
 	for __key: String in __managers:
 		match __key:
@@ -57,6 +59,7 @@ func update_signals() -> void:
 			__item_list.add_item.connect(add_item)
 			__item_list.select_item.connect(select_item)
 			__item_list.select_item_append.connect(select_item_append)
+			__item_list.request_menu.connect(request_menu.emit)
 			__item_list.deselect_item.connect(deselect_item)
 			__item_list.deselect_all.connect(deselect_all)
 			__item_list.query.connect(query)
