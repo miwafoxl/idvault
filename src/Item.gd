@@ -9,13 +9,13 @@ func _init(__id: int, __properties: Array[Property] = []) -> void:
 	self.id = __id
 	self.properties = __properties
 
-func append_proprieties(__properties: Array[Property]) -> bool:
+func append_properties(__properties: Array[Property]) -> bool:
 	if not __properties.is_empty():
 		properties.append_array(__properties)
 		return true
 	return false
 
-func remove_proprieties_index(__rm_properties_idx: Array[int]) -> bool:
+func remove_properties_index(__rm_properties_idx: Array[int]) -> bool:
 	var __prop_size: int = properties.size()
 	if not __rm_properties_idx.is_empty():
 		for __property_idx: int in __rm_properties_idx:
@@ -27,7 +27,7 @@ func remove_proprieties_index(__rm_properties_idx: Array[int]) -> bool:
 		clean_properties()
 	return true
 
-func remove_proprieties(__rm_properties_id: Array[String]) -> void:
+func remove_properties(__rm_properties_id: Array[String]) -> void:
 	var __prop_size: int = properties.size()
 	if not __rm_properties_id.is_empty():
 		for __rm_property_id: String in __rm_properties_id:

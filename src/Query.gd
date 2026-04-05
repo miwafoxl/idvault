@@ -40,7 +40,7 @@ enum ComputeError {
 	PARAMETER_TYPE_MISMATCH
 }
 
-enum ComparasionMode {
+enum ComparisonMode {
 	COMPARASION,
 	MATCH,
 	NEARBY,
@@ -136,31 +136,31 @@ func compute(__subqueries: Array[Subquery] = parsed_query) -> void:
 func solve_parameter(__parsed_parameter: Array, __link_value: Variant) -> bool:
 	var __passed_value: Variant = __parsed_parameter[2]
 	match __parsed_parameter[1]:
-		ComparasionMode.MATCH:
+		ComparisonMode.MATCH:
 			match __parsed_parameter[0]:
 				Parameter.ParameterTypes.NUMBER:
 					if int(__passed_value) == int(__link_value): return true
 				Parameter.ParameterTypes.STRING:
 					if String(__passed_value) == String(__link_value): return true
-		ComparasionMode.NEARBY:
+		ComparisonMode.NEARBY:
 			match __parsed_parameter[0]:
 				Parameter.ParameterTypes.NUMBER:
 					const __DIST: int = 20 # TODO: make this configurable
 					if int(__passed_value) in range(__link_value - __DIST, \
 							__link_value + __DIST): return true
-		ComparasionMode.GREATER_THAN:
+		ComparisonMode.GREATER_THAN:
 			match __parsed_parameter[0]:
 				Parameter.ParameterTypes.NUMBER:
 					if int(__passed_value) > int(__link_value): return true
-		ComparasionMode.GREATER_OR_EQUALS_TO:
+		ComparisonMode.GREATER_OR_EQUALS_TO:
 			match __parsed_parameter[0]:
 				Parameter.ParameterTypes.NUMBER:
 					if int(__passed_value) >= int(__link_value): return true
-		ComparasionMode.LESSER_THAN:
+		ComparisonMode.LESSER_THAN:
 			match __parsed_parameter[0]:
 				Parameter.ParameterTypes.NUMBER:
 					if int(__passed_value) < int(__link_value): return true
-		ComparasionMode.LESSER_OR_EQUALS_TO:
+		ComparisonMode.LESSER_OR_EQUALS_TO:
 			match __parsed_parameter[0]:
 				Parameter.ParameterTypes.NUMBER:
 					if int(__passed_value) <= int(__link_value): return true
@@ -168,47 +168,47 @@ func solve_parameter(__parsed_parameter: Array, __link_value: Variant) -> bool:
 
 func parse_parameter(__parameter: String) -> Array: # [ParameterType, Mode, Value]
 	var __param_type: Parameter.ParameterTypes
-	var __param_mode: ComparasionMode
+	var __param_mode: ComparisonMode
 	var __param_value: Variant = null
 	if __parameter.substr(1).is_valid_int():
 		__param_type = Parameter.ParameterTypes.NUMBER
 		if __parameter.is_valid_int():
-			__param_mode = ComparasionMode.MATCH
+			__param_mode = ComparisonMode.MATCH
 			__param_value = int(__parameter)
 	if __param_value == null:
 		match __parameter.substr(0, 1):
 			"=": 
-				__param_mode = ComparasionMode.MATCH # String and Number
+				__param_mode = ComparisonMode.MATCH # String and Number
 				if __param_type == null:
 					__param_type = Parameter.ParameterTypes.STRING
 					__param_value = String(__parameter.substr(1))
 			"~":  # TODO: '~' (Nearby) Can be implemented to strings if use String.match
-				__param_mode = ComparasionMode.NEARBY # Number 
+				__param_mode = ComparisonMode.NEARBY # Number 
 				if __param_type == null:
-					__param_mode = ComparasionMode.MATCH
+					__param_mode = ComparisonMode.MATCH
 					__param_type = Parameter.ParameterTypes.STRING
 					__param_value = String(__parameter.substr(1))
-					printerr("QParseParameter: parameter '%s' has a number comparasion, but \
-					a string was provided instead. Using ComparasionMode.MATCH instead." % __parameter)
+					printerr("QParseParameter: parameter '%s' has a number comparison, but \
+					a string was provided instead. Using ComparisonMode.MATCH instead." % __parameter)
 			">": 
-				__param_mode = ComparasionMode.GREATER_OR_EQUALS_TO # Number
+				__param_mode = ComparisonMode.GREATER_OR_EQUALS_TO # Number
 				if __param_type == null:
-					__param_mode = ComparasionMode.MATCH
+					__param_mode = ComparisonMode.MATCH
 					__param_type = Parameter.ParameterTypes.STRING
 					__param_value = String(__parameter.substr(1))
-					printerr("QParseParameter: parameter '%s' has a number comparasion, but \
-					a string was provided instead. Using ComparasionMode.MATCH instead." % __parameter)
+					printerr("QParseParameter: parameter '%s' has a number comparison, but \
+					a string was provided instead. Using ComparisonMode.MATCH instead." % __parameter)
 			"<": 
-				__param_mode = ComparasionMode.LESSER_OR_EQUALS_TO # Number
+				__param_mode = ComparisonMode.LESSER_OR_EQUALS_TO # Number
 				if __param_type == null:
-					__param_mode = ComparasionMode.MATCH
+					__param_mode = ComparisonMode.MATCH
 					__param_type = Parameter.ParameterTypes.STRING
 					__param_value = String(__parameter.substr(1))
-					printerr("QParseParameter: parameter '%s' has a number comparasion, but \
-					a string was provided instead. Using ComparasionMode.MATCH instead." % __parameter)
-			_: # TODO: Implement 2-char (>=, <=) comparasion modes
+					printerr("QParseParameter: parameter '%s' has a number comparison, but \
+					a string was provided instead. Using ComparisonMode.MATCH instead." % __parameter)
+			_: # TODO: Implement 2-char (>=, <=) comparison modes
 				__param_type = Parameter.ParameterTypes.STRING
-				__param_mode = ComparasionMode.MATCH
+				__param_mode = ComparisonMode.MATCH
 				__param_value = String(__parameter)
 	return [__param_type, __param_mode, __param_value]
 
