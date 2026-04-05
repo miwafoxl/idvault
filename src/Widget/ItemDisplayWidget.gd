@@ -22,6 +22,19 @@ func update_color() -> void:
 		self.set_modulate(Color(0.537, 0.537, 1.0, 1.0))
 	else:
 		self.set_modulate(Color.WHITE)
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is not InputEventMouseButton: return
+	var __mouse_act: InputEventMouseButton = event 
+	match __mouse_act.button_index:
+		MouseButton.MOUSE_BUTTON_LEFT:
+			click.emit(related_id)
+			if not display_selected:
+				self.display_selected = true
+			else:
+				self.display_selected = false
+		MouseButton.MOUSE_BUTTON_RIGHT:
+			request_menu.emit(&"panel.itemlist.item_menu")
 	
 func _on_button_up() -> void:
 	click.emit(related_id)
