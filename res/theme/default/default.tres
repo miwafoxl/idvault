@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3 uid="uid://echxjbibbbbf"]
+
+[ext_resource type="FontFile" uid="uid://5viuac8gse8w" path="res://res/theme/default/Font/Miranda_Sans/MirandaSans-VariableFont_wght.ttf" id="1_nvxe0"]
+[ext_resource type="StyleBox" uid="uid://d24big01h1jj4" path="res://res/theme/default/StyleBoxFlat/default_hover.tres" id="1_wd0d5"]
+[ext_resource type="StyleBox" uid="uid://dse3vhvgyk4ma" path="res://res/theme/default/StyleBoxFlat/default_normal.tres" id="2_nvxe0"]
+[ext_resource type="StyleBox" uid="uid://dluq2o0d8nrvd" path="res://res/theme/default/StyleBoxFlat/default_pressed.tres" id="3_rt8mx"]
+
+[resource]
+Button/font_sizes/font_size = 12
+Button/fonts/font = ExtResource("1_nvxe0")
+Button/styles/hover = ExtResource("1_wd0d5")
+Button/styles/normal = ExtResource("2_nvxe0")
+Button/styles/pressed = ExtResource("3_rt8mx")
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("1_nvxe0")
+LineEdit/font_sizes/font_size = 12
+LineEdit/fonts/font = ExtResource("1_nvxe0")
+LineEdit/styles/focus = ExtResource("3_rt8mx")
+LineEdit/styles/normal = ExtResource("2_nvxe0")
+RichTextLabel/font_sizes/normal_font_size = 12
