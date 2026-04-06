@@ -25,10 +25,13 @@ func swap_ui(__ui: PackedScene) -> void:
 
 func popup_menu(__id: StringName, __param: Dictionary = {}, \
 		__position: Vector2i = DisplayServer.mouse_get_position()) -> void:
-	var __menu: PopupMenu = menu_manager.retrieve_menu(__id)
+	var __menu: ContextMenu = menu_manager.retrieve_menu(__id, __param)
 	if __menu == null:
 		printerr("No menu with id '%s'" % __id)
+	#print_debug(__id, __param)
 	add_child(__menu)
+	__menu.action_query.connect(menu_manager.menu_action_callback, \
+			ConnectFlags.CONNECT_DEFERRED)
 	__menu.set_position(__position)
 	__menu.set_force_native(true)
 	__menu.popup()

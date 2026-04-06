@@ -17,10 +17,10 @@ func check() -> bool:
 	__obj.free()
 	return true
 
-func get_menu() -> PopupMenu:
+func get_menu(__param: Dictionary = {}) -> ContextMenu:
 	var __obj: Object = Object.new()
-	var __result: PopupMenu = null
+	var __result: ContextMenu = null
 	__obj.set_script(src)
-	__result = __obj.build()
+	__result = __obj.build(__param)
 	__obj.free()
 	return __result

@@ -26,6 +26,9 @@ func update(__selected_items_id: Array[int] = []) -> void:
 	update_item_display()
 	update_selected_items(__selected_items_id)
 
+func handle_menu_request(__menu_id: StringName, __param: Dictionary = {}) -> void:
+	request_menu.emit(__menu_id, {"item_id": selected_item_ids})
+
 func update_selected_items(__selected: Array[int] = []) -> void:
 	selected_item_ids = __selected
 	for __item_widget: ItemDisplayWidget in item_list_parent.get_children(false):
@@ -47,11 +50,11 @@ func update_item_display() -> void:
 			__item_widget.subtitle = __item_title[0].alt
 		else:
 			__item_widget.title = str(__item.id)
-		__item_widget.click.connect(interaction_item_display_click)
-		__item_widget.request_menu.connect(request_menu.emit)
+		__item_widget.select.connect(interaction_item_display_click)
+		__item_widget.select_append.connect(select_item_append.emit)
+		__item_widget.request_menu.connect(handle_menu_request)
 		__item_widget.update()
 		item_list_parent.add_child(__item_widget)
-
 
 func _on_new_item_button_button_down() -> void:
 	add_item.emit()

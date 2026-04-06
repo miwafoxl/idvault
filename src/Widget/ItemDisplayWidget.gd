@@ -9,9 +9,9 @@ var display_selected: bool = false
 @export var node_title: Label 
 @export var node_subtitle: Label
 
-signal click()
-signal hover()
-signal request_menu()
+signal select()
+signal select_append()
+signal request_menu(__menu_id: StringName)
 
 func update() -> void:
 	node_title.set_text(self.title)
@@ -29,17 +29,15 @@ func _on_gui_input(event: InputEvent) -> void:
 	var __mouse_act: InputEventMouseButton = event 
 	match __mouse_act.button_index:
 		MouseButton.MOUSE_BUTTON_LEFT:
-			click.emit(related_id)
+			select.emit(related_id)
 			if not display_selected:
 				self.display_selected = true
 			else:
 				self.display_selected = false
 		MouseButton.MOUSE_BUTTON_RIGHT:
-			request_menu.emit(&"panel.itemlist.item_menu")
-	
-func _on_button_up() -> void:
-	click.emit(related_id)
-	if not display_selected:
-		self.display_selected = true
-	else:
-		self.display_selected = false
+			select_append.emit(related_id)
+			if not display_selected:
+				self.display_selected = true
+			else:
+				self.display_selected = false
+			request_menu.emit.call_deferred(&"panel.itemlist.item_menu")

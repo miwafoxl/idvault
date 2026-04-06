@@ -34,7 +34,7 @@ func remove_menu(__rm_menu_aliases: Array[StringName]) -> void:
 		if __alias in __rm_menu_aliases:
 			loaded.erase(__alias)
 
-func retrieve_menu(__menu_id: StringName, __param_dict: Dictionary = {}) -> PopupMenu:
+func retrieve_menu(__menu_id: StringName, __param_dict: Dictionary = {}) -> ContextMenu:
 	# TODO: Support menu parameters
 	var __ref: WeakRef = loaded.get(__menu_id, null)
 	var __menu: Menu = null
@@ -45,8 +45,13 @@ func retrieve_menu(__menu_id: StringName, __param_dict: Dictionary = {}) -> Popu
 	if __menu == null:
 		printerr("MenuManager: failed to get a reference to menu id '%s'." % __menu_id)
 		return null
-	var __result: PopupMenu = __menu.get_menu()
+	var __result: ContextMenu = __menu.get_menu(__param_dict)
 	__result.set_theme(theme)
 	if __result == null:
 		push_warning("MenuManager: menu id '%s' failed." % __menu_id)
 	return __result
+
+func menu_action_callback(__param: Dictionary) -> void:
+	if __param.is_empty(): return
+	var __action: StringName = __param.keys()[0]
+	print_debug(__param)
