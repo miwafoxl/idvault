@@ -20,7 +20,7 @@ enum PropertyTypes {
 }
 
 # TODO: Separate thread
-func get_item_by_id(__id: Array[int]) -> Array[Item]:
+func get_item_by_id(__id: Array[String]) -> Array[Item]:
 	var __items: Array[Item] = []
 	__items.resize(__id.size())
 	if unordered_items.is_empty():
@@ -78,11 +78,10 @@ func deselect_items_at_stage_index(__deselec_stage_index: Array[int]) -> void:
 			if __item in selected_items:
 				selected_items.erase(__item)
 
-func retrieve_selected_items_id() -> Array[int]:
-	var __selected_ids: Array[int] = []
+func retrieve_selected_items_id() -> Array[String]:
+	var __selected_ids: Array[String] = []
 	for __item: Item in selected_items:
 		__selected_ids.append(__item.id)
-	__selected_ids.sort()
 	return __selected_ids
 
 func append_items(__entries: Array[Item]) -> bool:
@@ -114,15 +113,11 @@ func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
 	if not __rm_stage_index.is_empty():
 		var __items: Array[Item] = get_staged_item_index(__rm_stage_index)
 		for __item: Item in __items:
-			if __item.id >= __items_size: 
-				printerr("Item Manager: Failed to remove item %s (larger than \
-				stage size (%s))" % [__item.id, __items_size])
-				return false
-			unordered_items.set(__item.id, null)
-		clean_entries()
+			__item.unreference()
 		descriptors_cx = reload_descriptor_context(unordered_items)
 		parameters_cx = reload_parameters_context(unordered_items)
 		links_cx = reload_links_context(unordered_items)
+	clean_entries()
 	return true
 
 func clean_entries() -> void:
