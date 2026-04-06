@@ -64,11 +64,11 @@ msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"
 msgstr ""
 
 #: res/menus/panel/itemlist/ItemMenu.gd:40
-msgid "PANEL.ITEMLIST.CLIPBOARD_ITEM_TEXT"
+msgid "PANEL.ITEMLIST.CLIPBOARD_SELECTED_ITEM_TEXT"
 msgstr ""
 
 #: res/menus/panel/itemlist/ItemMenu.gd:43
-msgid "PANEL.ITEMLIST.CLIPBOARD_LINKED_TAGS"
+msgid "PANEL.ITEMLIST.CLIPBOARD_SELECTED_LINKED_TAGS"
 msgstr ""
 
 #: res/menus/panel/itemlist/ItemMenu.gd:48
