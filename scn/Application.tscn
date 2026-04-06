@@ -29,7 +29,7 @@
 [ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/MenuManager.gd" id="27_5yf8b"]
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/panel/itemlist/ItemMenu.tres" id="29_ldrk5"]
-[ext_resource type="Theme" uid="uid://s2sg63fwrnyx" path="res://res/theme/default/menu.tres" id="30_ldrk5"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="30_ldrk5"]
 
 [node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "dialog_manager", "menu_manager")]
 script = ExtResource("1_tbfir")

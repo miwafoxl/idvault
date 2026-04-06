@@ -1,7 +1,0 @@
-[gd_resource type="Theme" format=3 uid="uid://s2sg63fwrnyx"]
-
-[ext_resource type="FontFile" uid="uid://5viuac8gse8w" path="res://res/theme/default/Font/Miranda_Sans/MirandaSans-VariableFont_wght.ttf" id="1_xncko"]
-
-[resource]
-PopupMenu/font_sizes/font_size = 12
-PopupMenu/fonts/font = ExtResource("1_xncko")

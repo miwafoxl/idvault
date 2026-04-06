@@ -17,4 +17,6 @@ LineEdit/font_sizes/font_size = 12
 LineEdit/fonts/font = ExtResource("1_nvxe0")
 LineEdit/styles/focus = ExtResource("3_rt8mx")
 LineEdit/styles/normal = ExtResource("2_nvxe0")
+PopupMenu/font_sizes/font_size = 12
+PopupMenu/fonts/font = ExtResource("1_nvxe0")
 RichTextLabel/font_sizes/normal_font_size = 12
