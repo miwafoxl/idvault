@@ -1,0 +1,81 @@
+# LANGUAGE translation for idvault for the following files:
+# res://scn/Panels/ItemListPanel.tscn
+# res://scn/Dialogs/MessageBox.tscn
+# res://scn/Dialogs/NewItem.tscn
+# res://scn/Dialogs/TestReturn.tscn
+# res://res/menus/panel/itemlist/ItemMenu.gd
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: idvault\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: scn/Panels/ItemListPanel.tscn
+msgid "PANEL.ITEMLIST.NEW_ITEM"
+msgstr "New Item"
+
+#: scn/Panels/ItemListPanel.tscn
+msgid "PANEL.ITEMLIST.QUERY_PLACEHOLDER"
+msgstr "Search tags"
+
+#: scn/Panels/ItemListPanel.tscn
+msgid "PANEL.ITEMLIST.QUERY"
+msgstr "Search"
+
+#: scn/Dialogs/MessageBox.tscn
+msgid "DIALOG.MESSAGE.TITLE"
+msgstr "Information"
+
+#: scn/Dialogs/MessageBox.tscn
+msgid "DIALOG.GENERAL.OK"
+msgstr "OK"
+
+#: scn/Dialogs/NewItem.tscn
+msgid "DIALOG.NEW_ITEM.TITLE"
+msgstr "Creating new item"
+
+#: scn/Dialogs/TestReturn.tscn
+msgid "DIALOG.TESTRETURN.TITLE"
+msgstr "Test Return"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:22
+msgid "PANEL.ITEMLIST.MANAGE_COMMON_LINKS"
+msgstr "Manage common links"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:24
+msgid "PANEL.ITEMLIST.ITEM_PROPERTIES"
+msgstr "Item properties"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:25
+msgid "PANEL.ITEMLIST.MANAGE_LINKS"
+msgstr "Manage links"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:26
+msgid "PANEL.ITEMLIST.DUPLICATE"
+msgstr "Duplicate item(s)"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:27
+msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS"
+msgstr "Query: Items linked to this item"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:28
+msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"
+msgstr "Query: Items unlinked to this item"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:29
+msgid "PANEL.ITEMLIST.DELETE_ITEMS"
+msgstr "Delete item(s)"
+
+msgid "idvault"
+msgstr ""

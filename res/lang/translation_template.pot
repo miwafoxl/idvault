@@ -1,0 +1,75 @@
+# LANGUAGE translation for idvault for the following files:
+# res://scn/Panels/ItemListPanel.tscn
+# res://scn/Dialogs/MessageBox.tscn
+# res://scn/Dialogs/NewItem.tscn
+# res://scn/Dialogs/TestReturn.tscn
+# res://res/menus/panel/itemlist/ItemMenu.gd
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: idvault\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: scn/Panels/ItemListPanel.tscn
+msgid "PANEL.ITEMLIST.NEW_ITEM"
+msgstr ""
+
+#: scn/Panels/ItemListPanel.tscn
+msgid "PANEL.ITEMLIST.QUERY_PLACEHOLDER"
+msgstr ""
+
+#: scn/Panels/ItemListPanel.tscn
+msgid "PANEL.ITEMLIST.QUERY"
+msgstr ""
+
+#: scn/Dialogs/MessageBox.tscn
+msgid "DIALOG.MESSAGE.TITLE"
+msgstr ""
+
+#: scn/Dialogs/MessageBox.tscn
+msgid "DIALOG.GENERAL.OK"
+msgstr ""
+
+#: scn/Dialogs/NewItem.tscn
+msgid "DIALOG.NEW_ITEM.TITLE"
+msgstr ""
+
+#: scn/Dialogs/TestReturn.tscn
+msgid "DIALOG.TESTRETURN.TITLE"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:22
+msgid "PANEL.ITEMLIST.MANAGE_COMMON_LINKS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:24
+msgid "PANEL.ITEMLIST.ITEM_PROPERTIES"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:25
+msgid "PANEL.ITEMLIST.MANAGE_LINKS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:26
+msgid "PANEL.ITEMLIST.DUPLICATE"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:27
+msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:28
+msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:29
+msgid "PANEL.ITEMLIST.DELETE_ITEMS"
+msgstr ""
+
+msgid "idvault"
+msgstr ""
