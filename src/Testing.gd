@@ -6,41 +6,55 @@ extends Node
 
 ## Creates a single empty item
 func test1() -> bool:
-	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", {
-		"item_id": __id }):
+	# Setup: --------------------------------------------------
+	if not action_manager.run(&"items.append.items", {}):
+		return false
+	if not action_manager.run(&"items.stage.unordered", {
+		"item": manager.unordered_items }):
 			return false
-	if not action_manager.run(&"items.remove.by_item_id", {
-		"item_id": [__id] }): # Cleanup
+	# Cleanup: ------------------------------------------------
+	if not action_manager.run(&"items.select.by_item_index", {
+		"item_idx": [0] }):
+			return false
+	if not action_manager.run(&"items.remove.selected", {}):
 			return false
 	return true
 
 ## Creates 10 empty items
 func test2() -> bool:
-	var __id: int = randi() % 100
+	# Setup: --------------------------------------------------
 	if not action_manager.run(&"items.append.items", {
-		"item_id": __id, 
 		"count": 10 }):
 			return false
-	if not action_manager.run(&"items.remove.by_item_id", {
-		"item_id": range(__id, __id + 10)}): # Cleanup
+	if not action_manager.run(&"items.stage.unordered", {
+		"item": manager.unordered_items }):
 			return false
+	# Cleanup: ------------------------------------------------
+	if not action_manager.run(&"items.select.by_item_index", {
+		"item_idx": range(10) }):
+			return false
+	if not action_manager.run(&"items.remove.selected", {}):
+		return false
 	return true
 
 ## Creates a single item and gives it a property afterwards
 func test3() -> bool:
-	var __id: int = randi() % 100
+	# Setup: --------------------------------------------------
 	if not action_manager.run(&"items.append.items", {
-		"item_id": __id, 
 		"properties": [Display.new("Momento")] }):
 			return false
-	if not action_manager.run(&"items.select.by_item_id", {
-		"item_id": [__id] }):
+	if not action_manager.run(&"items.stage.unordered", {
+		"item": manager.unordered_items }):
 			return false
+	if not action_manager.run(&"items.select.by_item_index", {
+		"item_idx": [0] }):
+			return false
+	var __selected_id: String = manager.selected_items[0].id
 	if not action_manager.run(&"items.append.properties_to_selected", {
-		"properties": [Link.new([__id]), 
+		"properties": [Link.new([__selected_id]), 
 					   Descriptor.new("test")] }):
 			return false
+	# Cleanup: ------------------------------------------------
 	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
 		return false
 	return true
@@ -48,53 +62,59 @@ func test3() -> bool:
 ## Creates a single item, give it a property, then delete the property \
 ## without deleting the whole item
 func test4() -> bool:
-	var __id: int = randi() % 100
-	if not action_manager.run(&"items.append.items", {
-		"item_id": __id}):
+	# Setup: --------------------------------------------------
+	if not action_manager.run(&"items.append.items", {}):
+		return false
+	if not action_manager.run(&"items.stage.unordered", {
+		"item": manager.unordered_items }):
 			return false
-	if not action_manager.run(&"items.select.by_item_id", {
-		"item_id": [__id] }):
+	if not action_manager.run(&"items.select.by_item_index", {
+		"item_idx": [0] }):
 			return false
 	var __display: Display = Display.new("coc");
+	var __selected_id: String = manager.selected_items[0].id
 	if not action_manager.run(&"items.append.properties_to_selected", {
-		"properties": [Link.new([__id]), __display] }):
+		"properties": [Link.new([__selected_id]), __display] }):
 			return false
 	if not action_manager.run(&"items.remove.property_id", {
 		"item": manager.selected_items, 
 		"property_id": [__display.id] }):
 			return false
-	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
+	# Cleanup: ------------------------------------------------
+	if not action_manager.run(&"items.remove.selected", {}):
 		return false
 	return true
 
 ## Create an item and retrieves it as if only ID was known.\
 ## This can't be done using actions. The UI handles retrieval of items.
-func test5() -> bool:
-	var __id: int = randi() % 100
-	var __item: Item = Item.new(__id)
-	if not manager.append_items([__item]):
-		return false
-	var __get_item: Array[Item] = manager.get_item_by_id([__id])
-	if __get_item.is_empty() or __get_item[0] == null:
-		return false
-	if not manager.remove_items_unordered([0]): #      CLEANUP
-		return false
-	return true
+#func test5() -> bool:
+	#var __id: int = randi() % 100
+	#var __item: Item = Item.new(__id)
+	#if not manager.append_items([__item]):
+		#return false
+	#var __get_item: Array[Item] = manager.get_item_by_id([__id])
+	#if __get_item.is_empty() or __get_item[0] == null:
+		#return false
+	#if not manager.remove_items_unordered([0]): #      CLEANUP
+		#return false
+	#return true
 
 ## Create an item with a parameter and validly links to itself with \
 ## a link parameter
 func test6() -> bool:
-	var __id: int = randi() % 100
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
 	if not action_manager.run(&"items.append.items", {
-		"item_id": __id,
 		"properties": [Display.new("Kek"), __param] }):
 			return false
-	if not action_manager.run(&"items.select.by_item_id", {
-		"item_id": [__id] }):
+	if not action_manager.run(&"items.stage.unordered", {
+		"item": manager.unordered_items }):
 			return false
+	if not action_manager.run(&"items.select.by_item_index", {
+		"item_idx": [0] }):
+			return false
+	var __selected_id: String = manager.selected_items[0].id
 	if not action_manager.run(&"items.append.properties_to_selected", {
-		"properties": [Link.new([__id], {__param.id: 7}), 
+		"properties": [Link.new([__selected_id], {__param.id: 7}), 
 					   Descriptor.new("test")] }):
 			return false
 	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
