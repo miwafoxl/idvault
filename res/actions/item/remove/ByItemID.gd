@@ -2,15 +2,15 @@ extends Object
 
 ## Removes items by ID
 func run(__manager: ItemManager, __param: Dictionary) -> bool: 
-	var __item_ids: Array[int]
+	var __item_ids: Array[String]
 	var __rm_indexes: Array[int]
 	#region Parameter processing
 	for __key: String in __param:
 		var __value: Variant = __param[__key]
 		match __key:
 			"item_id" when __value is Array:
-				for __id: int in __value:
-					if __id is int:
+				for __id: Variant in __value:
+					if __id is String:
 						__item_ids.append(__id)
 			_:
 				push_warning("items.remove.by_item_id: invalid key '%s'\
