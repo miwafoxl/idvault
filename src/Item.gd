@@ -1,13 +1,15 @@
 extends Resource
 class_name Item
 
-@export var id: int = 0;
+@export var id: String = ""
 @export var properties: Array[Property] = [];
 # TODO: add Dictionary[property_id: weakref(Property)] to optimize line 34
 
-func _init(__id: int, __properties: Array[Property] = []) -> void:
-	self.id = __id
+func _init(__id: String = "", __properties: Array[Property] = []) -> void:
 	self.properties = __properties
+	self.id = __id
+	if __id.is_empty():
+		self.id = RandomString.new("i_").value
 
 func append_properties(__properties: Array[Property]) -> bool:
 	if not __properties.is_empty():
