@@ -1,7 +1,7 @@
 extends Property
 class_name Link
 
-@export var to: Array[int] = [];
+@export var to: Array[String] = [];
 @export var parameters: Dictionary[String, Variant] = {};
 
 # TODO: remove possibility of adding multiple of the same link
@@ -35,7 +35,7 @@ func remove_parameter(__rm_parameter_id: Array[String]) -> bool:
 			return parameters.erase(__param_id)
 	return true
 
-func _init(__link_item_id: Array[int], \
+func _init(__link_item_id: Array[String], \
 		__parameters: Dictionary[String, Variant] = {}) -> void:
 	self.to = __link_item_id
 	append_parameter(__parameters)
