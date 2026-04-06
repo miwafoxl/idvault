@@ -1,7 +1,7 @@
 extends Object
 
 ## Creates and appends a specified amount of empty items
-func run(__manager: Manager, __param: Dictionary) -> bool: 
+func run(__manager: ItemManager, __param: Dictionary) -> bool: 
 	var __id: int = __manager.get_stage_size()
 	var __range: int = 1
 	var __init_props: Array[Property] = []

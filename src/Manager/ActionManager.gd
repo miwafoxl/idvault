@@ -1,7 +1,7 @@
-extends Node
+extends Manager
 class_name ActionManager
 
-@export var manager: Manager
+@export var manager: ItemManager
 @export var default: Array[Action] = [];
 @export var loaded: Dictionary[StringName, Variant] = {}; # {action alias: action ref}
 

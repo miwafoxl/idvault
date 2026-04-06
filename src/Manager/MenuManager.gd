@@ -1,4 +1,4 @@
-extends Node
+extends Manager
 class_name MenuManager
 
 @export var default: Array[Menu] = [];

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://vg1jt16tyye1"]
 
-[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="1_h0uo0"]
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager/ItemManager.gd" id="1_h0uo0"]
 
-[node name="Manager" type="Node" unique_id=965861676]
+[node name="ItemManager" type="Node" unique_id=965861676]
 script = ExtResource("1_h0uo0")
 metadata/_custom_type_script = "uid://htdxvtahxgnw"

@@ -1,8 +1,8 @@
-extends Node
+extends Manager
 class_name DialogManager
 
 @export var spawn_node: Node
-@export var manager: Manager
+@export var manager: ItemManager
 @export var default: Dictionary[StringName, PackedScene]
 @export var returning_values: Dictionary[StringName, Array]
 var loaded: Dictionary[StringName, PackedScene] = {}; # {dialog alias: packed scene}

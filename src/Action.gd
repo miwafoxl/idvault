@@ -19,7 +19,7 @@ func check() -> bool:
 	__obj.free()
 	return checked
 
-func execute(__manager: Manager, __param: Dictionary)\
+func execute(__manager: ItemManager, __param: Dictionary)\
 		 -> bool: # TODO: Args are not used here yet
 	if not checked:
 		printerr("Action: can't run action '%s' because it has not been checked by ActionManager." % alias)

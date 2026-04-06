@@ -2,7 +2,7 @@ extends Node
 class_name Application
 
 @export var default_ui: PackedScene
-@export var item_manager: Manager
+@export var item_manager: ItemManager
 @export var action_manager: ActionManager
 @export var dialog_manager: DialogManager
 @export var menu_manager: MenuManager

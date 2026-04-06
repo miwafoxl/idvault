@@ -1,7 +1,7 @@
 extends Object
 
 ## Append items to selection by Item index. If items aren't existent, nothing happens.
-func run(__manager: Manager, __param: Dictionary) -> bool: 
+func run(__manager: ItemManager, __param: Dictionary) -> bool: 
 	# Each int in the args array is an Item ID
 	var __item_ids: Array[int]
 	var __select_indexes: Array[int]

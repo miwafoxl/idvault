@@ -1,7 +1,7 @@
 extends Control
 class_name UI
 
-@export var manager: Manager
+@export var manager: ItemManager
 @export var action_manager: ActionManager
 @export var node_panels: Control
 

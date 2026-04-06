@@ -16,7 +16,7 @@ func order(a: Item, b: Item) -> bool:
 	return false
 
 ## Stage items in alphabetically
-func run(__manager: Manager, __param: Dictionary) -> bool:
+func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	var __items: Array[Item] = []
 	#region Parameter processing
 	for __key: String in __param:

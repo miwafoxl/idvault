@@ -1,7 +1,7 @@
 extends Object
 
 ## Select items by Item ID. If items aren't existent, nothing happens.
-func run(__manager: Manager, __param: Dictionary) -> bool: 
+func run(__manager: ItemManager, __param: Dictionary) -> bool: 
 	var __item_ids: Array[int]
 	#region Parameter processing
 	for __key: String in __param:

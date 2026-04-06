@@ -2,7 +2,7 @@ extends Node
 
 @export var action_manager: ActionManager
 @export var dialog_manager: DialogManager
-@export var manager: Manager
+@export var manager: ItemManager
 
 ## Creates a single empty item
 func test1() -> bool:

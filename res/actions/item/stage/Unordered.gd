@@ -1,7 +1,7 @@
 extends Object
 
 ## Stage items as its given, no sorting is performed.
-func run(__manager: Manager, __param: Dictionary) -> bool:
+func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	var __items: Array[Item] = []
 	#region Parameter processing
 	for __key: String in __param:
