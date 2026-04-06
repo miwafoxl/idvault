@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://dl2u5de4plemq" path="res://res/actions/item/stage/Unordered.tres" id="19_qonqs"]
 [ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/Manager/DialogManager.gd" id="20_hg2lc"]
 [ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/MessageBox.tscn" id="21_1m14j"]
+[ext_resource type="Resource" uid="uid://bwadsxr54clqa" path="res://res/actions/item/to_clipboard/SelectedDisplay.tres" id="22_0slqf"]
 [ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/NewItem.tscn" id="22_g87cj"]
 [ext_resource type="PackedScene" uid="uid://bwd3pwft1ywa5" path="res://scn/Dialogs/TestReturn.tscn" id="23_cnxrv"]
 [ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager/ItemManager.gd" id="24_1v7vn"]
@@ -48,7 +49,7 @@ manager = NodePath("../ItemManager")
 [node name="ActionManager" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("manager")]
 script = ExtResource("2_xwlb1")
 manager = NodePath("../ItemManager")
-default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs")])
+default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
 [node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node", "manager")]
