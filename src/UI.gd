@@ -23,19 +23,19 @@ func add_item() -> void:
 		"item": manager.unordered_items })
 	update_panels.call_deferred()
 
-func select_item(__id: int) -> void:
+func select_item(__item_id: String) -> void:
 	action_manager.run(&"items.select.by_item_id", {
-		"item_id": [__id] })
+		"item_id": [__item_id] })
 	update_panels.call_deferred()
 
-func select_item_append(__id: int) -> void:
+func select_item_append(__item_id: String) -> void:
 	action_manager.run(&"items.select.by_item_id_append", {
-		"item_id": [__id] })
+		"item_id": [__item_id] })
 	update_panels.call_deferred()
 
-func deselect_item(__id: int) -> void:
+func deselect_item(__item_id: String) -> void:
 	action_manager.run(&"items.deselect.by_item_id", {
-		"item_id": [__id] })
+		"item_id": [__item_id] })
 	update_panels.call_deferred()
 
 func deselect_all() -> void:
