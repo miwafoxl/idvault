@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
 bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
 
-[node name="Ui" type="Control" unique_id=2117910557 node_paths=PackedStringArray("manager", "action_manager", "node_panels")]
+[node name="Ui" type="Control" unique_id=2117910557 node_paths=PackedStringArray("node_panels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,9 +16,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("2_ag2qf")
 script = ExtResource("1_1pjss")
-manager = NodePath("")
-action_manager = NodePath("")
 node_panels = NodePath("MarginContainer/HBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
