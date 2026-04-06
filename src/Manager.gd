@@ -53,11 +53,11 @@ func append_properties_to_item(__item_arr_indexes: Array[int], \
 	return __err
 
 func select_items(__items: Array[Item], __append: bool = false) -> void:
-	if not __items.is_empty():
-		if __append:
-			selected_items += __items
-		else:
-			selected_items = __items
+	if __items.is_empty(): return
+	if not __append: selected_items = __items; return
+	for __item: Item in __items:
+		if __item not in selected_items:
+			selected_items.append(__item)
 
 func deselect_items(__deselec_items: Array[Item]) -> void:
 	if not __deselec_items.is_empty():
