@@ -28,7 +28,7 @@ func build(__param: Dictionary) -> ContextMenu:
 		__menu.add_item(tr(&"PANEL.ITEMLIST.MANAGE_LINKS"))
 		__menu.set_item_metadata(-1, {&"items.open_dialog.editor_links": {} })
 	__menu.add_separator()
-	
+		
 	__menu.add_item(tr(&"PANEL.ITEMLIST.QUERY_LINKED_ITEMS"))
 	__menu.set_item_metadata(-1, {&"items.query.selected": {} })
 	
@@ -37,9 +37,19 @@ func build(__param: Dictionary) -> ContextMenu:
 	
 	__menu.add_separator()
 	
-	__menu.add_item(tr(&"PANEL.ITEMLIST.DUPLICATE"))
+	__menu.add_item(tr(&"PANEL.ITEMLIST.CLIPBOARD_ITEM_TEXT"))
+	__menu.set_item_metadata(-1, {&"items.to_clipboard.display": {} })
+	
+	__menu.add_item(tr(&"PANEL.ITEMLIST.CLIPBOARD_LINKED_TAGS"))
+	__menu.set_item_metadata(-1, {&"items.to_clipboard.tags": {} })
+	
+	__menu.add_separator()
+	
+	__menu.add_item(tr(&"PANEL.ITEMLIST.DUPLICATE_ITEMS"))
+	__menu.set_item_metadata(-1, {&"items.duplicate.selected": {"select": false} })
+	__menu.add_item(tr(&"PANEL.ITEMLIST.DUPLICATE_ITEMS_AND_SELECT"))
 	__menu.set_item_metadata(-1, {&"items.duplicate.selected": {"select": true} })
 	
 	__menu.add_item(tr(&"PANEL.ITEMLIST.DELETE_ITEMS"))
-	__menu.set_item_metadata(-1, {&"items.remove.selected": {"select": true} })
+	__menu.set_item_metadata(-1, {&"items.remove.selected": {} })
 	return __menu
