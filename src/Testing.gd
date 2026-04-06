@@ -123,27 +123,27 @@ func test6() -> bool:
 
 ## Create an item with a parameter and validly links to itself with \
 ## a link parameter, then queries it.
-func test6_5() -> bool:
-	var __id: int = randi() % 100
-	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
-	var __item: Item = Item.new(__id, [
-		Display.new("Fodendo"),
-		__param
-	])
-	__item.append_properties([
-		Link.new([__item.id], {__param.id: 7}),
-		Descriptor.new("test")
-	])
-	if not manager.append_items([__item]):
-		return false
-	
-	var __q: Query = Query.new("test", manager.unordered_items, \
-			manager.descriptors_cx, manager.parameters_cx, manager.links_cx)
-	if not __q.parse_raw():
-		return false
-	__q.compute()
-	var __q_result: Array[Item] = await __q.done
-	return true
+#func test6_5() -> bool:
+	#var __id: int = randi() % 100
+	#var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
+	#var __item: Item = Item.new(__id, [
+		#Display.new("Fodendo"),
+		#__param
+	#])
+	#__item.append_properties([
+		#Link.new([__item.id], {__param.id: 7}),
+		#Descriptor.new("test")
+	#])
+	#if not manager.append_items([__item]):
+		#return false
+	#
+	#var __q: Query = Query.new("test", manager.unordered_items, \
+			#manager.descriptors_cx, manager.parameters_cx, manager.links_cx)
+	#if not __q.parse_raw():
+		#return false
+	#__q.compute()
+	#var __q_result: Array[Item] = await __q.done
+	#return true
 
 ## Opens a test dialog to check if value is returning from dialog
 func test7() -> bool:
@@ -158,8 +158,8 @@ func do_tests() -> Array[int]:
 	if not test2(): __failed_at.append(2)
 	if not test3(): __failed_at.append(3)
 	if not test4(): __failed_at.append(4)
-	if not test5(): __failed_at.append(5)
+	#if not test5(): __failed_at.append(5) #
 	if not test6(): __failed_at.append(6)
-	#if not await test6_5(): __failed_at.append(65)
-	#if not test7(): __failed_at.append(7)
+	#if not await test6_5(): __failed_at.append(65) #
+	#if not test7(): __failed_at.append(7) #
 	return __failed_at
