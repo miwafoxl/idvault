@@ -27,7 +27,7 @@ msgstr "New Item"
 
 #: scn/Panels/ItemListPanel.tscn
 msgid "PANEL.ITEMLIST.QUERY_PLACEHOLDER"
-msgstr "Search tags"
+msgstr "Search tags (separated by spaces)"
 
 #: scn/Panels/ItemListPanel.tscn
 msgid "PANEL.ITEMLIST.QUERY"
@@ -53,27 +53,39 @@ msgstr "Test Return"
 msgid "PANEL.ITEMLIST.MANAGE_COMMON_LINKS"
 msgstr "Manage common links"
 
-#: res/menus/panel/itemlist/ItemMenu.gd:24
+#: res/menus/panel/itemlist/ItemMenu.gd:25
 msgid "PANEL.ITEMLIST.ITEM_PROPERTIES"
 msgstr "Item properties"
 
-#: res/menus/panel/itemlist/ItemMenu.gd:25
+#: res/menus/panel/itemlist/ItemMenu.gd:28
 msgid "PANEL.ITEMLIST.MANAGE_LINKS"
 msgstr "Manage links"
 
-#: res/menus/panel/itemlist/ItemMenu.gd:26
-msgid "PANEL.ITEMLIST.DUPLICATE"
-msgstr "Duplicate item(s)"
-
-#: res/menus/panel/itemlist/ItemMenu.gd:27
+#: res/menus/panel/itemlist/ItemMenu.gd:32
 msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS"
-msgstr "Query: Items linked to this item"
+msgstr "Search: Items linked to this item"
 
-#: res/menus/panel/itemlist/ItemMenu.gd:28
+#: res/menus/panel/itemlist/ItemMenu.gd:35
 msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"
-msgstr "Query: Items unlinked to this item"
+msgstr "Search: Items unlinked to this item"
 
-#: res/menus/panel/itemlist/ItemMenu.gd:29
+#: res/menus/panel/itemlist/ItemMenu.gd:40
+msgid "PANEL.ITEMLIST.CLIPBOARD_ITEM_TEXT"
+msgstr "Clipboard: Copy item text"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:43
+msgid "PANEL.ITEMLIST.CLIPBOARD_LINKED_TAGS"
+msgstr "Clipboard: Copy all linked tags of selected items"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:48
+msgid "PANEL.ITEMLIST.DUPLICATE_ITEMS"
+msgstr "Duplicate selected items (keep selection)"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:50
+msgid "PANEL.ITEMLIST.DUPLICATE_ITEMS_AND_SELECT"
+msgstr "Duplicate selected items (select new ones)"
+
+#: res/menus/panel/itemlist/ItemMenu.gd:53
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
 msgstr "Delete item(s)"
 

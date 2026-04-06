@@ -47,27 +47,39 @@ msgstr ""
 msgid "PANEL.ITEMLIST.MANAGE_COMMON_LINKS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:24
+#: res/menus/panel/itemlist/ItemMenu.gd:25
 msgid "PANEL.ITEMLIST.ITEM_PROPERTIES"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:25
+#: res/menus/panel/itemlist/ItemMenu.gd:28
 msgid "PANEL.ITEMLIST.MANAGE_LINKS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:26
-msgid "PANEL.ITEMLIST.DUPLICATE"
-msgstr ""
-
-#: res/menus/panel/itemlist/ItemMenu.gd:27
+#: res/menus/panel/itemlist/ItemMenu.gd:32
 msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:28
+#: res/menus/panel/itemlist/ItemMenu.gd:35
 msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:29
+#: res/menus/panel/itemlist/ItemMenu.gd:40
+msgid "PANEL.ITEMLIST.CLIPBOARD_ITEM_TEXT"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:43
+msgid "PANEL.ITEMLIST.CLIPBOARD_LINKED_TAGS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:48
+msgid "PANEL.ITEMLIST.DUPLICATE_ITEMS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:50
+msgid "PANEL.ITEMLIST.DUPLICATE_ITEMS_AND_SELECT"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:53
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
 msgstr ""
 
