@@ -13,11 +13,11 @@ signal deselect_item(id: int)
 signal deselect_all()
 signal select_item_append(id: int)
 
-func interaction_item_display_click(__id: int) -> void:
+func interaction_item_display_click(__id: int, __append: bool = false) -> void:
 	if KeyboardModifiers.is_shift_modifier:
 		if __id in selected_item_ids:
 			deselect_item.emit(__id)
-		else:
+		elif (__id in selected_item_ids) or __append:
 			select_item_append.emit(__id)
 	else:
 		select_item.emit(__id)
