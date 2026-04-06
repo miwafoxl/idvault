@@ -1,8 +1,8 @@
 extends Object
 
 ## Describe your menu here
-func build(__param: Dictionary) -> PopupMenu:
-	var __menu: PopupMenu = PopupMenu.new()
+func build(__param: Dictionary) -> ContextMenu:
+	var __menu: ContextMenu = ContextMenu.new()
 	var __items_id: Array[int] = []
 	var __items_size: int
 	#region Parameter processing
