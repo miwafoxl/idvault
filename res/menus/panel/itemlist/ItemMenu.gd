@@ -28,20 +28,27 @@ func build(__param: Dictionary) -> ContextMenu:
 		__menu.add_item(tr(&"PANEL.ITEMLIST.MANAGE_LINKS"))
 		__menu.set_item_metadata(-1, {&"items.open_dialog.editor_links": {} })
 	__menu.add_separator()
+
+	__menu.add_item(tr(&"PANEL.ITEMLIST.QUERY_LINKED_ITEMS_WITH_TAGS"))
+	__menu.set_item_metadata(-1, {&"items.query.selected_tagged": {} })
+	
+	__menu.add_item(tr(&"PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS_WITH_TAGS"))
+	__menu.set_item_metadata(-1, {&"items.query.selected_tagged_negate": {} })
 		
 	__menu.add_item(tr(&"PANEL.ITEMLIST.QUERY_LINKED_ITEMS"))
 	__menu.set_item_metadata(-1, {&"items.query.selected": {} })
 	
 	__menu.add_item(tr(&"PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"))
-	__menu.set_item_metadata(-1, {&"items.query.selected_negated": {} })
+	__menu.set_item_metadata(-1, {&"items.query.selected_negate": {} })
+	
 	
 	__menu.add_separator()
 	
-	__menu.add_item(tr(&"PANEL.ITEMLIST.CLIPBOARD_ITEM_TEXT"))
-	__menu.set_item_metadata(-1, {&"items.to_clipboard.display": {} })
+	__menu.add_item(tr(&"PANEL.ITEMLIST.CLIPBOARD_SELECTED_ITEM_TEXT"))
+	__menu.set_item_metadata(-1, {&"items.to_clipboard.selected_display": {} })
 	
-	__menu.add_item(tr(&"PANEL.ITEMLIST.CLIPBOARD_LINKED_TAGS"))
-	__menu.set_item_metadata(-1, {&"items.to_clipboard.tags": {} })
+	__menu.add_item(tr(&"PANEL.ITEMLIST.CLIPBOARD_SELECTED_LINKED_TAGS"))
+	__menu.set_item_metadata(-1, {&"items.to_clipboard.selected_linked_tags": {} })
 	
 	__menu.add_separator()
 	
