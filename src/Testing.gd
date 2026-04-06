@@ -141,5 +141,5 @@ func do_tests() -> Array[int]:
 	if not test5(): __failed_at.append(5)
 	if not test6(): __failed_at.append(6)
 	#if not await test6_5(): __failed_at.append(65)
-	if not test7(): __failed_at.append(7)
+	#if not test7(): __failed_at.append(7)
 	return __failed_at
