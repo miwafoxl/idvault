@@ -10,8 +10,9 @@ var display_selected: bool = false
 @export var node_title: Label 
 @export var node_subtitle: Label
 
-signal select()
+@warning_ignore("unused_signal")
 signal select_append()
+signal select()
 signal request_menu(__menu_id: StringName)
 
 func update() -> void:

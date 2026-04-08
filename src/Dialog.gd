@@ -5,6 +5,7 @@ class_name Dialog
 @export var returns: bool = false
 var return_id: String = ""
 
+@warning_ignore("unused_signal")
 signal returning(__id: String, return_args: Array)
 
 func pop() -> void:

@@ -6,8 +6,9 @@ class_name DialogManager
 @export var returning_values: Dictionary[StringName, Array]
 var loaded: Dictionary[StringName, PackedScene] = {}; # {dialog alias: packed scene}
 
-signal received_return(__id: String)
+@warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
+signal received_return(__id: String)
 
 func append_dialog_return(__id: String, __return_args: Array) -> void:
 	if __id.is_empty():

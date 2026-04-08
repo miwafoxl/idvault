@@ -5,6 +5,7 @@ class_name ActionManager
 @export var default: Array[Action] = [];
 @export var loaded: Dictionary[StringName, Variant] = {}; # {action alias: action ref}
 
+@warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
 
 func append_actions(__actions: Array[Action], __log: bool = false) -> void:

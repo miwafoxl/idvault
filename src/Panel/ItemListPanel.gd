@@ -10,8 +10,10 @@ signal add_item
 signal query(text: String)
 signal select_item(id: String)
 signal deselect_item(id: String)
-signal deselect_all()
 signal select_item_append(stage_id: int)
+
+@warning_ignore("unused_signal")
+signal deselect_all()
 
 func interaction_item_display_click(__item_id: String) -> void:
 	if selected_item_id.is_empty():

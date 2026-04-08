@@ -5,6 +5,7 @@ class_name ItemManager
 @export var selected_items: Array[Item] = [];
 var staged_items: Array[WeakRef] = [];
 
+@warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
 
 # Context
