@@ -123,7 +123,7 @@ func compute(__subqueries: Array[Subquery] = parsed_query) -> void:
 				error_at_splice = [0, ComputeError.PARAMETER_TYPE_MISMATCH]
 				break
 		for u: int in available_links.size():
-			var __linked_item_id: int = (available_links[u])[2][0] # Linking item ID
+			var __linked_item_id: String = (available_links[u])[2][0] # Linking item ID
 			var __linked_parameter_value: Variant = (available_links[u])[3] \
 					as Dictionary[String, Variant].get(__param.id)
 			if not __item.id == __linked_item_id: continue
