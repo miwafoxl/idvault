@@ -1,9 +1,11 @@
 # LANGUAGE translation for idvault for the following files:
 # res://scn/Panels/ItemListPanel.tscn
 # res://scn/Dialogs/MessageBox.tscn
-# res://scn/Dialogs/NewItem.tscn
 # res://scn/Dialogs/TestReturn.tscn
 # res://res/menus/panel/itemlist/ItemMenu.gd
+# res://scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+# res://scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+# res://scn/Dialogs/ItemProperties.tscn
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -33,10 +35,6 @@ msgstr ""
 
 #: scn/Dialogs/MessageBox.tscn
 msgid "DIALOG.GENERAL.OK"
-msgstr ""
-
-#: scn/Dialogs/NewItem.tscn
-msgid "DIALOG.NEW_ITEM.TITLE"
 msgstr ""
 
 #: scn/Dialogs/TestReturn.tscn
@@ -89,6 +87,58 @@ msgstr ""
 
 #: res/menus/panel/itemlist/ItemMenu.gd:60
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.HEADER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.HEADER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.TITLE"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.ALT"
+msgstr ""
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.ITEM_PROPERTIES.TITLE"
+msgstr ""
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.GENERAL.APPLY"
+msgstr ""
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.GENERAL.CANCEL"
 msgstr ""
 
 msgid "idvault"
