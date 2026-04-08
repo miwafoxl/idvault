@@ -147,7 +147,7 @@ func test6() -> bool:
 
 ## Opens a test dialog to check if value is returning from dialog
 func test7() -> bool:
-	var return_id: String = dialog_manager.open_return(&"test_return")
+	var return_id: String = dialog_manager.open_return(&"test_return", {})
 	if return_id.is_empty():
 		return false
 	return true
