@@ -36,10 +36,14 @@ func popup_menu(__id: StringName, __param: Dictionary = {}, \
 	__menu.set_force_native(true)
 	__menu.popup()
 
+func trigger_dialog(__dialog: StringName, __param: Dictionary = {}) -> void:
+	dialog_manager.open(__dialog, __param)
+
 func _ready() -> void:
 	action_manager.append_actions(action_manager.default, false)
-	dialog_manager.append_dialog(dialog_manager.default, false)
-	menu_manager.append_menus(menu_manager.default, true)
+	dialog_manager.append_dialog(dialog_manager.default, true)
+	menu_manager.append_menus(menu_manager.default, false)
+	item_manager.trigger_dialog.connect(trigger_dialog, ConnectFlags.CONNECT_DEFERRED)
 	swap_ui(default_ui)
 	var __test_results: Array[int] = testing.do_tests()
 	if __test_results.is_empty():
