@@ -53,10 +53,9 @@ manager = NodePath("../ItemManager")
 default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
-[node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node", "manager")]
+[node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node")]
 script = ExtResource("20_hg2lc")
 spawn_node = NodePath("..")
-manager = NodePath("../ItemManager")
 default = Dictionary[StringName, PackedScene]({
 &"item_properties": ExtResource("22_g87cj"),
 &"message": ExtResource("21_1m14j"),

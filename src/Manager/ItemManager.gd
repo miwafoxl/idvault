@@ -5,12 +5,12 @@ class_name ItemManager
 @export var selected_items: Array[Item] = [];
 var staged_items: Array[WeakRef] = [];
 
+signal trigger(tr: Trigger)
+
 # Context
 var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
 var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id]
 var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
-
-signal trigger_dialog(__dialog: StringName, __param: Dictionary)
 
 enum PropertyTypes {
 	PROPERTY,

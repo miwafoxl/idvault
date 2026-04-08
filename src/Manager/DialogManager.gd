@@ -2,12 +2,12 @@ extends Manager
 class_name DialogManager
 
 @export var spawn_node: Node
-@export var manager: ItemManager
 @export var default: Dictionary[StringName, PackedScene]
 @export var returning_values: Dictionary[StringName, Array]
 var loaded: Dictionary[StringName, PackedScene] = {}; # {dialog alias: packed scene}
 
 signal received_return(__id: String)
+signal trigger(tr: Trigger)
 
 func append_dialog_return(__id: String, __return_args: Array) -> void:
 	if __id.is_empty():

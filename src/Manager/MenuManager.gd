@@ -6,6 +6,7 @@ class_name MenuManager
 @export var theme: Theme
 @export var action_manager: ActionManager
 
+signal trigger(tr: Trigger)
 
 func append_menus(__menus: Array[Menu], __log: bool = false) -> void:
 	if __menus.is_empty(): return
@@ -55,4 +56,7 @@ func retrieve_menu(__menu_id: StringName, __param_dict: Dictionary = {}) -> Cont
 func menu_action_callback(__param: Dictionary) -> void:
 	if __param.is_empty(): return
 	var __action: StringName = __param.keys()[0]
-	action_manager.run(__action, __param.values()[0])
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.ACTION,
+		__action, __param.values()[0]
+	))
