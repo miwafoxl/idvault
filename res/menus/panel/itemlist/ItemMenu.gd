@@ -20,13 +20,13 @@ func build(__param: Dictionary) -> ContextMenu:
 	__items_size =__items_id.size() 
 	if __items_size > 1:
 		__menu.add_item(tr(&"PANEL.ITEMLIST.MANAGE_COMMON_LINKS"))
-		__menu.set_item_metadata(-1, {&"items.open_dialog.editor_common_links": {} })
+		__menu.set_item_metadata(-1, {&"items.dialog.selected_common_links": {} })
 	else:
 		__menu.add_item(tr(&"PANEL.ITEMLIST.ITEM_PROPERTIES"))
-		__menu.set_item_metadata(-1, {&"items.open_dialog.editor_item_properties": {} })
+		__menu.set_item_metadata(-1, {&"items.dialog.selected_item_properties": {} })
 		
 		__menu.add_item(tr(&"PANEL.ITEMLIST.MANAGE_LINKS"))
-		__menu.set_item_metadata(-1, {&"items.open_dialog.editor_links": {} })
+		__menu.set_item_metadata(-1, {&"items.dialog.editor_links": {} })
 	__menu.add_separator()
 
 	__menu.add_item(tr(&"PANEL.ITEMLIST.QUERY_LINKED_ITEMS_WITH_TAGS"))
