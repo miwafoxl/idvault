@@ -18,9 +18,9 @@ func swap_ui(__ui: PackedScene) -> void:
 		ui.free()
 	ui = __node
 	ui.give_managers({
-		"item": item_manager,
-		"action": action_manager })
+		"item": item_manager })
 	ui.request_menu.connect(popup_menu)
+	ui.trigger.connect(process_trigger)
 	add_child(__node, true)
 
 func popup_menu(__id: StringName, __param: Dictionary = {}, \
@@ -36,14 +36,24 @@ func popup_menu(__id: StringName, __param: Dictionary = {}, \
 	__menu.set_force_native(true)
 	__menu.popup()
 
-func trigger_dialog(__dialog: StringName, __param: Dictionary = {}) -> void:
-	dialog_manager.open(__dialog, __param)
+func process_trigger(__tr: Trigger) -> void:
+	if (__tr == null) or (__tr.relevant_id.is_empty()):
+		printerr("Received invalid or null trigger")
+		return
+	match __tr.type:
+		Trigger.TriggerTypes.ACTION:
+			action_manager.run(__tr.relevant_id, __tr.parameters)
+		Trigger.TriggerTypes.DIALOG:
+			dialog_manager.open(__tr.relevant_id, __tr.parameters)
 
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default, false)
-	dialog_manager.append_dialog(dialog_manager.default, true)
+	action_manager.append_actions(action_manager.default, true)
+	dialog_manager.append_dialog(dialog_manager.default, false)
 	menu_manager.append_menus(menu_manager.default, false)
-	item_manager.trigger_dialog.connect(trigger_dialog, ConnectFlags.CONNECT_DEFERRED)
+	action_manager.trigger.connect(process_trigger)
+	dialog_manager.trigger.connect(process_trigger)
+	menu_manager.trigger.connect(process_trigger)
+	item_manager.trigger.connect(process_trigger)
 	swap_ui(default_ui)
 	var __test_results: Array[int] = testing.do_tests()
 	if __test_results.is_empty():
