@@ -41,10 +41,6 @@ msgstr "Information"
 msgid "DIALOG.GENERAL.OK"
 msgstr "OK"
 
-#: scn/Dialogs/NewItem.tscn
-msgid "DIALOG.NEW_ITEM.TITLE"
-msgstr "Creating new item"
-
 #: scn/Dialogs/TestReturn.tscn
 msgid "DIALOG.TESTRETURN.TITLE"
 msgstr "Test Return"
@@ -97,5 +93,60 @@ msgstr "Duplicate selected item(s) (select copied items)"
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
 msgstr "Delete item(s)"
 
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.HEADER"
+msgstr "Descriptor"
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
+msgstr "Alias"
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
+msgstr "max. 64 chars, snake_case, no escapes: a-z 0-9 ()-_?"
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
+msgstr "Brief"
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
+msgstr "max. 150 chars"
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
+msgstr "Meaning"
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
+msgstr "max. 1500 chars, escapes allowed, intended for documentation"
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.HEADER"
+msgstr "Display"
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.TITLE"
+msgstr "Header"
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.ALT"
+msgstr "Alt"
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.ITEM_PROPERTIES.TITLE"
+msgstr "Item Properties"
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.GENERAL.APPLY"
+msgstr "Apply"
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.GENERAL.CANCEL"
+msgstr "Cancel"
+
 msgid "idvault"
 msgstr ""
+
+#~ msgid "DIALOG.NEW_ITEM.TITLE"
+#~ msgstr "Creating new item"
