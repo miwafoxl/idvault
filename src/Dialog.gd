@@ -1,7 +1,7 @@
 extends Window
 class_name Dialog
 
-@export var args: Array = []
+@export var args: Dictionary = {}
 @export var returns: bool = false
 var return_id: String = ""
 

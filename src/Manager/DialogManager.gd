@@ -51,7 +51,7 @@ func access_returned_value(__return_id: String, __erase: bool = true) -> Array:
 	if __erase: returning_values.erase(__return_id)
 	return __value
 
-func open(__alias: StringName, ...args) -> bool:
+func open(__alias: StringName, __param: Dictionary) -> bool:
 	var __scn: PackedScene = loaded.get(__alias)
 	if __scn == null:
 		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
@@ -59,12 +59,12 @@ func open(__alias: StringName, ...args) -> bool:
 	var __dialog: Dialog = __scn.instantiate()
 	if __dialog.returns:
 		push_warning("DialogManager: dialog '%s' can return but it was called used open() instead of open_return()" % __alias)
-	__dialog.args = args
+	__dialog.args = __param
 	spawn_node.add_child.call_deferred(__dialog)
 	__dialog.pop.call_deferred()
 	return true
 
-func open_return(__alias: StringName, ...args: Array) -> String:
+func open_return(__alias: StringName, __param: Dictionary) -> String:
 	var __scn: PackedScene = loaded.get(__alias)
 	if __scn == null:
 		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
@@ -73,7 +73,7 @@ func open_return(__alias: StringName, ...args: Array) -> String:
 	if not __dialog.returns:
 		push_warning("DialogManager: no-return dialog '%s' called used open_return() instead of open()" % __alias)
 	var __return_id: String = RandomString.new("d_").value
-	__dialog.args = args
+	__dialog.args = __param
 	__dialog.return_id = __return_id
 	__dialog.returning.connect(append_dialog_return)
 	spawn_node.add_child.call_deferred(__dialog)

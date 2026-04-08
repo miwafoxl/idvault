@@ -5,10 +5,9 @@ const MIN_LABEL_SIZE: int = 70
 
 @export var message_node: RichTextLabel
 @export var confirm_node: Button
-var message: String = ""
 
 func _on_about_to_popup() -> void:
-	message_node.text = args[0]
+	message_node.text = args.get("message")
 	var __size_y: int = ceil(message_node.get_size().y)
 	if __size_y > MIN_LABEL_SIZE:
 		var __new_y: int = __size_y - MIN_LABEL_SIZE
