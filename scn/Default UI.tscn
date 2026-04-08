@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qwnt8iblsa3l"]
 
-[ext_resource type="Script" uid="uid://bgl0w67mhmb04" path="res://src/UI.gd" id="1_1pjss"]
+[ext_resource type="Script" uid="uid://box8byd3uky85" path="res://src/UI/DefaultUI.gd" id="2_1pjss"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="2_ag2qf"]
 [ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/Panels/ItemListPanel.tscn" id="3_dbx2o"]
 
@@ -17,7 +17,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_ag2qf")
-script = ExtResource("1_1pjss")
+script = ExtResource("2_1pjss")
 node_panels = NodePath("MarginContainer/HBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
