@@ -11,6 +11,11 @@ func pop() -> void:
 	self.visible = true
 	self.popup_centered()
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_CLOSE_REQUEST:
+			self.queue_free()
+			
 func _ready() -> void:
 	self.visible = false
 	self.set_force_native(true)
