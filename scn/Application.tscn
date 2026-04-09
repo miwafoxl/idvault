@@ -68,9 +68,8 @@ metadata/_custom_type_script = "uid://bwxtawgolorsm"
 script = ExtResource("24_1v7vn")
 metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
-[node name="MenuManager" type="Node" parent="." unique_id=988378929 node_paths=PackedStringArray("action_manager")]
+[node name="MenuManager" type="Node" parent="." unique_id=988378929]
 script = ExtResource("27_5yf8b")
 default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5")])
 theme = ExtResource("30_ldrk5")
-action_manager = NodePath("../ActionManager")
 metadata/_custom_type_script = "uid://bwyef4g1l0om3"
