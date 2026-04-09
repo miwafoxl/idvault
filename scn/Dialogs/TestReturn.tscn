@@ -1,7 +1,20 @@
-[gd_scene format=3 uid="uid://bwd3pwft1ywa5"]
+[gd_scene format=3 uid="uid://cxndit3j3x08v"]
 
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="1_dcdbb"]
-[ext_resource type="Script" uid="uid://cs4u4a7umce8m" path="res://src/Dialog/TestReturnDialog.gd" id="2_dcdbb"]
+
+[sub_resource type="GDScript" id="GDScript_iymrx"]
+script/source = "extends Dialog
+class_name TestReturnDialog
+
+@export var test_lineedit: LineEdit
+
+func _on_button_ok_button_up() -> void:
+	returning.emit(self.return_id, [test_lineedit.get_text()])
+	close_request()
+
+func close_request() -> void:
+	self.queue_free()
+"
 
 [node name="TestReturn" type="Window" unique_id=1098095428 node_paths=PackedStringArray("test_lineedit")]
 oversampling_override = 1.0
@@ -9,9 +22,8 @@ title = "DIALOG.TESTRETURN.TITLE"
 position = Vector2i(0, 36)
 size = Vector2i(400, 70)
 theme = ExtResource("1_dcdbb")
-script = ExtResource("2_dcdbb")
+script = SubResource("GDScript_iymrx")
 test_lineedit = NodePath("MarginContainer/VBoxContainer/Test")
-returns = true
 metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1602618312]
