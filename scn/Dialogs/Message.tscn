@@ -12,6 +12,7 @@ theme = ExtResource("1_bscds")
 script = ExtResource("1_mwbxi")
 message_node = NodePath("MarginContainer/VBoxContainer/Message")
 confirm_node = NodePath("MarginContainer/VBoxContainer/HBoxContainer/ButtonOK")
+important = true
 metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1602618312]
