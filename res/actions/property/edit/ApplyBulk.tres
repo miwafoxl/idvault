@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://ccts7mjdabkm4"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_shmb6"]
+[ext_resource type="Script" uid="uid://dpcx0121kecyn" path="res://res/actions/property/edit/ApplyBulk.gd" id="2_1k3ux"]
+
+[resource]
+script = ExtResource("1_shmb6")
+alias = &"property.edit.apply"
+author = "idvault"
+src = ExtResource("2_1k3ux")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"
