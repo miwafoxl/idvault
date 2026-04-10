@@ -169,6 +169,19 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 		return []
 	return __head_arr
 
+func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		return []
+	var __head_arr: Array
+	for __header: String in __head:
+		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, null)
+		if __get == null:
+			printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
+				[__head, __cache_library])
+		__head_arr.append(__get)
+	return __head_arr
+
 func reload_cache(__items: Array[Item]) -> void:
 	#item_cache.clear()
 	# { Item.id: [Item wref], ... }
