@@ -15,5 +15,6 @@ enum TriggerTypes {
 	TRIGGER,
 	NONE,
 	ACTION,
-	DIALOG
+	DIALOG,
+	MENU,
 }
