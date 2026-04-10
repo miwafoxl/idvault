@@ -24,6 +24,8 @@ enum PropertyTypes {
 	RANGED_DATE,
 }
 
+#region HACKS
+
 # TODO: Separate thread
 func get_item_by_id(__id: Array[String]) -> Array[Item]:
 	var __items: Array[Item] = []
@@ -57,31 +59,50 @@ func append_properties_to_item(__item_arr_indexes: Array[int], \
 			unordered_items[__item_id].append_property(__properties)
 	return __err
 
+#endregion HACKS
+#region ITEM SELECTING
+
 func select_items(__items: Array[Item], __append: bool = false) -> void:
+	var __changed: bool = false
 	if __items.is_empty(): return
-	if not __append: selected_items = __items; return
-	for __item: Item in __items:
-		if __item not in selected_items:
-			selected_items.append(__item)
+	if __append: 
+		for __item: Item in __items:
+			if __item not in selected_items:
+				selected_items.append(__item)
+				__changed = true
+	else:
+		selected_items = __items;
+		__changed = true
+	if __changed: selection_updated.emit()
 
 func deselect_items(__deselec_items: Array[Item]) -> void:
+	var __changed: bool = false
 	if not __deselec_items.is_empty():
 		for __item: Item in selected_items:
 			if __item in __deselec_items:
 				selected_items.erase(__item)
+				__changed = true
+	if __changed: selection_updated.emit()
 
-func select_items_at_stage_index(__stage_index: Array[int], __append: bool = false) -> void:
+func select_items_at_stage_index(__stage_index: Array[int], \
+		__append: bool = false) -> void:
+	var __changed: bool = false
 	if not __stage_index.is_empty():
 		if not __append: selected_items.clear()
 		var __items: Array[Item] = get_staged_item_index(__stage_index)
 		selected_items.append_array(__items)
+		__changed = true
+	if __changed: selection_updated.emit()
 
 func deselect_items_at_stage_index(__deselec_stage_index: Array[int]) -> void:
+	var __changed: bool = false
 	if not __deselec_stage_index.is_empty():
 		var __items: Array[Item] = get_staged_item_index(__deselec_stage_index)
 		for __item: Item in __items:
 			if __item in selected_items:
 				selected_items.erase(__item)
+				__changed = true
+	if __changed: selection_updated.emit()
 
 func retrieve_selected_items_id() -> Array[String]:
 	var __selected_ids: Array[String] = []
@@ -89,14 +110,15 @@ func retrieve_selected_items_id() -> Array[String]:
 		__selected_ids.append(__item.id)
 	return __selected_ids
 
+#endregion ITEM SELECTING
+#region ITEM APPENDING AND REMOVAL
+
 func append_items(__entries: Array[Item]) -> bool:
-	if not __entries.is_empty():
-		unordered_items += __entries
-		descriptors_cx = reload_descriptor_context(unordered_items)
-		parameters_cx = reload_parameters_context(unordered_items)
-		links_cx = reload_links_context(unordered_items)
-		return true
-	return false 
+	if __entries.is_empty(): return false
+	unordered_items += __entries
+	reload_cache(unordered_items)
+	items_updated.emit()
+	return true 
 
 func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
@@ -108,9 +130,8 @@ func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 				return false
 			unordered_items.set(__item_id, null)
 		clean_entries()
-		descriptors_cx = reload_descriptor_context(unordered_items)
-		parameters_cx = reload_parameters_context(unordered_items)
-		links_cx = reload_links_context(unordered_items)
+		reload_cache(unordered_items)
+		items_updated.emit()
 	return true
 
 func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
@@ -119,10 +140,10 @@ func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
 		var __items: Array[Item] = get_staged_item_index(__rm_stage_index)
 		for __item: Item in __items:
 			__item.unreference()
-		descriptors_cx = reload_descriptor_context(unordered_items)
-		parameters_cx = reload_parameters_context(unordered_items)
-		links_cx = reload_links_context(unordered_items)
-	clean_entries()
+		#reload_context(unordered_items)
+		reload_cache(unordered_items)
+		clean_entries()
+		items_updated.emit()
 	return true
 
 func clean_entries() -> void:
