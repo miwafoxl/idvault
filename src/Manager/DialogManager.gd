@@ -58,25 +58,8 @@ func open(__alias: StringName, __param: Dictionary) -> bool:
 		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
 		return false
 	var __dialog: Dialog = __scn.instantiate()
-	if __dialog.returns:
-		push_warning("DialogManager: dialog '%s' can return but it was called used open() instead of open_return()" % __alias)
 	__dialog.args = __param
+	__dialog.trigger.connect(trigger.emit)
 	spawn_node.add_child.call_deferred(__dialog)
 	__dialog.pop.call_deferred()
 	return true
-
-func open_return(__alias: StringName, __param: Dictionary) -> String:
-	var __scn: PackedScene = loaded.get(__alias)
-	if __scn == null:
-		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
-		return ""
-	var __dialog: Dialog = __scn.instantiate()
-	if not __dialog.returns:
-		push_warning("DialogManager: no-return dialog '%s' called used open_return() instead of open()" % __alias)
-	var __return_id: String = RandomString.new("d_").value
-	__dialog.args = __param
-	__dialog.return_id = __return_id
-	__dialog.returning.connect(append_dialog_return)
-	spawn_node.add_child.call_deferred(__dialog)
-	__dialog.pop.call_deferred()
-	return __return_id
