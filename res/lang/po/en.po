@@ -33,14 +33,6 @@ msgstr "Search tags (separated by spaces)"
 msgid "PANEL.ITEMLIST.QUERY"
 msgstr "Search"
 
-#: scn/Dialogs/MessageBox.tscn
-msgid "DIALOG.MESSAGE.TITLE"
-msgstr "Information"
-
-#: scn/Dialogs/MessageBox.tscn
-msgid "DIALOG.GENERAL.OK"
-msgstr "OK"
-
 #: scn/Dialogs/TestReturn.tscn
 msgid "DIALOG.TESTRETURN.TITLE"
 msgstr "Test Return"
@@ -141,12 +133,29 @@ msgstr "Item Properties"
 msgid "DIALOG.GENERAL.APPLY"
 msgstr "Apply"
 
-#: scn/Dialogs/ItemProperties.tscn
+#: scn/Dialogs/ItemProperties.tscn scn/Dialogs/Confirmation.tscn
 msgid "DIALOG.GENERAL.CANCEL"
 msgstr "Cancel"
 
+#: scn/Dialogs/Message.tscn
+msgid "DIALOG.MESSAGE.TITLE"
+msgstr "Information"
+
+#: scn/Dialogs/Message.tscn
+msgid "DIALOG.GENERAL.OK"
+msgstr "OK"
+
+#: scn/Dialogs/Confirmation.tscn
+msgid "DIALOG.USER_CONFIRMATION.TITLE"
+msgstr "Confirm Action"
+
+#: scn/Dialogs/Confirmation.tscn
+msgid "DIALOG.GENERAL.CONFIRM"
+msgstr "Confirm"
+
+#: src/Dialog/ItemPropertiesDialog.gd:30
+msgid "DIALOG.USER_CONFIRMATION.EXIT_ITEM_PROPERTIES_UNCOMMITED_CHANGES"
+msgstr "Your changes were not applied. Discard unsaved changes?"
+
 msgid "idvault"
 msgstr ""
-
-#~ msgid "DIALOG.NEW_ITEM.TITLE"
-#~ msgstr "Creating new item"
