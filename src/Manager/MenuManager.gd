@@ -4,7 +4,6 @@ class_name MenuManager
 @export var default: Array[Menu] = [];
 @export var loaded: Dictionary[StringName, Variant] = {}; #  {alias: menu ref}
 @export var theme: Theme
-@export var action_manager: ActionManager
 
 signal trigger(tr: Trigger)
 
