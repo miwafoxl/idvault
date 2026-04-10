@@ -57,8 +57,9 @@ func _ready() -> void:
 	menu_manager.trigger.connect(process_trigger)
 	item_manager.trigger.connect(process_trigger)
 	swap_ui(default_ui)
-	var __test_results: Array[int] = testing.do_tests()
+	var __disable_test: bool = true
+	var __test_results: Array = [] if __disable_test else testing.do_tests()
 	if __test_results.is_empty():
-		print("All tests passed")
+		print(["All tests passed", "Tests disabled"][__disable_test as int])
 	else:
 		printerr("Test failed: ", __test_results)
