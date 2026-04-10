@@ -55,3 +55,5 @@ layout_mode = 2
 text = "DIALOG.GENERAL.CANCEL"
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonApply" to="." method="_on_button_apply_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="close_request"]
