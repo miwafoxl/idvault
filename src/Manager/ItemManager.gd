@@ -8,7 +8,7 @@ var staged_items: Array[WeakRef] = [];
 
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
-signal items_updated()
+signal stage_updated()
 signal selection_updated()
 
 # DEPRECATED: Context
@@ -119,7 +119,6 @@ func append_items(__entries: Array[Item]) -> bool:
 	if __entries.is_empty(): return false
 	unordered_items += __entries
 	reload_cache(unordered_items)
-	items_updated.emit()
 	return true 
 
 func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
@@ -133,7 +132,6 @@ func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 			unordered_items.set(__item_id, null)
 		clean_entries()
 		reload_cache(unordered_items)
-		items_updated.emit()
 	return true
 
 func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
@@ -145,7 +143,6 @@ func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
 		#reload_context(unordered_items)
 		reload_cache(unordered_items)
 		clean_entries()
-		items_updated.emit()
 	return true
 
 func clean_entries() -> void:
@@ -170,6 +167,19 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 		printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
 				[__head, __cache_library])
 		return []
+	return __head_arr
+
+func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		return []
+	var __head_arr: Array
+	for __header: String in __head:
+		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, null)
+		if __get == null:
+			printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
+				[__head, __cache_library])
+		__head_arr.append(__get)
 	return __head_arr
 
 func reload_cache(__items: Array[Item]) -> void:
@@ -319,9 +329,11 @@ func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
 	for __item: Item in __items:
 		var __ref: WeakRef = weakref(__item)
 		staged_items.append(__ref)
+	stage_updated.emit()
 
 func reverse_staged() -> void:
-	return staged_items.reverse()
+	staged_items.reverse()
+	stage_updated.emit()
 
 func get_stage_size() -> int:
 	return staged_items.size()
