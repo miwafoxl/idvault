@@ -8,7 +8,7 @@ var staged_items: Array[WeakRef] = [];
 
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
-signal items_updated()
+signal stage_updated()
 signal selection_updated()
 
 # DEPRECATED: Context
@@ -119,7 +119,6 @@ func append_items(__entries: Array[Item]) -> bool:
 	if __entries.is_empty(): return false
 	unordered_items += __entries
 	reload_cache(unordered_items)
-	items_updated.emit()
 	return true 
 
 func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
@@ -133,7 +132,6 @@ func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 			unordered_items.set(__item_id, null)
 		clean_entries()
 		reload_cache(unordered_items)
-		items_updated.emit()
 	return true
 
 func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
@@ -145,7 +143,6 @@ func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
 		#reload_context(unordered_items)
 		reload_cache(unordered_items)
 		clean_entries()
-		items_updated.emit()
 	return true
 
 func clean_entries() -> void:
@@ -319,9 +316,11 @@ func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
 	for __item: Item in __items:
 		var __ref: WeakRef = weakref(__item)
 		staged_items.append(__ref)
+	stage_updated.emit()
 
 func reverse_staged() -> void:
-	return staged_items.reverse()
+	staged_items.reverse()
+	stage_updated.emit()
 
 func get_stage_size() -> int:
 	return staged_items.size()

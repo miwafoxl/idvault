@@ -25,5 +25,5 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 			continue
 		__prop.serialize(__get_modified_prop.deserialized(false))
 		__items_updated = true
-	if __items_updated: __manager.items_updated.emit()
+	if __items_updated: __manager.stage_updated.emit()
 	return __items_updated
