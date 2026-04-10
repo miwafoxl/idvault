@@ -49,4 +49,7 @@ func run(__action: StringName, __param_dict: Dictionary) -> bool:
 	if __act == null:
 		printerr("ActionManager: failed to get a reference to action '%s'." % __action)
 		return false
-	return __act.execute(manager, __param_dict)
+	var __result: bool = __act.execute(manager, __param_dict)
+	if not __result:
+		printerr("ActionManager: action '%s' failed." % __action)
+	return __result
