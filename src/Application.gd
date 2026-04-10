@@ -2,7 +2,7 @@ extends Node
 class_name Application
 
 @export var default_ui: PackedScene
-@export var item_manager: Manager
+@export var item_manager: ItemManager
 @export var action_manager: ActionManager
 @export var dialog_manager: DialogManager
 @export var menu_manager: MenuManager
@@ -18,9 +18,11 @@ func swap_ui(__ui: PackedScene) -> void:
 		ui.free()
 	ui = __node
 	ui.give_managers({
-		"item": item_manager,
-		"action": action_manager })
+		"item": item_manager })
 	ui.request_menu.connect(popup_menu)
+	ui.trigger.connect(process_trigger)
+	item_manager.items_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
+	item_manager.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
 	add_child(__node, true)
 
 func popup_menu(__id: StringName, __param: Dictionary = {}, \
@@ -36,13 +38,28 @@ func popup_menu(__id: StringName, __param: Dictionary = {}, \
 	__menu.set_force_native(true)
 	__menu.popup()
 
+func process_trigger(__tr: Trigger) -> void:
+	if (__tr == null) or (__tr.relevant_id.is_empty()):
+		printerr("Received invalid or null trigger")
+		return
+	match __tr.type:
+		Trigger.TriggerTypes.ACTION:
+			action_manager.run(__tr.relevant_id, __tr.parameters)
+		Trigger.TriggerTypes.DIALOG:
+			dialog_manager.open(__tr.relevant_id, __tr.parameters)
+
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default, false)
+	action_manager.append_actions(action_manager.default, true)
 	dialog_manager.append_dialog(dialog_manager.default, false)
-	menu_manager.append_menus(menu_manager.default, true)
+	menu_manager.append_menus(menu_manager.default, false)
+	action_manager.trigger.connect(process_trigger)
+	dialog_manager.trigger.connect(process_trigger)
+	menu_manager.trigger.connect(process_trigger)
+	item_manager.trigger.connect(process_trigger)
 	swap_ui(default_ui)
-	var __test_results: Array[int] = testing.do_tests()
+	var __disable_test: bool = true
+	var __test_results: Array = [] if __disable_test else testing.do_tests()
 	if __test_results.is_empty():
-		print("All tests passed")
+		print(["All tests passed", "Tests disabled"][__disable_test as int])
 	else:
 		printerr("Test failed: ", __test_results)

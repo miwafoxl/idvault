@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by3xvk1tboofk" path="res://src/Application.gd" id="1_tbfir"]
 [ext_resource type="PackedScene" uid="uid://qwnt8iblsa3l" path="res://scn/Default UI.tscn" id="2_1bq3j"]
-[ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/ActionManager.gd" id="2_xwlb1"]
+[ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/Manager/ActionManager.gd" id="2_xwlb1"]
 [ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="3_1v7vn"]
 [ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://res/actions/item/append/TestItem.tres" id="4_gl6yv"]
 [ext_resource type="Resource" uid="uid://cd1r6vnrbo6tk" path="res://res/actions/item/append/Items.tres" id="5_1bq3j"]
@@ -20,14 +20,17 @@
 [ext_resource type="Resource" uid="uid://dp2kjjnttef3o" path="res://res/actions/item/remove/Selected.tres" id="17_ajmq0"]
 [ext_resource type="Resource" uid="uid://dh4ys308mmwj8" path="res://res/actions/item/stage/Alphabetical.tres" id="18_4w571"]
 [ext_resource type="Resource" uid="uid://dl2u5de4plemq" path="res://res/actions/item/stage/Unordered.tres" id="19_qonqs"]
-[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/DialogManager.gd" id="20_hg2lc"]
-[ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/MessageBox.tscn" id="21_1m14j"]
-[ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/NewItem.tscn" id="22_g87cj"]
-[ext_resource type="PackedScene" uid="uid://bwd3pwft1ywa5" path="res://scn/Dialogs/TestReturn.tscn" id="23_cnxrv"]
-[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager.gd" id="24_1v7vn"]
+[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/Manager/DialogManager.gd" id="20_hg2lc"]
+[ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/Message.tscn" id="21_1m14j"]
+[ext_resource type="Resource" uid="uid://bwadsxr54clqa" path="res://res/actions/item/to_clipboard/SelectedDisplay.tres" id="22_0slqf"]
+[ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/ItemProperties.tscn" id="22_g87cj"]
+[ext_resource type="Resource" uid="uid://dm2s7cs4a6av7" path="res://res/actions/item/dialog/SelectedItemProperties.tres" id="23_pucfs"]
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager/ItemManager.gd" id="24_1v7vn"]
+[ext_resource type="Resource" uid="uid://ccts7mjdabkm4" path="res://res/actions/property/edit/ApplyBulk.tres" id="24_s2ijd"]
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="26_1bq3j"]
-[ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/MenuManager.gd" id="27_5yf8b"]
+[ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/Manager/MenuManager.gd" id="27_5yf8b"]
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
+[ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/Dialogs/Confirmation.tscn" id="29_bnnxs"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/panel/itemlist/ItemMenu.tres" id="29_ldrk5"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="30_ldrk5"]
 
@@ -48,17 +51,16 @@ manager = NodePath("../ItemManager")
 [node name="ActionManager" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("manager")]
 script = ExtResource("2_xwlb1")
 manager = NodePath("../ItemManager")
-default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs")])
+default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
-[node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node", "manager")]
+[node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node")]
 script = ExtResource("20_hg2lc")
 spawn_node = NodePath("..")
-manager = NodePath("../ItemManager")
 default = Dictionary[StringName, PackedScene]({
+&"item_properties": ExtResource("22_g87cj"),
 &"message": ExtResource("21_1m14j"),
-&"new_item": ExtResource("22_g87cj"),
-&"test_return": ExtResource("23_cnxrv")
+&"user_confirmation": ExtResource("29_bnnxs")
 })
 metadata/_custom_type_script = "uid://bwxtawgolorsm"
 

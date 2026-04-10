@@ -1,9 +1,13 @@
 # LANGUAGE translation for idvault for the following files:
 # res://scn/Panels/ItemListPanel.tscn
-# res://scn/Dialogs/MessageBox.tscn
-# res://scn/Dialogs/NewItem.tscn
 # res://scn/Dialogs/TestReturn.tscn
 # res://res/menus/panel/itemlist/ItemMenu.gd
+# res://scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+# res://scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+# res://scn/Dialogs/ItemProperties.tscn
+# res://scn/Dialogs/Message.tscn
+# res://scn/Dialogs/Confirmation.tscn
+# res://src/Dialog/ItemPropertiesDialog.gd
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -27,18 +31,6 @@ msgstr ""
 msgid "PANEL.ITEMLIST.QUERY"
 msgstr ""
 
-#: scn/Dialogs/MessageBox.tscn
-msgid "DIALOG.MESSAGE.TITLE"
-msgstr ""
-
-#: scn/Dialogs/MessageBox.tscn
-msgid "DIALOG.GENERAL.OK"
-msgstr ""
-
-#: scn/Dialogs/NewItem.tscn
-msgid "DIALOG.NEW_ITEM.TITLE"
-msgstr ""
-
 #: scn/Dialogs/TestReturn.tscn
 msgid "DIALOG.TESTRETURN.TITLE"
 msgstr ""
@@ -47,28 +39,121 @@ msgstr ""
 msgid "PANEL.ITEMLIST.MANAGE_COMMON_LINKS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:24
+#: res/menus/panel/itemlist/ItemMenu.gd:25
 msgid "PANEL.ITEMLIST.ITEM_PROPERTIES"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:25
+#: res/menus/panel/itemlist/ItemMenu.gd:28
 msgid "PANEL.ITEMLIST.MANAGE_LINKS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:26
-msgid "PANEL.ITEMLIST.DUPLICATE"
+#: res/menus/panel/itemlist/ItemMenu.gd:32
+msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS_WITH_TAGS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:27
+#: res/menus/panel/itemlist/ItemMenu.gd:35
+msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS_WITH_TAGS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:38
 msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:28
+#: res/menus/panel/itemlist/ItemMenu.gd:41
 msgid "PANEL.ITEMLIST.QUERY_UNLINKED_ITEMS"
 msgstr ""
 
-#: res/menus/panel/itemlist/ItemMenu.gd:29
+#: res/menus/panel/itemlist/ItemMenu.gd:47
+msgid "PANEL.ITEMLIST.CLIPBOARD_SELECTED_ITEM_TEXT"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:50
+msgid "PANEL.ITEMLIST.CLIPBOARD_SELECTED_LINKED_TAGS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:55
+msgid "PANEL.ITEMLIST.DUPLICATE_ITEMS"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:57
+msgid "PANEL.ITEMLIST.DUPLICATE_ITEMS_AND_SELECT"
+msgstr ""
+
+#: res/menus/panel/itemlist/ItemMenu.gd:60
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.HEADER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.HEADER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.TITLE"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
+msgid "WIDGET.DISPLAY_EDIT.ALT"
+msgstr ""
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.ITEM_PROPERTIES.TITLE"
+msgstr ""
+
+#: scn/Dialogs/ItemProperties.tscn
+msgid "DIALOG.GENERAL.APPLY"
+msgstr ""
+
+#: scn/Dialogs/ItemProperties.tscn
+#: scn/Dialogs/Confirmation.tscn
+msgid "DIALOG.GENERAL.CANCEL"
+msgstr ""
+
+#: scn/Dialogs/Message.tscn
+msgid "DIALOG.MESSAGE.TITLE"
+msgstr ""
+
+#: scn/Dialogs/Message.tscn
+msgid "DIALOG.GENERAL.OK"
+msgstr ""
+
+#: scn/Dialogs/Confirmation.tscn
+msgid "DIALOG.USER_CONFIRMATION.TITLE"
+msgstr ""
+
+#: scn/Dialogs/Confirmation.tscn
+msgid "DIALOG.GENERAL.CONFIRM"
+msgstr ""
+
+#: src/Dialog/ItemPropertiesDialog.gd:30
+msgid "DIALOG.USER_CONFIRMATION.EXIT_ITEM_PROPERTIES_UNCOMMITED_CHANGES"
 msgstr ""
 
 msgid "idvault"

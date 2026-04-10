@@ -1,7 +1,7 @@
 extends Object
 
 ## Append properties to selected items
-func run(__manager: Manager, __param: Dictionary) -> bool:
+func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	# Every item in __args is a property
 	var __properties: Array[Property] = []
 	if __manager.selected_items.is_empty():

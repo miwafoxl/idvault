@@ -1,12 +1,13 @@
-extends Node
+extends Manager
 class_name DialogManager
 
 @export var spawn_node: Node
-@export var manager: Manager
 @export var default: Dictionary[StringName, PackedScene]
 @export var returning_values: Dictionary[StringName, Array]
 var loaded: Dictionary[StringName, PackedScene] = {}; # {dialog alias: packed scene}
 
+@warning_ignore("unused_signal")
+signal trigger(tr: Trigger)
 signal received_return(__id: String)
 
 func append_dialog_return(__id: String, __return_args: Array) -> void:
@@ -51,31 +52,14 @@ func access_returned_value(__return_id: String, __erase: bool = true) -> Array:
 	if __erase: returning_values.erase(__return_id)
 	return __value
 
-func open(__alias: StringName, ...args) -> bool:
+func open(__alias: StringName, __param: Dictionary) -> bool:
 	var __scn: PackedScene = loaded.get(__alias)
 	if __scn == null:
 		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
 		return false
 	var __dialog: Dialog = __scn.instantiate()
-	if __dialog.returns:
-		push_warning("DialogManager: dialog '%s' can return but it was called used open() instead of open_return()" % __alias)
-	__dialog.args = args
+	__dialog.args = __param
+	__dialog.trigger.connect(trigger.emit)
 	spawn_node.add_child.call_deferred(__dialog)
 	__dialog.pop.call_deferred()
 	return true
-
-func open_return(__alias: StringName, ...args: Array) -> String:
-	var __scn: PackedScene = loaded.get(__alias)
-	if __scn == null:
-		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
-		return ""
-	var __dialog: Dialog = __scn.instantiate()
-	if not __dialog.returns:
-		push_warning("DialogManager: no-return dialog '%s' called used open_return() instead of open()" % __alias)
-	var __return_id: String = RandomString.new("d_").value
-	__dialog.args = args
-	__dialog.return_id = __return_id
-	__dialog.returning.connect(append_dialog_return)
-	spawn_node.add_child.call_deferred(__dialog)
-	__dialog.pop.call_deferred()
-	return __return_id

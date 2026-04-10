@@ -1,7 +1,7 @@
 extends Object
 
 ## Removes items by index
-func run(__manager: Manager, __param: Dictionary) -> bool: 
+func run(__manager: ItemManager, __param: Dictionary) -> bool: 
 	var __indexes: Array[int]
 	#region Parameter processing
 	for __key: String in __param:

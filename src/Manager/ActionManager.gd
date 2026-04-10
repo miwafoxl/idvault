@@ -1,10 +1,12 @@
-extends Node
+extends Manager
 class_name ActionManager
 
-@export var manager: Manager
+@export var manager: ItemManager
 @export var default: Array[Action] = [];
 @export var loaded: Dictionary[StringName, Variant] = {}; # {action alias: action ref}
 
+@warning_ignore("unused_signal")
+signal trigger(tr: Trigger)
 
 func append_actions(__actions: Array[Action], __log: bool = false) -> void:
 	if __actions.is_empty(): return
@@ -47,7 +49,4 @@ func run(__action: StringName, __param_dict: Dictionary) -> bool:
 	if __act == null:
 		printerr("ActionManager: failed to get a reference to action '%s'." % __action)
 		return false
-	var __result: bool = __act.execute(manager, __param_dict)
-	if not __result:
-		push_warning("ActionManager: action '%s' failed." % __action)
-	return __result
+	return __act.execute(manager, __param_dict)

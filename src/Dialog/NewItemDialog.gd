@@ -1,2 +1,0 @@
-extends Dialog
-class_name NewItemDialog

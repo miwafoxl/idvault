@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://dfv228qdvucjj"]
+
+[ext_resource type="Script" uid="uid://b1nklbx53sbji" path="res://src/Dialog/ItemPropertiesDialog.gd" id="1_0c17t"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="1_m2jxb"]
+[ext_resource type="PackedScene" uid="uid://7unqtp42fpve" path="res://scn/Widgets/PropertyEditWidget.tscn" id="2_w245s"]
+
+[node name="ItemPropertiesDialog" type="Window" unique_id=1098095428 node_paths=PackedStringArray("label_item", "property_edit")]
+oversampling_override = 1.0
+title = "DIALOG.ITEM_PROPERTIES.TITLE"
+position = Vector2i(0, 36)
+size = Vector2i(600, 500)
+unresizable = true
+theme = ExtResource("1_m2jxb")
+script = ExtResource("1_0c17t")
+label_item = NodePath("MarginContainer/VBoxContainer/Label")
+property_edit = NodePath("MarginContainer/VBoxContainer/PropertyEditWidget")
+metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=791869297]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=254200484]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1284302371]
+auto_translate_mode = 2
+layout_mode = 2
+text = "ENTRY ID: "
+
+[node name="PropertyEditWidget" parent="MarginContainer/VBoxContainer" unique_id=1920076258 instance=ExtResource("2_w245s")]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1129694742]
+layout_mode = 2
+alignment = 2
+
+[node name="ButtonApply" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1500355513]
+layout_mode = 2
+text = "DIALOG.GENERAL.APPLY"
+
+[node name="ButtonCancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1028156276]
+layout_mode = 2
+text = "DIALOG.GENERAL.CANCEL"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonApply" to="." method="_on_button_apply_button_down"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/ButtonCancel" to="." method="close_request"]

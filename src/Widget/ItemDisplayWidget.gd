@@ -1,7 +1,8 @@
 extends Widget
 class_name ItemDisplayWidget
 
-@export var related_id: int = 0
+@export var related_stage_id: int = 0
+@export var related_id: String = ""
 @export var title: String = "";
 @export var subtitle: String = "";
 var display_selected: bool = false
@@ -9,8 +10,9 @@ var display_selected: bool = false
 @export var node_title: Label 
 @export var node_subtitle: Label
 
-signal select()
+@warning_ignore("unused_signal")
 signal select_append()
+signal select()
 signal request_menu(__menu_id: StringName)
 
 func update() -> void:
@@ -35,7 +37,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			else:
 				self.display_selected = false
 		MouseButton.MOUSE_BUTTON_RIGHT:
-			select_append.emit(related_id)
+			#select.emit(related_id)
 			if not display_selected:
 				self.display_selected = true
 			else:

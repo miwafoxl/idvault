@@ -1,7 +1,7 @@
 extends Object
 
 ## Delete selected items. Run with caution.
-func run(__manager: Manager, __param: Dictionary) -> bool:
+func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __manager.selected_items.is_empty():
 		push_warning("items.remove.selected: Nothing selected")
 		return false

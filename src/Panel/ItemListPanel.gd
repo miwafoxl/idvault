@@ -4,33 +4,38 @@ class_name ItemListPanel
 @export var widget_item: PackedScene
 @export var item_list_parent: Control
 @export var items_ref: Array[Item] = []
-@export var selected_item_ids: Array[int] = []
+@export var selected_item_id: Array[String] = []
 
 signal add_item
 signal query(text: String)
-signal select_item(id: int)
-signal deselect_item(id: int)
+signal select_item(id: String)
+signal deselect_item(id: String)
+signal select_item_append(stage_id: int)
+
+@warning_ignore("unused_signal")
 signal deselect_all()
-signal select_item_append(id: int)
 
-func interaction_item_display_click(__id: int, __append: bool = false) -> void:
-	if KeyboardModifiers.is_shift_modifier:
-		if __id in selected_item_ids:
-			deselect_item.emit(__id)
-		elif (__id in selected_item_ids) or __append:
-			select_item_append.emit(__id)
+func interaction_item_display_click(__item_id: String) -> void:
+	if selected_item_id.is_empty():
+		select_item.emit(__item_id)
 	else:
-		select_item.emit(__id)
+		if KeyboardModifiers.is_shift_modifier:
+			if __item_id in selected_item_id:
+				deselect_item.emit(__item_id)
+			else:
+				select_item_append.emit(__item_id)
+		else:
+			select_item.emit(__item_id)
 
-func update(__selected_items_id: Array[int] = []) -> void:
+func update(__selected_items_id: Array[String] = []) -> void:
 	update_item_display()
 	update_selected_items(__selected_items_id)
 
 func handle_menu_request(__menu_id: StringName, __param: Dictionary = {}) -> void:
-	request_menu.emit(__menu_id, {"item_id": selected_item_ids})
+	request_menu.emit(__menu_id, {"item_id": selected_item_id})
 
-func update_selected_items(__selected: Array[int] = []) -> void:
-	selected_item_ids = __selected
+func update_selected_items(__selected: Array[String] = []) -> void:
+	selected_item_id = __selected
 	for __item_widget: ItemDisplayWidget in item_list_parent.get_children(false):
 		if __item_widget.related_id in __selected:
 			__item_widget.display_selected = true
@@ -41,9 +46,11 @@ func update_selected_items(__selected: Array[int] = []) -> void:
 func update_item_display() -> void:
 	for __item: ItemDisplayWidget in item_list_parent.get_children(false):
 		__item.queue_free()
-	for __item: Item in items_ref:
+	for __stage_id: int in items_ref.size():
+		var __item: Item = items_ref[__stage_id]
 		var __item_widget: ItemDisplayWidget = widget_item.instantiate()
 		var __item_title: Array[Display] = __item.retrieve_displays()
+		__item_widget.related_stage_id = __stage_id
 		__item_widget.related_id = __item.id
 		if not __item_title.is_empty():
 			__item_widget.title = __item_title[0].text

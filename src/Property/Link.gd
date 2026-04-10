@@ -1,17 +1,24 @@
 extends Property
 class_name Link
 
-@export var to: Array[int] = [];
+@export var from: Array[String] = [];
+@export var to: Array[String] = [];
 @export var parameters: Dictionary[String, Variant] = {};
 
 # TODO: remove possibility of adding multiple of the same link
-func append_to_linked_id_arr(__linking: Array[int]) -> bool:
-	if not __linking.is_empty():
-		to.append_array(__linking)
+func append_linking_from_id(__linking_id: Array[int]) -> bool:
+	if not __linking_id.is_empty():
+		from.append_array(__linking_id)
 		return true
 	return false
 
-func remove_from_linked_id_arr(__rm_indexes: Array[int]) -> bool:
+func append_linked_to_id(__linked_to: Array[int]) -> bool:
+	if not __linked_to.is_empty():
+		to.append_array(__linked_to)
+		return true
+	return false
+
+func remove_linked_to_id(__rm_indexes: Array[int]) -> bool:
 	var __links: int = to.size()
 	if not __rm_indexes.is_empty():
 		for __linked_item_id: int in __rm_indexes:
@@ -35,7 +42,7 @@ func remove_parameter(__rm_parameter_id: Array[String]) -> bool:
 			return parameters.erase(__param_id)
 	return true
 
-func _init(__link_item_id: Array[int], \
+func _init(__link_item_id: Array[String], \
 		__parameters: Dictionary[String, Variant] = {}) -> void:
 	self.to = __link_item_id
 	append_parameter(__parameters)

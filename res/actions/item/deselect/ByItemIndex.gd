@@ -1,7 +1,7 @@
 extends Object
 
 ## Deselect items. If items aren't selected, nothing happens.
-func run(__manager: Manager, __param: Dictionary) -> bool: 
+func run(__manager: ItemManager, __param: Dictionary) -> bool: 
 	var __item_ids: Array[int]
 	var __deselect_indexes: Array[int]
 	#region Parameter processing
