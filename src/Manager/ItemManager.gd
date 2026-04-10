@@ -7,6 +7,8 @@ var staged_items: Array[WeakRef] = [];
 
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
+signal items_updated()
+signal selection_updated()
 
 # Context
 var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
