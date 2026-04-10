@@ -5,7 +5,13 @@ class_name DefaultUI
 @export var node_panels: Control
 
 signal request_menu(menu_id: StringName, param: Dictionary)
-	
+
+func update() -> void:
+	update_panels()
+
+func update_selection() -> void:
+	update_panels()
+
 func give_managers(__managers: Dictionary) -> void:
 	for __key: String in __managers:
 		match __key:
@@ -24,7 +30,6 @@ func add_item() -> void:
 		&"items.stage.alphabetical", {
 			"item": manager.unordered_items
 		} ))
-	update_panels.call_deferred()
 
 func select_item(__item_id: String) -> void:
 	trigger.emit(Trigger.new(
@@ -32,7 +37,6 @@ func select_item(__item_id: String) -> void:
 		&"items.select.by_item_id", {
 			"item_id": [__item_id]
 		} ))
-	update_panels.call_deferred()
 
 func select_item_append(__item_id: String) -> void:
 	trigger.emit(Trigger.new(
@@ -40,7 +44,6 @@ func select_item_append(__item_id: String) -> void:
 		&"items.select.by_item_id_append", {
 			"item_id": [__item_id]
 		} ))
-	update_panels.call_deferred()
 
 func deselect_item(__item_id: String) -> void:
 	trigger.emit(Trigger.new(
@@ -48,19 +51,16 @@ func deselect_item(__item_id: String) -> void:
 		&"items.deselect.by_item_id", {
 			"item_id": [__item_id]
 		} ))
-	update_panels.call_deferred()
 
 func deselect_all() -> void:
 	trigger.emit(Trigger.new(
 		Trigger.TriggerTypes.ACTION,
 		&"items.deselect.all", {} ))
-	update_panels.call_deferred()
 
 func query(__text: String) -> void:
 	trigger.emit(Trigger.new(
 		Trigger.TriggerTypes.ACTION,
 		&"items.query.text", {} ))
-	update_panels.call_deferred()
 
 func update_panels() -> void:
 	for panel: Control in node_panels.get_children():

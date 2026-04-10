@@ -21,6 +21,8 @@ func swap_ui(__ui: PackedScene) -> void:
 		"item": item_manager })
 	ui.request_menu.connect(popup_menu)
 	ui.trigger.connect(process_trigger)
+	item_manager.items_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
+	item_manager.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
 	add_child(__node, true)
 
 func popup_menu(__id: StringName, __param: Dictionary = {}, \
