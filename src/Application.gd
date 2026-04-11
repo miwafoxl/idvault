@@ -47,6 +47,11 @@ func process_trigger(__tr: Trigger) -> void:
 			action_manager.run(__tr.relevant_id, __tr.parameters)
 		Trigger.TriggerTypes.DIALOG:
 			dialog_manager.open(__tr.relevant_id, __tr.parameters)
+		Trigger.TriggerTypes.MENU:
+			popup_menu(__tr.relevant_id, __tr.parameters)
+		_:
+			printerr("Invalid trigger type '%s'" % \
+				Trigger.TriggerTypes.keys()[__tr.type])
 
 func _ready() -> void:
 	action_manager.append_actions(action_manager.default, true)
