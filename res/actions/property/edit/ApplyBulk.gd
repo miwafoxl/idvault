@@ -15,15 +15,19 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 				push_warning("property.edit.apply_bulk: invalid key '%s'\
 				-> changes" % __key)
 	#endregion Parameter processing
-	var __items_updated: bool = false
+	var __items_updated: Array[Item] = []
 	for __prop_id: String in __changes.keys():
 		var __get_prop: Array = __manager.get_from_cache("by_property_id", __prop_id)
 		var __get_modified_prop: Property = __changes[__prop_id]
+		var __item: Item = (__get_prop[0] as WeakRef).get_ref()
 		var __prop: Property = (__get_prop[1] as WeakRef).get_ref()
-		if __prop == null:
-			push_warning("property.edit.apply_bulk: Failed to get reference to property id '%s'." % __prop_id)
+		if __prop == null or __item == null:
+			push_warning("property.edit.apply_bulk: Failed to " + \
+			"get reference to item id or its containg property id '%s'." % [__prop_id])
 			continue
 		__prop.serialize(__get_modified_prop.deserialized(false))
-		__items_updated = true
-	if __items_updated: __manager.stage_updated.emit()
-	return __items_updated
+		__items_updated.append(__item)
+	if __items_updated: 
+		__manager.reload_cache(__manager.unordered_items)
+		__manager.stage_updated.emit()
+	return not __items_updated.is_empty()

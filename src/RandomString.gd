@@ -13,6 +13,7 @@ var value: String = ""
 
 func regenerate() -> String:
 	var __id: String = prefix
+	seed(Time.get_ticks_usec())
 	for i: int in range(length):
 		__id += __ID_CHARSET.pick_random()
 	return __id

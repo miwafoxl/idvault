@@ -5,6 +5,7 @@ class_name Dialog
 @export var args: Dictionary = {}
 @export var important: bool = false
 
+@warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
 
 #region OVERRIDES
