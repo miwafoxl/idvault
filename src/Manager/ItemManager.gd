@@ -184,11 +184,15 @@ func reload_cache(__items: Array[Item]) -> void:
 	# { Prop.id: [Item wref, Prop wref], ... }
 	item_cache.set("by_property_id", cache_by_property_id(__items))
 	item_cache.set("by_descriptor_id", cache_by_descriptor_id(__items))
+	# { Descriptor.alias: [Item wref, Prop wref, Prop.id], ... }
+	item_cache.set("by_descriptor_alias", cache_by_descriptor_alias(__items))
+	# { Descriptor.id: Descriptor wref, ... }
+	item_cache.set("by_descriptor", cache_by_descriptor(__items))
 	# { Param.id: [Item wref, Prop wref, Prop.id], ... }
 	item_cache.set("by_parameter_id", cache_by_parameter_id(__items))
-	# { Link.from: [Item wref, Prop wref, Prop.id], ... }
+	# { Link.from: [Item wref, Prop wref, Prop.id, Link.to], ... }
 	item_cache.set("by_link_from_id", cache_links(__items, false))
-	# { Link.to: [Item wref, Prop wref, Prop.id], ... }
+	# { Link.to: [Item wref, Prop wref, Prop.id, Link.from]], ... }
 	item_cache.set("by_link_to_id", cache_links(__items, true))
 
 func cache_by_item_id(__items: Array[Item]) -> Dictionary:
@@ -210,8 +214,7 @@ func cache_by_property_id(__items: Array[Item]) -> Dictionary:
 		if __item.properties.is_empty(): continue
 		for __prop: Property in __item.properties:
 			var __cx: Array = []
-			__cx.append_array([weakref(__item), weakref(__prop)])
-			__cache.set(__prop.id, __cx)
+			__cache.set(__prop.id, [weakref(__item), weakref(__prop)])
 	return __cache
 
 func cache_by_descriptor_id(__items: Array[Item]) -> Dictionary:
@@ -223,8 +226,31 @@ func cache_by_descriptor_id(__items: Array[Item]) -> Dictionary:
 		if __props.is_empty(): continue
 		for __prop: Property in __props:
 			var __cx: Array = []
-			__cx.append_array([weakref(__item), weakref(__prop)])
-			__cache.set(__prop.id, __cx)
+			__cache.set(__prop.id, [weakref(__item), weakref(__prop)])
+	return __cache
+
+func cache_by_descriptor(__items: Array[Item]) -> Dictionary:
+	if __items.is_empty(): return {}
+	var __cache: Dictionary = {}
+	for __item_idx: int in __items.size():
+		var __item: Item = __items[__item_idx]
+		var __props: Array[Descriptor] = __item.retrieve_descriptors()
+		if __props.is_empty(): continue
+		for __prop: Property in __props:
+			__cache.set(__prop.id, weakref(__prop))
+	return __cache
+
+func cache_by_descriptor_alias(__items: Array[Item]) -> Dictionary:
+	if __items.is_empty(): return {}
+	var __cache: Dictionary = {}
+	for __item_idx: int in __items.size():
+		var __item: Item = __items[__item_idx]
+		var __props: Array[Descriptor] = __item.retrieve_descriptors()
+		if __props.is_empty(): continue
+		for __prop: Descriptor in __props:
+			var __cx: Array = []
+			__cx.append_array([weakref(__item), weakref(__prop), __prop.id])
+			__cache.set(__prop.alias, __cx)
 	return __cache
 
 func cache_by_parameter_id(__items: Array[Item]) -> Dictionary:
