@@ -152,15 +152,16 @@ func clean_entries() -> void:
 #region ITEM CACHEING
 
 func get_from_cache(__cache_library: String, __head: String) -> Array:
+	var __head_arr: Array = []
+	var __cache_lib: Dictionary
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		printerr("ItemManager: non-existent cache '%s'. Returning empty array." % __cache_library)
 		return []
-	var __head_arr: Array = (item_cache.get(__cache_library) \
-			as Dictionary).get(__head, null)
-	if __head_arr == null:
-		printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
-				[__head, __cache_library])
-		return []
+	__cache_lib = item_cache.get(__cache_library, {})
+	if not __cache_lib.is_empty():
+		__head_arr = __cache_lib.get(__head, [])
+	if __head_arr == []: pass
+		#printerr("ItemManager: cache '%s/%s' not found. Returning empty array." % [__cache_library, __head])
 	return __head_arr
 
 func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
