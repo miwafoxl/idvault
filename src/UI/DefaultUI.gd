@@ -4,6 +4,7 @@ class_name DefaultUI
 @export var manager: ItemManager
 @export var node_panels: Control
 
+@warning_ignore("unused_signal")
 signal request_menu(menu_id: StringName, param: Dictionary)
 
 func update() -> void:
