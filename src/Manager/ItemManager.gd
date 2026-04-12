@@ -11,12 +11,6 @@ signal trigger(tr: Trigger)
 signal stage_updated()
 signal selection_updated()
 
-# DEPRECATED: Context
-var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
-var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id, 3: params]
-var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
-var property_cx: Array # [0: item ref, 1: property ref, 2: prop id]
-
 enum PropertyTypes {
 	PROPERTY,
 	DESCRIPTOR,
@@ -256,71 +250,15 @@ func cache_links(__items: Array[Item], \
 		for __prop: Link in __props:
 			var __cx: Array = []
 			__cx.append_array([weakref(__item), weakref(__prop), __prop.id])
-			if __to_from: __cache.set(__prop.to, __cx)
-			else: 		  __cache.set(__prop.from, __cx)
+			if __to_from:
+				__cx.append(__prop.from_id)
+				__cache.set(__prop.to_id, __cx)
+			else:
+				__cx.append(__prop.to_id)
+				__cache.set(__prop.from_id, __cx)
 	return __cache
 
 #endregion ITEM CACHEING
-#region CONTEXT RELOADING
-
-# DEPRECATED
-func reload_context(__items: Array[Item]) -> void:
-	property_cx = reload_property_context(__items)
-	descriptors_cx = reload_descriptor_context(__items)
-	parameters_cx = reload_parameters_context(__items)
-	links_cx = reload_links_context(__items)
-
-# DEPRECATED
-func reload_descriptor_context(__items: Array[Item]) \
-		-> Array: # descriptors_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if not __item.has_descriptor(): continue
-			for __descriptor: Descriptor in __item.retrieve_descriptors():
-				__cx.append([weakref(__item), weakref(__descriptor), \
-				__descriptor.alias])
-	return __cx
-
-# DEPRECATED
-func reload_parameters_context(__items: Array[Item]) \
-		-> Array: # parameters_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if not __item.has_parameters(): continue
-			for __param: Parameter in __item.retrieve_parameters():
-				__cx.append([weakref(__item), weakref(__param), __param.id])
-	return __cx
-
-# DEPRECATED
-func reload_links_context(__items: Array[Item]) \
-		-> Array: # links_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if not __item.has_parameters(): continue
-			for __link: Link in __item.retrieve_links():
-				__cx.append([weakref(__item), weakref(__link), 
-				__link.to, __link.parameters])
-	return __cx
-
-# DEPRECATED
-func reload_property_context(__items: Array[Item]) \
-		-> Array: # links_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if __item.properties.is_empty(): continue
-			for __prop: Property in __item.properties:
-				__cx.append([weakref(__item), weakref(__prop), __prop.id])
-	return __cx
-
-#endregion CONTEXT RELOADING
 #region ITEM STAGING
 
 func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
