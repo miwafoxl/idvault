@@ -2,7 +2,9 @@
 extends Widget
 class_name PropertyWidget
 
+@export var list_header: ListHeader
 var related_prop_id: String = ""
+var marked_for_deletion: bool = false
 var changed: bool = false
 
 @abstract
