@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crtk73wxrxvkq"]
 
 [ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/Panel/ItemListPanel.gd" id="1_pof3a"]
-[ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/Widgets/ItemDisplayWidget.tscn" id="2_f0ka7"]
+[ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/Widgets/ItemDisplay.tscn" id="2_f0ka7"]
 
 [node name="ItemListPanel" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent")]
 layout_mode = 3
