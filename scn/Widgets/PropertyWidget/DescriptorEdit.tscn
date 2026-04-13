@@ -1,31 +1,28 @@
 [gd_scene format=3 uid="uid://cnuh2h3q2jgbx"]
 
-[ext_resource type="Script" uid="uid://d1brfe50g6pit" path="res://src/Widget/PropertyWidget/DescriptorEdit.gd" id="1_a1j0s"]
-[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/theme/default/Font/header_label.tres" id="2_5nlgx"]
+[ext_resource type="Script" uid="uid://d1brfe50g6pit" path="res://src/Widget/PropertyWidget/DescriptorEdit.gd" id="1_fck80"]
+[ext_resource type="PackedScene" uid="uid://cnni1jmq8g1de" path="res://scn/Widgets/ListHeader.tscn" id="2_x3gk3"]
 
-[node name="DescriptorEditWidget" type="PanelContainer" unique_id=1940872918 node_paths=PackedStringArray("lineedit_alias", "lineedit_short", "lineedit_long")]
+[node name="DescriptorEditWidget" type="PanelContainer" unique_id=1940872918 node_paths=PackedStringArray("lineedit_alias", "lineedit_short", "lineedit_long", "list_header")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-script = ExtResource("1_a1j0s")
+script = ExtResource("1_fck80")
 lineedit_alias = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/LineEditAlias")
 lineedit_short = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/LineEditShort")
 lineedit_long = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/TextEditLong")
+list_header = NodePath("VBoxContainer/ListHeader")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=798033856]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=903327926]
-custom_minimum_size = Vector2(0, 32)
+[node name="ListHeader" parent="VBoxContainer" unique_id=637322541 node_paths=PackedStringArray("collapsible") instance=ExtResource("2_x3gk3")]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer" unique_id=577710021]
-layout_mode = 2
-text = "WIDGET.DESCRIPTOR_EDIT.HEADER"
-label_settings = ExtResource("2_5nlgx")
+collapsible = NodePath("../MarginContainer")
+header_text = &"WIDGET.DESCRIPTOR_EDIT.HEADER"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=2037757481]
 layout_mode = 2

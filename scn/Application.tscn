@@ -35,6 +35,8 @@
 [ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/Dialogs/Confirmation.tscn" id="29_bnnxs"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/panel/itemlist/ItemMenu.tres" id="29_ldrk5"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="30_ldrk5"]
+[ext_resource type="Resource" uid="uid://m2h7je8j8yr5" path="res://res/menus/panel/itemlist/AddItem.tres" id="35_62eh1"]
+[ext_resource type="Resource" uid="uid://i0c3uu7pho37" path="res://res/menus/dialog/item_properties/PropertyMenu.tres" id="36_v4htx"]
 
 [node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "dialog_manager", "menu_manager")]
 script = ExtResource("1_tbfir")
@@ -72,6 +74,6 @@ metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
 [node name="MenuManager" type="Node" parent="." unique_id=988378929]
 script = ExtResource("27_5yf8b")
-default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5")])
+default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5"), ExtResource("35_62eh1"), ExtResource("36_v4htx")])
 theme = ExtResource("30_ldrk5")
 metadata/_custom_type_script = "uid://bwyef4g1l0om3"

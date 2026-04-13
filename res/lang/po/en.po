@@ -23,7 +23,7 @@ msgstr ""
 
 #: scn/Panels/ItemListPanel.tscn
 msgid "PANEL.ITEMLIST.NEW_ITEM"
-msgstr "New Item"
+msgstr "Item..."
 
 #: scn/Panels/ItemListPanel.tscn
 msgid "PANEL.ITEMLIST.QUERY_PLACEHOLDER"
@@ -33,21 +33,17 @@ msgstr "Search tags (separated by spaces)"
 msgid "PANEL.ITEMLIST.QUERY"
 msgstr "Search"
 
-#: scn/Dialogs/TestReturn.tscn
-msgid "DIALOG.TESTRETURN.TITLE"
-msgstr "Test Return"
-
 #: res/menus/panel/itemlist/ItemMenu.gd:22
 msgid "PANEL.ITEMLIST.MANAGE_COMMON_LINKS"
-msgstr "Manage common links"
+msgstr "Manage common links..."
 
 #: res/menus/panel/itemlist/ItemMenu.gd:25
 msgid "PANEL.ITEMLIST.ITEM_PROPERTIES"
-msgstr "Item properties"
+msgstr "Item properties..."
 
 #: res/menus/panel/itemlist/ItemMenu.gd:28
 msgid "PANEL.ITEMLIST.MANAGE_LINKS"
-msgstr "Manage links"
+msgstr "Manage links..."
 
 #: res/menus/panel/itemlist/ItemMenu.gd:32
 msgid "PANEL.ITEMLIST.QUERY_LINKED_ITEMS_WITH_TAGS"
@@ -85,46 +81,6 @@ msgstr "Duplicate selected item(s) (select copied items)"
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
 msgstr "Delete item(s)"
 
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.HEADER"
-msgstr "Descriptor"
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
-msgstr "Alias"
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
-msgstr "max. 64 chars, snake_case, no escapes: a-z 0-9 ()-_?"
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
-msgstr "Brief"
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
-msgstr "max. 150 chars"
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
-msgstr "Meaning"
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
-msgstr "max. 1500 chars, escapes allowed, intended for documentation"
-
-#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
-msgid "WIDGET.DISPLAY_EDIT.HEADER"
-msgstr "Display"
-
-#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
-msgid "WIDGET.DISPLAY_EDIT.TITLE"
-msgstr "Header"
-
-#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
-msgid "WIDGET.DISPLAY_EDIT.ALT"
-msgstr "Alt"
-
 #: scn/Dialogs/ItemProperties.tscn
 msgid "DIALOG.ITEM_PROPERTIES.TITLE"
 msgstr "Item Properties"
@@ -153,9 +109,79 @@ msgstr "Confirm Action"
 msgid "DIALOG.GENERAL.CONFIRM"
 msgstr "Confirm"
 
-#: src/Dialog/ItemPropertiesDialog.gd:30
+#: src/Dialog/ItemPropertiesDialog.gd:24
 msgid "DIALOG.USER_CONFIRMATION.EXIT_ITEM_PROPERTIES_UNCOMMITED_CHANGES"
 msgstr "Your changes were not applied. Discard unsaved changes?"
 
+#: res/menus/panel/itemlist/AddItem.gd:6
+msgid "PANEL.ITEMLIST.NEW_ITEM_EMPTY"
+msgstr "Create new empty item..."
+
+#: res/menus/panel/itemlist/AddItem.gd:9
+msgid "PANEL.ITEMLIST.NEW_ITEM_DESCRIPTOR"
+msgstr "Create new descriptor item..."
+
+#: res/menus/panel/itemlist/AddItem.gd:14
+msgid "PANEL.ITEMLIST.LOAD_ITEM_FILE"
+msgstr "Load item from file..."
+
+#: res/menus/panel/itemlist/AddItem.gd:19
+msgid "PANEL.ITEMLIST.EDIT_ITEM_SELECTED"
+msgstr "Edit selected item(s) properties..."
+
+#: res/menus/panel/itemlist/AddItem.gd:22
+msgid "PANEL.ITEMLIST.EXPORT_ITEM_SELECTED"
+msgstr "Export selected item(s) properties..."
+
+#: res/menus/panel/itemlist/AddItem.gd:25
+msgid "PANEL.ITEMLIST.DELETE_ITEM_SELECTED"
+msgstr "Delete selected item(s)"
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
+msgstr "Alias"
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
+msgstr "max. 64 chars, snake_case, no escapes: a-z 0-9 ()-_?"
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
+msgstr "Brief"
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
+msgstr "max. 150 chars"
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
+msgstr "Meaning"
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
+msgstr "max. 1500 chars, escapes allowed, intended for documentation"
+
+#: scn/Widgets/PropertyWidget/DisplayEdit.tscn
+msgid "WIDGET.DISPLAY_EDIT.TITLE"
+msgstr "Header"
+
+#: scn/Widgets/PropertyWidget/DisplayEdit.tscn
+msgid "WIDGET.DISPLAY_EDIT.ALT"
+msgstr "Alt"
+
+#: src/Widget/ListHeader.gd:14
+msgid "WIDGET.LIST_HEADER.SHOW"
+msgstr "Show"
+
+#: src/Widget/ListHeader.gd:16
+msgid "WIDGET.LIST_HEADER.COLLAPSE"
+msgstr "Collapse"
+
 msgid "idvault"
-msgstr ""
+msgstr "idvault"
+
+#~ msgid "WIDGET.DESCRIPTOR_EDIT.HEADER"
+#~ msgstr "Descriptor"
+
+#~ msgid "DIALOG.TESTRETURN.TITLE"
+#~ msgstr "Test Return"

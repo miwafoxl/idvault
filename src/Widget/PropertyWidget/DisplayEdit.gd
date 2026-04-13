@@ -23,3 +23,13 @@ func get_as_property() -> Property:
 	var __title: String = lineedit_title.text.strip_edges().strip_escapes()
 	var __alt: String = lineedit_alt.text.strip_edges().strip_escapes()
 	return Display.new(__title, __alt)
+
+func trigger_options() -> void:
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.MENU,
+		&"dialog.item_properties.property_menu"
+	))
+
+func _ready() -> void:
+	list_header.update_collapse()
+	list_header.property_options.connect(trigger_options)
