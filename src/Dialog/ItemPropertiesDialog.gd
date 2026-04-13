@@ -2,7 +2,7 @@ extends Dialog
 class_name ItemPropertiesDialog
 
 @export var label_item: Label
-@export var property_edit: PropertyEditWidget
+@export var property_edit: PropertyEdit
 
 #region OVERRIDES
 
