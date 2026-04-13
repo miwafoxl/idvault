@@ -36,7 +36,8 @@ func _on_about_to_popup() -> void:
 	if __item == null:
 		printerr("ItemPropertiesDialog: item parameter not received")
 	self.set_title(tr(self.title) + ": %s" % __item.id)
-	property_edit.deserialize_properties(__item.properties)
+	property_edit.deserialize_properties(__item.id, __item.properties)
+	property_edit.trigger.connect(trigger.emit)
 
 func _on_button_apply_button_down() -> void:
 	enter_request()
