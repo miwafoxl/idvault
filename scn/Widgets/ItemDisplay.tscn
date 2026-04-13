@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dq43vgs2e687m"]
 
-[ext_resource type="Script" uid="uid://c03xvk6e6dae4" path="res://src/Widget/ItemDisplayWidget.gd" id="1_jl6yb"]
+[ext_resource type="Script" uid="uid://c03xvk6e6dae4" path="res://src/Widget/ItemDisplay.gd" id="1_bsvhx"]
 
 [node name="ItemDisplayWidget" type="Button" unique_id=1857722230 node_paths=PackedStringArray("node_title", "node_subtitle")]
 custom_minimum_size = Vector2(0, 48)
@@ -9,7 +9,7 @@ anchor_right = 1.0
 offset_bottom = 48.0
 grow_horizontal = 2
 size_flags_horizontal = 3
-script = ExtResource("1_jl6yb")
+script = ExtResource("1_bsvhx")
 node_title = NodePath("MarginContainer/HBoxContainer/VBoxContainer/EntryTitle")
 node_subtitle = NodePath("MarginContainer/HBoxContainer/VBoxContainer/EntrySubtitle")
 

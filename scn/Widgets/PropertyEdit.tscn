@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://7unqtp42fpve"]
 
-[ext_resource type="Script" uid="uid://dw333omdd05wt" path="res://src/Widget/PropertyEditWidget.gd" id="1_uk0nf"]
-[ext_resource type="PackedScene" uid="uid://cnuh2h3q2jgbx" path="res://scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn" id="1_x0gpj"]
-[ext_resource type="PackedScene" uid="uid://dictm4h6nd5tk" path="res://scn/Widgets/PropertyWidget/DisplayEditWidget.tscn" id="2_3u7ns"]
+[ext_resource type="Script" uid="uid://dw333omdd05wt" path="res://src/Widget/PropertyEdit.gd" id="1_pfvcm"]
+[ext_resource type="PackedScene" uid="uid://cnuh2h3q2jgbx" path="res://scn/Widgets/PropertyWidget/DescriptorEdit.tscn" id="2_dpldg"]
+[ext_resource type="PackedScene" uid="uid://dictm4h6nd5tk" path="res://scn/Widgets/PropertyWidget/DisplayEdit.tscn" id="3_664fx"]
 
 [node name="PropertyEditWidget" type="PanelContainer" unique_id=136871007 node_paths=PackedStringArray("spawn_node")]
 anchors_preset = 15
@@ -12,10 +12,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_uk0nf")
+script = ExtResource("1_pfvcm")
 spawn_node = NodePath("VBoxContainer/ScrollContainer/VBoxContainer")
-descriptor_edit = ExtResource("1_x0gpj")
-display_edit = ExtResource("2_3u7ns")
+descriptor_edit = ExtResource("2_dpldg")
+display_edit = ExtResource("3_664fx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1625159379]
 layout_mode = 2
