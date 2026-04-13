@@ -26,3 +26,13 @@ func get_as_property() -> Property:
 	var __short: String = lineedit_short.text.strip_edges().strip_escapes()
 	var __long: String = lineedit_long.text.strip_edges()
 	return Descriptor.new(__alias, __short, __long)
+
+func trigger_options() -> void:
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.MENU,
+		&"dialog.item_properties.property_menu"
+	))
+
+func _ready() -> void:
+	list_header.update_collapse()
+	list_header.property_options.connect(trigger_options)
