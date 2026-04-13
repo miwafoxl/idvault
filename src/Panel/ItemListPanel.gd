@@ -55,9 +55,13 @@ func update_item_display() -> void:
 		item_list_parent.add_child(__item_widget)
 
 func _on_new_item_button_button_down() -> void:
+	#trigger.emit(Trigger.new(
+		#Trigger.TriggerTypes.ACTION,
+		#&"items.append.testitem"
+	#))
 	trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.ACTION,
-		&"items.append.testitem"
+		Trigger.TriggerTypes.MENU,
+		&"panel.itemlist.add_item"
 	))
 	
 func _on_query_button_button_down() -> void:
