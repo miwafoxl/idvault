@@ -10,3 +10,6 @@ func update() -> void
 
 @abstract
 func update_selection() -> void
+
+@abstract
+func request(__request: StringName, __param: Dictionary) -> void

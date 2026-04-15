@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://c77y48j6w074"]
+
+[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/theme/DefaultUI/Font/header_label.tres" id="2_cawar"]
+
+[sub_resource type="GDScript" id="GDScript_hjf6m"]
+script/source = "extends Button
+class_name ListHeader
+
+@onready var header_text_node: Label = $HBoxContainer/LeftAnchor/HeaderText
+@onready var collapse_button: Button = $HBoxContainer/LeftAnchor/ButtonHide
+
+@export var collapsible: Control
+@export var header_text: StringName
+var collapsed: bool = false
+
+signal property_options
+
+func update_collapse() -> void:
+	collapsible.set_visible(not collapsed)
+	if collapsed:
+		collapse_button.set_text(tr(&\"WIDGET.LIST_HEADER.SHOW\"))
+	else:
+		collapse_button.set_text(tr(&\"WIDGET.LIST_HEADER.COLLAPSE\"))
+
+func _on_button_hide_button_down() -> void:
+	collapsed = not collapsed
+	update_collapse()
+
+func _on_button_options_button_down() -> void:
+	property_options.emit()
+
+func _ready() -> void:
+	header_text_node.set_text(tr(header_text))
+"
+
+[node name="ListHeader" type="Button" unique_id=637322541]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+script = SubResource("GDScript_hjf6m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=227437018]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LeftAnchor" type="HBoxContainer" parent="HBoxContainer" unique_id=175142443]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonHide" type="Button" parent="HBoxContainer/LeftAnchor" unique_id=1656175876]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+flat = true
+
+[node name="HeaderText" type="Label" parent="HBoxContainer/LeftAnchor" unique_id=1207311526]
+layout_mode = 2
+label_settings = ExtResource("2_cawar")
+
+[node name="RightAnchor" type="HBoxContainer" parent="HBoxContainer" unique_id=368056132]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ButtonOptions" type="Button" parent="HBoxContainer/RightAnchor" unique_id=889996631]
+layout_mode = 2
+text = "WIDGET.LIST_HEADER.ITEM_OPTIONS"
+flat = true
+
+[connection signal="button_down" from="HBoxContainer/LeftAnchor/ButtonHide" to="." method="_on_button_hide_button_down"]
+[connection signal="button_down" from="HBoxContainer/RightAnchor/ButtonOptions" to="." method="_on_button_options_button_down"]

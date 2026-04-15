@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3mw360ur5mac"]
 
 [ext_resource type="Script" uid="uid://by3xvk1tboofk" path="res://src/Application.gd" id="1_tbfir"]
-[ext_resource type="PackedScene" uid="uid://qwnt8iblsa3l" path="res://scn/Default UI.tscn" id="2_1bq3j"]
+[ext_resource type="PackedScene" uid="uid://qwnt8iblsa3l" path="res://scn/DefaultUI/Default UI.tscn" id="2_1bq3j"]
 [ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/Manager/ActionManager.gd" id="2_xwlb1"]
 [ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="3_1v7vn"]
 [ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://res/actions/item/append/TestItem.tres" id="4_gl6yv"]
@@ -20,10 +20,7 @@
 [ext_resource type="Resource" uid="uid://dp2kjjnttef3o" path="res://res/actions/item/remove/Selected.tres" id="17_ajmq0"]
 [ext_resource type="Resource" uid="uid://dh4ys308mmwj8" path="res://res/actions/item/stage/Alphabetical.tres" id="18_4w571"]
 [ext_resource type="Resource" uid="uid://dl2u5de4plemq" path="res://res/actions/item/stage/Unordered.tres" id="19_qonqs"]
-[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/Manager/DialogManager.gd" id="20_hg2lc"]
-[ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/Dialogs/Message.tscn" id="21_1m14j"]
 [ext_resource type="Resource" uid="uid://bwadsxr54clqa" path="res://res/actions/item/to_clipboard/SelectedDisplay.tres" id="22_0slqf"]
-[ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/Dialogs/ItemProperties.tscn" id="22_g87cj"]
 [ext_resource type="Resource" uid="uid://dm2s7cs4a6av7" path="res://res/actions/item/dialog/SelectedItemProperties.tres" id="23_pucfs"]
 [ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager/ItemManager.gd" id="24_1v7vn"]
 [ext_resource type="Resource" uid="uid://ccts7mjdabkm4" path="res://res/actions/property/edit/ApplyBulk.tres" id="24_s2ijd"]
@@ -32,24 +29,22 @@
 [ext_resource type="Resource" uid="uid://bpam0ndoe46cb" path="res://res/actions/item/stage/Query.tres" id="26_33pya"]
 [ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/Manager/MenuManager.gd" id="27_5yf8b"]
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
-[ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/Dialogs/Confirmation.tscn" id="29_bnnxs"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/panel/itemlist/ItemMenu.tres" id="29_ldrk5"]
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/default/default.tres" id="30_ldrk5"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="30_ldrk5"]
 [ext_resource type="Resource" uid="uid://m2h7je8j8yr5" path="res://res/menus/panel/itemlist/AddItem.tres" id="35_62eh1"]
 [ext_resource type="Resource" uid="uid://i0c3uu7pho37" path="res://res/menus/dialog/item_properties/PropertyMenu.tres" id="36_v4htx"]
 
-[node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "dialog_manager", "menu_manager")]
+[node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "menu_manager")]
 script = ExtResource("1_tbfir")
 default_ui = ExtResource("2_1bq3j")
 item_manager = NodePath("ItemManager")
 action_manager = NodePath("ActionManager")
-dialog_manager = NodePath("DialogManager")
 menu_manager = NodePath("MenuManager")
 metadata/_custom_type_script = "uid://by3xvk1tboofk"
 
 [node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "dialog_manager", "manager") instance=ExtResource("26_1bq3j")]
 action_manager = NodePath("../ActionManager")
-dialog_manager = NodePath("../DialogManager")
+dialog_manager = NodePath("")
 manager = NodePath("../ItemManager")
 
 [node name="ActionManager" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("manager")]
@@ -57,16 +52,6 @@ script = ExtResource("2_xwlb1")
 manager = NodePath("../ItemManager")
 default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd"), ExtResource("25_bnnxs"), ExtResource("26_33pya")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
-
-[node name="DialogManager" type="Node" parent="." unique_id=1771549941 node_paths=PackedStringArray("spawn_node")]
-script = ExtResource("20_hg2lc")
-spawn_node = NodePath("..")
-default = Dictionary[StringName, PackedScene]({
-&"item_properties": ExtResource("22_g87cj"),
-&"message": ExtResource("21_1m14j"),
-&"user_confirmation": ExtResource("29_bnnxs")
-})
-metadata/_custom_type_script = "uid://bwxtawgolorsm"
 
 [node name="ItemManager" type="Node" parent="." unique_id=1855138344]
 script = ExtResource("24_1v7vn")

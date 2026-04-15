@@ -4,11 +4,10 @@ class_name Application
 @export var default_ui: PackedScene
 @export var item_manager: ItemManager
 @export var action_manager: ActionManager
-@export var dialog_manager: DialogManager
 @export var menu_manager: MenuManager
 
 @onready var testing = $Testing
-var ui: Control = null
+var ui: UI = null
 
 func swap_ui(__ui: PackedScene) -> void:
 	var __node: UI = __ui.instantiate()
@@ -23,7 +22,10 @@ func swap_ui(__ui: PackedScene) -> void:
 	ui.trigger.connect(process_trigger)
 	item_manager.stage_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
 	item_manager.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
-	add_child(__node, true)
+	add_child(ui, true)
+
+func ui_request(__id: StringName, __param: Dictionary) -> void:
+	ui.request(__id, __param)
 
 func popup_menu(__id: StringName, __param: Dictionary = {}, \
 		__position: Vector2i = DisplayServer.mouse_get_position()) -> void:
@@ -45,20 +47,18 @@ func process_trigger(__tr: Trigger) -> void:
 	match __tr.type:
 		Trigger.TriggerTypes.ACTION:
 			action_manager.run(__tr.relevant_id, __tr.parameters)
-		Trigger.TriggerTypes.DIALOG:
-			dialog_manager.open(__tr.relevant_id, __tr.parameters)
 		Trigger.TriggerTypes.MENU:
 			popup_menu(__tr.relevant_id, __tr.parameters)
+		Trigger.TriggerTypes.UI_REQUEST:
+			ui_request(__tr.relevant_id, __tr.parameters)
 		_:
 			printerr("Invalid trigger type '%s'" % \
 				Trigger.TriggerTypes.keys()[__tr.type])
 
 func _ready() -> void:
 	action_manager.append_actions(action_manager.default, true)
-	dialog_manager.append_dialog(dialog_manager.default, false)
 	menu_manager.append_menus(menu_manager.default, false)
 	action_manager.trigger.connect(process_trigger)
-	dialog_manager.trigger.connect(process_trigger)
 	menu_manager.trigger.connect(process_trigger)
 	item_manager.trigger.connect(process_trigger)
 	swap_ui(default_ui)

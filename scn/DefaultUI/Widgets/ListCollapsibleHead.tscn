@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bmft22luwfebh"]
+
+[ext_resource type="Script" uid="uid://6y13eaquu4h2" path="res://src/UI/DefaultUI/Widget/ListCollapsibleHead.gd" id="1_jpixw"]
+[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/theme/DefaultUI/Font/header_label.tres" id="2_q71nm"]
+
+[node name="LISTCOLLAPSIBLEH" type="PanelContainer" unique_id=218796388 node_paths=PackedStringArray("BUT_COLLAPSE", "BUT_HEAD_OPTIONS", "CONTENT_APPEND", "TXT_HEADER")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jpixw")
+BUT_COLLAPSE = NodePath("VBOXC/PANELC_HEAD/HBOXC/ANCHOR_LEFT/BUT_COLLAPSE")
+BUT_HEAD_OPTIONS = NodePath("VBOXC/PANELC_HEAD/HBOXC/ANCHOR_RIGHT/BUT_HEAD_OPTIONS")
+CONTENT_APPEND = NodePath("VBOXC")
+TXT_HEADER = NodePath("VBOXC/PANELC_HEAD/HBOXC/ANCHOR_LEFT/TXT_HEADER")
+
+[node name="VBOXC" type="VBoxContainer" parent="." unique_id=2140831020]
+layout_mode = 2
+
+[node name="PANELC_HEAD" type="PanelContainer" parent="VBOXC" unique_id=340213755]
+layout_mode = 2
+
+[node name="HBOXC" type="HBoxContainer" parent="VBOXC/PANELC_HEAD" unique_id=2089262127]
+layout_mode = 2
+alignment = 1
+
+[node name="ANCHOR_LEFT" type="HBoxContainer" parent="VBOXC/PANELC_HEAD/HBOXC" unique_id=1320630488]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BUT_COLLAPSE" type="Button" parent="VBOXC/PANELC_HEAD/HBOXC/ANCHOR_LEFT" unique_id=633129681]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+flat = true
+
+[node name="TXT_HEADER" type="Label" parent="VBOXC/PANELC_HEAD/HBOXC/ANCHOR_LEFT" unique_id=1104720064]
+layout_mode = 2
+label_settings = ExtResource("2_q71nm")
+
+[node name="ANCHOR_RIGHT" type="HBoxContainer" parent="VBOXC/PANELC_HEAD/HBOXC" unique_id=1473515219]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="BUT_HEAD_OPTIONS" type="Button" parent="VBOXC/PANELC_HEAD/HBOXC/ANCHOR_RIGHT" unique_id=1291486335]
+layout_mode = 2
+text = "WIDGET.LIST_HEADER.ITEM_OPTIONS"
+flat = true

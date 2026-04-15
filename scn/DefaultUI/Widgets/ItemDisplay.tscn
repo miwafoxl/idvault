@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dq43vgs2e687m"]
+
+[ext_resource type="Script" uid="uid://c03xvk6e6dae4" path="res://src/UI/DefaultUI/Widget/ItemDisplay.gd" id="1_46y6r"]
+
+[node name="ITEMDISPLAY" type="Button" unique_id=1857722230 node_paths=PackedStringArray("node_title", "node_subtitle")]
+custom_minimum_size = Vector2(0, 48)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_46y6r")
+node_title = NodePath("MARGIN_C/HBOX_C/VBOX_C/TXT_HEAD")
+node_subtitle = NodePath("MARGIN_C/HBOX_C/VBOX_C/TXT_ALT")
+
+[node name="MARGIN_C" type="MarginContainer" parent="." unique_id=1194377214]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBOX_C" type="HBoxContainer" parent="MARGIN_C" unique_id=173807230]
+layout_mode = 2
+
+[node name="VBOX_C" type="VBoxContainer" parent="MARGIN_C/HBOX_C" unique_id=458033017]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TXT_HEAD" type="Label" parent="MARGIN_C/HBOX_C/VBOX_C" unique_id=1543387147]
+layout_mode = 2
+vertical_alignment = 2
+text_overrun_behavior = 5
+
+[node name="TXT_ALT" type="Label" parent="MARGIN_C/HBOX_C/VBOX_C" unique_id=148014020]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7202103, 0.7202103, 0.7202103, 1)
+theme_override_font_sizes/font_size = 13
+text_overrun_behavior = 5
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

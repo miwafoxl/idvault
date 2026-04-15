@@ -42,6 +42,9 @@ func remove_parameter(__rm_parameter_id: Array[String]) -> bool:
 			return parameters.erase(__param_id)
 	return true
 
+func get_type_as_string() -> StringName:
+	return &"PROPERTY.TYPES.LINK"
+
 func _init(__link_to_id: String, __link_from_id: String = "",
 		__parameters: Dictionary[String, Variant] = {}) -> void:
 	self.from_id = __link_from_id

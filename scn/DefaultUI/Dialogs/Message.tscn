@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://yiyymio1q8vs"]
+
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_bscds"]
+[ext_resource type="Script" uid="uid://c848sd5lglvht" path="res://src/UI/DefaultUI/Dialog/MessageDialog.gd" id="1_mwbxi"]
+
+[node name="MESSAGE" type="Window" unique_id=1098095428 node_paths=PackedStringArray("message_node", "confirm_node")]
+oversampling_override = 1.0
+title = "DIALOG.MESSAGE.TITLE"
+position = Vector2i(0, 36)
+size = Vector2i(400, 70)
+theme = ExtResource("1_bscds")
+script = ExtResource("1_mwbxi")
+message_node = NodePath("MARGIN_C/VBOX_C/TXT_MESSAGE")
+confirm_node = NodePath("MARGIN_C/VBOX_C/HBOX_C/BUT_OK")
+important = true
+metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
+
+[node name="MARGIN_C" type="MarginContainer" parent="." unique_id=1602618312]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBOX_C" type="VBoxContainer" parent="MARGIN_C" unique_id=1374406176]
+layout_mode = 2
+
+[node name="TXT_MESSAGE" type="RichTextLabel" parent="MARGIN_C/VBOX_C" unique_id=3095069]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+selection_enabled = true
+
+[node name="HBOX_C" type="HBoxContainer" parent="MARGIN_C/VBOX_C" unique_id=1060096253]
+layout_mode = 2
+alignment = 1
+
+[node name="BUT_OK" type="Button" parent="MARGIN_C/VBOX_C/HBOX_C" unique_id=968177803]
+layout_mode = 2
+text = "DIALOG.GENERAL.OK"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="button_up" from="MARGIN_C/VBOX_C/HBOX_C/BUT_OK" to="." method="_on_button_ok_button_up"]

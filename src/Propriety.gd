@@ -21,8 +21,5 @@ func serialize(__dict: Dictionary) -> void:
 	for __key: String in __dict.keys():
 		self.set(__key, __dict[__key])
 
-#@abstract
-#func deserialize() -> Dictionary
-#
-#@abstract
-#func serialize() -> Property
+@abstract
+func get_type_as_string() -> StringName
