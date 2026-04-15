@@ -11,6 +11,9 @@ enum ParameterTypes {
 	NUMBER,
 }
 
+func get_type_as_string() -> StringName:
+	return &"PROPERTY.TYPES.PARAMETER"
+
 func _init(__type: ParameterTypes = ParameterTypes.NUMBER, __order: int = 0, \
 		__id: String = RandomString.new("p_").value):
 	self.param_id = __id
