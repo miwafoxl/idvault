@@ -1,44 +1,14 @@
 extends Resource
 class_name Query
 
-const QUERY_SPACER: String = " ";
-const QUERY_PARAMETER: String = ":";
-const QUERY_NEGATOR: String = "!";
+var raw_query: String = "";
+var manager: ItemManager
+var items: Array[Item]
 
-@export var raw_query: String = "";
-var error_at_splice: Array # [Splice index, QueryError or ParseError]
-var parsed_query: Array[Subquery] = []
+var filtered: Array[Item]
+var error_query: Array # [Relevant Descriptor, ParseError]
 
-var available_items: Array[Item] = []
-var available_descriptors: Array = []
-var available_parameters: Array = []
-var available_links: Array = []
-
-signal done(selected_items: Array[Item])
-
-class Subquery: 
-	var alias: String = "";
-	var parameters: Array[String] = []
-	var negate: bool = false
-	func _init(__alias: String, __params: Array[String] = [],
-			 __negate: bool = false):
-		self.alias = __alias
-		self.parameters = __params
-		self.negate = __negate
-	
-enum ParseError {
-	UNKNOWN,
-	EMPTY_SPLICE,
-	INVALID_PARAMETER,
-}
-
-enum ComputeError {
-	UNKNOWN,
-	EMPTY_QUERY,
-	DESCRIPTOR_UNKNOWN,
-	PARAMETER_UNKNOWN,
-	PARAMETER_TYPE_MISMATCH
-}
+var start_ms: int
 
 enum ComparisonMode {
 	COMPARASION,
@@ -49,175 +19,149 @@ enum ComparisonMode {
 	LESSER_THAN,
 	LESSER_OR_EQUALS_TO,
 }
-# [0: [0: [0: bla, 1: bla]]]
-# [0: [0: bla, 1: bla], 1: [0: bla]]..
-func check_descriptor_availability(__alias: String) -> bool:
-	for __descriptor_arr: Array in available_descriptors:
-		if __descriptor_arr[2] == __alias:
-			return true
-	return false
 
-func item_via_descriptor_alias(__alias: String) -> Item:
-	for __descriptor_arr: Array in available_descriptors:
-		if __descriptor_arr[2] == __alias:
-			return (__descriptor_arr[0] as WeakRef).get_ref()
-	return null
+enum ParseError {
+	OK,
+	EMPTY_SPLIT,
+	DESCRIPTOR_NOT_FOUND,
+	PARAMETER_TOO_MANY_PARAM_DELIMITERS,
+	PARAMETER_EXPECTED_CLOSING_QUOTES,
+	PARAMETER_INVALID_SYMBOL_USE,
+}
 
-func parse_raw() -> bool:
-	var __subqueries: Array[Subquery] = []
-	var __spliced_query: PackedStringArray = raw_query.split(QUERY_SPACER, false)
-	if __spliced_query.is_empty():
-		error_at_splice = [0, ParseError.EMPTY_SPLICE]
-		printerr("QParsing: splice returned an empty string")
-		return false
-	for i: int in __spliced_query.size():
-		var __splice: String = __spliced_query[i]
-		var __descriptor: String = ""
-		var __parameter: String = ""
-		var __negator: bool = false
-		match __splice.count(QUERY_PARAMETER):
-			0:
-				__descriptor = __splice
-			1: 
-				var __spliced_splice: PackedStringArray = __splice.split(QUERY_PARAMETER)
-				__descriptor = __spliced_splice[0]
-				__parameter = __spliced_splice[1]
-			_:
-				printerr("QParsing: too many parameter separators in splice %s" % i)
-				error_at_splice = [i, ParseError.INVALID_PARAMETER]
-				return false
-		if __descriptor.begins_with(QUERY_NEGATOR):
-			__negator = true
-		__subqueries.append(Subquery.new(
-			__descriptor, [], __negator
+class Parsed:
+	var descriptor_cx: Array
+	var parameters: Dictionary = {}
+	var is_negated: bool = false
+	var error: ParseError = ParseError.OK
+	func _init(__cx: Array, __negated: bool = false, \
+			__parameters: Dictionary = {}) -> void:
+		self.descriptor_cx = __cx
+		self.is_negated = __negated
+		self.parameters = __parameters
+
+func print_parsed(__parsed: Array[Parsed]) -> void:
+	for __parse: Parsed in __parsed:
+		print({
+			"descriptor_id": __parse.descriptor_cx[2],
+			"parameters": __parse.parameters,
+			"is_negated": __parse.is_negated,
+			"error": ParseError.keys()[__parse.error],
+		})
+
+func process(__exclusive: bool = true) -> void:
+	start_ms = Time.get_ticks_usec()
+	var __query_descriptors: PackedStringArray = raw_query.split(" ")
+	var __parse_query: Dictionary[String, Parsed] = parse_split(__query_descriptors); # print_parsed(__parse)
+	filtered = filter_items_by_parsed(items, __parse_query, __exclusive)
+	return 
+	
+
+func parse_split(__split: PackedStringArray) -> Dictionary[String, Parsed]:
+	var __parsed: Dictionary[String, Parsed] = {}
+	if __split.is_empty(): 
+		error_query = ["parse_split", ParseError.EMPTY_SPLIT]
+	for __query_str: String in __split:
+		var __negated: bool = false
+		var __descriptor_str: String
+		var __parameters_str: String
+		var __descriptor_cx: Array
+		var __parameters: Dictionary = {}
+		if __query_str.count(":") == 1:
+			__descriptor_str = __query_str.get_slice(":", 0)
+			__parameters_str = __query_str.get_slice(":", 1)
+			__parameters = parse_parameter(__parameters_str)
+		elif __query_str.count(":") > 1:
+			error_query = [__query_str, ParseError.PARAMETER_TOO_MANY_PARAM_DELIMITERS]
+			break
+		else: __descriptor_str = __query_str
+		if __descriptor_str.left(1) in ["-", "!"]:
+			__negated = true
+			__descriptor_str = __descriptor_str.right(-1)
+		__descriptor_cx = manager.get_from_cache("by_descriptor_alias", __descriptor_str)
+		if __descriptor_cx.is_empty():
+			error_query = [__query_str, ParseError.DESCRIPTOR_NOT_FOUND]
+			break
+		__parsed.set(__descriptor_cx[2], Parsed.new(
+			__descriptor_cx, __negated, __parameters
 		))
-	parsed_query = __subqueries
-	return true
+	return __parsed
 
-# TODO: Separate thread (please)
-func compute(__subqueries: Array[Subquery] = parsed_query) -> void:
-	var __unsorted_items: Array[Item] = []
-	if __subqueries.is_empty():
-		printerr("QCompute: empty subquery array provided")
-		error_at_splice = [0, ComputeError.EMPTY_QUERY]
-		done.emit.call_deferred(__unsorted_items)
-		return
-	for i: int in __subqueries.size():
-		var __alias: String = __subqueries[i].alias
-		if not check_descriptor_availability(__alias):
-			printerr("QCompute: unknown item with descriptor '%s'" % __alias)
-			error_at_splice = [0, ComputeError.DESCRIPTOR_UNKNOWN]
-			break 
-		var __item: Item = item_via_descriptor_alias(__alias)
-		if __item in __unsorted_items: continue
-		var __param: Parameter = __item.retrieve_parameters(0)[0] # TODO: support multiple param
-		var __parameter_parse: Array = []
-		if not __subqueries[i].parameters.is_empty(): 
-			__parameter_parse = parse_parameter(__subqueries[i].parameters[0])
-			if __parameter_parse.is_empty(): 
-				printerr("QCompute: item with descriptor '%s' has no parameters" % __alias)
-				error_at_splice = [0, ComputeError.PARAMETER_UNKNOWN]
-				break
-			if not __param.type == __parameter_parse[0]:
-				printerr("QCompute: type mismatch while querying item with descriptor '%s'" % __alias)
-				error_at_splice = [0, ComputeError.PARAMETER_TYPE_MISMATCH]
-				break
-		for u: int in available_links.size():
-			var __linked_item_id: String = (available_links[u])[2][0] # Linking item ID
-			var __linked_parameter_value: Variant = (available_links[u])[3] \
-					as Dictionary[String, Variant].get(__param.id)
-			if not __item.id == __linked_item_id: continue
-			if not __parameter_parse.is_empty() and not solve_parameter(\
-					__parameter_parse, __linked_parameter_value):
-				continue # Not passed
-			__unsorted_items.append(__item)
-	done.emit.call_deferred(__unsorted_items)
+func parse_parameter(__parameter_str: String) -> Dictionary:
+	var __param: Dictionary = {}
+	var __value: String
+	if __parameter_str.left(1) in [":", ";", "(", ")", "?", "@", "#", "$", "%"]:
+		__param.set("Error", ParseError.PARAMETER_INVALID_SYMBOL_USE)
+	match __parameter_str.left(1):
+		">" when __parameter_str.substr(1, 1) == "=":
+			__param.set("ComparisonMode", ComparisonMode.GREATER_OR_EQUALS_TO)
+			__value = __parameter_str.substr(2)
+		"<" when __parameter_str.substr(1, 1) == "=":
+			__param.set("ComparisonMode", ComparisonMode.LESSER_OR_EQUALS_TO)
+			__value = __parameter_str.substr(2)
+		">":
+			__param.set("ComparisonMode", ComparisonMode.GREATER_THAN)
+			__value = __parameter_str.substr(1)
+		"<":
+			__param.set("ComparisonMode", ComparisonMode.LESSER_THAN)
+			__value = __parameter_str.substr(1)
+		"~" when __parameter_str.substr(1, 1) == '"':
+			if not __parameter_str.right(1) == '"':
+				__param.set("Error", ParseError.PARAMETER_EXPECTED_CLOSING_QUOTES)
+			__param.set("Type", Parameter.ParameterTypes.STRING)
+			__param.set("ComparisonMode", ComparisonMode.NEARBY)
+			__value = __parameter_str.substr(2).remove_chars('"')
+		"~":
+			__param.set("ComparisonMode", ComparisonMode.NEARBY)
+			__value = __parameter_str.substr(1)
+		'"':
+			if not __parameter_str.right(1) == '"':
+				__param.set("Error", ParseError.PARAMETER_EXPECTED_CLOSING_QUOTES)
+			__param.set("ComparisonMode", ComparisonMode.MATCH)
+			__param.set("Type", Parameter.ParameterTypes.STRING)
+			__value = __parameter_str.substr(1).remove_chars('"')
+		_:
+			__param.set("ComparisonMode", ComparisonMode.MATCH)
+			__value = __parameter_str
+	if __value.is_valid_int():
+		__param.set("Type", Parameter.ParameterTypes.NUMBER)
+		__param.set("Value", __value.to_int())
+	else:
+		__param.set("Type", Parameter.ParameterTypes.STRING)
+		__param.set("Value", __value)
+	return __param
 
-func solve_parameter(__parsed_parameter: Array, __link_value: Variant) -> bool:
-	var __passed_value: Variant = __parsed_parameter[2]
-	match __parsed_parameter[1]:
-		ComparisonMode.MATCH:
-			match __parsed_parameter[0]:
-				Parameter.ParameterTypes.NUMBER:
-					if int(__passed_value) == int(__link_value): return true
-				Parameter.ParameterTypes.STRING:
-					if String(__passed_value) == String(__link_value): return true
-		ComparisonMode.NEARBY:
-			match __parsed_parameter[0]:
-				Parameter.ParameterTypes.NUMBER:
-					const __DIST: int = 20 # TODO: make this configurable
-					if int(__passed_value) in range(__link_value - __DIST, \
-							__link_value + __DIST): return true
-		ComparisonMode.GREATER_THAN:
-			match __parsed_parameter[0]:
-				Parameter.ParameterTypes.NUMBER:
-					if int(__passed_value) > int(__link_value): return true
-		ComparisonMode.GREATER_OR_EQUALS_TO:
-			match __parsed_parameter[0]:
-				Parameter.ParameterTypes.NUMBER:
-					if int(__passed_value) >= int(__link_value): return true
-		ComparisonMode.LESSER_THAN:
-			match __parsed_parameter[0]:
-				Parameter.ParameterTypes.NUMBER:
-					if int(__passed_value) < int(__link_value): return true
-		ComparisonMode.LESSER_OR_EQUALS_TO:
-			match __parsed_parameter[0]:
-				Parameter.ParameterTypes.NUMBER:
-					if int(__passed_value) <= int(__link_value): return true
-	return false
+# Exclusive: Matches only if all descriptors are present
+# Inclusive: Matches if at least one descriptor query is present
+func filter_items_by_parsed(__items: Array[Item], \
+		__parsed_query: Dictionary[String, Parsed], \
+		__exclusive: bool = true, __log: bool = true) -> Array[Item]:
+	var __filtered: Array[Item]
+	var __miss: int = 0
+	for __item: Item in __items:
+		var __remaining_matches: Array = __parsed_query.keys()
+		var __cx: Array = manager.get_from_cache("by_link_from_id", __item.id)
+		if (__cx.is_empty()) or (__cx[3] not in __remaining_matches): 
+			__miss += 1
+			continue
+		var __from: String = __cx[3] # Link.from
+		__remaining_matches.erase(__from)
+		if __exclusive and not __remaining_matches.is_empty(): continue
+		__filtered.append(__item)
+	if __log:
+		var __usec: int = Time.get_ticks_usec() - start_ms
+		var __took_string: String = "Took %s %s" % [__usec, ["usec", "ms"][(__usec >= 1000) as int]]
+		print_debug("Query: Filtered %s items with %s misses. Took %s usec." % [
+			__filtered.size(), __miss, Time.get_ticks_usec() - start_ms
+		])
+		print_parsed(__parsed_query.values())
+	return __filtered
 
-func parse_parameter(__parameter: String) -> Array: # [ParameterType, Mode, Value]
-	var __param_type: Parameter.ParameterTypes
-	var __param_mode: ComparisonMode
-	var __param_value: Variant = null
-	if __parameter.substr(1).is_valid_int():
-		__param_type = Parameter.ParameterTypes.NUMBER
-		if __parameter.is_valid_int():
-			__param_mode = ComparisonMode.MATCH
-			__param_value = int(__parameter)
-	if __param_value == null:
-		match __parameter.substr(0, 1):
-			"=": 
-				__param_mode = ComparisonMode.MATCH # String and Number
-				if __param_type == null:
-					__param_type = Parameter.ParameterTypes.STRING
-					__param_value = String(__parameter.substr(1))
-			"~":  # TODO: '~' (Nearby) Can be implemented to strings if use String.match
-				__param_mode = ComparisonMode.NEARBY # Number 
-				if __param_type == null:
-					__param_mode = ComparisonMode.MATCH
-					__param_type = Parameter.ParameterTypes.STRING
-					__param_value = String(__parameter.substr(1))
-					printerr("QParseParameter: parameter '%s' has a number comparison, but \
-					a string was provided instead. Using ComparisonMode.MATCH instead." % __parameter)
-			">": 
-				__param_mode = ComparisonMode.GREATER_OR_EQUALS_TO # Number
-				if __param_type == null:
-					__param_mode = ComparisonMode.MATCH
-					__param_type = Parameter.ParameterTypes.STRING
-					__param_value = String(__parameter.substr(1))
-					printerr("QParseParameter: parameter '%s' has a number comparison, but \
-					a string was provided instead. Using ComparisonMode.MATCH instead." % __parameter)
-			"<": 
-				__param_mode = ComparisonMode.LESSER_OR_EQUALS_TO # Number
-				if __param_type == null:
-					__param_mode = ComparisonMode.MATCH
-					__param_type = Parameter.ParameterTypes.STRING
-					__param_value = String(__parameter.substr(1))
-					printerr("QParseParameter: parameter '%s' has a number comparison, but \
-					a string was provided instead. Using ComparisonMode.MATCH instead." % __parameter)
-			_: # TODO: Implement 2-char (>=, <=) comparison modes
-				__param_type = Parameter.ParameterTypes.STRING
-				__param_mode = ComparisonMode.MATCH
-				__param_value = String(__parameter)
-	return [__param_type, __param_mode, __param_value]
-
-func _init(__raw_query: String, __items: Array[Item], __descr_cx: Array,
-		__param_cx: Array, __links_cx: Array, __parse: bool = false) -> void:
+func _init(__raw_query: String, __items: Array[Item], \
+		__manager: ItemManager, __exclusive: bool = true) -> void:
 	self.raw_query = __raw_query.strip_edges().strip_escapes()
-	self.available_items = __items
-	self.available_descriptors = __descr_cx
-	self.available_parameters = __param_cx
-	self.available_links = __links_cx
-	if __parse:
-		var _p: bool = parse_raw()
+	self.items = __items
+	self.manager = __manager
+	if __items.is_empty():
+		printerr("Query: received no items to filter")
+	else: process(__exclusive)

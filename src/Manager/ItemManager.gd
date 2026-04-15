@@ -8,14 +8,8 @@ var staged_items: Array[WeakRef] = [];
 
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
-signal items_updated()
+signal stage_updated()
 signal selection_updated()
-
-# DEPRECATED: Context
-var descriptors_cx: Array # [0: item ref, 1: descriptor ref, 2: alias]
-var parameters_cx: Array # [0: item ref, 1: parameter ref, 2: param id, 3: params]
-var links_cx: Array # [0: item ref, 1: link ref, 2: linked item id]
-var property_cx: Array # [0: item ref, 1: property ref, 2: prop id]
 
 enum PropertyTypes {
 	PROPERTY,
@@ -119,7 +113,6 @@ func append_items(__entries: Array[Item]) -> bool:
 	if __entries.is_empty(): return false
 	unordered_items += __entries
 	reload_cache(unordered_items)
-	items_updated.emit()
 	return true 
 
 func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
@@ -133,7 +126,6 @@ func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
 			unordered_items.set(__item_id, null)
 		clean_entries()
 		reload_cache(unordered_items)
-		items_updated.emit()
 	return true
 
 func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
@@ -145,7 +137,6 @@ func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
 		#reload_context(unordered_items)
 		reload_cache(unordered_items)
 		clean_entries()
-		items_updated.emit()
 	return true
 
 func clean_entries() -> void:
@@ -161,15 +152,29 @@ func clean_entries() -> void:
 #region ITEM CACHEING
 
 func get_from_cache(__cache_library: String, __head: String) -> Array:
+	var __head_arr: Array = []
+	var __cache_lib: Dictionary
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager: non-existent cache '%s'. Returning empty array." % __cache_library)
+		return []
+	__cache_lib = item_cache.get(__cache_library, {})
+	if not __cache_lib.is_empty():
+		__head_arr = __cache_lib.get(__head, [])
+	if __head_arr == []: pass
+		#printerr("ItemManager: cache '%s/%s' not found. Returning empty array." % [__cache_library, __head])
+	return __head_arr
+
+func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
 	if not item_cache.has(__cache_library):
 		printerr("ItemManager: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
-	var __head_arr: Array = (item_cache.get(__cache_library) \
-			as Dictionary).get(__head, null)
-	if __head_arr == null:
-		printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
+	var __head_arr: Array
+	for __header: String in __head:
+		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, null)
+		if __get == null:
+			printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
 				[__head, __cache_library])
-		return []
+		__head_arr.append(__get)
 	return __head_arr
 
 func reload_cache(__items: Array[Item]) -> void:
@@ -179,11 +184,15 @@ func reload_cache(__items: Array[Item]) -> void:
 	# { Prop.id: [Item wref, Prop wref], ... }
 	item_cache.set("by_property_id", cache_by_property_id(__items))
 	item_cache.set("by_descriptor_id", cache_by_descriptor_id(__items))
+	# { Descriptor.alias: [Item wref, Prop wref, Prop.id], ... }
+	item_cache.set("by_descriptor_alias", cache_by_descriptor_alias(__items))
+	# { Descriptor.id: Descriptor wref, ... }
+	item_cache.set("by_descriptor", cache_by_descriptor(__items))
 	# { Param.id: [Item wref, Prop wref, Prop.id], ... }
 	item_cache.set("by_parameter_id", cache_by_parameter_id(__items))
-	# { Link.from: [Item wref, Prop wref, Prop.id], ... }
+	# { Link.from: [Item wref, Prop wref, Prop.id, Link.to], ... }
 	item_cache.set("by_link_from_id", cache_links(__items, false))
-	# { Link.to: [Item wref, Prop wref, Prop.id], ... }
+	# { Link.to: [Item wref, Prop wref, Prop.id, Link.from]], ... }
 	item_cache.set("by_link_to_id", cache_links(__items, true))
 
 func cache_by_item_id(__items: Array[Item]) -> Dictionary:
@@ -205,8 +214,7 @@ func cache_by_property_id(__items: Array[Item]) -> Dictionary:
 		if __item.properties.is_empty(): continue
 		for __prop: Property in __item.properties:
 			var __cx: Array = []
-			__cx.append_array([weakref(__item), weakref(__prop)])
-			__cache.set(__prop.id, __cx)
+			__cache.set(__prop.id, [weakref(__item), weakref(__prop)])
 	return __cache
 
 func cache_by_descriptor_id(__items: Array[Item]) -> Dictionary:
@@ -218,8 +226,31 @@ func cache_by_descriptor_id(__items: Array[Item]) -> Dictionary:
 		if __props.is_empty(): continue
 		for __prop: Property in __props:
 			var __cx: Array = []
-			__cx.append_array([weakref(__item), weakref(__prop)])
-			__cache.set(__prop.id, __cx)
+			__cache.set(__prop.id, [weakref(__item), weakref(__prop)])
+	return __cache
+
+func cache_by_descriptor(__items: Array[Item]) -> Dictionary:
+	if __items.is_empty(): return {}
+	var __cache: Dictionary = {}
+	for __item_idx: int in __items.size():
+		var __item: Item = __items[__item_idx]
+		var __props: Array[Descriptor] = __item.retrieve_descriptors()
+		if __props.is_empty(): continue
+		for __prop: Property in __props:
+			__cache.set(__prop.id, weakref(__prop))
+	return __cache
+
+func cache_by_descriptor_alias(__items: Array[Item]) -> Dictionary:
+	if __items.is_empty(): return {}
+	var __cache: Dictionary = {}
+	for __item_idx: int in __items.size():
+		var __item: Item = __items[__item_idx]
+		var __props: Array[Descriptor] = __item.retrieve_descriptors()
+		if __props.is_empty(): continue
+		for __prop: Descriptor in __props:
+			var __cx: Array = []
+			__cx.append_array([weakref(__item), weakref(__prop), __prop.id])
+			__cache.set(__prop.alias, __cx)
 	return __cache
 
 func cache_by_parameter_id(__items: Array[Item]) -> Dictionary:
@@ -246,71 +277,15 @@ func cache_links(__items: Array[Item], \
 		for __prop: Link in __props:
 			var __cx: Array = []
 			__cx.append_array([weakref(__item), weakref(__prop), __prop.id])
-			if __to_from: __cache.set(__prop.to, __cx)
-			else: 		  __cache.set(__prop.from, __cx)
+			if __to_from:
+				__cx.append(__prop.from_id)
+				__cache.set(__prop.to_id, __cx)
+			else:
+				__cx.append(__prop.to_id)
+				__cache.set(__prop.from_id, __cx)
 	return __cache
 
 #endregion ITEM CACHEING
-#region CONTEXT RELOADING
-
-# DEPRECATED
-func reload_context(__items: Array[Item]) -> void:
-	property_cx = reload_property_context(__items)
-	descriptors_cx = reload_descriptor_context(__items)
-	parameters_cx = reload_parameters_context(__items)
-	links_cx = reload_links_context(__items)
-
-# DEPRECATED
-func reload_descriptor_context(__items: Array[Item]) \
-		-> Array: # descriptors_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if not __item.has_descriptor(): continue
-			for __descriptor: Descriptor in __item.retrieve_descriptors():
-				__cx.append([weakref(__item), weakref(__descriptor), \
-				__descriptor.alias])
-	return __cx
-
-# DEPRECATED
-func reload_parameters_context(__items: Array[Item]) \
-		-> Array: # parameters_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if not __item.has_parameters(): continue
-			for __param: Parameter in __item.retrieve_parameters():
-				__cx.append([weakref(__item), weakref(__param), __param.id])
-	return __cx
-
-# DEPRECATED
-func reload_links_context(__items: Array[Item]) \
-		-> Array: # links_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if not __item.has_parameters(): continue
-			for __link: Link in __item.retrieve_links():
-				__cx.append([weakref(__item), weakref(__link), 
-				__link.to, __link.parameters])
-	return __cx
-
-# DEPRECATED
-func reload_property_context(__items: Array[Item]) \
-		-> Array: # links_cx model
-	var __cx: Array
-	if not __items.is_empty():
-		for __item_idx: int in __items.size():
-			var __item: Item = __items[__item_idx]
-			if __item.properties.is_empty(): continue
-			for __prop: Property in __item.properties:
-				__cx.append([weakref(__item), weakref(__prop), __prop.id])
-	return __cx
-
-#endregion CONTEXT RELOADING
 #region ITEM STAGING
 
 func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
@@ -319,9 +294,11 @@ func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
 	for __item: Item in __items:
 		var __ref: WeakRef = weakref(__item)
 		staged_items.append(__ref)
+	stage_updated.emit()
 
 func reverse_staged() -> void:
-	return staged_items.reverse()
+	staged_items.reverse()
+	stage_updated.emit()
 
 func get_stage_size() -> int:
 	return staged_items.size()

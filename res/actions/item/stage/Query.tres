@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://bpam0ndoe46cb"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_yrq7r"]
+[ext_resource type="Script" uid="uid://dbny6x3nt3cjm" path="res://res/actions/item/stage/Query.gd" id="2_o5o5d"]
+
+[resource]
+script = ExtResource("1_yrq7r")
+alias = &"items.stage.query"
+author = "idvault"
+src = ExtResource("2_o5o5d")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"

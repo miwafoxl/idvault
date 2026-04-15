@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://drg6s6o8cnr7d"]
+
+[ext_resource type="FontFile" uid="uid://bgxq435l0unep" path="res://res/theme/DefaultUI/Font/Miranda_Sans/static/MirandaSans-Bold.ttf" id="1_brvrh"]
+
+[resource]
+font = ExtResource("1_brvrh")
+font_size = 12

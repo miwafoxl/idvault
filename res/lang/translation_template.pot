@@ -1,13 +1,14 @@
 # LANGUAGE translation for idvault for the following files:
 # res://scn/Panels/ItemListPanel.tscn
-# res://scn/Dialogs/TestReturn.tscn
 # res://res/menus/panel/itemlist/ItemMenu.gd
-# res://scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-# res://scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
 # res://scn/Dialogs/ItemProperties.tscn
 # res://scn/Dialogs/Message.tscn
 # res://scn/Dialogs/Confirmation.tscn
 # res://src/Dialog/ItemPropertiesDialog.gd
+# res://res/menus/panel/itemlist/AddItem.gd
+# res://scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+# res://scn/Widgets/PropertyWidget/DisplayEdit.tscn
+# res://src/Widget/ListHeader.gd
 #
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
@@ -29,10 +30,6 @@ msgstr ""
 
 #: scn/Panels/ItemListPanel.tscn
 msgid "PANEL.ITEMLIST.QUERY"
-msgstr ""
-
-#: scn/Dialogs/TestReturn.tscn
-msgid "DIALOG.TESTRETURN.TITLE"
 msgstr ""
 
 #: res/menus/panel/itemlist/ItemMenu.gd:22
@@ -83,46 +80,6 @@ msgstr ""
 msgid "PANEL.ITEMLIST.DELETE_ITEMS"
 msgstr ""
 
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.HEADER"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DescriptorEditWidget.tscn
-msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
-msgid "WIDGET.DISPLAY_EDIT.HEADER"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
-msgid "WIDGET.DISPLAY_EDIT.TITLE"
-msgstr ""
-
-#: scn/Widgets/PropertyWidget/DisplayEditWidget.tscn
-msgid "WIDGET.DISPLAY_EDIT.ALT"
-msgstr ""
-
 #: scn/Dialogs/ItemProperties.tscn
 msgid "DIALOG.ITEM_PROPERTIES.TITLE"
 msgstr ""
@@ -152,8 +109,72 @@ msgstr ""
 msgid "DIALOG.GENERAL.CONFIRM"
 msgstr ""
 
-#: src/Dialog/ItemPropertiesDialog.gd:30
+#: src/Dialog/ItemPropertiesDialog.gd:24
 msgid "DIALOG.USER_CONFIRMATION.EXIT_ITEM_PROPERTIES_UNCOMMITED_CHANGES"
+msgstr ""
+
+#: res/menus/panel/itemlist/AddItem.gd:6
+msgid "PANEL.ITEMLIST.NEW_ITEM_EMPTY"
+msgstr ""
+
+#: res/menus/panel/itemlist/AddItem.gd:9
+msgid "PANEL.ITEMLIST.NEW_ITEM_DESCRIPTOR"
+msgstr ""
+
+#: res/menus/panel/itemlist/AddItem.gd:14
+msgid "PANEL.ITEMLIST.LOAD_ITEM_FILE"
+msgstr ""
+
+#: res/menus/panel/itemlist/AddItem.gd:19
+msgid "PANEL.ITEMLIST.EDIT_ITEM_SELECTED"
+msgstr ""
+
+#: res/menus/panel/itemlist/AddItem.gd:22
+msgid "PANEL.ITEMLIST.EXPORT_ITEM_SELECTED"
+msgstr ""
+
+#: res/menus/panel/itemlist/AddItem.gd:25
+msgid "PANEL.ITEMLIST.DELETE_ITEM_SELECTED"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DescriptorEdit.tscn
+msgid "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEdit.tscn
+msgid "WIDGET.DISPLAY_EDIT.TITLE"
+msgstr ""
+
+#: scn/Widgets/PropertyWidget/DisplayEdit.tscn
+msgid "WIDGET.DISPLAY_EDIT.ALT"
+msgstr ""
+
+#: src/Widget/ListHeader.gd:14
+msgid "WIDGET.LIST_HEADER.SHOW"
+msgstr ""
+
+#: src/Widget/ListHeader.gd:16
+msgid "WIDGET.LIST_HEADER.COLLAPSE"
 msgstr ""
 
 msgid "idvault"

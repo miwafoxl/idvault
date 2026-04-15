@@ -11,6 +11,9 @@ func get_any_valid_str() -> String:
 		if not __text.is_empty(): return __text
 	return ""
 
+func get_type_as_string() -> StringName:
+	return &"PROPERTY.TYPES.DISPLAY"
+
 func _init(__text: String = "", __alt: String = "", \
 		__iso_639_1: String = "") -> void:
 	self.text = __text

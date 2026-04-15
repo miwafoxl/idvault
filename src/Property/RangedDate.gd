@@ -13,6 +13,9 @@ func is_range_inverted(__bound_1: Date, __bound_2: Date) -> bool:
 		return true
 	return false
 
+func get_type_as_string() -> StringName:
+	return &"PROPERTY.TYPES.RANGED_DATE"
+
 func _init(__range: Array[Date], __description: String = "") -> void:
 	var __bound_1: Date = __range[0];
 	var __bound_2: Date = __range[1];

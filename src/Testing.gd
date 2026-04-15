@@ -1,7 +1,7 @@
 extends Node
 
 @export var action_manager: ActionManager
-@export var dialog_manager: DialogManager
+@export var dialog_manager: DefaultUI_DialogManager
 @export var manager: ItemManager
 
 ## Creates a single empty item
@@ -51,7 +51,7 @@ func test3() -> bool:
 			return false
 	var __selected_id: String = manager.selected_items[0].id
 	if not action_manager.run(&"items.append.properties_to_selected", {
-		"properties": [Link.new([__selected_id]), 
+		"properties": [Link.new(__selected_id), 
 					   Descriptor.new("test")] }):
 			return false
 	# Cleanup: ------------------------------------------------
@@ -74,7 +74,7 @@ func test4() -> bool:
 	var __display: Display = Display.new("coc");
 	var __selected_id: String = manager.selected_items[0].id
 	if not action_manager.run(&"items.append.properties_to_selected", {
-		"properties": [Link.new([__selected_id]), __display] }):
+		"properties": [Link.new(__selected_id), __display] }):
 			return false
 	if not action_manager.run(&"items.remove.property_id", {
 		"item": manager.selected_items, 
@@ -114,7 +114,7 @@ func test6() -> bool:
 			return false
 	var __selected_id: String = manager.selected_items[0].id
 	if not action_manager.run(&"items.append.properties_to_selected", {
-		"properties": [Link.new([__selected_id], {__param.id: 7}), 
+		"properties": [Link.new(__selected_id, "", {__param.id: 7}), 
 					   Descriptor.new("test")] }):
 			return false
 	if not action_manager.run(&"items.remove.selected", {}): # Cleanup

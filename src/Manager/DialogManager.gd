@@ -1,5 +1,5 @@
 extends Manager
-class_name DialogManager
+class_name DefaultUI_DialogManager
 
 @export var spawn_node: Node
 @export var default: Dictionary[StringName, PackedScene]
@@ -57,7 +57,7 @@ func open(__alias: StringName, __param: Dictionary) -> bool:
 	if __scn == null:
 		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
 		return false
-	var __dialog: Dialog = __scn.instantiate()
+	var __dialog: DefaultUI_Dialog = __scn.instantiate()
 	__dialog.args = __param
 	__dialog.trigger.connect(trigger.emit)
 	spawn_node.add_child.call_deferred(__dialog)
