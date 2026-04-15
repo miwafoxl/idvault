@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bbae2ckb24yn8"]
+
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_bs5gj"]
+[ext_resource type="Script" uid="uid://bu8hi3dekhoqo" path="res://src/UI/DefaultUI/Dialog/Confirmation.gd" id="2_bs5gj"]
+
+[node name="USER_CONFIRMATION" type="Window" unique_id=1098095428 node_paths=PackedStringArray("message_node")]
+oversampling_override = 1.0
+title = "DIALOG.USER_CONFIRMATION.TITLE"
+position = Vector2i(0, 36)
+size = Vector2i(400, 70)
+theme = ExtResource("1_bs5gj")
+script = ExtResource("2_bs5gj")
+message_node = NodePath("MARGIN_C/VBOX_C/TXT_MESSAGE")
+important = true
+metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
+
+[node name="MARGIN_C" type="MarginContainer" parent="." unique_id=1602618312]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBOX_C" type="VBoxContainer" parent="MARGIN_C" unique_id=1374406176]
+layout_mode = 2
+
+[node name="TXT_MESSAGE" type="RichTextLabel" parent="MARGIN_C/VBOX_C" unique_id=3095069]
+layout_mode = 2
+size_flags_vertical = 3
+focus_mode = 2
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+selection_enabled = true
+
+[node name="HBOX_C" type="HBoxContainer" parent="MARGIN_C/VBOX_C" unique_id=1060096253]
+layout_mode = 2
+alignment = 1
+
+[node name="BUT_CONFIRM" type="Button" parent="MARGIN_C/VBOX_C/HBOX_C" unique_id=968177803]
+layout_mode = 2
+text = "DIALOG.GENERAL.CONFIRM"
+
+[node name="BUT_CANCEL" type="Button" parent="MARGIN_C/VBOX_C/HBOX_C" unique_id=517084387]
+layout_mode = 2
+text = "DIALOG.GENERAL.CANCEL"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="button_down" from="MARGIN_C/VBOX_C/HBOX_C/BUT_CONFIRM" to="." method="_on_button_confirm"]
+[connection signal="button_down" from="MARGIN_C/VBOX_C/HBOX_C/BUT_CANCEL" to="." method="_on_button_cancel"]
