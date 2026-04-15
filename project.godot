@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="idvault"
-config/version="0.03"
+config/version="0.04"
 run/main_scene="uid://d3mw360ur5mac"
 config/features=PackedStringArray("4.6", "Mobile")
 run/low_processor_mode=true
