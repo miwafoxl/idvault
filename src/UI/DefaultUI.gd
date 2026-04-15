@@ -2,6 +2,7 @@ extends UI
 class_name DefaultUI
 
 @export var manager: ItemManager
+@export var dialog_manager: DefaultUI_DialogManager
 @export var node_panels: Control
 
 @warning_ignore("unused_signal")
@@ -23,16 +24,26 @@ func give_managers(__managers: Dictionary) -> void:
 
 func update_panels() -> void:
 	for panel: Control in node_panels.get_children():
-		if (panel is UI_Panel) and (panel is ItemListPanel):
-			(panel as ItemListPanel).items_ref = manager.get_staged_items_pages()
-			(panel as ItemListPanel).update(manager.retrieve_selected_items_id())
+		if (panel is DefaultUI_Panel) and (panel is DefaultUI_ItemListPanel):
+			(panel as DefaultUI_ItemListPanel).items_ref = manager.get_staged_items_pages()
+			(panel as DefaultUI_ItemListPanel).update(manager.retrieve_selected_items_id())
 		
 func update_signals() -> void:
 	for panel: Control in node_panels.get_children():
-		if panel is UI_Panel and (panel is ItemListPanel):
-			var __item_list: ItemListPanel = panel
+		if panel is DefaultUI_Panel and (panel is DefaultUI_ItemListPanel):
+			var __item_list: DefaultUI_ItemListPanel = panel
 			__item_list.trigger.connect(trigger.emit)
 
+func request(__request: StringName, __param: Dictionary) -> void:
+	match __request:
+		&"item_properties", \
+		&"message", \
+		&"user_confirmation":
+			dialog_manager.open(__request, __param)
+		_:
+			printerr("DefaultUI: invalid request '%s'" % __request)
+	
 func _ready() -> void:
+	dialog_manager.append_dialog(dialog_manager.default)
 	update_signals()
 	update_panels()

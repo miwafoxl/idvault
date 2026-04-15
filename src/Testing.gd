@@ -1,7 +1,7 @@
 extends Node
 
 @export var action_manager: ActionManager
-@export var dialog_manager: DialogManager
+@export var dialog_manager: DefaultUI_DialogManager
 @export var manager: ItemManager
 
 ## Creates a single empty item
