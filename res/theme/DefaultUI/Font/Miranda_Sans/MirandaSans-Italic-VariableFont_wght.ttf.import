@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cjl6blwe85pie"
-path="res://.godot/imported/MirandaSans-SemiBoldItalic.ttf-fa9ae241cfc8efc84832f77bcc55f486.fontdata"
+uid="uid://bocagt1nmj46u"
+path="res://.godot/imported/MirandaSans-Italic-VariableFont_wght.ttf-e6426abb59c7cf3c0d8ce6ee0b71d1ca.fontdata"
 
 [deps]
 
-source_file="res://res/theme/default/Font/Miranda_Sans/static/MirandaSans-SemiBoldItalic.ttf"
-dest_files=["res://.godot/imported/MirandaSans-SemiBoldItalic.ttf-fa9ae241cfc8efc84832f77bcc55f486.fontdata"]
+source_file="res://res/theme/DefaultUI/Font/Miranda_Sans/MirandaSans-Italic-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/MirandaSans-Italic-VariableFont_wght.ttf-e6426abb59c7cf3c0d8ce6ee0b71d1ca.fontdata"]
 
 [params]
 

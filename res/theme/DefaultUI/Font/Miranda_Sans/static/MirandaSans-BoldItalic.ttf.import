@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://7q2ne317r12m"
-path="res://.godot/imported/MirandaSans-BoldItalic.ttf-a1f3b25ec2c6d6ae6539c4776a1174d2.fontdata"
+path="res://.godot/imported/MirandaSans-BoldItalic.ttf-4ed47133a77334809ddb014836dc3f82.fontdata"
 
 [deps]
 
-source_file="res://res/theme/default/Font/Miranda_Sans/static/MirandaSans-BoldItalic.ttf"
-dest_files=["res://.godot/imported/MirandaSans-BoldItalic.ttf-a1f3b25ec2c6d6ae6539c4776a1174d2.fontdata"]
+source_file="res://res/theme/DefaultUI/Font/Miranda_Sans/static/MirandaSans-BoldItalic.ttf"
+dest_files=["res://.godot/imported/MirandaSans-BoldItalic.ttf-4ed47133a77334809ddb014836dc3f82.fontdata"]
 
 [params]
 

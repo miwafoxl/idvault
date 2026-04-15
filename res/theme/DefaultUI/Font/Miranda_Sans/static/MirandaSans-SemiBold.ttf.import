@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://depaq4pi4h5ja"
-path="res://.godot/imported/MirandaSans-SemiBold.ttf-5f4887fd9259af8d1b2ab8d100c2abbe.fontdata"
+path="res://.godot/imported/MirandaSans-SemiBold.ttf-b74412d318eb893dfa7403a493b3fe3a.fontdata"
 
 [deps]
 
-source_file="res://res/theme/default/Font/Miranda_Sans/static/MirandaSans-SemiBold.ttf"
-dest_files=["res://.godot/imported/MirandaSans-SemiBold.ttf-5f4887fd9259af8d1b2ab8d100c2abbe.fontdata"]
+source_file="res://res/theme/DefaultUI/Font/Miranda_Sans/static/MirandaSans-SemiBold.ttf"
+dest_files=["res://.godot/imported/MirandaSans-SemiBold.ttf-b74412d318eb893dfa7403a493b3fe3a.fontdata"]
 
 [params]
 
