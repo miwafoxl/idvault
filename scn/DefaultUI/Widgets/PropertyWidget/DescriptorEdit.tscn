@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1brfe50g6pit" path="res://src/UI/DefaultUI/Widget/PropertyWidget/DescriptorEdit.gd" id="1_fck80"]
 
-[node name="DescriptorEditWidget" type="PanelContainer" unique_id=1940872918 node_paths=PackedStringArray("lineedit_alias", "lineedit_short", "lineedit_long", "list_header")]
+[node name="DESCRIPTOR_EDIT" type="PanelContainer" unique_id=1940872918 node_paths=PackedStringArray("lineedit_alias", "lineedit_short", "lineedit_long")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,54 +10,53 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_fck80")
-lineedit_alias = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/LineEditAlias")
-lineedit_short = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/LineEditShort")
-lineedit_long = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/TextEditLong")
-list_header = NodePath("")
+lineedit_alias = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_ALIAS")
+lineedit_short = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_SHORT")
+lineedit_long = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/TEXT_LONG")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=798033856]
+[node name="VBOX_C" type="VBoxContainer" parent="." unique_id=798033856]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=2037757481]
+[node name="MARGIN_C" type="MarginContainer" parent="VBOX_C" unique_id=2037757481]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1815679101]
+[node name="VBOX_C" type="VBoxContainer" parent="VBOX_C/MARGIN_C" unique_id=1815679101]
 layout_mode = 2
 
-[node name="TitleField" type="GridContainer" parent="VBoxContainer/MarginContainer/VBoxContainer" unique_id=308451975]
+[node name="GRID_C" type="GridContainer" parent="VBOX_C/MARGIN_C/VBOX_C" unique_id=308451975]
 layout_mode = 2
 theme_override_constants/h_separation = 40
 columns = 2
 
-[node name="LabelAlias" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=1773891633]
+[node name="TXT_ALIAS" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1773891633]
 layout_mode = 2
 text = "WIDGET.DESCRIPTOR_EDIT.ALIAS"
 
-[node name="LineEditAlias" type="LineEdit" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=1045855981]
+[node name="LINE_ALIAS" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1045855981]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
 
-[node name="LabelShort" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=966374119]
+[node name="TXT_SHORT" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=966374119]
 layout_mode = 2
 text = "WIDGET.DESCRIPTOR_EDIT.SHORT"
 
-[node name="LineEditShort" type="LineEdit" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=1348862395]
+[node name="LINE_SHORT" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1348862395]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
 
-[node name="LabelLong" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=247437778]
+[node name="TXT_LONG" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=247437778]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "WIDGET.DESCRIPTOR_EDIT.LONG"
 
-[node name="TextEditLong" type="TextEdit" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=28871705]
-custom_minimum_size = Vector2(0, 400)
+[node name="TEXT_LONG" type="TextEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=28871705]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"

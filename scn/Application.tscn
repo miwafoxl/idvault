@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="26_1bq3j"]
 [ext_resource type="Resource" uid="uid://bpam0ndoe46cb" path="res://res/actions/item/stage/Query.tres" id="26_33pya"]
 [ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/Manager/MenuManager.gd" id="27_5yf8b"]
+[ext_resource type="Resource" uid="uid://dvnlmjildicpb" path="res://res/actions/item/reorder/ByPropertyIndex.tres" id="27_bnnxs"]
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/panel/itemlist/ItemMenu.tres" id="29_ldrk5"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="30_ldrk5"]
@@ -42,15 +43,14 @@ action_manager = NodePath("ActionManager")
 menu_manager = NodePath("MenuManager")
 metadata/_custom_type_script = "uid://by3xvk1tboofk"
 
-[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "dialog_manager", "manager") instance=ExtResource("26_1bq3j")]
+[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "manager") instance=ExtResource("26_1bq3j")]
 action_manager = NodePath("../ActionManager")
-dialog_manager = NodePath("")
 manager = NodePath("../ItemManager")
 
 [node name="ActionManager" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("manager")]
 script = ExtResource("2_xwlb1")
 manager = NodePath("../ItemManager")
-default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd"), ExtResource("25_bnnxs"), ExtResource("26_33pya")])
+default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd"), ExtResource("25_bnnxs"), ExtResource("26_33pya"), ExtResource("27_bnnxs")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
 [node name="ItemManager" type="Node" parent="." unique_id=1855138344]

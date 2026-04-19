@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://dvnlmjildicpb"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_lg1o7"]
+[ext_resource type="Script" uid="uid://bm3fnokqs8111" path="res://res/actions/item/reorder/ByPropertyIndex.gd" id="2_t3ooo"]
+
+[resource]
+script = ExtResource("1_lg1o7")
+alias = &"items.reorder.by_property_index"
+author = "idvault"
+src = ExtResource("2_t3ooo")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"

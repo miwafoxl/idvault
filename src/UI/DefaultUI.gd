@@ -45,5 +45,6 @@ func request(__request: StringName, __param: Dictionary) -> void:
 	
 func _ready() -> void:
 	dialog_manager.append_dialog(dialog_manager.default)
+	dialog_manager.trigger.connect(trigger.emit)
 	update_signals()
 	update_panels()

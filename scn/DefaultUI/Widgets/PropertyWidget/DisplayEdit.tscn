@@ -2,46 +2,45 @@
 
 [ext_resource type="Script" uid="uid://bqypb0pyabpcu" path="res://src/UI/DefaultUI/Widget/PropertyWidget/DisplayEdit.gd" id="1_iywll"]
 
-[node name="DisplayEditWidget" type="PanelContainer" unique_id=1290763817 node_paths=PackedStringArray("lineedit_title", "lineedit_alt", "list_header")]
+[node name="DISPLAY_EDIT" type="PanelContainer" unique_id=1290763817 node_paths=PackedStringArray("lineedit_title", "lineedit_alt")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iywll")
-lineedit_title = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/LineEditTitle")
-lineedit_alt = NodePath("VBoxContainer/MarginContainer/VBoxContainer/TitleField/LineEditAlt")
-list_header = NodePath("")
+lineedit_title = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_TITLE")
+lineedit_alt = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_ALT")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1052199156]
+[node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1052199156]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1753017781]
+[node name="MARGIN_C" type="MarginContainer" parent="VBOX_C" unique_id=1753017781]
 layout_mode = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1815679101]
+[node name="VBOX_C" type="VBoxContainer" parent="VBOX_C/MARGIN_C" unique_id=1815679101]
 layout_mode = 2
 
-[node name="TitleField" type="GridContainer" parent="VBoxContainer/MarginContainer/VBoxContainer" unique_id=308451975]
+[node name="GRID_C" type="GridContainer" parent="VBOX_C/MARGIN_C/VBOX_C" unique_id=308451975]
 layout_mode = 2
 theme_override_constants/h_separation = 40
 columns = 2
 
-[node name="LabelTitle" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=1773891633]
+[node name="TXT_HEADER" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1773891633]
 layout_mode = 2
 text = "WIDGET.DISPLAY_EDIT.TITLE"
 
-[node name="LineEditTitle" type="LineEdit" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=1045855981]
+[node name="LINE_TITLE" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1045855981]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LabelAlt" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=966374119]
+[node name="TXT_ALT" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=966374119]
 layout_mode = 2
 text = "WIDGET.DISPLAY_EDIT.ALT"
 
-[node name="LineEditAlt" type="LineEdit" parent="VBoxContainer/MarginContainer/VBoxContainer/TitleField" unique_id=1348862395]
+[node name="LINE_ALT" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1348862395]
 layout_mode = 2
 size_flags_horizontal = 3

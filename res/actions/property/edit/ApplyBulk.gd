@@ -57,14 +57,14 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	# Modifying existing properties
 	for __prop_id: String in __mod:
 		var __get_prop: Array = __manager.get_from_cache("by_property_id", __prop_id)
-		var __get_modified_prop: Property = __mod[__prop_id]
+		var __get_modified_prop: Dictionary = __mod[__prop_id]
 		var __item: Item = (__get_prop[0] as WeakRef).get_ref()
 		var __prop: Property = (__get_prop[1] as WeakRef).get_ref()
 		if __prop == null or __item == null:
 			push_warning("property.edit.apply_bulk: Failed to " + \
 			"get reference to item id or its containg property id '%s'." % [__prop_id])
 			continue
-		__prop.serialize(__get_modified_prop.deserialized(false))
+		__prop.serialize(__get_modified_prop)
 		__items_updated.append(__item)
 	
 	if __items_updated: 

@@ -14,6 +14,18 @@ func deserialize(__property: Property) -> void:
 	for __control: Control in [lineedit_alias, lineedit_short, lineedit_long]:
 		__control.set_meta(&"unchanged", __control.text)
 
+func collect() -> Dictionary:
+	var __collected: Dictionary = {}
+	if marked_for_deletion:
+		__collected = {"rem": {
+			related_prop_id: marked_for_deletion
+		}}
+	elif check_if_changed():
+		__collected = {"mod": {
+			related_prop_id: get_as_property().deserialized()
+		}}
+	return __collected
+
 func check_if_changed() -> bool:
 	var __changed: bool = false
 	for __control: Control in [lineedit_alias, lineedit_short, lineedit_long]:
