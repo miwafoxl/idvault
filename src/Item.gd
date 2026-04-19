@@ -5,11 +5,16 @@ class_name Item
 @export var properties: Array[Property] = [];
 # TODO: add Dictionary[property_id: weakref(Property)] to optimize line 34
 
+#region OVERRIDES
+
 func _init(__id: String = "", __properties: Array[Property] = []) -> void:
 	self.properties = __properties
 	self.id = __id
 	if __id.is_empty():
 		self.id = RandomString.new("i_").value
+
+#endregion OVERRIDES
+#region ADD, REMOVE AND REORDER PROPERTIES
 
 func append_properties(__properties: Array[Property]) -> bool:
 	if not __properties.is_empty():
@@ -48,6 +53,24 @@ func clean_properties() -> void:
 	for __index: int in __rm_indexes:
 		properties.remove_at(__index)
 
+func reorder_properties(__prop_idx: Array[int], __idx: int) -> void:
+	var __prop_size: int = properties.size()
+	var __new_idx: int = __idx
+	var __temp: Array[Property] = []
+	var __counter: int = 0
+	for i: int in __prop_size:
+		if i <= __new_idx and i > __new_idx + __prop_idx.size() - 1:
+			__temp.append(properties[__counter])
+			__counter += 1
+		else:
+			var __i: int = ((__new_idx + __prop_idx.size() - 1) - i) % __prop_size
+			__temp.append(properties[__i])
+			print("B: __i = %s" % __i)
+	properties = __temp
+
+#endregion ADD AND REMOVE PROPERTIES
+#region RETRIEVE PROPERTIES
+
 func retrieve_property_ids() -> Array[String]:
 	var __ids: Array[String] = []
 	for __prop: Property in self.properties:
@@ -60,7 +83,9 @@ func has_property_id(__id: Array[String]) -> bool:
 		if __has_id in __property_ids:
 			return true
 	return false
-	
+
+#region DESCRIPTOR
+
 func has_descriptor() -> bool:
 	for __prop: Property in properties:
 		if __prop is Descriptor:
@@ -74,6 +99,9 @@ func retrieve_descriptors() -> Array[Descriptor]:
 			__properties_filtered.append(__prop)
 	return __properties_filtered
 
+#endregion DESCRIPTOR
+#region LINK
+
 func has_link() -> bool:
 	for __prop: Property in properties:
 		if __prop is Link:
@@ -86,6 +114,9 @@ func retrieve_links() -> Array[Link]:
 		if __prop is Link:
 			__properties_filtered.append(__prop)
 	return __properties_filtered
+
+#endregion LINK
+#region PARAMETER
 
 func count_parameters() -> int:
 	var __count: int = 0
@@ -110,6 +141,9 @@ func retrieve_parameters(__order: int = -1) -> Array[Parameter]:
 				__properties_filtered.append(__prop)
 	return __properties_filtered
 
+#endregion PARAMETERS
+#region DISPLAY
+
 func has_display() -> bool:
 	for __prop: Property in properties:
 		if __prop is Display:
@@ -129,3 +163,6 @@ func get_valid_string_display_or_empty() -> String:
 		var __string: String = __display.get_any_valid_str()
 		if not __string.is_empty(): return __string
 	return ""
+
+#endregion DISPLAY
+#endregion RETRIEVE PROPERTIES
