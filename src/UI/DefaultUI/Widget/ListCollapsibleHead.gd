@@ -41,6 +41,17 @@ func _ready() -> void:
 	TXT_HEADER.set_text(tr(header_tr_string))
 	if options_menu_id.is_empty():
 		BUT_HEAD_OPTIONS.hide()
+	else:
+		BUT_HEAD_OPTIONS.pressed.connect(trigger.emit.bind(
+			Trigger.new(
+				Trigger.TriggerTypes.MENU,
+				options_menu_id, {
+					"item_id": related_item_id,
+					"param_idx": order,
+				}
+			)
+		))
 	CONTENT_APPEND.add_child(contents)
 	BUT_COLLAPSE.pressed.connect(toggle_collapse)
+	
 	update_collapse()
