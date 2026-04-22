@@ -66,7 +66,7 @@ func _on_new_item_button_button_down() -> void:
 	#))
 	trigger.emit(Trigger.new(
 		Trigger.TriggerTypes.MENU,
-		&"panel.itemlist.add_item"
+		&"items.add_item"
 	))
 	
 func _on_query_button_button_down() -> void:
