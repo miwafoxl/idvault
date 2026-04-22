@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://cskmwmxrxjkka"]
 
+[ext_resource type="Script" uid="uid://bgag5d5wuyb3e" path="res://src/UI/DefaultUI/Widget/PropertyWidget/LinkEdit.gd" id="1_6tfq8"]
+
 [node name="LINK_EDIT" type="PanelContainer" unique_id=1290763817]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6tfq8")
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1052199156]
 layout_mode = 2
