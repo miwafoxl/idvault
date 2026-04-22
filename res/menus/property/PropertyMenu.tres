@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Menu" format=3 uid="uid://i0c3uu7pho37"]
 
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="1_sbg04"]
-[ext_resource type="Script" uid="uid://curupaou5d0sa" path="res://res/menus/dialog/item_properties/PropertyMenu.gd" id="2_ufi5p"]
+[ext_resource type="Script" uid="uid://curupaou5d0sa" path="res://res/menus/property/PropertyMenu.gd" id="2_ufi5p"]
 
 [resource]
 script = ExtResource("1_sbg04")
