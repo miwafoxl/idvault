@@ -72,13 +72,17 @@ func select_items(__items: Array[Item], __append: bool = false) -> void:
 	if __changed: selection_updated.emit()
 
 func deselect_items(__deselec_items: Array[Item]) -> void:
-	var __changed: bool = false
+	var __rm_indexes: Array[int] = []
 	if not __deselec_items.is_empty():
-		for __item: Item in selected_items:
+		for i: int in selected_items.size():
+			var __item: Item = selected_items[i]
 			if __item in __deselec_items:
-				selected_items.erase(__item)
-				__changed = true
-	if __changed: selection_updated.emit()
+				selected_items.set(i, null)
+				__rm_indexes.append(i)
+	if not __rm_indexes.is_empty():
+		for __idx: int in __rm_indexes:
+			selected_items.remove_at(__idx)
+	selection_updated.emit()
 
 func select_items_at_stage_index(__stage_index: Array[int], \
 		__append: bool = false) -> void:
