@@ -4,7 +4,7 @@ class_name ItemManager
 @export var unordered_items: Array[Item] = [];
 @export var selected_items: Array[Item] = [];
 @export var item_cache: Dictionary = {}; # [0: item
-var staged_items: Array[WeakRef] = [];
+var staged_items: Dictionary[String, WeakRef] = {};
 
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
@@ -72,13 +72,17 @@ func select_items(__items: Array[Item], __append: bool = false) -> void:
 	if __changed: selection_updated.emit()
 
 func deselect_items(__deselec_items: Array[Item]) -> void:
-	var __changed: bool = false
+	var __rm_indexes: Array[int] = []
 	if not __deselec_items.is_empty():
-		for __item: Item in selected_items:
+		for i: int in selected_items.size():
+			var __item: Item = selected_items[i]
 			if __item in __deselec_items:
-				selected_items.erase(__item)
-				__changed = true
-	if __changed: selection_updated.emit()
+				selected_items.set(i, null)
+				__rm_indexes.append(i)
+	if not __rm_indexes.is_empty():
+		for __idx: int in __rm_indexes:
+			selected_items.remove_at(__idx)
+	selection_updated.emit()
 
 func select_items_at_stage_index(__stage_index: Array[int], \
 		__append: bool = false) -> void:
@@ -115,7 +119,17 @@ func append_items(__entries: Array[Item]) -> bool:
 	reload_cache(unordered_items)
 	return true 
 
-func remove_items_unordered(__item_arr_indexes: Array[int]) -> bool:
+func remove_items_unordered(__items: Array[Item]) -> void:
+	for __item: Item in __items:
+		var __unord_idx: int = unordered_items.find(__item)
+		if __unord_idx == -1: continue
+		unordered_items.set(__unord_idx, null)
+		if staged_items.has(__item.id):
+			staged_items.erase(__item.id)
+	clean_entries()
+	reload_cache(unordered_items)
+
+func remove_items_unordered_index(__item_arr_indexes: Array[int]) -> bool:
 	var __items_size: int = unordered_items.size() # Potentially bad to do everytime
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
@@ -134,7 +148,6 @@ func remove_items_stage_index(__rm_stage_index: Array[int]) -> bool:
 		var __items: Array[Item] = get_staged_item_index(__rm_stage_index)
 		for __item: Item in __items:
 			__item.unreference()
-		#reload_context(unordered_items)
 		reload_cache(unordered_items)
 		clean_entries()
 	return true
@@ -293,11 +306,7 @@ func stage_items(__items: Array[Item], __append_stage: bool = false) -> void:
 	if not __append_stage: staged_items.clear()
 	for __item: Item in __items:
 		var __ref: WeakRef = weakref(__item)
-		staged_items.append(__ref)
-	stage_updated.emit()
-
-func reverse_staged() -> void:
-	staged_items.reverse()
+		staged_items.set(__item.id, __ref)
 	stage_updated.emit()
 
 func get_stage_size() -> int:
@@ -305,18 +314,28 @@ func get_stage_size() -> int:
 
 func get_staged_item_index(__indexes: Array) -> Array[Item]:
 	var __items: Array[Item] = []
-	var __stage_size: int = get_stage_size() - 1
+	var __stage_ids: Array[String] = staged_items.keys()
 	if __indexes.is_empty(): return __items
 	for __idx: int in __indexes:
-		if __idx > __stage_size: 
-			printerr("Item Manager: Tried to access stage index %s greater than stage size %s" % \
-					[__idx, __stage_size])
-			continue
-		var __deref_item: Item = staged_items[__idx].get_ref()
-		if __deref_item == null:
+		var __ref: WeakRef = staged_items.get(__stage_ids[__idx], null)
+		var __item: Item = null
+		if __ref == null or __ref.get_ref() == null:
 			printerr("Item Manager: Failed to get reference for item in stage index %s" % __idx)
 			continue
-		__items.append(__deref_item)
+		__item = __ref.get_ref()
+		__items.append(__item)
+	return __items
+
+func get_staged_item_by_id(__item_ids: Array[String]) -> Array[Item]:
+	var __items: Array[Item] = []
+	for __id: String in __item_ids:
+		var __ref: WeakRef = staged_items.get(__id, null)
+		var __item: Item = null
+		if __ref == null or __ref.get_ref() == null: 
+			printerr("Item Manager: Failed to get reference for staged item id %s" % __id)
+			continue
+		__item = __ref.get_ref()
+		__items.append(__item)
 	return __items
 	
 func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Array[Item]:
