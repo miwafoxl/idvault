@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/items/ItemMenu.tres" id="29_ldrk5"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="30_ldrk5"]
+[ext_resource type="Resource" uid="uid://cgolyyl2lalt4" path="res://res/menus/property/AddProperty.tres" id="34_33pya"]
 [ext_resource type="Resource" uid="uid://m2h7je8j8yr5" path="res://res/menus/items/AddItem.tres" id="35_62eh1"]
 [ext_resource type="Resource" uid="uid://i0c3uu7pho37" path="res://res/menus/property/PropertyMenu.tres" id="36_v4htx"]
 
@@ -62,6 +63,6 @@ metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
 [node name="MenuManager" type="Node" parent="." unique_id=988378929]
 script = ExtResource("27_5yf8b")
-default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5"), ExtResource("35_62eh1"), ExtResource("36_v4htx")])
+default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5"), ExtResource("35_62eh1"), ExtResource("36_v4htx"), ExtResource("34_33pya")])
 theme = ExtResource("30_ldrk5")
 metadata/_custom_type_script = "uid://bwyef4g1l0om3"
