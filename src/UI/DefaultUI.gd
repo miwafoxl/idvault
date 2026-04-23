@@ -40,6 +40,8 @@ func request(__request: StringName, __param: Dictionary) -> void:
 		&"message", \
 		&"user_confirmation":
 			dialog_manager.open(__request, __param)
+		&"update_item_properties":
+			dialog_manager.update_dialog(&"item_properties")
 		_:
 			printerr("DefaultUI: invalid request '%s'" % __request)
 	
