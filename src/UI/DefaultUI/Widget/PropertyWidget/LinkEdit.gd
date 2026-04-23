@@ -32,6 +32,6 @@ func collect() -> Dictionary:
 		}}
 	elif check_if_changed():
 		__collected = {"mod": {
-			related_prop_id: get_as_property().deserialized()
+			related_prop_id: get_as_property().deserialized(false)
 		}}
 	return __collected
