@@ -1,10 +1,10 @@
 extends Property
 class_name RangedDate
 
-# NULL values can be set as Unknown in UI
 @export var description: String = ""
-@export var start_date: Date = null;
-@export var end_date: Date = null; # null = present day, present time
+@export var start_date: Vector3i = Vector3i.ZERO;
+@export var end_date: Vector3i = Vector3i.ZERO;
+@export var indefinite_end: bool = false
 
 func is_range_inverted(__bound_1: Date, __bound_2: Date) -> bool:
 	if __bound_2.yyyymmdd.z > __bound_1.yyyymmdd.z or \
