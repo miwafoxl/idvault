@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://cbdyive18b3qt"]
+
+[ext_resource type="Script" uid="uid://cxoo1564ftlom" path="res://src/UI/DefaultUI/Widget/PropertyWidget/RangedEdit.gd" id="1_e6oeu"]
+
+[node name="RANGED_DATE_EDIT" type="PanelContainer" unique_id=1290763817 node_paths=PackedStringArray("day_start", "day_end", "month_start", "month_end", "year_start", "year_end", "indefinite")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e6oeu")
+day_start = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START/LINE_DAY")
+day_end = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_END/LINE_DAY")
+month_start = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START/OPT_MONTH")
+month_end = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_END/OPT_MONTH")
+year_start = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START/LINE_YEAR")
+year_end = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_END/LINE_YEAR")
+indefinite = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START/CHK_INDEFINITE")
+
+[node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1052199156]
+layout_mode = 2
+
+[node name="MARGIN_C" type="MarginContainer" parent="VBOX_C" unique_id=1753017781]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="VBOX_C" type="VBoxContainer" parent="VBOX_C/MARGIN_C" unique_id=1815679101]
+layout_mode = 2
+
+[node name="GRID_C" type="GridContainer" parent="VBOX_C/MARGIN_C/VBOX_C" unique_id=308451975]
+layout_mode = 2
+theme_override_constants/h_separation = 30
+columns = 2
+
+[node name="TXT_START" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1773891633]
+layout_mode = 2
+text = "WIDGET.DATE_EDIT.START_DATE"
+
+[node name="HBOX_C_START" type="HBoxContainer" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=685165584]
+layout_mode = 2
+
+[node name="LINE_DAY" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START" unique_id=1296012575]
+layout_mode = 2
+placeholder_text = "DD"
+max_length = 2
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="OPT_MONTH" type="OptionButton" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START" unique_id=1115589441]
+layout_mode = 2
+item_count = 12
+popup/item_0/text = "DATE.MONTH.JANUARY"
+popup/item_0/id = 0
+popup/item_1/text = "DATE.MONTH.FEBRUARY"
+popup/item_1/id = 1
+popup/item_2/text = "DATE.MONTH.MARCH"
+popup/item_2/id = 2
+popup/item_3/text = "DATE.MONTH.APRIL"
+popup/item_3/id = 3
+popup/item_4/text = "DATE.MONTH.MAY"
+popup/item_4/id = 4
+popup/item_5/text = "DATE.MONTH.JUNE"
+popup/item_5/id = 5
+popup/item_6/text = "DATE.MONTH.JULY"
+popup/item_6/id = 6
+popup/item_7/text = "DATE.MONTH.AUGUST"
+popup/item_7/id = 7
+popup/item_8/text = "DATE.MONTH.SEPTEMBER"
+popup/item_8/id = 8
+popup/item_9/text = "DATE.MONTH.OCTOBER"
+popup/item_9/id = 9
+popup/item_10/text = "DATE.MONTH.NOVEMBER"
+popup/item_10/id = 10
+popup/item_11/text = "DATE.MONTH.DECEMBER"
+popup/item_11/id = 11
+
+[node name="LINE_YEAR" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START" unique_id=1045855981]
+layout_mode = 2
+placeholder_text = "YYYY"
+max_length = 5
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="CHK_INDEFINITE" type="CheckBox" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START" unique_id=646814894]
+layout_mode = 2
+text = "WIDGET.DATE_EDIT.INDEFINITE"
+
+[node name="TXT_END" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=41180942]
+layout_mode = 2
+text = "WIDGET.DATE_EDIT.END_DATE"
+
+[node name="HBOX_C_END" type="HBoxContainer" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1607175677]
+layout_mode = 2
+
+[node name="LINE_DAY" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_END" unique_id=532829590]
+layout_mode = 2
+placeholder_text = "DD"
+max_length = 2
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[node name="OPT_MONTH" type="OptionButton" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_END" unique_id=937598888]
+layout_mode = 2
+item_count = 12
+popup/item_0/text = "DATE.MONTH.FEBRUARY"
+popup/item_0/id = 1
+popup/item_1/text = "DATE.MONTH.JANUARY"
+popup/item_1/id = 0
+popup/item_2/text = "DATE.MONTH.MARCH"
+popup/item_2/id = 2
+popup/item_3/text = "DATE.MONTH.APRIL"
+popup/item_3/id = 3
+popup/item_4/text = "DATE.MONTH.MAY"
+popup/item_4/id = 4
+popup/item_5/text = "DATE.MONTH.JUNE"
+popup/item_5/id = 5
+popup/item_6/text = "DATE.MONTH.JULY"
+popup/item_6/id = 6
+popup/item_7/text = "DATE.MONTH.AUGUST"
+popup/item_7/id = 7
+popup/item_8/text = "DATE.MONTH.SEPTEMBER"
+popup/item_8/id = 8
+popup/item_9/text = "DATE.MONTH.OCTOBER"
+popup/item_9/id = 9
+popup/item_10/text = "DATE.MONTH.NOVEMBER"
+popup/item_10/id = 10
+popup/item_11/text = "DATE.MONTH.DECEMBER"
+popup/item_11/id = 11
+
+[node name="LINE_YEAR" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_END" unique_id=1923474723]
+layout_mode = 2
+placeholder_text = "YYYY"
+max_length = 5
+context_menu_enabled = false
+emoji_menu_enabled = false
+virtual_keyboard_enabled = false
+
+[connection signal="toggled" from="VBOX_C/MARGIN_C/VBOX_C/GRID_C/HBOX_C_START/CHK_INDEFINITE" to="." method="set_disabled_end_date"]
