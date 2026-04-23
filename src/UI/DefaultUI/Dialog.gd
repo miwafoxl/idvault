@@ -4,10 +4,12 @@ class_name DefaultUI_Dialog
 
 @export var args: Dictionary = {}
 @export var important: bool = false
+var alias: StringName
 
-@warning_ignore("unused_signal")
+@warning_ignore_start("unused_signal")
 signal trigger(tr: Trigger)
-
+signal handle_close_request(StringName)
+@warning_ignore_restore("unused_signal")
 #region OVERRIDES
 
 func _notification(what: int) -> void:
@@ -26,14 +28,17 @@ func _ready() -> void:
 	self.visible = false
 	self.set_force_native(true)
 
+func _update_arguments() -> void:
+	pass
+
+func close_request() -> void:
+	handle_close_request.emit(alias)
+
 #endregion OVERRIDES
 #region ABSTRACT FUNCTIONS
 
 @abstract
 func enter_request() -> void
-
-@abstract
-func close_request() -> void
 
 #endregion
 

@@ -3,18 +3,11 @@ class_name DefaultUI_DialogManager
 
 @export var spawn_node: Control
 @export var default: Dictionary[StringName, PackedScene]
-@export var returning_values: Dictionary[StringName, Array]
+@export var active_dialogs: Dictionary[StringName, DefaultUI_Dialog]
 var loaded: Dictionary[StringName, PackedScene] = {}; # {dialog alias: packed scene}
 
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
-signal received_return(__id: String)
-
-func append_dialog_return(__id: String, __return_args: Array) -> void:
-	if __id.is_empty():
-		printerr("DialogManager: failed to append dialog return because __id is empty.")
-	returning_values.set(__id, __return_args)
-	received_return.emit(__id)
 
 func append_dialog(__dialog: Dictionary[StringName, PackedScene], __log: bool = false) -> void:
 	if __dialog.is_empty(): return
@@ -44,22 +37,31 @@ func remove_dialogs(__rm_dialog_aliases: Array[StringName]) -> void:
 		if __alias in __rm_dialog_aliases:
 			loaded.erase(__alias)
 
-func access_returned_value(__return_id: String, __erase: bool = true) -> Array:
-	if __return_id not in returning_values.keys():
-		printerr("DialogManager: no return id '%s' found." % __return_id)
-		return []
-	var __value: Array = returning_values[__return_id]
-	if __erase: returning_values.erase(__return_id)
-	return __value
-
 func open(__alias: StringName, __param: Dictionary) -> bool:
 	var __scn: PackedScene = loaded.get(__alias)
 	if __scn == null:
 		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
 		return false
-	var __dialog: DefaultUI_Dialog = __scn.instantiate()
+	var __dialog: DefaultUI_Dialog = active_dialogs.get(__alias, null)
+	if __dialog == null:
+		__dialog = __scn.instantiate()
+		__dialog.alias = __alias
+		__dialog.trigger.connect(trigger.emit)
+		__dialog.handle_close_request.connect(close_request)
+		active_dialogs.set(__alias, __dialog)
+		spawn_node.add_child.call_deferred(__dialog)
+		__dialog.pop.call_deferred()
 	__dialog.args = __param
-	__dialog.trigger.connect(trigger.emit)
-	spawn_node.add_child.call_deferred(__dialog)
-	__dialog.pop.call_deferred()
+	__dialog._update_arguments()
 	return true
+
+func update_dialog(__alias: StringName) -> void:
+	var __dialog: DefaultUI_Dialog = active_dialogs.get(__alias, null)
+	if __dialog == null: return
+	__dialog._update_arguments()
+
+func close_request(__alias: StringName) -> void:
+	var __dialog: DefaultUI_Dialog = active_dialogs.get(__alias, null)
+	if __dialog == null: return
+	active_dialogs.erase(__alias)
+	__dialog.queue_free()
