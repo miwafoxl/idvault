@@ -67,7 +67,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 		__prop.serialize(__get_modified_prop)
 		__items_updated.append(__item)
 	
-	if __items_updated: 
+	if __items_updated:  # TODO: reload_cache only affected items
 		__manager.reload_cache(__manager.unordered_items)
 		__manager.stage_updated.emit()
 		__manager.trigger.emit(Trigger.new(

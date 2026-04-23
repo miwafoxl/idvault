@@ -45,4 +45,16 @@ func _update_arguments() -> void:
 func _on_button_apply_button_down() -> void:
 	enter_request()
 
+func _on_but_property_add_pressed() -> void:
+	var __item: Item = args.get("item")
+	if __item == null:
+		printerr("ItemPropertiesDialog: item parameter not received")
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.MENU,
+		&"property.add_property",
+		{
+			"item_id": __item.id,
+		}
+	))
+
 #endregion INPUT

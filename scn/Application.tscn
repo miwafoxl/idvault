@@ -15,7 +15,7 @@
 [ext_resource type="Resource" uid="uid://cgkdbus2xj5tg" path="res://res/actions/item/deselect/ByItemIndex.tres" id="12_s2ijd"]
 [ext_resource type="Resource" uid="uid://clfbxt6aenhar" path="res://res/actions/item/select/ByItemIndex.tres" id="13_bnnxs"]
 [ext_resource type="Resource" uid="uid://cyyks5xald400" path="res://res/actions/item/select/ByItemIndex_Append.tres" id="14_33pya"]
-[ext_resource type="Resource" uid="uid://bckjplgug86rj" path="res://res/actions/item/append/PropertiesToSelected.tres" id="15_62eh1"]
+[ext_resource type="Resource" uid="uid://bckjplgug86rj" path="res://res/actions/property/append/Selected.tres" id="15_62eh1"]
 [ext_resource type="Resource" uid="uid://cxgp6sjyya64u" path="res://res/actions/item/remove/PropertyID.tres" id="16_v4htx"]
 [ext_resource type="Resource" uid="uid://dp2kjjnttef3o" path="res://res/actions/item/remove/Selected.tres" id="17_ajmq0"]
 [ext_resource type="Resource" uid="uid://dh4ys308mmwj8" path="res://res/actions/item/stage/Alphabetical.tres" id="18_4w571"]
@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/items/ItemMenu.tres" id="29_ldrk5"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="30_ldrk5"]
+[ext_resource type="Resource" uid="uid://cgolyyl2lalt4" path="res://res/menus/property/AddProperty.tres" id="34_33pya"]
 [ext_resource type="Resource" uid="uid://m2h7je8j8yr5" path="res://res/menus/items/AddItem.tres" id="35_62eh1"]
 [ext_resource type="Resource" uid="uid://i0c3uu7pho37" path="res://res/menus/property/PropertyMenu.tres" id="36_v4htx"]
 
@@ -62,6 +63,6 @@ metadata/_custom_type_script = "uid://htdxvtahxgnw"
 
 [node name="MenuManager" type="Node" parent="." unique_id=988378929]
 script = ExtResource("27_5yf8b")
-default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5"), ExtResource("35_62eh1"), ExtResource("36_v4htx")])
+default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5"), ExtResource("35_62eh1"), ExtResource("36_v4htx"), ExtResource("34_33pya")])
 theme = ExtResource("30_ldrk5")
 metadata/_custom_type_script = "uid://bwyef4g1l0om3"
