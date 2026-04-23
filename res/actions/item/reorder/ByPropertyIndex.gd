@@ -23,7 +23,9 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	#endregion Parameter processing
 	var __get_id: Array[Item] = __manager.get_item_by_id([__item_id])
 	if __param_idx.is_empty() or __get_id.is_empty() or \
-		__get_id[0].has_parameters(): 
-			return false
+		__get_id[0].has_parameters(): return false
 	__get_id[0].reorder_properties(__param_idx, __new_idx)
+	__manager.trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.UI_REQUEST,
+		&"update_item_properties"))
 	return true

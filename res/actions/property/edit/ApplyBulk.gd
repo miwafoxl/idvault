@@ -70,4 +70,8 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __items_updated: 
 		__manager.reload_cache(__manager.unordered_items)
 		__manager.stage_updated.emit()
+		__manager.trigger.emit(Trigger.new(
+			Trigger.TriggerTypes.UI_REQUEST,
+			&"update_item_properties"
+		))
 	return true
