@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" uid="uid://bqypb0pyabpcu" path="res://src/UI/DefaultUI/Widget/PropertyWidget/DisplayEdit.gd" id="1_iywll"]
 
-[node name="DISPLAY_EDIT" type="PanelContainer" unique_id=1290763817]
+[node name="DISPLAY_EDIT" type="PanelContainer" unique_id=1290763817 node_paths=PackedStringArray("title", "alt")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iywll")
+title = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_TITLE")
+alt = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_ALT")
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1052199156]
 layout_mode = 2
