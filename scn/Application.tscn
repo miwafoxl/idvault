@@ -15,7 +15,7 @@
 [ext_resource type="Resource" uid="uid://cgkdbus2xj5tg" path="res://res/actions/item/deselect/ByItemIndex.tres" id="12_s2ijd"]
 [ext_resource type="Resource" uid="uid://clfbxt6aenhar" path="res://res/actions/item/select/ByItemIndex.tres" id="13_bnnxs"]
 [ext_resource type="Resource" uid="uid://cyyks5xald400" path="res://res/actions/item/select/ByItemIndex_Append.tres" id="14_33pya"]
-[ext_resource type="Resource" uid="uid://bckjplgug86rj" path="res://res/actions/item/append/PropertiesToSelected.tres" id="15_62eh1"]
+[ext_resource type="Resource" uid="uid://bckjplgug86rj" path="res://res/actions/property/append/Selected.tres" id="15_62eh1"]
 [ext_resource type="Resource" uid="uid://cxgp6sjyya64u" path="res://res/actions/item/remove/PropertyID.tres" id="16_v4htx"]
 [ext_resource type="Resource" uid="uid://dp2kjjnttef3o" path="res://res/actions/item/remove/Selected.tres" id="17_ajmq0"]
 [ext_resource type="Resource" uid="uid://dh4ys308mmwj8" path="res://res/actions/item/stage/Alphabetical.tres" id="18_4w571"]
