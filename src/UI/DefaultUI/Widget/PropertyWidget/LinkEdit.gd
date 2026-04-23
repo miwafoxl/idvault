@@ -9,15 +9,14 @@ func deserialize(__property: Property) -> void:
 	related_prop_id = __prop.id
 	from_id.text = __prop.from_id
 	to_id.text = __prop.to_id
-	for __lineedit: LineEdit in [from_id, to_id]:
-		__lineedit.set_meta(UNCHANGED_META_STR, __lineedit.text)
+	for __control: LineEdit in [from_id, to_id]:
+		__control.set_meta(UNCHANGED_META_STR, __control.text)
 
 func check_if_changed() -> bool:
-	var __changed: bool = false
-	for __lineedit: LineEdit in [from_id, to_id]:
-		if not __lineedit.get_meta(UNCHANGED_META_STR) == __lineedit.text:
-			__changed = true
-	return __changed
+	var __changed: int = 0
+	for __control: LineEdit in [from_id, to_id]:
+		__changed += int(__control.get_meta(UNCHANGED_META_STR) != __control.text)
+	return __changed > 0
 
 func get_as_property() -> Property:
 	var __from: String = from_id.text.strip_edges().strip_escapes()

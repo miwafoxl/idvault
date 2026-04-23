@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1brfe50g6pit" path="res://src/UI/DefaultUI/Widget/PropertyWidget/DescriptorEdit.gd" id="1_fck80"]
 
-[node name="DESCRIPTOR_EDIT" type="PanelContainer" unique_id=1940872918 node_paths=PackedStringArray("lineedit_alias", "lineedit_short", "lineedit_long")]
+[node name="DESCRIPTOR_EDIT" type="PanelContainer" unique_id=1940872918]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,9 +10,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_fck80")
-lineedit_alias = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_ALIAS")
-lineedit_short = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_SHORT")
-lineedit_long = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/TEXT_LONG")
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=798033856]
 layout_mode = 2

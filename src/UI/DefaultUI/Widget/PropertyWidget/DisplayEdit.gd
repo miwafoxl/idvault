@@ -1,27 +1,26 @@
 extends PropertyWidget
 class_name DisplayEditWidget
 
-@export var lineedit_title: LineEdit
-@export var lineedit_alt: LineEdit
+@export var title: LineEdit
+@export var alt: LineEdit
 
 func deserialize(__property: Property) -> void:
 	var __prop: Display = __property
 	related_prop_id = __prop.id
-	lineedit_title.text = __prop.text
-	lineedit_alt.text = __prop.alt
-	for __lineedit: LineEdit in [lineedit_title, lineedit_alt]:
-		__lineedit.set_meta(&"unchanged", __lineedit.text)
+	title.text = __prop.text
+	alt.text = __prop.alt
+	for __control: LineEdit in [title, alt]:
+		__control.set_meta(&"unchanged", __control.text)
 
 func check_if_changed() -> bool:
-	var __changed: bool = false
-	for __lineedit: LineEdit in [lineedit_title, lineedit_alt]:
-		if not __lineedit.get_meta(&"unchanged") == __lineedit.text:
-			__changed = true
-	return __changed
+	var __changed: int = 0
+	for __control: Control in [title, alt]:
+		__changed += int(__control.get_meta(UNCHANGED_META_STR) != __control.text)
+	return __changed > 0
 
 func get_as_property() -> Property:
-	var __title: String = lineedit_title.text.strip_edges().strip_escapes()
-	var __alt: String = lineedit_alt.text.strip_edges().strip_escapes()
+	var __title: String = title.text.strip_edges().strip_escapes()
+	var __alt: String = alt.text.strip_edges().strip_escapes()
 	return Display.new(__title, __alt)
 
 func collect() -> Dictionary:
@@ -35,9 +34,3 @@ func collect() -> Dictionary:
 			related_prop_id: get_as_property().deserialized(false)
 		}}
 	return __collected
-
-func trigger_options() -> void:
-	trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.MENU,
-		&"dialog.item_properties.property_menu"
-	))
