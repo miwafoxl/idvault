@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_m2jxb"]
 [ext_resource type="PackedScene" uid="uid://4lnrxhsq4rg4" path="res://scn/DefaultUI/Widgets/EditableList.tscn" id="3_m2jxb"]
 
-[node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428 node_paths=PackedStringArray("EDITABLELIST", "label_item")]
+[node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428 node_paths=PackedStringArray("editable_list", "label_item")]
 oversampling_override = 1.0
 title = "DIALOG.ITEM_PROPERTIES.TITLE"
 position = Vector2i(0, 36)
@@ -12,7 +12,7 @@ size = Vector2i(600, 500)
 unresizable = true
 theme = ExtResource("1_m2jxb")
 script = ExtResource("1_0c17t")
-EDITABLELIST = NodePath("MARGINC/VBOX_C/EDITABLELIST")
+editable_list = NodePath("MARGINC/VBOX_C/EDITABLELIST")
 label_item = NodePath("MARGINC/VBOX_C/TXT_TOP")
 metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
 
