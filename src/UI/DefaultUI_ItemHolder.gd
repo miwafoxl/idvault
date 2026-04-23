@@ -19,6 +19,8 @@ func build_wd_list_collapsible_head() -> Array[DefaultUI_ListCollapsibleHead]:
 			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/DisplayEdit.tscn")
 		if __prop is Date:
 			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/DateEdit.tscn")
+		if __prop is RangedDate:
+			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/RangedDateEdit.tscn")
 		if __prop is Link:
 			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/LinkEdit.tscn")
 		if __scn == null:
