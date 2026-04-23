@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://ds4no5kf6l5mu"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_awwbn"]
+[ext_resource type="Script" uid="uid://i1m663npmims" path="res://res/actions/property/append/ToItemID.gd" id="2_445ay"]
+
+[resource]
+script = ExtResource("1_awwbn")
+alias = &"property.append.to_item_id"
+author = "idvault"
+src = ExtResource("2_445ay")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"

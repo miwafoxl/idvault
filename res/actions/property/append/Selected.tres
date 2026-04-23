@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://bckjplgug86rj"]
 
 [ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_dy02p"]
-[ext_resource type="Script" uid="uid://bt5oj1tmx7hj8" path="res://res/actions/item/append/PropertiesToSelected.gd" id="2_3whf2"]
+[ext_resource type="Script" uid="uid://bt5oj1tmx7hj8" path="res://res/actions/property/append/Selected.gd" id="2_3whf2"]
 
 [resource]
 script = ExtResource("1_dy02p")
-alias = &"items.append.properties_to_selected"
+alias = &"property.append.selected"
 author = "idvault"
 src = ExtResource("2_3whf2")
 metadata/_custom_type_script = "uid://b475asnp2gx0l"

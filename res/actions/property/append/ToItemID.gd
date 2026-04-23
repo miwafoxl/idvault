@@ -1,0 +1,45 @@
+extends Object
+
+## Appends properties to many item IDs
+func run(__manager: ItemManager, __param: Dictionary) -> bool:
+	var __item_id: Array[String]
+	var __properties: Array[Property]
+	#region Parameter processing
+	for __key: String in __param:
+		var __value: Variant = __param[__key]
+		match __key:
+			"item_id" when __value is Array:
+				for __id: Variant in __value:
+					if __id is String:
+						__item_id.append(__id as String)
+			"properties" when __value is Array:
+				for __property: Variant in __value:
+					if __property is Property:
+						__properties.append(__property as Property)
+			_:
+				push_warning("property.append.to_item_id: invalid key '%s'\
+				-> item_id properties" % __key)
+	#endregion Parameter processing
+	var __items_updated: Array[Item] = []
+	for __id: String in __item_id:
+		var __item_cx: Array = __manager.get_from_cache("by_item_id", __id)
+		if __item_cx.is_empty():
+			push_warning("property.append.to_item_id: Failed to " + \
+			"get cache for item id '%s' (item might have been deleted)." % [__item_id])
+			continue
+		var __item: Item = (__item_cx[0] as WeakRef).get_ref()
+		if __item == null:
+			push_warning("property.append.to_item_id: Failed to " + \
+			"get reference to item id '%s' (item might have been deleted)." % [__item_id])
+			continue
+		__item.append_properties(__properties)
+		__items_updated.append(__item)
+		
+	if __items_updated: # TODO: reload_cache only affected items
+		__manager.reload_cache(__manager.unordered_items)
+		__manager.stage_updated.emit()
+		__manager.trigger.emit(Trigger.new(
+			Trigger.TriggerTypes.UI_REQUEST,
+			&"update_item_properties"
+		))
+	return false
