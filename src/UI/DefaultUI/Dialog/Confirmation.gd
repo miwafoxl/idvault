@@ -12,9 +12,6 @@ func enter_request() -> void:
 	__callback.call()
 	close_request()
 
-func close_request() -> void:
-	self.queue_free()
-
 #endregion
 #region INPUT
 
