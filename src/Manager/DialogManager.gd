@@ -1,7 +1,7 @@
 extends Manager
 class_name DefaultUI_DialogManager
 
-@export var spawn_node: Node
+@export var spawn_node: Control
 @export var default: Dictionary[StringName, PackedScene]
 @export var returning_values: Dictionary[StringName, Array]
 var loaded: Dictionary[StringName, PackedScene] = {}; # {dialog alias: packed scene}
