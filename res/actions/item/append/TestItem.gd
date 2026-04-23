@@ -3,7 +3,9 @@ extends Object
 ## Creates and appends an empty item
 func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	var __random_props: Array[Property] = [
-		Display.new(RandomString.new("", 12).value, "first test here".repeat(randi() % 3))
+		Display.new(RandomString.new("", 12).value, "first test here".repeat(randi() % 3)),
+		Date.new(Vector3i(1999, 2, 1)),
+		RangedDate.new([Vector3i(1999, 1, 1), Vector3i.ZERO])
 	]
 	if __manager.unordered_items.size() > 0 and true:
 		var __descriptors: Dictionary = __manager.item_cache.get("by_descriptor", {})

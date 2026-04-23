@@ -1,30 +1,26 @@
 extends Property
 class_name RangedDate
 
-# NULL values can be set as Unknown in UI
 @export var description: String = ""
-@export var start_date: Date = null;
-@export var end_date: Date = null; # null = present day, present time
+@export var start_date: Vector3i = Vector3i.ZERO;
+@export var end_date: Vector3i = Vector3i.ZERO;
+@export var indefinite_end: bool = false
 
-func is_range_inverted(__bound_1: Date, __bound_2: Date) -> bool:
-	if __bound_2.yyyymmdd.z > __bound_1.yyyymmdd.z or \
-			__bound_2.yyyymmdd.y > __bound_1.yyyymmdd.y or \
-			__bound_2.yyyymmdd.x > __bound_2.yyyymmdd.x:
-		return true
-	return false
+func should_swap(__bound_1: Vector3i, __bound_2: Vector3i) -> bool:
+	if __bound_1 < __bound_2 or __bound_2 == Vector3i.ZERO:
+		return false
+	return true
 
 func get_type_as_string() -> StringName:
 	return &"PROPERTY.TYPES.RANGED_DATE"
 
-func _init(__range: Array[Date], __description: String = "") -> void:
-	var __bound_1: Date = __range[0];
-	var __bound_2: Date = __range[1];
-	var __invert_op: bool = is_range_inverted(__bound_1, __bound_2)
-	self.description = __description
-	if not __invert_op:
-		self.start_date = __bound_1
-		self.end_date = __bound_2
-	else:
+func _init(__range: Array[Vector3i], __indefinite: bool = false) -> void:
+	var __bound_1: Vector3i = __range[0];
+	var __bound_2: Vector3i = __range[1];
+	self.indefinite_end = __indefinite
+	self.start_date = __bound_1
+	self.end_date = __bound_2
+	if should_swap(__bound_1, __bound_2) and not __indefinite:
 		self.start_date = __bound_2
 		self.end_date = __bound_1
 	self.id = RandomString.new("P_").value

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://4lnrxhsq4rg4"]
 
 [ext_resource type="Script" uid="uid://dx8q36gvaqe0k" path="res://src/UI/DefaultUI/Widget/EditableList.gd" id="1_0vqwo"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="2_s20by"]
 
 [node name="EDITABLELIST" type="Control" unique_id=404017486 node_paths=PackedStringArray("BODY")]
 layout_mode = 3
@@ -19,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_s20by")
 
 [node name="VBOX_BODY" type="VBoxContainer" parent="SCROLL_C" unique_id=193018389]
 layout_mode = 2

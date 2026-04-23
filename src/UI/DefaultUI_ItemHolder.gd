@@ -17,8 +17,15 @@ func build_wd_list_collapsible_head() -> Array[DefaultUI_ListCollapsibleHead]:
 			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/DescriptorEdit.tscn")
 		if __prop is Display:
 			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/DisplayEdit.tscn")
+		if __prop is Date:
+			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/DateEdit.tscn")
+		if __prop is RangedDate:
+			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/RangedDateEdit.tscn")
+		if __prop is Link:
+			__scn = preload("res://scn/DefaultUI/Widgets/PropertyWidget/LinkEdit.tscn")
 		if __scn == null:
-			printerr("DefaultUI_ItemHolder: unknown prop type to build wdListCollapsibleHead")
+			var __prop_str: StringName = __prop.get_type_as_string()
+			printerr("DefaultUI_ItemHolder: prop type '%s' has no integration with ListCollapsibleHead" % __prop_str)
 			return null
 		return __scn
 	if item.properties.size() == 0:

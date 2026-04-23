@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/UI/DefaultUI/Panel/ItemListPanel.gd" id="1_pof3a"]
 [ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/DefaultUI/Widgets/ItemDisplay.tscn" id="2_f0ka7"]
 
-[node name="ITEMLISTPANEL" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent", "query_line")]
+[node name="PANEL_ITEMLIST" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent", "query_line")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
