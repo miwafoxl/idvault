@@ -13,20 +13,18 @@ func deserialize(__property: Property) -> void:
 	related_prop_id = __prop.id
 	description.text = __prop.description
 	day.text = str(__prop.yyyymmdd.z)
-	month.select(__prop.yyyymmdd.y - 1)
 	year.text = str(__prop.yyyymmdd.x)
+	month.select(__prop.yyyymmdd.y - 1)
 	month.set_meta(UNCHANGED_META_STR, month.selected)
-	for __lineedit: Control in [description, day, year]:
-		__lineedit.set_meta(UNCHANGED_META_STR, __lineedit.text)
+	for __control: Control in [description, day, year]:
+		__control.set_meta(UNCHANGED_META_STR, __control.text)
 
 func check_if_changed() -> bool:
-	var __changed: bool = false
-	for __lineedit: Control in [description, day, year]:
-		if not __lineedit.get_meta(UNCHANGED_META_STR) == __lineedit.text:
-			__changed = true
-	if not month.get_meta(UNCHANGED_META_STR) == month.selected:
-		__changed = true
-	return __changed
+	var __changed: int = 0
+	for __control: Control in [description, day, year]:
+		__changed += int(__control.get_meta(UNCHANGED_META_STR) != __control.text)
+	__changed += int(month.get_meta(UNCHANGED_META_STR) != month.selected)
+	return __changed > 0
 
 # TODO: Make configurable when the user puts a number higher than the month currently
 # set, either modulate to current month (%) or max out 
