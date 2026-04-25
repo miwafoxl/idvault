@@ -370,3 +370,43 @@ func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Arra
 	return __stage
 
 #endregion ITEM STAGING
+#region CACHE LINK NETWORK
+
+func cache_retrieve_link_network(__items: Array[Item]) -> Dictionary:
+	var __network: Dictionary = {}
+	var __fail: Array = []
+	var __size: int = __items.size()
+	if __size == 0: return __network
+	elif __size == 1: 
+		# Get all incoming links that match property IDs.
+		var __item: Item = __items[0]
+		var __match_ids: Array[String] = __item.retrieve_property_ids()
+		var __cache: Array = cache_get_matched("by_links", __match_ids.map(
+			func(id: String): return "*@%s" % id )) # Get links linked >TO< __match_ids
+		if not __cache.is_empty():
+			for __cx: Array in __cache:
+				var __item_from_id: String = __cx[2] # Incoming ID
+				var __linker_ref: WeakRef = __cx[0]
+				var __item_ref: WeakRef = null
+				if __item_from_id.begins_with("i_"): # Incoming ID is an item
+					var __item_cx: Array = get_from_cache("by_item_id", __item_from_id)
+					if __item_cx.is_empty(): continue
+					__item_ref = __item_cx[0]
+				elif  __item_from_id.begins_with("P_"): # Incoming ID is a property
+					var __item_cx: Array = get_from_cache("by_property_id", __item_from_id)
+					if __item_cx.is_empty(): continue
+					__item_ref = __item_cx[0]
+				else:
+					__fail.append(__item_from_id) 
+					continue
+				__network.set(__item_from_id, 
+				{
+					"linking_item": __item_ref.get_ref(),
+					"linker_item_id": __linker_ref.get_ref()
+				})
+	else: # Get common between all items
+		printerr("cache_retrieve_link_network: __size > 1 not implemented")
+	if __fail: printerr("ItemManager: Failed to identify ids %s for link network" % __fail)
+	return __network
+
+#endregion CACHE LINK NETWORK

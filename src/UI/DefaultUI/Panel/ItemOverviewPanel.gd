@@ -2,6 +2,7 @@ extends DefaultUI_Panel
 class_name DefaultUI_ItemOverview
 
 @export var items_ref: Array[Item] = []
+@export var items_network: Dictionary = {}
 @export var selected: int = 0
 
 func update() -> void:
