@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_m2jxb"]
 [ext_resource type="PackedScene" uid="uid://4lnrxhsq4rg4" path="res://scn/DefaultUI/Widgets/EditableList.tscn" id="3_m2jxb"]
 
-[node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428 node_paths=PackedStringArray("editable_list", "label_item")]
+[node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428]
 oversampling_override = 1.0
 title = "DIALOG.ITEM_PROPERTIES.TITLE"
 position = Vector2i(0, 36)
@@ -12,8 +12,6 @@ size = Vector2i(600, 500)
 unresizable = true
 theme = ExtResource("1_m2jxb")
 script = ExtResource("1_0c17t")
-editable_list = NodePath("MARGINC/VBOX_C/EDITABLELIST")
-label_item = NodePath("")
 metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
 
 [node name="MARGINC" type="MarginContainer" parent="." unique_id=791869297]
@@ -41,6 +39,7 @@ layout_mode = 2
 text = "DIALOG.ITEM_PROPERTIES.ADD_PROPERTY"
 
 [node name="EDITABLELIST" parent="MARGINC/VBOX_C" unique_id=404017486 instance=ExtResource("3_m2jxb")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
