@@ -183,11 +183,29 @@ func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Arra
 		return []
 	var __head_arr: Array
 	for __header: String in __head:
-		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, null)
-		if __get == null:
+		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, [])
+		if __get.is_empty():
 			printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
-				[__head, __cache_library])
+				[__header, __cache_library])
+			continue
 		__head_arr.append(__get)
+	return __head_arr
+
+func cache_get_matched(__cache_library: String, __match_string: Array) -> Array:
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager: Invalid link cache library '%s'. Returning empty array." % __cache_library)
+		return []
+	var __matched_keys: Array = []
+	var __head_arr: Array = []
+	var __library: Dictionary = item_cache.get(__cache_library)
+	for __key: String in __library.keys():
+		for __match_str: String in __match_string:
+			if __key.matchn(__match_str):
+				__matched_keys.push_front(__key)
+	for __key: String in __matched_keys:
+		var __get: Array = __library.get(__key, [])
+		if not __get.is_empty():
+			__head_arr.append(__get)
 	return __head_arr
 
 func reload_cache(__items: Array[Item]) -> void:
@@ -204,9 +222,7 @@ func reload_cache(__items: Array[Item]) -> void:
 	# { Param.id: [Item wref, Prop wref, Prop.id], ... }
 	item_cache.set("by_parameter_id", cache_by_parameter_id(__items))
 	# { Link.from: [Item wref, Prop wref, Prop.id, Link.to], ... }
-	item_cache.set("by_link_from_id", cache_links(__items, false))
-	# { Link.to: [Item wref, Prop wref, Prop.id, Link.from]], ... }
-	item_cache.set("by_link_to_id", cache_links(__items, true))
+	item_cache.set("by_links", cache_links(__items))
 
 func cache_by_item_id(__items: Array[Item]) -> Dictionary:
 	if __items.is_empty(): return {}
@@ -279,8 +295,7 @@ func cache_by_parameter_id(__items: Array[Item]) -> Dictionary:
 			__cache.set(__prop.param_id, __cx)
 	return __cache
 
-func cache_links(__items: Array[Item], \
-		__to_from: bool = false) -> Dictionary:
+func cache_links(__items: Array[Item]) -> Dictionary:
 	if __items.is_empty(): return {}
 	var __cache: Dictionary = {}
 	for __item_idx: int in __items.size():
@@ -289,13 +304,14 @@ func cache_links(__items: Array[Item], \
 		if __props.is_empty(): continue
 		for __prop: Link in __props:
 			var __cx: Array = []
-			__cx.append_array([weakref(__item), weakref(__prop), __prop.id])
-			if __to_from:
-				__cx.append(__prop.from_id)
-				__cache.set(__prop.to_id, __cx)
-			else:
-				__cx.append(__prop.to_id)
-				__cache.set(__prop.from_id, __cx)
+			__cx.append_array([weakref(__item), weakref(__prop), __prop.from_id, __prop.to_id])
+			__cache.set("%s@%s" % [__prop.from_id, __prop.to_id], __cx)
+			#if __to_from: 
+				#__cx.append(__prop.from_id)
+				#__cache.set(__prop.to_id, __cx)
+			#else:
+				#__cx.append(__prop.to_id)
+				#__cache.set(__prop.from_id, __cx)
 	return __cache
 
 #endregion ITEM CACHEING
