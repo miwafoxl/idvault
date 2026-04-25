@@ -23,10 +23,16 @@ func give_managers(__managers: Dictionary) -> void:
 				printerr("UI: unknown manager '%s' provided to UI" % __key)
 
 func update_panels() -> void:
-	for panel: Control in node_panels.get_children():
-		if (panel is DefaultUI_Panel) and (panel is DefaultUI_ItemListPanel):
-			(panel as DefaultUI_ItemListPanel).items_ref = manager.get_staged_items_pages()
-			(panel as DefaultUI_ItemListPanel).update(manager.retrieve_selected_items_id())
+	for __control: Control in node_panels.get_children():
+		if __control is not DefaultUI_Panel: continue
+		if __control is DefaultUI_ItemListPanel:
+			var __panel: DefaultUI_ItemListPanel = __control
+			__panel.items_ref = manager.get_staged_items_pages()
+			__panel.update(manager.retrieve_selected_items_id())
+		if __control is DefaultUI_ItemOverview:
+			var __panel: DefaultUI_ItemOverview = __control
+			__panel.items_ref = manager.selected_items
+			__panel.update()
 		
 func update_signals() -> void:
 	for panel: Control in node_panels.get_children():

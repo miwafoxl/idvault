@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/DefaultUI/Dialogs/ItemProperties.tscn" id="4_efg31"]
 [ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/DefaultUI/Dialogs/Confirmation.tscn" id="5_j8r87"]
 [ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/DefaultUI/Dialogs/Message.tscn" id="6_0uej8"]
+[ext_resource type="PackedScene" uid="uid://bsmf80bu51od0" path="res://scn/DefaultUI/Panels/ItemOverviewPanel.tscn" id="8_efg31"]
 
 [node name="UI" type="Control" unique_id=2117910557 node_paths=PackedStringArray("dialog_manager", "node_panels")]
 layout_mode = 3
@@ -50,7 +51,12 @@ layout_mode = 2
 [node name="PANEL_ITEMLIST" parent="MARGIN_C/HBOX_C" unique_id=1192789613 instance=ExtResource("3_dbx2o")]
 layout_mode = 2
 
+[node name="PANEL_ITEMOVERVIEW" parent="MARGIN_C/HBOX_C" unique_id=767367165 instance=ExtResource("8_efg31")]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="MARGIN_C" type="MarginContainer" parent="MARGIN_C/HBOX_C" unique_id=1870618833]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
