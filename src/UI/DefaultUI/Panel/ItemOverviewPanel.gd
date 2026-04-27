@@ -17,7 +17,7 @@ func update() -> void:
 func update_view(__selected: int = selected) -> void:
 	if items_ref.is_empty(): return
 	var __item: Item = items_ref[selected]
-	for __control: Control in [%BOX_C_DISPLAY, %BOX_C_DESC_CONTENT, %BOX_C_DESCR_VIEW]:
+	for __control: Control in [%BOX_C_DISPLAY, %BOX_C_DESC_CONTENT]:
 		__control.set_visible(false)
 	if __item.properties.is_empty(): return
 	for __prop: Property in __item.properties:
@@ -33,7 +33,10 @@ func update_view(__selected: int = selected) -> void:
 				if __content.is_empty(): continue
 				%TXT_CONTENT.set_text(__content)
 				%BOX_C_DESC_CONTENT.set_visible(true)
-				
+	# Builds descriptor view.
+	%BOX_C_INLINK_VIEW.item_network = items_network
+	%BOX_C_INLINK_VIEW.build()
+
 func update_counter(__count: int) -> void:
 	if __count > 0:
 		%TXT_INFO.set_text("%s/%s" % [selected + 1, __count])

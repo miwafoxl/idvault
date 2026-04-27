@@ -2,7 +2,7 @@
 
 [ext_resource type="LabelSettings" uid="uid://d2s73pg551rdx" path="res://res/theme/DefaultUI/Font/panel_itemoverview_header.tres" id="1_pi4sv"]
 [ext_resource type="Script" uid="uid://cdh7j2tcec54t" path="res://src/UI/DefaultUI/Panel/ItemOverviewPanel.gd" id="1_vk70h"]
-[ext_resource type="PackedScene" uid="uid://orgh5771t3sd" path="res://scn/DefaultUI/Widgets/DescriptorView.tscn" id="3_some0"]
+[ext_resource type="PackedScene" uid="uid://orgh5771t3sd" path="res://scn/DefaultUI/Widgets/InlinkView.tscn" id="3_some0"]
 
 [node name="PANEL_ITEMOVERVIEW" type="Control" unique_id=767367165]
 layout_mode = 3
@@ -110,6 +110,6 @@ fit_content = true
 selection_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="BOX_C_DESCR_VIEW" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=423051502 instance=ExtResource("3_some0")]
+[node name="BOX_C_INLINK_VIEW" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=423051502 instance=ExtResource("3_some0")]
 unique_name_in_owner = true
 layout_mode = 2
