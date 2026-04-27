@@ -77,15 +77,28 @@ custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 color = Color(0.22670749, 0.22670749, 0.22670746, 1)
 
+[node name="TXT_BRIEF" type="RichTextLabel" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY/HBOX_C" unique_id=1685425302]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "BRIEF"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 3
+vertical_alignment = 2
+
 [node name="TXT_HEADER" type="Label" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=532346996]
 unique_name_in_owner = true
 layout_mode = 2
+text = "HEADER"
 label_settings = ExtResource("1_pi4sv")
 
 [node name="TXT_ALT" type="Label" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=1705025216]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.5254902)
 layout_mode = 2
+text = "ALT TEXT"
 
 [node name="BOX_C_DESC_CONTENT" type="BoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=1401076298]
 unique_name_in_owner = true
