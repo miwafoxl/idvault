@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://orgh5771t3sd"]
-
-[ext_resource type="Script" uid="uid://btet7b82dbopc" path="res://src/UI/DefaultUI/Widget/DescriptorView.gd" id="1_y2u5s"]
-
-[node name="BOX_C DESCR_VIEW" type="BoxContainer" unique_id=423051502]
-script = ExtResource("1_y2u5s")
