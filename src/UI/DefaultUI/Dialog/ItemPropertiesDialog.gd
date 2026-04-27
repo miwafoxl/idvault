@@ -4,6 +4,8 @@ class_name DefaultUI_ItemPropertiesDialog
 #region OVERRIDES
 
 func enter_request() -> void:
+	var __focus: Control = self.gui_get_focus_owner()
+	if not __focus == %BUT_APPLY or __focus == null: return
 	var __new_property: Dictionary = %EDITABLELIST.collect_item_node_data()
 	trigger.emit(Trigger.new(
 		Trigger.TriggerTypes.ACTION,

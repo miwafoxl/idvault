@@ -8,7 +8,7 @@
 oversampling_override = 1.0
 title = "DIALOG.ITEM_PROPERTIES.TITLE"
 position = Vector2i(0, 36)
-size = Vector2i(600, 500)
+size = Vector2i(450, 500)
 unresizable = true
 theme = ExtResource("1_m2jxb")
 script = ExtResource("1_0c17t")
@@ -48,6 +48,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="BUT_APPLY" type="Button" parent="MARGINC/VBOX_C/HBOX_C" unique_id=1500355513]
+unique_name_in_owner = true
 layout_mode = 2
 text = "DIALOG.GENERAL.APPLY"
 
