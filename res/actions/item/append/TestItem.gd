@@ -13,8 +13,8 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 		if not __descriptors.is_empty(): 
 			__descriptors_id = __descriptors.keys()
 			__random_props.append(Link.new(
+				__manager.unordered_items.pick_random().id, # FROM ID
 				__descriptors_id.pick_random(), # TO ID
-				__manager.unordered_items.pick_random().id # FROM ID
 		))
 	
 	var __items: Array[Item]
