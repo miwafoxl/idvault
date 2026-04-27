@@ -57,3 +57,12 @@ func _ready() -> void:
 	dialog_manager.trigger.connect(trigger.emit)
 	update_signals()
 	update_panels()
+
+func _input(event: InputEvent) -> void:
+	if event is not InputEventKey: return
+	#print_debug(event as InputEventKey)
+	if event.is_action("test_item"):
+		trigger.emit(Trigger.new(
+			Trigger.TriggerTypes.ACTION,
+			&"items.append.testitem"
+		))
