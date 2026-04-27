@@ -7,14 +7,11 @@ class_name ItemDisplayWidget
 @export var subtitle: String = "";
 var display_selected: bool = false
 
-@export var node_title: Label 
-@export var node_subtitle: Label
-
 #region OVERRIDES
 
 func update() -> void:
-	node_title.set_text(self.title)
-	node_subtitle.set_text(self.subtitle)
+	%TXT_HEAD.set_text(title)
+	%TXT_ALT.set_text(subtitle)
 	update_color()
 
 #endregion
