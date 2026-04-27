@@ -168,7 +168,7 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 	var __head_arr: Array = []
 	var __cache_lib: Dictionary
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager: non-existent cache '%s'. Returning empty array." % __cache_library)
+		printerr("ItemManager::get_from_cache: non-existent cache '%s'. Returning empty array." % __cache_library)
 		return []
 	__cache_lib = item_cache.get(__cache_library, {})
 	if not __cache_lib.is_empty():
@@ -179,13 +179,13 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 
 func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		printerr("ItemManager::get_from_cache_many: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
 	var __head_arr: Array
 	for __header: String in __head:
 		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, [])
 		if __get.is_empty():
-			printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
+			printerr("ItemManager::get_from_cache_many: Invalid cache header '%s' in library '%s'. Returning empty array." % \
 				[__header, __cache_library])
 			continue
 		__head_arr.append(__get)
@@ -193,7 +193,7 @@ func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Arra
 
 func cache_get_matched(__cache_library: String, __match_string: Array) -> Array:
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager: Invalid link cache library '%s'. Returning empty array." % __cache_library)
+		printerr("ItemManager::get_from_cache_matched: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
 	var __matched_keys: Array = []
 	var __head_arr: Array = []
