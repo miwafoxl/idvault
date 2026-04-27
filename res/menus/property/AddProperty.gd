@@ -18,7 +18,7 @@ func build(__param: Dictionary) -> ContextMenu:
 	__menu.set_item_metadata(-1, {&"property.append.selected": 
 		{
 		"properties": [
-			Display.new()
+			Display.new("")
 		]} 
 	})
 	

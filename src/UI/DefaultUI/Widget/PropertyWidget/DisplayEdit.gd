@@ -7,21 +7,37 @@ class_name DisplayEditWidget
 func deserialize(__property: Property) -> void:
 	var __prop: Display = __property
 	related_prop_id = __prop.id
-	title.text = __prop.text
-	alt.text = __prop.alt
-	for __control: LineEdit in [title, alt]:
-		__control.set_meta(&"unchanged", __control.text)
+	%LINE_HEADER.set_text(__prop.header)
+	%LINE_ALT.set_text(__prop.alt)
+	%LINE_BRIEF.set_text(__prop.brief)
+	%LINE_TEXT.set_text(__prop.text)
+	for __control: Control in [%LINE_HEADER, %LINE_ALT, \
+								%LINE_BRIEF, %LINE_TEXT]:
+		__control.set_meta(UNCHANGED_META_STR, __control.text)
 
 func check_if_changed() -> bool:
 	var __changed: int = 0
-	for __control: Control in [title, alt]:
+	for __control: Control in [%LINE_HEADER, %LINE_ALT, \
+								%LINE_BRIEF, %LINE_TEXT]:
 		__changed += int(__control.get_meta(UNCHANGED_META_STR) != __control.text)
 	return __changed > 0
 
 func get_as_property() -> Property:
-	var __title: String = title.text.strip_edges().strip_escapes()
-	var __alt: String = alt.text.strip_edges().strip_escapes()
-	return Display.new(__title, __alt)
+	var __title: String = %LINE_HEADER.text \
+		.strip_edges() \
+		.strip_escapes() \
+		.left(150)
+	var __alt: String = %LINE_ALT.text \
+		.strip_edges() \
+		.strip_escapes() \
+		.left(150)
+	var __brief: String = %LINE_BRIEF.text \
+		.strip_edges() \
+		.strip_escapes() \
+		.left(150)
+	var __text: String = %LINE_TEXT.text \
+		.left(1500)
+	return Display.new(__title, __alt, __brief, __text)
 
 func collect() -> Dictionary:
 	var __collected: Dictionary = {}

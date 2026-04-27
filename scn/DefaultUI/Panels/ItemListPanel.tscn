@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/UI/DefaultUI/Panel/ItemListPanel.gd" id="1_pof3a"]
 [ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/DefaultUI/Widgets/ItemDisplay.tscn" id="2_f0ka7"]
 
-[node name="PANEL_ITEMLIST" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent", "query_line")]
+[node name="PANEL_ITEMLIST" type="Control" unique_id=1192789613]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,8 +13,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_pof3a")
 widget_item = ExtResource("2_f0ka7")
-item_list_parent = NodePath("VBOX_C/SCROLL_C/VBOX_C")
-query_line = NodePath("VBOX_C/HBOX_C/LINE_QUERY")
 metadata/_custom_type_script = "uid://mpumg4pxy8il"
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1283702624]
@@ -42,6 +40,7 @@ layout_mode = 2
 text = "PANEL.ITEMLIST.NEW_ITEM"
 
 [node name="LINE_QUERY" type="LineEdit" parent="VBOX_C/HBOX_C" unique_id=649090237]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -58,6 +57,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="VBOX_C" type="VBoxContainer" parent="VBOX_C/SCROLL_C" unique_id=1536254369]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

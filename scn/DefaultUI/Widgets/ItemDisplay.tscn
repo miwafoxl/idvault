@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c03xvk6e6dae4" path="res://src/UI/DefaultUI/Widget/ItemDisplay.gd" id="1_46y6r"]
 
-[node name="ITEMDISPLAY" type="Button" unique_id=1857722230 node_paths=PackedStringArray("node_title", "node_subtitle")]
+[node name="ITEMDISPLAY" type="Button" unique_id=1857722230]
 custom_minimum_size = Vector2(0, 48)
 anchors_preset = 10
 anchor_right = 1.0
@@ -10,8 +10,6 @@ offset_bottom = 48.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 script = ExtResource("1_46y6r")
-node_title = NodePath("MARGIN_C/HBOX_C/VBOX_C/TXT_HEAD")
-node_subtitle = NodePath("MARGIN_C/HBOX_C/VBOX_C/TXT_ALT")
 
 [node name="MARGIN_C" type="MarginContainer" parent="." unique_id=1194377214]
 layout_mode = 1
@@ -33,11 +31,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="TXT_HEAD" type="Label" parent="MARGIN_C/HBOX_C/VBOX_C" unique_id=1543387147]
+unique_name_in_owner = true
 layout_mode = 2
 vertical_alignment = 2
 text_overrun_behavior = 5
 
 [node name="TXT_ALT" type="Label" parent="MARGIN_C/HBOX_C/VBOX_C" unique_id=148014020]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7202103, 0.7202103, 0.7202103, 1)
 theme_override_font_sizes/font_size = 13

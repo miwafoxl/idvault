@@ -2,14 +2,12 @@ extends Property
 class_name Descriptor
 
 @export var alias: String = "" # Required: Lowercase, no symbols or spaces
-@export var short: String = ""; # Short phrase that defines the descriptor
-@export var long: String = ""; # Long explanation, BBCode or Markdown
+@export var priority: int = 0
 
 func get_type_as_string() -> StringName:
 	return &"PROPERTY.TYPES.DESCRIPTOR"
 
-func _init(__alias: String, __short: String = "", __long: String = "") -> void:
+func _init(__alias: String, __priority: int = 0) -> void:
 	self.alias = __alias
-	self.short = __short
-	self.long = __long
+	self.priority = __priority
 	self.id = RandomString.new("P_").value
