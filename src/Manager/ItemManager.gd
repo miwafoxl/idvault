@@ -208,6 +208,16 @@ func get_from_cache_matched(__cache_library: String, __match_string: Array) -> A
 			__head_arr.append(__get)
 	return __head_arr
 
+func get_count_from_cache_matched(__cache_library: String, __match_string: String) -> int:
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager::get_count_from_cache_matched: Invalid cache " + \
+		"library '%s'. Returning empty array." % __cache_library)
+		return 0
+	var __library: Dictionary = item_cache.get(__cache_library)
+	var __count: int = __library.keys().reduce(func(accum: int, element: String):
+		return accum + 1 if element.containsn(__match_string) else accum, 0)
+	return __count
+
 func reload_cache(__items: Array[Item]) -> void:
 	#item_cache.clear()
 	# { Item.id: [Item wref], ... }
