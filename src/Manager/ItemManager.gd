@@ -168,7 +168,7 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 	var __head_arr: Array = []
 	var __cache_lib: Dictionary
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager: non-existent cache '%s'. Returning empty array." % __cache_library)
+		printerr("ItemManager::get_from_cache: non-existent cache '%s'. Returning empty array." % __cache_library)
 		return []
 	__cache_lib = item_cache.get(__cache_library, {})
 	if not __cache_lib.is_empty():
@@ -179,16 +179,44 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 
 func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		printerr("ItemManager::get_from_cache_many: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
 	var __head_arr: Array
 	for __header: String in __head:
-		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, null)
-		if __get == null:
-			printerr("ItemManager: Invalid cache header '%s' in library '%s'. Returning empty array." % \
-				[__head, __cache_library])
+		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, [])
+		if __get.is_empty():
+			printerr("ItemManager::get_from_cache_many: Invalid cache header '%s' in library '%s'. Returning empty array." % \
+				[__header, __cache_library])
+			continue
 		__head_arr.append(__get)
 	return __head_arr
+
+func get_from_cache_matched(__cache_library: String, __match_string: Array) -> Array:
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager::get_from_cache_matched: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		return []
+	var __matched_keys: Array = []
+	var __head_arr: Array = []
+	var __library: Dictionary = item_cache.get(__cache_library)
+	for __key: String in __library.keys():
+		for __match_str: String in __match_string:
+			if __key.containsn(__match_str):
+				__matched_keys.push_front(__key)
+	for __key: String in __matched_keys:
+		var __get: Array = __library.get(__key, [])
+		if not __get.is_empty():
+			__head_arr.append(__get)
+	return __head_arr
+
+func get_count_from_cache_matched(__cache_library: String, __match_string: String) -> int:
+	if not item_cache.has(__cache_library):
+		printerr("ItemManager::get_count_from_cache_matched: Invalid cache " + \
+		"library '%s'. Returning empty array." % __cache_library)
+		return 0
+	var __library: Dictionary = item_cache.get(__cache_library)
+	var __count: int = __library.keys().reduce(func(accum: int, element: String):
+		return accum + 1 if element.containsn(__match_string) else accum, 0)
+	return __count
 
 func reload_cache(__items: Array[Item]) -> void:
 	#item_cache.clear()
@@ -204,9 +232,7 @@ func reload_cache(__items: Array[Item]) -> void:
 	# { Param.id: [Item wref, Prop wref, Prop.id], ... }
 	item_cache.set("by_parameter_id", cache_by_parameter_id(__items))
 	# { Link.from: [Item wref, Prop wref, Prop.id, Link.to], ... }
-	item_cache.set("by_link_from_id", cache_links(__items, false))
-	# { Link.to: [Item wref, Prop wref, Prop.id, Link.from]], ... }
-	item_cache.set("by_link_to_id", cache_links(__items, true))
+	item_cache.set("by_links", cache_links(__items))
 
 func cache_by_item_id(__items: Array[Item]) -> Dictionary:
 	if __items.is_empty(): return {}
@@ -279,8 +305,7 @@ func cache_by_parameter_id(__items: Array[Item]) -> Dictionary:
 			__cache.set(__prop.param_id, __cx)
 	return __cache
 
-func cache_links(__items: Array[Item], \
-		__to_from: bool = false) -> Dictionary:
+func cache_links(__items: Array[Item]) -> Dictionary:
 	if __items.is_empty(): return {}
 	var __cache: Dictionary = {}
 	for __item_idx: int in __items.size():
@@ -289,13 +314,8 @@ func cache_links(__items: Array[Item], \
 		if __props.is_empty(): continue
 		for __prop: Link in __props:
 			var __cx: Array = []
-			__cx.append_array([weakref(__item), weakref(__prop), __prop.id])
-			if __to_from:
-				__cx.append(__prop.from_id)
-				__cache.set(__prop.to_id, __cx)
-			else:
-				__cx.append(__prop.to_id)
-				__cache.set(__prop.from_id, __cx)
+			__cx.append_array([weakref(__item), weakref(__prop), __prop.from_id, __prop.to_id])
+			__cache.set("%s@%s" % [__prop.from_id, __prop.to_id], __cx)
 	return __cache
 
 #endregion ITEM CACHEING
@@ -354,3 +374,51 @@ func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Arra
 	return __stage
 
 #endregion ITEM STAGING
+#region CACHE LINK NETWORK
+
+func cache_retrieve_link_network(__items: Array[Item]) -> Dictionary:
+	var __network: Dictionary = {}
+	var __fail: Array = []
+	var __size: int = __items.size()
+	if __size == 0: return __network
+	elif __size == 1: 
+		# Get all incoming links that match property IDs.
+		var __item: Item = __items[0]
+		var __match_ids: Array[String] = __item.retrieve_property_ids()
+		__match_ids.append(__item.id)
+		var __cache: Array = get_from_cache_matched("by_links", __match_ids.map(
+			func(id: String): return "@%s" % id )) # Get links linked >TO< __match_ids
+		if not __cache.is_empty():
+			for __cx: Array in __cache:
+				var __item_from_id: String = __cx[2] # Incoming ID
+				var __linker_ref: WeakRef = __cx[0]
+				var __item_ref: WeakRef = null
+				var __type: String = "item"
+				var __count: int = get_count_from_cache_matched("by_links", "%s@" % __item_from_id)
+				if __item_from_id.begins_with("i_"): # Incoming ID is an item
+					var __item_cx: Array = get_from_cache("by_item_id", __item_from_id)
+					if __item_cx.is_empty(): continue
+					__item_ref = __item_cx[0]
+				elif  __item_from_id.begins_with("P_"): # Incoming ID is a property
+					var __item_cx: Array = get_from_cache("by_descriptor_id", __item_from_id)
+					__type = "descriptor"
+					if __item_cx.is_empty(): 
+						__item_cx = get_from_cache("by_property_id", __item_from_id)
+						__type = "property"
+					__item_ref = __item_cx[0]
+				else:
+					__fail.append(__item_from_id) 
+					continue
+				__network.set(__item_from_id, 
+				{
+					"type": __type,
+					"linking_linkcount": __count,
+					"linking_item": __item_ref.get_ref(),
+					"linker_item_id": __linker_ref.get_ref()
+				})
+	else: # Get common between all items
+		printerr("cache_retrieve_link_network: __size > 1 not implemented")
+	if __fail: printerr("ItemManager: Failed to identify ids %s for link network" % __fail)
+	return __network
+
+#endregion CACHE LINK NETWORK

@@ -2,7 +2,7 @@
 
 [ext_resource type="LabelSettings" uid="uid://d2s73pg551rdx" path="res://res/theme/DefaultUI/Font/panel_itemoverview_header.tres" id="1_pi4sv"]
 [ext_resource type="Script" uid="uid://cdh7j2tcec54t" path="res://src/UI/DefaultUI/Panel/ItemOverviewPanel.gd" id="1_vk70h"]
-[ext_resource type="PackedScene" uid="uid://orgh5771t3sd" path="res://scn/DefaultUI/Widgets/DescriptorView.tscn" id="3_some0"]
+[ext_resource type="PackedScene" uid="uid://orgh5771t3sd" path="res://scn/DefaultUI/Widgets/InlinkView.tscn" id="3_some0"]
 
 [node name="PANEL_ITEMOVERVIEW" type="Control" unique_id=767367165]
 layout_mode = 3
@@ -80,14 +80,12 @@ color = Color(0.22670749, 0.22670749, 0.22670746, 1)
 [node name="TXT_HEADER" type="Label" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=532346996]
 unique_name_in_owner = true
 layout_mode = 2
-text = "HEADER"
 label_settings = ExtResource("1_pi4sv")
 
 [node name="TXT_ALT" type="Label" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=1705025216]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.5254902)
 layout_mode = 2
-text = "ALT TEXT"
 
 [node name="BOX_C_DESC_CONTENT" type="BoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=1401076298]
 unique_name_in_owner = true
@@ -108,13 +106,10 @@ size_flags_horizontal = 3
 focus_mode = 2
 mouse_default_cursor_shape = 1
 bbcode_enabled = true
-text = "Bitwise operations allow you to perform some very elegant checks. This way of using bitwise flags has many benefits. First, you can save a lot of typing, especially when you have a lot of options to turn on and off. Especially if you want to avoid too long function calls or passing a full object or dictionary (depending on the language) bitwise flags can be really handy. Also, they save a lot of memory. Not that your computer would run out of memory quickly, but it does speed up code execution considerably, something you will notice especially if you have functions that are being called ridiculously often. In that case, all your code has to actually do is to do a little bit of number magic, and since that’s built into every computer, your computer is really good at this.
-
-Plus, even though I said “Well one byte has eight bits” you are not restricted to only eight options and their combinations. Normally, you work with numbers that have 64 bits, so you can expand your setting to 64 different settings! And I’m pretty positive that, if you run out of numbers, you really should refactor your code to use less options anyway. By the way, if you’re in languages with types, always make sure to use unsigned integers for that bitwise magic, since signed integers (i.e. numbers that can be negative) have to reserve the last bit for the sign (plus or minus) so that you effectively lose one option and have 63 remaining."
 fit_content = true
 selection_enabled = true
 drag_and_drop_selection_enabled = false
 
-[node name="BOX_C_DESCR_VIEW" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=423051502 instance=ExtResource("3_some0")]
+[node name="BOX_C_INLINK_VIEW" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=423051502 instance=ExtResource("3_some0")]
 unique_name_in_owner = true
 layout_mode = 2

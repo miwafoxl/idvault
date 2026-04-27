@@ -1,2 +1,0 @@
-extends BoxContainer
-class_name DefaultUI_DescriptorView

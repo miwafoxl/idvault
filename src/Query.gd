@@ -140,8 +140,8 @@ func filter_items_by_parsed(__items: Array[Item], \
 	var __miss: int = 0
 	for __item: Item in __items:
 		var __remaining_matches: Array = __parsed_query.keys()
-		var __cx: Array = manager.get_from_cache("by_link_from_id", __item.id)
-		if (__cx.is_empty()) or (__cx[3] not in __remaining_matches): 
+		var __cx: Array = manager.get_from_cache_matched("by_links", ["@%s" % __item.id])
+		if (__cx.is_empty()): # or (__cx[3] not in __remaining_matches): 
 			__miss += 1
 			continue
 		var __from: String = __cx[3] # Link.from

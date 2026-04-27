@@ -68,7 +68,7 @@ func reorder_properties(__prop_idx: Array[int], __idx: int) -> void:
 			print("B: __i = %s" % __i)
 	properties = __temp
 
-#endregion ADD AND REMOVE PROPERTIES
+#endregion ADD, REMOVE AND REORDER PROPERTIES
 #region RETRIEVE PROPERTIES
 
 func retrieve_property_ids() -> Array[String]:
