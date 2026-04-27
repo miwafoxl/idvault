@@ -191,7 +191,7 @@ func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Arra
 		__head_arr.append(__get)
 	return __head_arr
 
-func cache_get_matched(__cache_library: String, __match_string: Array) -> Array:
+func get_from_cache_matched(__cache_library: String, __match_string: Array) -> Array:
 	if not item_cache.has(__cache_library):
 		printerr("ItemManager::get_from_cache_matched: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
@@ -200,7 +200,7 @@ func cache_get_matched(__cache_library: String, __match_string: Array) -> Array:
 	var __library: Dictionary = item_cache.get(__cache_library)
 	for __key: String in __library.keys():
 		for __match_str: String in __match_string:
-			if __key.matchn(__match_str):
+			if __key.containsn(__match_str):
 				__matched_keys.push_front(__key)
 	for __key: String in __matched_keys:
 		var __get: Array = __library.get(__key, [])
