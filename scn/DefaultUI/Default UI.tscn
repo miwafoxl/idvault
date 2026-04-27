@@ -7,11 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/DefaultUI/Dialogs/ItemProperties.tscn" id="4_efg31"]
 [ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/DefaultUI/Dialogs/Confirmation.tscn" id="5_j8r87"]
 [ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/DefaultUI/Dialogs/Message.tscn" id="6_0uej8"]
+[ext_resource type="PackedScene" uid="uid://bsmf80bu51od0" path="res://scn/DefaultUI/Panels/ItemOverviewPanel.tscn" id="8_efg31"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8v7u"]
-bg_color = Color(0.28542295, 0.28542295, 0.28542295, 1)
-
-[node name="Ui" type="Control" unique_id=2117910557 node_paths=PackedStringArray("dialog_manager", "node_panels")]
+[node name="UI" type="Control" unique_id=2117910557 node_paths=PackedStringArray("dialog_manager", "node_panels")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +21,7 @@ size_flags_vertical = 3
 theme = ExtResource("2_ag2qf")
 script = ExtResource("2_1pjss")
 dialog_manager = NodePath("DialogManager")
-node_panels = NodePath("MarginContainer/HBoxContainer")
+node_panels = NodePath("MARGIN_C/HBOX_C")
 
 [node name="DialogManager" type="Node" parent="." unique_id=1938092817 node_paths=PackedStringArray("spawn_node")]
 script = ExtResource("3_vodya")
@@ -35,7 +33,7 @@ default = Dictionary[StringName, PackedScene]({
 })
 metadata/_custom_type_script = "uid://bwxtawgolorsm"
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=354924104]
+[node name="MARGIN_C" type="MarginContainer" parent="." unique_id=354924104]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,19 +45,20 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Panel" type="Panel" parent="MarginContainer" unique_id=2075197168]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_x8v7u")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1599995273]
+[node name="HBOX_C" type="HBoxContainer" parent="MARGIN_C" unique_id=1599995273]
 layout_mode = 2
 
-[node name="ItemListPanel" parent="MarginContainer/HBoxContainer" unique_id=1192789613 instance=ExtResource("3_dbx2o")]
+[node name="PANEL_ITEMLIST" parent="MARGIN_C/HBOX_C" unique_id=1192789613 instance=ExtResource("3_dbx2o")]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=1870618833]
+[node name="PANEL_ITEMOVERVIEW" parent="MARGIN_C/HBOX_C" unique_id=767367165 instance=ExtResource("8_efg31")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=1327811748]
+[node name="MARGIN_C" type="MarginContainer" parent="MARGIN_C/HBOX_C" unique_id=1870618833]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PANEL" type="Panel" parent="MARGIN_C/HBOX_C/MARGIN_C" unique_id=1327811748]
 layout_mode = 2

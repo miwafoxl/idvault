@@ -9,6 +9,6 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	for __item: Item in __manager.selected_items:
 		var __idx: int = __manager.unordered_items.find(__item)
 		__rm_indexes.append(__idx)
-	__manager.selected_items.clear() # Deselects
-	__manager.remove_items_unordered(__rm_indexes)
+	__manager.remove_items_unordered(__manager.selected_items)
+	__manager.selection_updated.emit()
 	return true

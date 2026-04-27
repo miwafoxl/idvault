@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://orgh5771t3sd"]
+
+[ext_resource type="Script" uid="uid://btet7b82dbopc" path="res://src/UI/DefaultUI/Widget/InlinkView.gd" id="1_jooa5"]
+[ext_resource type="PackedScene" uid="uid://c3dp5vlvgqbwr" path="res://scn/DefaultUI/Widgets/InlinkButton.tscn" id="2_v5n34"]
+
+[node name="BOX_C INLINK_VIEW" type="BoxContainer" unique_id=423051502]
+size_flags_horizontal = 3
+vertical = true
+script = ExtResource("1_jooa5")
+descriptor_button = ExtResource("2_v5n34")
+match_type = "descriptor"
+
+[node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1050482610]
+layout_mode = 2
+
+[node name="TXT_HEADER" type="Label" parent="VBOX_C" unique_id=348653338]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HFLOW_C" type="VFlowContainer" parent="VBOX_C" unique_id=784092165]
+unique_name_in_owner = true
+layout_mode = 2

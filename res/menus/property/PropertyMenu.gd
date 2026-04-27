@@ -3,12 +3,34 @@ extends Object
 ## Describe your menu here
 func build(__param: Dictionary) -> ContextMenu:
 	var __menu: ContextMenu = ContextMenu.new()
+	var __item_id: String
+	var __param_idx: int
+	#region Parameter processing
+	for __key: String in __param:
+		var __value: Variant = __param[__key]
+		match __key:
+			"item_id" when __value is String:
+				__item_id = __value
+			"param_idx" when __value is int:
+				__param_idx = __value
+			_:
+				push_warning("dialog.item_properties.property_menu: invalid key '%s'\
+				-> item_id, param_idx" % __key)
+	#endregion Parameter processing
 	
 	__menu.add_item(tr(&"DIALOG.ITEM_PROPERTIES.PROPERTY_MOVE_UP"))
-	__menu.set_item_metadata(-1, {&"items.reorder.property_by_id": {} })
+	__menu.set_item_metadata(-1, {&"items.reorder.by_property_index": {
+		"item_id": __item_id,
+		"param_idx": [__param_idx],
+		"new_idx": __param_idx - 1
+	} })
 	
 	__menu.add_item(tr(&"DIALOG.ITEM_PROPERTIES.PROPERTY_MOVE_DOWN"))
-	__menu.set_item_metadata(-1, {&"items.reorder.property_by_id": {} })
+	__menu.set_item_metadata(-1, {&"items.reorder.by_property_index": {
+		"item_id": __item_id,
+		"param_idx": [__param_idx],
+		"new_idx": __param_idx + 1
+	} })
 	
 	__menu.add_separator()
 	

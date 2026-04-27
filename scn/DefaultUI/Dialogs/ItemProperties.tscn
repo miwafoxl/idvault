@@ -4,7 +4,7 @@
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_m2jxb"]
 [ext_resource type="PackedScene" uid="uid://4lnrxhsq4rg4" path="res://scn/DefaultUI/Widgets/EditableList.tscn" id="3_m2jxb"]
 
-[node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428 node_paths=PackedStringArray("EDITABLELIST", "label_item")]
+[node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428]
 oversampling_override = 1.0
 title = "DIALOG.ITEM_PROPERTIES.TITLE"
 position = Vector2i(0, 36)
@@ -12,8 +12,6 @@ size = Vector2i(600, 500)
 unresizable = true
 theme = ExtResource("1_m2jxb")
 script = ExtResource("1_0c17t")
-EDITABLELIST = NodePath("MARGINC/VBOX_C/EDITABLELIST")
-label_item = NodePath("MARGINC/VBOX_C/TXT_TOP")
 metadata/_custom_type_script = "uid://bgbr5sjlw4fl0"
 
 [node name="MARGINC" type="MarginContainer" parent="." unique_id=791869297]
@@ -33,12 +31,15 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 1
 
-[node name="TXT_TOP" type="Label" parent="MARGINC/VBOX_C" unique_id=1284302371]
-auto_translate_mode = 2
+[node name="HBOX_C_HEADER" type="HBoxContainer" parent="MARGINC/VBOX_C" unique_id=1638359859]
 layout_mode = 2
-text = "ENTRY ID: "
+
+[node name="BUT_PROPERTY_ADD" type="Button" parent="MARGINC/VBOX_C/HBOX_C_HEADER" unique_id=2030090635]
+layout_mode = 2
+text = "DIALOG.ITEM_PROPERTIES.ADD_PROPERTY"
 
 [node name="EDITABLELIST" parent="MARGINC/VBOX_C" unique_id=404017486 instance=ExtResource("3_m2jxb")]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -55,5 +56,6 @@ layout_mode = 2
 text = "DIALOG.GENERAL.CANCEL"
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="pressed" from="MARGINC/VBOX_C/HBOX_C_HEADER/BUT_PROPERTY_ADD" to="." method="_on_but_property_add_pressed"]
 [connection signal="button_down" from="MARGINC/VBOX_C/HBOX_C/BUT_APPLY" to="." method="_on_button_apply_button_down"]
 [connection signal="button_down" from="MARGINC/VBOX_C/HBOX_C/BUT_CANCEL" to="." method="close_request"]

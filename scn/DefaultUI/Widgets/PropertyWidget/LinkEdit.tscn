@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cskmwmxrxjkka"]
+
+[ext_resource type="Script" uid="uid://bgag5d5wuyb3e" path="res://src/UI/DefaultUI/Widget/PropertyWidget/LinkEdit.gd" id="1_6tfq8"]
+
+[node name="LINK_EDIT" type="PanelContainer" unique_id=1290763817 node_paths=PackedStringArray("from_id", "to_id")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6tfq8")
+from_id = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_FROM")
+to_id = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_TO")
+
+[node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1052199156]
+layout_mode = 2
+
+[node name="MARGIN_C" type="MarginContainer" parent="VBOX_C" unique_id=1753017781]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 8
+
+[node name="VBOX_C" type="VBoxContainer" parent="VBOX_C/MARGIN_C" unique_id=1815679101]
+layout_mode = 2
+
+[node name="GRID_C" type="GridContainer" parent="VBOX_C/MARGIN_C/VBOX_C" unique_id=308451975]
+layout_mode = 2
+theme_override_constants/h_separation = 40
+columns = 2
+
+[node name="TXT_FROM" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1773891633]
+layout_mode = 2
+text = "WIDGET.LINK_EDIT.FROM"
+
+[node name="LINE_FROM" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1045855981]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="TXT_TO" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=966374119]
+layout_mode = 2
+text = "WIDGET.LINK_EDIT.TO"
+
+[node name="LINE_TO" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1348862395]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2

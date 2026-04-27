@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c6ov0c5hf7iic" path="res://src/UI/DefaultUI/Panel/ItemListPanel.gd" id="1_pof3a"]
 [ext_resource type="PackedScene" uid="uid://dq43vgs2e687m" path="res://scn/DefaultUI/Widgets/ItemDisplay.tscn" id="2_f0ka7"]
 
-[node name="ITEMLISTPANEL" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent", "query_line")]
+[node name="PANEL_ITEMLIST" type="Control" unique_id=1192789613 node_paths=PackedStringArray("item_list_parent", "query_line")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,12 +19,20 @@ metadata/_custom_type_script = "uid://mpumg4pxy8il"
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1283702624]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.054
-offset_bottom = 0.00799942
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
+
+[node name="HBOX_C P_HEADER" type="HBoxContainer" parent="VBOX_C" unique_id=2070673807]
+layout_mode = 2
+
+[node name="TXT_PLACEHOLDER" type="Label" parent="VBOX_C/HBOX_C P_HEADER" unique_id=412019591]
+modulate = Color(1, 1, 1, 0.53333336)
+layout_mode = 2
+text = "Item List Panel"
 
 [node name="HBOX_C" type="HBoxContainer" parent="VBOX_C" unique_id=529340556]
 layout_mode = 2

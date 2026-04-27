@@ -53,7 +53,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			))
 			trigger.emit(Trigger.new(
 				Trigger.TriggerTypes.MENU,
-				&"panel.itemlist.item_menu"
+				&"items.menu"
 			))
 			update_selected_state()
 

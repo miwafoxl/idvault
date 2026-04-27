@@ -95,7 +95,7 @@ func test4() -> bool:
 	#var __get_item: Array[Item] = manager.get_item_by_id([__id])
 	#if __get_item.is_empty() or __get_item[0] == null:
 		#return false
-	#if not manager.remove_items_unordered([0]): #      CLEANUP
+	#if not manager.remove_items_unordered_index([0]): #      CLEANUP
 		#return false
 	#return true
 

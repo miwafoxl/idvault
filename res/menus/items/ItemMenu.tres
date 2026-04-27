@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Menu" format=3 uid="uid://ceslm53byufwy"]
 
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="1_el26n"]
-[ext_resource type="Script" uid="uid://cvw6563dnjlsh" path="res://res/menus/panel/itemlist/ItemMenu.gd" id="2_651g4"]
+[ext_resource type="Script" uid="uid://cvw6563dnjlsh" path="res://res/menus/items/ItemMenu.gd" id="2_651g4"]
 
 [resource]
 script = ExtResource("1_el26n")
-alias = &"panel.itemlist.item_menu"
+alias = &"items.menu"
 src = ExtResource("2_651g4")
 metadata/_custom_type_script = "uid://cw8bgstjifmjv"

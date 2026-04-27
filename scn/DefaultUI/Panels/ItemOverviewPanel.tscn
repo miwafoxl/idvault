@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://bsmf80bu51od0"]
+
+[ext_resource type="LabelSettings" uid="uid://d2s73pg551rdx" path="res://res/theme/DefaultUI/Font/panel_itemoverview_header.tres" id="1_pi4sv"]
+[ext_resource type="Script" uid="uid://cdh7j2tcec54t" path="res://src/UI/DefaultUI/Panel/ItemOverviewPanel.gd" id="1_vk70h"]
+[ext_resource type="PackedScene" uid="uid://orgh5771t3sd" path="res://scn/DefaultUI/Widgets/InlinkView.tscn" id="3_some0"]
+
+[node name="PANEL_ITEMOVERVIEW" type="Control" unique_id=767367165]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 648.0
+grow_horizontal = 2
+script = ExtResource("1_vk70h")
+
+[node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1776643673]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 648.0
+grow_horizontal = 2
+
+[node name="HBOX_C P_HEADER" type="HBoxContainer" parent="VBOX_C" unique_id=1569242391]
+layout_mode = 2
+
+[node name="TXT_PLACEHOLDER" type="Label" parent="VBOX_C/HBOX_C P_HEADER" unique_id=10097470]
+modulate = Color(1, 1, 1, 0.53333336)
+layout_mode = 2
+text = "Item Overview Panel"
+
+[node name="HBOX_C OVERVIEW_HEADER" type="HBoxContainer" parent="VBOX_C" unique_id=1745752626]
+layout_mode = 2
+
+[node name="HBOX_C_ANCHOR_L" type="HBoxContainer" parent="VBOX_C/HBOX_C OVERVIEW_HEADER" unique_id=770386903]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TXT_INFO" type="Label" parent="VBOX_C/HBOX_C OVERVIEW_HEADER/HBOX_C_ANCHOR_L" unique_id=1539732560]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0/0"
+
+[node name="HBOX_C_ANCHOR_R" type="HBoxContainer" parent="VBOX_C/HBOX_C OVERVIEW_HEADER" unique_id=936757639]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="BUT_LEFT" type="Button" parent="VBOX_C/HBOX_C OVERVIEW_HEADER/HBOX_C_ANCHOR_R" unique_id=1839875283]
+layout_mode = 2
+text = "<"
+
+[node name="BUT_RIGHT" type="Button" parent="VBOX_C/HBOX_C OVERVIEW_HEADER/HBOX_C_ANCHOR_R" unique_id=2036918484]
+layout_mode = 2
+text = ">"
+
+[node name="SCROLL_C PROP_VIEW" type="ScrollContainer" parent="VBOX_C" unique_id=302590811]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBOX_C" type="VBoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW" unique_id=2065836355]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BOX_C_DISPLAY" type="BoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=254302604]
+unique_name_in_owner = true
+layout_mode = 2
+vertical = true
+
+[node name="HBOX_C" type="HBoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=1792607181]
+layout_mode = 2
+
+[node name="ASPECT_C" type="AspectRatioContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY/HBOX_C" unique_id=189795221]
+layout_mode = 2
+
+[node name="PLACEHOLDER" type="ColorRect" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY/HBOX_C/ASPECT_C" unique_id=666919476]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+color = Color(0.22670749, 0.22670749, 0.22670746, 1)
+
+[node name="TXT_HEADER" type="Label" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=532346996]
+unique_name_in_owner = true
+layout_mode = 2
+label_settings = ExtResource("1_pi4sv")
+
+[node name="TXT_ALT" type="Label" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DISPLAY" unique_id=1705025216]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.5254902)
+layout_mode = 2
+
+[node name="BOX_C_DESC_CONTENT" type="BoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=1401076298]
+unique_name_in_owner = true
+layout_mode = 2
+vertical = true
+
+[node name="HLINE CONTENT" type="HSeparator" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DESC_CONTENT" unique_id=27903178]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBOX_C CONTENT" type="HBoxContainer" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DESC_CONTENT" unique_id=349527871]
+layout_mode = 2
+
+[node name="TXT_CONTENT" type="RichTextLabel" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C/BOX_C_DESC_CONTENT/HBOX_C CONTENT" unique_id=563497404]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 1
+bbcode_enabled = true
+fit_content = true
+selection_enabled = true
+drag_and_drop_selection_enabled = false
+
+[node name="BOX_C_INLINK_VIEW" parent="VBOX_C/SCROLL_C PROP_VIEW/VBOX_C" unique_id=423051502 instance=ExtResource("3_some0")]
+unique_name_in_owner = true
+layout_mode = 2

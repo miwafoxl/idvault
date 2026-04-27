@@ -25,4 +25,12 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	for __item: Item in __manager.selected_items: # TODO: Make this less destructive in case it fails
 		if not __item.append_properties(__properties):
 			__success = false
+	
+	if __success: # TODO: reload_cache only affected items
+		__manager.reload_cache(__manager.unordered_items)
+		__manager.stage_updated.emit()
+		__manager.trigger.emit(Trigger.new(
+			Trigger.TriggerTypes.UI_REQUEST,
+			&"update_item_properties"
+		))
 	return __success

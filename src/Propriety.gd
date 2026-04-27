@@ -12,7 +12,7 @@ func deserialized(__include_prop_id: bool = true) -> Dictionary:
 		var __usage: int = __dict.get("usage", 0)
 		if not __usage == 0x1006: continue
 		var __p_name: String = __dict.get("name", "")
-		var __p_value: String = self.get(__p_name)
+		var __p_value: Variant = self.get(__p_name)
 		if (not __include_prop_id) and (__p_name == "id"): continue
 		__property_dict.set(__p_name, __p_value)
 	return __property_dict

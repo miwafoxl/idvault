@@ -11,9 +11,6 @@ const MIN_LABEL_SIZE: int = 70
 func enter_request() -> void:
 	close_request()
 
-func close_request() -> void:
-	self.queue_free()
-
 #endregion OVERRIDES
 #region INPUT
 

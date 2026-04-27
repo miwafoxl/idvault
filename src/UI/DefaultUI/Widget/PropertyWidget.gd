@@ -2,6 +2,8 @@
 extends DefaultUI_Widget
 class_name PropertyWidget
 
+const UNCHANGED_META_STR: StringName = &"unchanged"
+
 var related_prop_id: String = ""
 var marked_for_deletion: bool = false
 var changed: bool = false

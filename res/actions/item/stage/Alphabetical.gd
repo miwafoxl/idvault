@@ -30,5 +30,4 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 		__items = __manager.unordered_items
 	__items.sort_custom(order)
 	__manager.stage_items(__items)
-	__manager.reverse_staged()
 	return true
