@@ -316,12 +316,6 @@ func cache_links(__items: Array[Item]) -> Dictionary:
 			var __cx: Array = []
 			__cx.append_array([weakref(__item), weakref(__prop), __prop.from_id, __prop.to_id])
 			__cache.set("%s@%s" % [__prop.from_id, __prop.to_id], __cx)
-			#if __to_from: 
-				#__cx.append(__prop.from_id)
-				#__cache.set(__prop.to_id, __cx)
-			#else:
-				#__cx.append(__prop.to_id)
-				#__cache.set(__prop.from_id, __cx)
 	return __cache
 
 #endregion ITEM CACHEING
@@ -391,26 +385,34 @@ func cache_retrieve_link_network(__items: Array[Item]) -> Dictionary:
 		# Get all incoming links that match property IDs.
 		var __item: Item = __items[0]
 		var __match_ids: Array[String] = __item.retrieve_property_ids()
-		var __cache: Array = cache_get_matched("by_links", __match_ids.map(
-			func(id: String): return "*@%s" % id )) # Get links linked >TO< __match_ids
+		__match_ids.append(__item.id)
+		var __cache: Array = get_from_cache_matched("by_links", __match_ids.map(
+			func(id: String): return "@%s" % id )) # Get links linked >TO< __match_ids
 		if not __cache.is_empty():
 			for __cx: Array in __cache:
 				var __item_from_id: String = __cx[2] # Incoming ID
 				var __linker_ref: WeakRef = __cx[0]
 				var __item_ref: WeakRef = null
+				var __type: String = "item"
+				var __count: int = get_count_from_cache_matched("by_links", "%s@" % __item_from_id)
 				if __item_from_id.begins_with("i_"): # Incoming ID is an item
 					var __item_cx: Array = get_from_cache("by_item_id", __item_from_id)
 					if __item_cx.is_empty(): continue
 					__item_ref = __item_cx[0]
 				elif  __item_from_id.begins_with("P_"): # Incoming ID is a property
-					var __item_cx: Array = get_from_cache("by_property_id", __item_from_id)
-					if __item_cx.is_empty(): continue
+					var __item_cx: Array = get_from_cache("by_descriptor_id", __item_from_id)
+					__type = "descriptor"
+					if __item_cx.is_empty(): 
+						__item_cx = get_from_cache("by_property_id", __item_from_id)
+						__type = "property"
 					__item_ref = __item_cx[0]
 				else:
 					__fail.append(__item_from_id) 
 					continue
 				__network.set(__item_from_id, 
 				{
+					"type": __type,
+					"linking_linkcount": __count,
 					"linking_item": __item_ref.get_ref(),
 					"linker_item_id": __linker_ref.get_ref()
 				})
