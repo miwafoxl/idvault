@@ -54,7 +54,7 @@ PANEL.ITEMLIST.CLIPBOARD_SELECTED_ITEM_TEXT,Clipboard: Copy selected item(s) tex
 PANEL.ITEMLIST.CLIPBOARD_SELECTED_LINKED_TAGS,Clipboard: Copy all linked tag aliases of selected item(s)
 PANEL.ITEMLIST.DUPLICATE_ITEMS,Duplicate selected item(s) (keep original selected)
 PANEL.ITEMLIST.DUPLICATE_ITEMS_AND_SELECT,Duplicate selected item(s) (select copied items)
-PANEL.ITEM_OVERVIEW.INLINKS_DESCRIPTOR_COUNT,{count} descriptor(s) incoming link(s)
+PANEL.ITEM_OVERVIEW.INLINKS_DESCRIPTOR_COUNT,{count} description(s)
 PANEL.ITEM_OVERVIEW.INLINKS_ITEM_DEFAULT,Related to {to}
 PANEL.ITEMLIST.DELETE_ITEMS,Delete item(s)
 PROPERTY.TYPES.DISPLAY,Display
