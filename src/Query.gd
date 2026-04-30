@@ -138,21 +138,39 @@ func filter_items_by_parsed(__items: Array[Item], \
 		__exclusive: bool = true, __log: bool = true) -> Array[Item]:
 	var __filtered: Array[Item]
 	var __miss: int = 0
+	var __positive_matches: Array[String] = []
+	var __negative_matches: Array[String] = []
+	for __id: String in __parsed_query.keys():
+		var __parsed: Parsed = __parsed_query[__id]
+		if __parsed.is_negated:
+			__negative_matches.append(__id)
+		else:
+			__positive_matches.append(__id)
 	for __item: Item in __items:
-		var __remaining_matches: Array = __parsed_query.keys()
-		var __cx: Array = manager.get_from_cache_matched("by_links", ["@%s" % __item.id])
-		if (__cx.is_empty()): # or (__cx[3] not in __remaining_matches): 
-			__miss += 1
-			continue
-		var __from: String = __cx[3] # Link.from
-		__remaining_matches.erase(__from)
-		if __exclusive and not __remaining_matches.is_empty(): continue
-		__filtered.append(__item)
+		var __match: bool = true
+		var __cache: Array = manager.get_from_cache_matched("by_links", __positive_matches.map(
+			func(id: String): return "%s@%s" % [id, __item.id] ))
+		var __cache_negated: Array = []
+		if not __negative_matches.is_empty():
+			__cache_negated = manager.get_from_cache_matched("by_links",  __negative_matches.map(
+			func(id: String): return "%s@%s" % [id, __item.id] ))
+	
+		if __cache.is_empty():
+			__match = not __negative_matches.is_empty()
+		if not __cache_negated.is_empty():
+			__match = false
+			
+		#print_debug("%s: +%s -%s -> %s" % [__item.id, __cache.size(), __cache_negated.size(), __match])
+		
+		if __match: __filtered.append(__item)
+		else: __miss += 1
 	if __log:
 		var __usec: int = Time.get_ticks_usec() - start_ms
-		var __took_string: String = "Took %s %s" % [__usec, ["usec", "ms"][(__usec >= 1000) as int]]
-		print_debug("Query: Filtered %s items with %s misses. Took %s usec." % [
-			__filtered.size(), __miss, Time.get_ticks_usec() - start_ms
+		var __ms: bool = __usec >= 1000
+		__usec = __usec >> 10 if __ms else __usec
+		var __took_string: String = "Took %s %s" % [__usec, ["usec", "ms"][__ms as int]]
+		print_debug("Query: Filtered %s items with %s misses. %s" % [
+			__filtered.size(), __miss, __took_string
 		])
 		print_parsed(__parsed_query.values())
 	return __filtered
