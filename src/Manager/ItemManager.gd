@@ -373,6 +373,15 @@ func get_staged_items_pages(__page_size: int = 0, __page_index: int = 0) -> Arra
 		__stage.append_array(__items)
 	return __stage
 
+func get_staged_items_total_pages(__page_size: int = 0) -> int:
+	var __stage_size: int = get_stage_size()
+	var __pages: int = 0
+	if __page_size > 0 and __page_size > __stage_size:
+		return 1
+	else:
+		__pages = ceil(float(__stage_size) / float(__page_size))
+	return __pages
+
 #endregion ITEM STAGING
 #region CACHE LINK NETWORK
 

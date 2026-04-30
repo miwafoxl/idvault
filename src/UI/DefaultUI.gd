@@ -27,7 +27,8 @@ func update_panels() -> void:
 		if __control is not DefaultUI_Panel: continue
 		if __control is DefaultUI_ItemListPanel:
 			var __panel: DefaultUI_ItemListPanel = __control
-			__panel.items_ref = manager.get_staged_items_pages()
+			__panel.items_ref = manager.get_staged_items_pages(100, __panel.selected_page)
+			__panel.total_pages = manager.get_staged_items_total_pages(100)
 			__panel.update(manager.retrieve_selected_items_id())
 		if __control is DefaultUI_ItemOverview:
 			var __panel: DefaultUI_ItemOverview = __control

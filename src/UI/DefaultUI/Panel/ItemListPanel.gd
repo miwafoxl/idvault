@@ -4,6 +4,8 @@ class_name DefaultUI_ItemListPanel
 @export var widget_item: PackedScene
 @export var items_ref: Array[Item] = []
 @export var selected_item_id: Array[String] = []
+@export var selected_page: int = 0
+@export var total_pages: int = 0
 
 func interaction_item_display_click(__item_id: String) -> void:
 	var __action: StringName
