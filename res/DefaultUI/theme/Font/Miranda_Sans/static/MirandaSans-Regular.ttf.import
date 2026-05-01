@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://qi726qfaxfoe"
-path="res://.godot/imported/MirandaSans-Regular.ttf-39721e5ae42579baf6a958570061b2bb.fontdata"
+path="res://.godot/imported/MirandaSans-Regular.ttf-593e308e94a4b8134304bd18274fc42b.fontdata"
 
 [deps]
 
-source_file="res://res/theme/DefaultUI/Font/Miranda_Sans/static/MirandaSans-Regular.ttf"
-dest_files=["res://.godot/imported/MirandaSans-Regular.ttf-39721e5ae42579baf6a958570061b2bb.fontdata"]
+source_file="res://res/DefaultUI/theme/Font/Miranda_Sans/static/MirandaSans-Regular.ttf"
+dest_files=["res://.godot/imported/MirandaSans-Regular.ttf-593e308e94a4b8134304bd18274fc42b.fontdata"]
 
 [params]
 

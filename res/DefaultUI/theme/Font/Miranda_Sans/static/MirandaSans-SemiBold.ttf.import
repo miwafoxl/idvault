@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c0htwbmbyluwm"
-path="res://.godot/imported/MirandaSans-Medium.ttf-39dd870c7a92dda1fc825ae3d9cb9e10.fontdata"
+uid="uid://depaq4pi4h5ja"
+path="res://.godot/imported/MirandaSans-SemiBold.ttf-786432f6320cc48debfd8490845ccb5a.fontdata"
 
 [deps]
 
-source_file="res://res/theme/DefaultUI/Font/Miranda_Sans/static/MirandaSans-Medium.ttf"
-dest_files=["res://.godot/imported/MirandaSans-Medium.ttf-39dd870c7a92dda1fc825ae3d9cb9e10.fontdata"]
+source_file="res://res/DefaultUI/theme/Font/Miranda_Sans/static/MirandaSans-SemiBold.ttf"
+dest_files=["res://.godot/imported/MirandaSans-SemiBold.ttf-786432f6320cc48debfd8490845ccb5a.fontdata"]
 
 [params]
 

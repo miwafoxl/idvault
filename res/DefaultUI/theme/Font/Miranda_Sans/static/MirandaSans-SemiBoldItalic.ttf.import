@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cjl6blwe85pie"
-path="res://.godot/imported/MirandaSans-SemiBoldItalic.ttf-62f58d520de56f7119d41cce32e1edd8.fontdata"
+path="res://.godot/imported/MirandaSans-SemiBoldItalic.ttf-4a9998ccd511ad870ff8e571adc5c64d.fontdata"
 
 [deps]
 
-source_file="res://res/theme/DefaultUI/Font/Miranda_Sans/static/MirandaSans-SemiBoldItalic.ttf"
-dest_files=["res://.godot/imported/MirandaSans-SemiBoldItalic.ttf-62f58d520de56f7119d41cce32e1edd8.fontdata"]
+source_file="res://res/DefaultUI/theme/Font/Miranda_Sans/static/MirandaSans-SemiBoldItalic.ttf"
+dest_files=["res://.godot/imported/MirandaSans-SemiBoldItalic.ttf-4a9998ccd511ad870ff8e571adc5c64d.fontdata"]
 
 [params]
 
