@@ -44,7 +44,7 @@ func _ready() -> void:
 	else:
 		BUT_HEAD_OPTIONS.pressed.connect(trigger.emit.bind(
 			Trigger.new(
-				Trigger.TriggerTypes.MENU,
+				Trigger.TriggerTypes.UI_REQUEST,
 				options_menu_id, {
 					"item_id": related_item_id,
 					"param_idx": order,
