@@ -14,7 +14,7 @@ func build(__param: Dictionary) -> ContextMenu:
 			"param_idx" when __value is int:
 				__param_idx = __value
 			_:
-				push_warning("dialog.item_properties.property_menu: invalid key '%s'\
+				push_warning("property.menu: invalid key '%s'\
 				-> item_id, param_idx" % __key)
 	#endregion Parameter processing
 	

@@ -57,8 +57,8 @@ func update_item_display() -> void:
 
 func _on_new_item_button_button_down() -> void:
 	trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.MENU,
-		&"items.add_item"
+		Trigger.TriggerTypes.UI_REQUEST,
+		&"menu:items.add_item"
 	))
 	
 func _on_query_button_button_down() -> void:

@@ -25,7 +25,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __param_idx.is_empty() or __get_id.is_empty() or \
 		__get_id[0].has_parameters(): return false
 	__get_id[0].reorder_properties(__param_idx, __new_idx)
-	__manager.trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.UI_REQUEST,
-		&"update_item_properties"))
+	__manager.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
+		Trigger.TriggerTypes.UI_REQUEST, # requests directly, but not calling this trigger
+		&"dialog:item_properties"))      # here won't update the item_preperties window.
 	return true

@@ -5,6 +5,6 @@
 
 [resource]
 script = ExtResource("1_sbg04")
-alias = &"dialog.item_properties.property_menu"
+alias = &"property.menu"
 src = ExtResource("2_ufi5p")
 metadata/_custom_type_script = "uid://cw8bgstjifmjv"

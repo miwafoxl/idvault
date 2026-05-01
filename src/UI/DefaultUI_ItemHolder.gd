@@ -43,6 +43,6 @@ func build_wd_list_collapsible_head() -> Array[DefaultUI_ListCollapsibleHead]:
 		__list_item.related_item_id = item.id
 		__list_item.contents = __node
 		__list_item.header_tr_string = __prop.get_type_as_string()
-		__list_item.options_menu_id = &"dialog.item_properties.property_menu"
+		__list_item.options_menu_id = &"menu:property.menu"
 		__list_items.append(__list_item)
 	return __list_items

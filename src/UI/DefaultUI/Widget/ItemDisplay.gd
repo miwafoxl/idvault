@@ -49,8 +49,8 @@ func _on_gui_input(event: InputEvent) -> void:
 					"only_if_nothing_selected": true}
 			))
 			trigger.emit(Trigger.new(
-				Trigger.TriggerTypes.MENU,
-				&"items.menu"
+				Trigger.TriggerTypes.UI_REQUEST,
+				&"menu:items.menu"
 			))
 			update_selected_state()
 

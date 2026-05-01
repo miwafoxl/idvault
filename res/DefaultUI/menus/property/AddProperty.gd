@@ -11,7 +11,7 @@ func build(__param: Dictionary) -> ContextMenu:
 			"item_id" when __value is String:
 				__item_id = __value
 			_:
-				push_warning("dialog.item_properties.property_menu: invalid key '%s'\
+				push_warning("property.menu: invalid key '%s'\
 				-> item_id, param_idx" % __key)
 	#endregion Parameter processing
 	__menu.add_item(tr(&"MENU.ADD_PROPERTY.ADD_DISPLAY"))
