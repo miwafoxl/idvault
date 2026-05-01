@@ -3,9 +3,6 @@ class_name DefaultUI
 
 @export var manager: ItemManager
 
-@warning_ignore("unused_signal")
-signal request_menu(menu_id: StringName, param: Dictionary)
-
 func update() -> void:
 	update_panels()
 
