@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c77y48j6w074"]
 
-[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/theme/DefaultUI/Font/header_label.tres" id="2_cawar"]
+[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/DefaultUI/theme/Font/header_label.tres" id="2_cawar"]
 
 [sub_resource type="GDScript" id="GDScript_hjf6m"]
 script/source = "extends Button
