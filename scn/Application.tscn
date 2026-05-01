@@ -27,21 +27,14 @@
 [ext_resource type="Resource" uid="uid://dco4oygq8k33m" path="res://res/actions/item/select/ByItemID_Toggle.tres" id="25_bnnxs"]
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="26_1bq3j"]
 [ext_resource type="Resource" uid="uid://bpam0ndoe46cb" path="res://res/actions/item/stage/Query.tres" id="26_33pya"]
-[ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/Manager/MenuManager.gd" id="27_5yf8b"]
 [ext_resource type="Resource" uid="uid://dvnlmjildicpb" path="res://res/actions/item/reorder/ByPropertyIndex.tres" id="27_bnnxs"]
-[ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/Menu.gd" id="28_2nqum"]
-[ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/menus/items/ItemMenu.tres" id="29_ldrk5"]
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="30_ldrk5"]
-[ext_resource type="Resource" uid="uid://cgolyyl2lalt4" path="res://res/menus/property/AddProperty.tres" id="34_33pya"]
-[ext_resource type="Resource" uid="uid://m2h7je8j8yr5" path="res://res/menus/items/AddItem.tres" id="35_62eh1"]
-[ext_resource type="Resource" uid="uid://i0c3uu7pho37" path="res://res/menus/property/PropertyMenu.tres" id="36_v4htx"]
 
 [node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "menu_manager")]
 script = ExtResource("1_tbfir")
 default_ui = ExtResource("2_1bq3j")
 item_manager = NodePath("ItemManager")
 action_manager = NodePath("ActionManager")
-menu_manager = NodePath("MenuManager")
+menu_manager = NodePath("")
 metadata/_custom_type_script = "uid://by3xvk1tboofk"
 
 [node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "manager") instance=ExtResource("26_1bq3j")]
@@ -60,9 +53,3 @@ unordered_items = null
 selected_items = null
 item_cache = null
 metadata/_custom_type_script = "uid://htdxvtahxgnw"
-
-[node name="MenuManager" type="Node" parent="." unique_id=988378929]
-script = ExtResource("27_5yf8b")
-default = Array[ExtResource("28_2nqum")]([ExtResource("29_ldrk5"), ExtResource("35_62eh1"), ExtResource("36_v4htx"), ExtResource("34_33pya")])
-theme = ExtResource("30_ldrk5")
-metadata/_custom_type_script = "uid://bwyef4g1l0om3"

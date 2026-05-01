@@ -1,15 +1,21 @@
 [gd_scene format=3 uid="uid://qwnt8iblsa3l"]
 
 [ext_resource type="Script" uid="uid://box8byd3uky85" path="res://src/UI/DefaultUI.gd" id="2_1pjss"]
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="2_ag2qf"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/DefaultUI/theme/default.tres" id="2_ag2qf"]
 [ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/DefaultUI/Panels/ItemListPanel.tscn" id="3_dbx2o"]
 [ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/Manager/DialogManager.gd" id="3_vodya"]
 [ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/DefaultUI/Dialogs/ItemProperties.tscn" id="4_efg31"]
 [ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/DefaultUI/Dialogs/Confirmation.tscn" id="5_j8r87"]
 [ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/DefaultUI/Dialogs/Message.tscn" id="6_0uej8"]
+[ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/Manager/MenuManager.gd" id="7_ma4em"]
 [ext_resource type="PackedScene" uid="uid://bsmf80bu51od0" path="res://scn/DefaultUI/Panels/ItemOverviewPanel.tscn" id="8_efg31"]
+[ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/UI/DefaultUI/Menu.gd" id="8_uf6ba"]
+[ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/DefaultUI/menus/items/ItemMenu.tres" id="9_bb540"]
+[ext_resource type="Resource" uid="uid://m2h7je8j8yr5" path="res://res/DefaultUI/menus/items/AddItem.tres" id="10_l62gj"]
+[ext_resource type="Resource" uid="uid://i0c3uu7pho37" path="res://res/DefaultUI/menus/property/PropertyMenu.tres" id="11_c3758"]
+[ext_resource type="Resource" uid="uid://cgolyyl2lalt4" path="res://res/DefaultUI/menus/property/AddProperty.tres" id="12_e5mym"]
 
-[node name="UI" type="Control" unique_id=2117910557 node_paths=PackedStringArray("dialog_manager", "node_panels")]
+[node name="UI" type="Control" unique_id=2117910557]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,10 +26,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_ag2qf")
 script = ExtResource("2_1pjss")
-dialog_manager = NodePath("DialogManager")
-node_panels = NodePath("MARGIN_C/HBOX_C")
 
-[node name="DialogManager" type="Node" parent="." unique_id=1938092817 node_paths=PackedStringArray("spawn_node")]
+[node name="DIALOG_MANAGER" type="Node" parent="." unique_id=1938092817 node_paths=PackedStringArray("spawn_node")]
+unique_name_in_owner = true
 script = ExtResource("3_vodya")
 spawn_node = NodePath("..")
 default = Dictionary[StringName, PackedScene]({
@@ -32,6 +37,13 @@ default = Dictionary[StringName, PackedScene]({
 &"user_confirmation": ExtResource("5_j8r87")
 })
 metadata/_custom_type_script = "uid://bwxtawgolorsm"
+
+[node name="MENU_MANAGER" type="Node" parent="." unique_id=325520232]
+unique_name_in_owner = true
+script = ExtResource("7_ma4em")
+default = Array[ExtResource("8_uf6ba")]([ExtResource("9_bb540"), ExtResource("10_l62gj"), ExtResource("11_c3758"), ExtResource("12_e5mym")])
+theme = ExtResource("2_ag2qf")
+metadata/_custom_type_script = "uid://bwyef4g1l0om3"
 
 [node name="MARGIN_C" type="MarginContainer" parent="." unique_id=354924104]
 layout_mode = 1
@@ -46,6 +58,7 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="HBOX_C" type="HBoxContainer" parent="MARGIN_C" unique_id=1599995273]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="PANEL_ITEMLIST" parent="MARGIN_C/HBOX_C" unique_id=1192789613 instance=ExtResource("3_dbx2o")]
