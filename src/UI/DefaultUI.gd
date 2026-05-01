@@ -50,16 +50,16 @@ func popup_menu(__id: StringName, __param: Dictionary = {}, \
 	__menu.set_force_native(true)
 	__menu.popup()
 
-func request(__request: Dictionary, __param: Dictionary) -> void:
-	match __request:
-		&"item_properties", \
-		&"message", \
-		&"user_confirmation":
-			%DIALOG_MANAGER.open(__request, __param)
-		&"update_item_properties":
-			%DIALOG_MANAGER.update_dialog(&"item_properties")
-		_:
-			printerr("DefaultUI: invalid request '%s'" % __request)
+func request(__request: StringName, __param: Dictionary) -> void:
+	var is_menu: bool = __request.begins_with("menu:")
+	var is_dialog: bool = __request.begins_with("dialog:")
+	
+	if is_menu:
+		popup_menu(__request.get_slice("menu:", 1), __param)
+	elif is_dialog:
+		%DIALOG_MANAGER.open(__request.get_slice("dialog:", 1), __param)
+	else:
+		printerr("DefaultUI: invalid request '%s'" % __request)
 	
 func _ready() -> void:
 	%DIALOG_MANAGER.append_dialog(%DIALOG_MANAGER.default)
