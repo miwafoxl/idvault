@@ -31,9 +31,3 @@ func get_as_property() -> Property:
 	var __alias: String = %LINE_ALIAS.text.to_snake_case()
 	var __priority: int = %LINE_PRIORITY.text.to_int()
 	return Descriptor.new(__alias, __priority)
-
-func trigger_options() -> void:
-	trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.MENU,
-		&"dialog.item_properties.property_menu"
-	))
