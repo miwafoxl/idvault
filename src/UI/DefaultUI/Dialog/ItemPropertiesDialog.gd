@@ -18,7 +18,8 @@ func close_request(__confirm: bool = false) -> void:
 	if not __new_property.is_empty() and not __confirm:
 		trigger.emit(Trigger.new(
 			Trigger.TriggerTypes.UI_REQUEST,
-			&"dialog:user_confirmation", {
+			&"dialog:user_confirmation", 
+			{
 				"callback": close_request.bind(true),
 				"message": tr(&"DIALOG.USER_CONFIRMATION.EXIT_ITEM_PROPERTIES_UNCOMMITED_CHANGES")}
 			))
@@ -49,6 +50,7 @@ func _on_but_property_add_pressed() -> void:
 		Trigger.TriggerTypes.UI_REQUEST,
 		&"menu:property.add_property",
 		{
+			"callback": %EDITABLELIST.display_item_node,
 			"item_id": __item.id,
 		}
 	))
