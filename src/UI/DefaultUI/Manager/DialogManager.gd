@@ -14,20 +14,20 @@ func append_dialog(__dialog: Dictionary[StringName, PackedScene], __log: bool = 
 	var __loaded_dialogs: PackedStringArray
 	for __alias: StringName in __dialog.keys():
 		if __alias.is_empty():
-			printerr("DialogManager: dialog with no alias. Skipping it.")
+			printerr("DefaultUI_DialogManager: dialog with no alias. Skipping it.")
 			continue
 		if __dialog[__alias] == null:
-			printerr("DialogManager: dialog '%s' has no scene. Skipping it." % __alias)
+			printerr("DefaultUI_DialogManager: dialog '%s' has no scene. Skipping it." % __alias)
 			continue
 		if __alias in __loaded_dialogs:
-			printerr("DialogManager: dialog '%s' has the same alias as a previously loaded action. Please unload that one then append it." % __alias)
+			printerr("DefaultUI_DialogManager: dialog '%s' has the same alias as a previously loaded action. Please unload that one then append it." % __alias)
 			continue
 		loaded.set(__alias, __dialog[__alias])
 		__loaded_dialogs.append(__alias)
 	loaded.sort()
 	if __log:
 		__loaded_dialogs.sort()
-		print("DialogManager: %s loaded:\n- %s" % [__loaded_dialogs.size(), \
+		print("DefaultUI_DialogManager: %s loaded:\n- %s" % [__loaded_dialogs.size(), \
 			"\n- ".join(__loaded_dialogs)
 		])
 
@@ -40,7 +40,7 @@ func remove_dialogs(__rm_dialog_aliases: Array[StringName]) -> void:
 func open(__alias: StringName, __param: Dictionary) -> bool:
 	var __scn: PackedScene = loaded.get(__alias)
 	if __scn == null:
-		printerr("DialogManager: dialog '%s' not found or loaded." % __alias)
+		printerr("DefaultUI_DialogManager: dialog '%s' not found or loaded." % __alias)
 		return false
 	var __dialog: DefaultUI_Dialog = active_dialogs.get(__alias, null)
 	if __dialog == null:
@@ -51,7 +51,7 @@ func open(__alias: StringName, __param: Dictionary) -> bool:
 		active_dialogs.set(__alias, __dialog)
 		spawn_node.add_child.call_deferred(__dialog)
 		__dialog.pop.call_deferred()
-	__dialog.args = __param
+	__dialog.args.merge(__param, true)
 	__dialog._update_arguments()
 	return true
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://yiyymio1q8vs"]
 
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_bscds"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/DefaultUI/theme/default.tres" id="1_bscds"]
 [ext_resource type="Script" uid="uid://c848sd5lglvht" path="res://src/UI/DefaultUI/Dialog/MessageDialog.gd" id="1_mwbxi"]
 
 [node name="MESSAGE" type="Window" unique_id=1098095428 node_paths=PackedStringArray("message_node", "confirm_node")]

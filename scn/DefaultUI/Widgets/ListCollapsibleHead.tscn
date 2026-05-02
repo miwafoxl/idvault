@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmft22luwfebh"]
 
 [ext_resource type="Script" uid="uid://6y13eaquu4h2" path="res://src/UI/DefaultUI/Widget/ListCollapsibleHead.gd" id="1_jpixw"]
-[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/theme/DefaultUI/Font/header_label.tres" id="2_q71nm"]
+[ext_resource type="LabelSettings" uid="uid://drg6s6o8cnr7d" path="res://res/DefaultUI/theme/Font/header_label.tres" id="2_q71nm"]
 
 [node name="LISTCOLLAPSIBLEH" type="PanelContainer" unique_id=218796388 node_paths=PackedStringArray("BUT_COLLAPSE", "BUT_HEAD_OPTIONS", "CONTENT_APPEND", "TXT_HEADER")]
 anchors_preset = 15

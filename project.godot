@@ -56,7 +56,6 @@ test_item={
 [internationalization]
 
 locale/translations=PackedStringArray("res://res/lang/csv/en/en.en.translation")
-locale/translations_pot_files=PackedStringArray("res://scn/DefaultUI/Dialogs/Confirmation.tscn", "res://scn/DefaultUI/Dialogs/ItemProperties.tscn", "res://scn/DefaultUI/Dialogs/Message.tscn", "res://scn/DefaultUI/Panels/ItemListPanel.tscn", "res://scn/DefaultUI/Widgets/PropertyWidget/DescriptorEdit.tscn", "res://scn/DefaultUI/Widgets/PropertyWidget/DisplayEdit.tscn", "res://src/UI/DefaultUI/Dialog/ItemPropertiesDialog.gd", "res://res/menus/items/AddItem.gd", "res://res/menus/items/ItemMenu.gd")
 
 [physics]
 

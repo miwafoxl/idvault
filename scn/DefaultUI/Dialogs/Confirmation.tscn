@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bbae2ckb24yn8"]
 
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_bs5gj"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/DefaultUI/theme/default.tres" id="1_bs5gj"]
 [ext_resource type="Script" uid="uid://bu8hi3dekhoqo" path="res://src/UI/DefaultUI/Dialog/Confirmation.gd" id="2_bs5gj"]
 
 [node name="USER_CONFIRMATION" type="Window" unique_id=1098095428 node_paths=PackedStringArray("message_node")]

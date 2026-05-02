@@ -6,7 +6,7 @@ class_name LinkEditWidget
 
 func deserialize(__property: Property) -> void:
 	var __prop: Link = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	from_id.text = __prop.from_id
 	to_id.text = __prop.to_id
 	for __control: LineEdit in [from_id, to_id]:
@@ -22,15 +22,3 @@ func get_as_property() -> Property:
 	var __from: String = from_id.text.strip_edges().strip_escapes()
 	var __to: String = to_id.text.strip_edges().strip_escapes()
 	return Link.new(__to, __from)
-
-func collect() -> Dictionary:
-	var __collected: Dictionary = {}
-	if marked_for_deletion:
-		__collected = {"rem": {
-			related_prop_id: marked_for_deletion
-		}}
-	elif check_if_changed():
-		__collected = {"mod": {
-			related_prop_id: get_as_property().deserialized(false)
-		}}
-	return __collected

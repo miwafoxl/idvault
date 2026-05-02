@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dfv228qdvucjj"]
 
 [ext_resource type="Script" uid="uid://b1nklbx53sbji" path="res://src/UI/DefaultUI/Dialog/ItemPropertiesDialog.gd" id="1_0c17t"]
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_m2jxb"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/DefaultUI/theme/default.tres" id="1_m2jxb"]
 [ext_resource type="PackedScene" uid="uid://4lnrxhsq4rg4" path="res://scn/DefaultUI/Widgets/EditableList.tscn" id="3_m2jxb"]
 
 [node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428]

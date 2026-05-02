@@ -10,7 +10,7 @@ const DAYS_IN_MONTHS: Array[int] = [ 31,29,31,30,31,30,31,31,30,31,30,31 ]
 
 func deserialize(__property: Property) -> void:
 	var __prop: Date = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	description.text = __prop.description
 	day.text = str(__prop.yyyymmdd.z)
 	year.text = str(__prop.yyyymmdd.x)
@@ -44,15 +44,3 @@ func get_as_property() -> Property:
 		month.selected
 	)
 	return Date.new(__new_yyyymmdd, __description)
-
-func collect() -> Dictionary:
-	var __collected: Dictionary = {}
-	if marked_for_deletion:
-		__collected = {"rem": {
-			related_prop_id: marked_for_deletion
-		}}
-	elif check_if_changed():
-		__collected = {"mod": {
-			related_prop_id: get_as_property().deserialized(false)
-		}}
-	return __collected

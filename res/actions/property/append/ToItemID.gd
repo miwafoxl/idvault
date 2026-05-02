@@ -38,8 +38,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __items_updated: # TODO: reload_cache only affected items
 		__manager.reload_cache(__manager.unordered_items)
 		__manager.stage_updated.emit()
-		__manager.trigger.emit(Trigger.new(
-			Trigger.TriggerTypes.UI_REQUEST,
-			&"update_item_properties"
-		))
+		__manager.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
+			Trigger.TriggerTypes.UI_REQUEST, # requests directly, but not calling this trigger
+			&"dialog:item_properties"))      # here won't update the item_preperties window.
 	return false

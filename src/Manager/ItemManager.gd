@@ -409,11 +409,15 @@ func cache_retrieve_link_network(__items: Array[Item]) -> Dictionary:
 					if __item_cx.is_empty(): continue
 					__item_ref = __item_cx[0]
 				elif  __item_from_id.begins_with("P_"): # Incoming ID is a property
+					# TODO: Make a cache library by_property_type to make this easier
+					# Tries to get it as a descriptor.
 					var __item_cx: Array = get_from_cache("by_descriptor_id", __item_from_id)
 					__type = "descriptor"
 					if __item_cx.is_empty(): 
+						# Not a descriptor. Get it as a property.
 						__item_cx = get_from_cache("by_property_id", __item_from_id)
 						__type = "property"
+						if __item_cx.is_empty(): continue # Deleted?
 					__item_ref = __item_cx[0]
 				else:
 					__fail.append(__item_from_id) 

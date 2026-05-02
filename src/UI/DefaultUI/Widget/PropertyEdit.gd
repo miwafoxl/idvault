@@ -23,7 +23,7 @@ func deserialize_properties(__item_id: String, \
 		else:
 			printerr("PropertyEditWidget: unknown prop type of prop id %s" % __prop.id)
 		if __scn == null: continue
-		__scn.related_prop_id = __prop.id
+		__scn.related_id = __prop.id
 		__scn.deserialize(__prop)
 		__scn.trigger.connect(trigger.emit)
 		spawn_node.add_child(__scn)
@@ -38,15 +38,15 @@ func get_properties_as_dict(__property_edit: Array[Node] = \
 	var __rem_arr: Array[String] = []
 	var __changed: bool = false
 	for __prop_edit: PropertyWidget in __property_edit as Array[PropertyWidget]:
-		if __prop_edit.related_prop_id.is_empty():
+		if __prop_edit.related_id.is_empty():
 			__add_arr.append(__prop_edit.get_as_property())
 			__changed = true
 		else:
 			if __prop_edit.marked_for_deletion:
-				__rem_arr.append(__prop_edit.related_prop_id)
+				__rem_arr.append(__prop_edit.related_id)
 				__changed = true
 			if not __prop_edit.check_if_changed(): continue
-			__mod.set(__prop_edit.related_prop_id, __prop_edit.get_as_property())
+			__mod.set(__prop_edit.related_id, __prop_edit.get_as_property())
 			__changed = true
 	if __changed:
 		__add.set(editing_item_id, __add_arr)
