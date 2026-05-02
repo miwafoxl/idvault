@@ -10,7 +10,7 @@ const DAYS_IN_MONTHS: Array[int] = [ 31,29,31,30,31,30,31,31,30,31,30,31 ]
 
 func deserialize(__property: Property) -> void:
 	var __prop: Date = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	description.text = __prop.description
 	day.text = str(__prop.yyyymmdd.z)
 	year.text = str(__prop.yyyymmdd.x)

@@ -4,8 +4,9 @@ class_name PropertyWidget
 
 const UNCHANGED_META_STR: StringName = &"unchanged"
 
-var related_prop_id: String = ""
+var related_id: String = ""
 var marked_for_deletion: bool = false
+var marked_to_append: bool = false
 var changed: bool = false
 
 @abstract

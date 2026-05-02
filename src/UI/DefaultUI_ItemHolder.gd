@@ -10,6 +10,9 @@ const list_collapsible_head: PackedScene = preload(
 func _init(__item: Item) -> void:
 	self.item = __item
 
+# TODO: Since there's a DefaultUI_PropertyHolder now, this doesn't make much sense because 
+# now you can just do DefaultUI_PropertyHolder.new(item.properties[0]), though there's no support for
+# arrays in that case.
 func build_wd_list_collapsible_head() -> Array[DefaultUI_ListCollapsibleHead]:
 	var __get_packed_scn: Callable = func(__prop: Property) -> PackedScene:
 		var __scn: PackedScene = null

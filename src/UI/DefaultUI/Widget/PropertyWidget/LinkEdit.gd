@@ -6,7 +6,7 @@ class_name LinkEditWidget
 
 func deserialize(__property: Property) -> void:
 	var __prop: Link = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	from_id.text = __prop.from_id
 	to_id.text = __prop.to_id
 	for __control: LineEdit in [from_id, to_id]:

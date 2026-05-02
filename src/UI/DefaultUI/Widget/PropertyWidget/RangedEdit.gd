@@ -14,7 +14,7 @@ const DAYS_IN_MONTHS: Array[int] = [ 31,29,31,30,31,30,31,31,30,31,30,31 ]
 
 func deserialize(__property: Property) -> void:
 	var __prop: RangedDate = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	indefinite.set_pressed(__prop.indefinite_end)
 	# Day deserialize
 	day_start.text = str(__prop.start_date.z) if __prop.start_date.z > 0 else ""

@@ -6,7 +6,7 @@ class_name DisplayEditWidget
 
 func deserialize(__property: Property) -> void:
 	var __prop: Display = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	%LINE_HEADER.set_text(__prop.header)
 	%LINE_ALT.set_text(__prop.alt)
 	%LINE_BRIEF.set_text(__prop.brief)
