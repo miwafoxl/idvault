@@ -38,15 +38,3 @@ func get_as_property() -> Property:
 	var __text: String = %LINE_TEXT.text \
 		.left(1500)
 	return Display.new(__title, __alt, __brief, __text)
-
-func collect() -> Dictionary:
-	var __collected: Dictionary = {}
-	if marked_for_deletion:
-		__collected = {"rem": {
-			related_prop_id: marked_for_deletion
-		}}
-	elif check_if_changed():
-		__collected = {"mod": {
-			related_prop_id: get_as_property().deserialized(false)
-		}}
-	return __collected
