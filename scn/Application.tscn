@@ -25,7 +25,6 @@
 [ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Module/ItemModule.gd" id="24_1v7vn"]
 [ext_resource type="Resource" uid="uid://ccts7mjdabkm4" path="res://res/actions/property/edit/ApplyBulk.tres" id="24_s2ijd"]
 [ext_resource type="Resource" uid="uid://dco4oygq8k33m" path="res://res/actions/item/select/ByItemID_Toggle.tres" id="25_bnnxs"]
-[ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="26_1bq3j"]
 [ext_resource type="Resource" uid="uid://bpam0ndoe46cb" path="res://res/actions/item/stage/Query.tres" id="26_33pya"]
 [ext_resource type="Resource" uid="uid://dvnlmjildicpb" path="res://res/actions/item/reorder/ByPropertyIndex.tres" id="27_bnnxs"]
 
@@ -33,8 +32,6 @@
 script = ExtResource("1_tbfir")
 default_ui = ExtResource("2_1bq3j")
 metadata/_custom_type_script = "uid://by3xvk1tboofk"
-
-[node name="Testing" parent="." unique_id=1650119604 instance=ExtResource("26_1bq3j")]
 
 [node name="ACTION_MODULE" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("mod_item")]
 unique_name_in_owner = true
