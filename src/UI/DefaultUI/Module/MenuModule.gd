@@ -1,5 +1,5 @@
-extends Manager
-class_name MenuManager
+extends Module
+class_name DefaultUI_MenuModule
 
 @export var default: Array[Menu] = [];
 @export var loaded: Dictionary[StringName, Variant] = {}; #  {alias: menu ref}
@@ -14,10 +14,10 @@ func append_menus(__menus: Array[Menu], __log: bool = false) -> void:
 		var __cur: Menu = __menus[i]
 		var __ref: WeakRef = null
 		if __cur.alias.is_empty():
-			printerr("DefaultUI_MenuManager: menu id on index %s has no alias. Skipping it." % i)
+			printerr("DefaultUI_MenuModule: menu id on index %s has no alias. Skipping it." % i)
 			continue
 		if __cur.alias in __loaded_menus:
-			printerr("DefaultUI_MenuManager: menu id '%s' has the same alias as a previously loaded menu. Please unload that one then append it." % i)
+			printerr("DefaultUI_MenuModule: menu id '%s' has the same alias as a previously loaded menu. Please unload that one then append it." % i)
 			continue
 		__ref = weakref(__cur)
 		loaded.set(__cur.alias, __ref)
@@ -25,7 +25,7 @@ func append_menus(__menus: Array[Menu], __log: bool = false) -> void:
 	loaded.sort()
 	if __log:
 		__loaded_menus.sort()
-		print("DefaultUI_MenuManager: %s loaded:\n- %s" % [__loaded_menus.size(), \
+		print("DefaultUI_MenuModule: %s loaded:\n- %s" % [__loaded_menus.size(), \
 			"\n- ".join(__loaded_menus)
 		])
 
@@ -40,16 +40,16 @@ func retrieve_menu(__menu_id: StringName, __param_dict: Dictionary = {}) -> Cont
 	var __ref: WeakRef = loaded.get(__menu_id, null)
 	var __menu: Menu = null
 	if __ref == null:
-		printerr("DefaultUI_MenuManager: menu id '%s' not found or loaded." % __menu_id)
+		printerr("DefaultUI_MenuModule: menu id '%s' not found or loaded." % __menu_id)
 		return null
 	__menu = __ref.get_ref()
 	if __menu == null:
-		printerr("DefaultUI_MenuManager: failed to get a reference to menu id '%s'." % __menu_id)
+		printerr("DefaultUI_MenuModule: failed to get a reference to menu id '%s'." % __menu_id)
 		return null
 	var __result: ContextMenu = __menu.get_menu(__param_dict)
 	__result.set_theme(theme)
 	if __result == null:
-		push_warning("DefaultUI_MenuManager: menu id '%s' failed." % __menu_id)
+		push_warning("DefaultUI_MenuModule: menu id '%s' failed." % __menu_id)
 	return __result
 
 func menu_action_callback(__param: Dictionary) -> void:

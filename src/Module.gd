@@ -1,3 +1,3 @@
 @abstract
 extends Node
-class_name Manager
+class_name Module

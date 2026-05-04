@@ -1,7 +1,7 @@
 extends Object
 
 ## Removes specific properties from items by property ID
-func run(__manager: ItemManager, __param: Dictionary) -> bool:
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	var __items: Array[Item] = []
 	var __rm_property_ids: Array[String] = []
 	#region Parameter processing

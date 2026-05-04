@@ -16,7 +16,7 @@ func order(a: Item, b: Item) -> bool:
 	return false
 
 ## Stage items in alphabetically
-func run(__manager: ItemManager, __param: Dictionary) -> bool:
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	var __items: Array[Item] = []
 	#region Parameter processing
 	for __key: String in __param:
@@ -27,7 +27,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 					if __arg is Item: __items.append(__arg as Item)
 	#endregion Parameter processing
 	if __items.is_empty():
-		__items = __manager.unordered_items
+		__items = __mod_item.unordered_items
 	__items.sort_custom(order)
-	__manager.stage_items(__items)
+	__mod_item.stage_items(__items)
 	return true

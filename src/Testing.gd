@@ -1,61 +1,61 @@
 extends Node
 
-@export var action_manager: ActionManager
-@export var dialog_manager: DefaultUI_DialogManager
-@export var manager: ItemManager
+#@export var dialog_manager: DefaultUI_DialogManager
+@export var mod_item: ItemModule
+@export var mod_action: ActionModule
 
 ## Creates a single empty item
 func test1() -> bool:
 	# Setup: --------------------------------------------------
-	if not action_manager.run(&"items.append.items", {}):
+	if not mod_action.run(&"items.append.items", {}):
 		return false
-	if not action_manager.run(&"items.stage.unordered", {
-		"item": manager.unordered_items }):
+	if not mod_action.run(&"items.stage.unordered", {
+		"item": mod_item.unordered_items }):
 			return false
 	# Cleanup: ------------------------------------------------
-	if not action_manager.run(&"items.select.by_item_index", {
+	if not mod_action.run(&"items.select.by_item_index", {
 		"item_idx": [0] }):
 			return false
-	if not action_manager.run(&"items.remove.selected", {}):
+	if not mod_action.run(&"items.remove.selected", {}):
 			return false
 	return true
 
 ## Creates 10 empty items
 func test2() -> bool:
 	# Setup: --------------------------------------------------
-	if not action_manager.run(&"items.append.items", {
+	if not mod_action.run(&"items.append.items", {
 		"count": 10 }):
 			return false
-	if not action_manager.run(&"items.stage.unordered", {
-		"item": manager.unordered_items }):
+	if not mod_action.run(&"items.stage.unordered", {
+		"item": mod_item.unordered_items }):
 			return false
 	# Cleanup: ------------------------------------------------
-	if not action_manager.run(&"items.select.by_item_index", {
+	if not mod_action.run(&"items.select.by_item_index", {
 		"item_idx": range(10) }):
 			return false
-	if not action_manager.run(&"items.remove.selected", {}):
+	if not mod_action.run(&"items.remove.selected", {}):
 		return false
 	return true
 
 ## Creates a single item and gives it a property afterwards
 func test3() -> bool:
 	# Setup: --------------------------------------------------
-	if not action_manager.run(&"items.append.items", {
+	if not mod_action.run(&"items.append.items", {
 		"properties": [Display.new("Momento")] }):
 			return false
-	if not action_manager.run(&"items.stage.unordered", {
-		"item": manager.unordered_items }):
+	if not mod_action.run(&"items.stage.unordered", {
+		"item": mod_item.unordered_items }):
 			return false
-	if not action_manager.run(&"items.select.by_item_index", {
+	if not mod_action.run(&"items.select.by_item_index", {
 		"item_idx": [0] }):
 			return false
-	var __selected_id: String = manager.selected_items[0].id
-	if not action_manager.run(&"items.append.properties_to_selected", {
+	var __selected_id: String = mod_item.selected_items[0].id
+	if not mod_action.run(&"items.append.properties_to_selected", {
 		"properties": [Link.new(__selected_id), 
 					   Descriptor.new("test")] }):
 			return false
 	# Cleanup: ------------------------------------------------
-	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
+	if not mod_action.run(&"items.remove.selected", {}): # Cleanup
 		return false
 	return true
 
@@ -63,25 +63,25 @@ func test3() -> bool:
 ## without deleting the whole item
 func test4() -> bool:
 	# Setup: --------------------------------------------------
-	if not action_manager.run(&"items.append.items", {}):
+	if not mod_action.run(&"items.append.items", {}):
 		return false
-	if not action_manager.run(&"items.stage.unordered", {
-		"item": manager.unordered_items }):
+	if not mod_action.run(&"items.stage.unordered", {
+		"item": mod_item.unordered_items }):
 			return false
-	if not action_manager.run(&"items.select.by_item_index", {
+	if not mod_action.run(&"items.select.by_item_index", {
 		"item_idx": [0] }):
 			return false
 	var __display: Display = Display.new("coc");
-	var __selected_id: String = manager.selected_items[0].id
-	if not action_manager.run(&"items.append.properties_to_selected", {
+	var __selected_id: String = mod_item.selected_items[0].id
+	if not mod_action.run(&"items.append.properties_to_selected", {
 		"properties": [Link.new(__selected_id), __display] }):
 			return false
-	if not action_manager.run(&"items.remove.property_id", {
-		"item": manager.selected_items, 
+	if not mod_action.run(&"items.remove.property_id", {
+		"item": mod_item.selected_items, 
 		"property_id": [__display.id] }):
 			return false
 	# Cleanup: ------------------------------------------------
-	if not action_manager.run(&"items.remove.selected", {}):
+	if not mod_action.run(&"items.remove.selected", {}):
 		return false
 	return true
 
@@ -103,21 +103,21 @@ func test4() -> bool:
 ## a link parameter
 func test6() -> bool:
 	var __param: Parameter = Parameter.new(Parameter.ParameterTypes.NUMBER)
-	if not action_manager.run(&"items.append.items", {
+	if not mod_action.run(&"items.append.items", {
 		"properties": [Display.new("Kek"), __param] }):
 			return false
-	if not action_manager.run(&"items.stage.unordered", {
-		"item": manager.unordered_items }):
+	if not mod_action.run(&"items.stage.unordered", {
+		"item": mod_item.unordered_items }):
 			return false
-	if not action_manager.run(&"items.select.by_item_index", {
+	if not mod_action.run(&"items.select.by_item_index", {
 		"item_idx": [0] }):
 			return false
-	var __selected_id: String = manager.selected_items[0].id
-	if not action_manager.run(&"items.append.properties_to_selected", {
+	var __selected_id: String = mod_item.selected_items[0].id
+	if not mod_action.run(&"items.append.properties_to_selected", {
 		"properties": [Link.new(__selected_id, "", {__param.id: 7}), 
 					   Descriptor.new("test")] }):
 			return false
-	if not action_manager.run(&"items.remove.selected", {}): # Cleanup
+	if not mod_action.run(&"items.remove.selected", {}): # Cleanup
 		return false
 	return true
 
@@ -145,12 +145,6 @@ func test6() -> bool:
 	#var __q_result: Array[Item] = await __q.done
 	#return true
 
-## Opens a test dialog to check if value is returning from dialog
-func test7() -> bool:
-	var return_id: String = dialog_manager.open_return(&"test_return", {})
-	if return_id.is_empty():
-		return false
-	return true
 
 func do_tests() -> Array[int]:
 	var __failed_at: Array[int] = []
@@ -161,5 +155,4 @@ func do_tests() -> Array[int]:
 	#if not test5(): __failed_at.append(5) #
 	if not test6(): __failed_at.append(6)
 	#if not await test6_5(): __failed_at.append(65) #
-	#if not test7(): __failed_at.append(7) #
 	return __failed_at

@@ -1,7 +1,7 @@
-extends Manager
-class_name ActionManager
+extends Module
+class_name ActionModule
 
-@export var manager: ItemManager
+@export var mod_item: ItemModule
 @export var default: Array[Action] = [];
 @export var loaded: Dictionary[StringName, Variant] = {}; # {action alias: action ref}
 
@@ -15,13 +15,13 @@ func append_actions(__actions: Array[Action], __log: bool = false) -> void:
 		var __cur: Action = __actions[i]
 		var __ref: WeakRef = null
 		if __cur.alias.is_empty():
-			printerr("ActionManager: action on index %s has no alias. Skipping it." % i)
+			printerr("ActionModule: action on index %s has no alias. Skipping it." % i)
 			continue
 		if __cur.alias in __loaded_actions:
-			printerr("ActionManager: action '%s' has the same alias as a previously loaded action. Please unload that one then append it." % i)
+			printerr("ActionModule: action '%s' has the same alias as a previously loaded action. Please unload that one then append it." % i)
 			continue
 		if not __cur.check():
-			printerr("ActionManager: action '%s' did not pass Action.check()." % __cur.alias)
+			printerr("ActionModule: action '%s' did not pass Action.check()." % __cur.alias)
 			continue
 		__ref = weakref(__cur)
 		loaded.set(__cur.alias, __ref)
@@ -29,7 +29,7 @@ func append_actions(__actions: Array[Action], __log: bool = false) -> void:
 	loaded.sort()
 	if __log:
 		__loaded_actions.sort()
-		print("ActionManager: %s loaded:\n- %s" % [__loaded_actions.size(), \
+		print("ActionModule: %s loaded:\n- %s" % [__loaded_actions.size(), \
 			"\n- ".join(__loaded_actions)
 		])
 
@@ -43,13 +43,13 @@ func run(__action: StringName, __param_dict: Dictionary) -> bool:
 	var __ref: WeakRef = loaded.get(__action, null)
 	var __act: Action = null
 	if __ref == null:
-		printerr("ActionManager: action '%s' not found or loaded." % __action)
+		printerr("ActionModule: action '%s' not found or loaded." % __action)
 		return false
 	__act = __ref.get_ref()
 	if __act == null:
-		printerr("ActionManager: failed to get a reference to action '%s'." % __action)
+		printerr("ActionModule: failed to get a reference to action '%s'." % __action)
 		return false
-	var __result: bool = __act.execute(manager, __param_dict)
+	var __result: bool = __act.execute(mod_item, __param_dict)
 	if not __result:
-		printerr("ActionManager: action '%s' failed." % __action)
+		printerr("ActionModule: action '%s' failed." % __action)
 	return __result

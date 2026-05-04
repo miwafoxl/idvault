@@ -1,7 +1,7 @@
 extends Object
 
 ## Deselect items. If items aren't selected, nothing happens.
-func run(__manager: ItemManager, __param: Dictionary) -> bool: 
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool: 
 	var __item_ids: Array[int]
 	var __deselect_indexes: Array[int]
 	#region Parameter processing
@@ -16,5 +16,5 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 				push_warning("items.deselect.by_item_index: invalid key '%s'\
 				-> item_idx" % __key)
 	#endregion Parameter processing
-	__manager.deselect_items_at_stage_index(__deselect_indexes)
+	__mod_item.deselect_items_at_stage_index(__deselect_indexes)
 	return true

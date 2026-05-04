@@ -1,7 +1,7 @@
 extends Object
 
 ## Get property changes and apply
-func run(__manager: ItemManager, __param: Dictionary) -> bool:
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	var __append: Dictionary # {Item.id: [New prop ref]} -> push into
 	var __modify: Dictionary # {Prop.id: New prop ref} -> copy into 
 	var __remove: Dictionary # {Item.id: [Prop.id]} -> remove_properties
@@ -28,7 +28,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __append:
 		for __op_id: String in __append:
 			var __item_id: String = __op_id.get_slice("@", 1)
-			var __item_cx: Array = __manager.get_from_cache("by_item_id", __item_id)
+			var __item_cx: Array = __mod_item.get_from_cache("by_item_id", __item_id)
 			var __append_prop: Property = __append[__op_id][0]
 			if __item_cx.is_empty():
 				push_warning("property.edit.apply_bulk: Failed to " + \
@@ -46,7 +46,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __remove:
 		for __op_id: String in __remove:
 			var __item_id: String = __op_id.get_slice("@", 1)
-			var __item_cx: Array = __manager.get_from_cache("by_item_id", __item_id)
+			var __item_cx: Array = __mod_item.get_from_cache("by_item_id", __item_id)
 			if __item_cx.is_empty():
 				push_warning("property.edit.apply_bulk: Failed to " + \
 				"get cache for item id '%s' (item might have been deleted)." % [__item_id])
@@ -63,7 +63,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	if __modify:
 		for __op_id: String in __modify:
 			var __prop_id: String = __op_id.get_slice("@", 1)
-			var __get_prop: Array = __manager.get_from_cache("by_property_id", __prop_id)
+			var __get_prop: Array = __mod_item.get_from_cache("by_property_id", __prop_id)
 			var __get_modified_prop: Dictionary = __modify[__op_id]
 			var __item: Item = (__get_prop[0] as WeakRef).get_ref()
 			var __prop: Property = (__get_prop[1] as WeakRef).get_ref()
@@ -75,9 +75,9 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 			__items_updated.append(__item)
 	
 	if __items_updated:  # TODO: reload_cache only affected items
-		__manager.reload_cache(__manager.unordered_items)
-		__manager.stage_updated.emit()
-		__manager.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
+		__mod_item.reload_cache(__mod_item.unordered_items)
+		__mod_item.stage_updated.emit()
+		__mod_item.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
 			Trigger.TriggerTypes.UI_REQUEST, # requests directly, but not calling this trigger
 			&"dialog:item_properties"))      # here won't update the item_preperties window.
 	return true
