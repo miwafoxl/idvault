@@ -1,7 +1,7 @@
 extends Object
 
 ## Appends properties to many item IDs
-func run(__manager: ItemManager, __param: Dictionary) -> bool:
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	var __item_id: Array[String]
 	var __properties: Array[Property]
 	#region Parameter processing
@@ -22,7 +22,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	#endregion Parameter processing
 	var __items_updated: Array[Item] = []
 	for __id: String in __item_id:
-		var __item_cx: Array = __manager.get_from_cache("by_item_id", __id)
+		var __item_cx: Array = __mod_item.get_from_cache("by_item_id", __id)
 		if __item_cx.is_empty():
 			push_warning("property.append.to_item_id: Failed to " + \
 			"get cache for item id '%s' (item might have been deleted)." % [__item_id])
@@ -36,9 +36,9 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 		__items_updated.append(__item)
 		
 	if __items_updated: # TODO: reload_cache only affected items
-		__manager.reload_cache(__manager.unordered_items)
-		__manager.stage_updated.emit()
-		__manager.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
+		__mod_item.reload_cache(__mod_item.unordered_items)
+		__mod_item.stage_updated.emit()
+		__mod_item.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
 			Trigger.TriggerTypes.UI_REQUEST, # requests directly, but not calling this trigger
 			&"dialog:item_properties"))      # here won't update the item_preperties window.
 	return false

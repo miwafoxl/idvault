@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by3xvk1tboofk" path="res://src/Application.gd" id="1_tbfir"]
 [ext_resource type="PackedScene" uid="uid://qwnt8iblsa3l" path="res://scn/DefaultUI/Default UI.tscn" id="2_1bq3j"]
-[ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/Manager/ActionManager.gd" id="2_xwlb1"]
+[ext_resource type="Script" uid="uid://cf1bf1qjt8op7" path="res://src/Module/ActionModule.gd" id="2_xwlb1"]
 [ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="3_1v7vn"]
 [ext_resource type="Resource" uid="uid://djcpnhe36pfht" path="res://res/actions/item/append/TestItem.tres" id="4_gl6yv"]
 [ext_resource type="Resource" uid="uid://cd1r6vnrbo6tk" path="res://res/actions/item/append/Items.tres" id="5_1bq3j"]
@@ -22,34 +22,28 @@
 [ext_resource type="Resource" uid="uid://dl2u5de4plemq" path="res://res/actions/item/stage/Unordered.tres" id="19_qonqs"]
 [ext_resource type="Resource" uid="uid://bwadsxr54clqa" path="res://res/actions/item/to_clipboard/SelectedDisplay.tres" id="22_0slqf"]
 [ext_resource type="Resource" uid="uid://dm2s7cs4a6av7" path="res://res/actions/item/dialog/SelectedItemProperties.tres" id="23_pucfs"]
-[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Manager/ItemManager.gd" id="24_1v7vn"]
+[ext_resource type="Script" uid="uid://htdxvtahxgnw" path="res://src/Module/ItemModule.gd" id="24_1v7vn"]
 [ext_resource type="Resource" uid="uid://ccts7mjdabkm4" path="res://res/actions/property/edit/ApplyBulk.tres" id="24_s2ijd"]
 [ext_resource type="Resource" uid="uid://dco4oygq8k33m" path="res://res/actions/item/select/ByItemID_Toggle.tres" id="25_bnnxs"]
 [ext_resource type="PackedScene" uid="uid://cjuakrb1vso45" path="res://scn/Testing.tscn" id="26_1bq3j"]
 [ext_resource type="Resource" uid="uid://bpam0ndoe46cb" path="res://res/actions/item/stage/Query.tres" id="26_33pya"]
 [ext_resource type="Resource" uid="uid://dvnlmjildicpb" path="res://res/actions/item/reorder/ByPropertyIndex.tres" id="27_bnnxs"]
 
-[node name="Application" type="Node" unique_id=363368971 node_paths=PackedStringArray("item_manager", "action_manager", "menu_manager")]
+[node name="APPLICATION" type="Node" unique_id=363368971]
 script = ExtResource("1_tbfir")
 default_ui = ExtResource("2_1bq3j")
-item_manager = NodePath("ItemManager")
-action_manager = NodePath("ActionManager")
-menu_manager = NodePath("")
 metadata/_custom_type_script = "uid://by3xvk1tboofk"
 
-[node name="Testing" parent="." unique_id=1650119604 node_paths=PackedStringArray("action_manager", "manager") instance=ExtResource("26_1bq3j")]
-action_manager = NodePath("../ActionManager")
-manager = NodePath("../ItemManager")
+[node name="Testing" parent="." unique_id=1650119604 instance=ExtResource("26_1bq3j")]
 
-[node name="ActionManager" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("manager")]
+[node name="ACTION_MODULE" type="Node" parent="." unique_id=1019005168 node_paths=PackedStringArray("mod_item")]
+unique_name_in_owner = true
 script = ExtResource("2_xwlb1")
-manager = NodePath("../ItemManager")
+mod_item = NodePath("../ITEM_MODULE")
 default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd"), ExtResource("25_bnnxs"), ExtResource("26_33pya"), ExtResource("27_bnnxs")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
-[node name="ItemManager" type="Node" parent="." unique_id=1855138344]
+[node name="ITEM_MODULE" type="Node" parent="." unique_id=1855138344]
+unique_name_in_owner = true
 script = ExtResource("24_1v7vn")
-unordered_items = null
-selected_items = null
-item_cache = null
 metadata/_custom_type_script = "uid://htdxvtahxgnw"

@@ -1,7 +1,7 @@
 extends Object
 
 ## Creates and appends a specified amount of empty items
-func run(__manager: ItemManager, __param: Dictionary) -> bool: 
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool: 
 	var __range: int = 1
 	var __init_props: Array[Property] = []
 	var __open_item_properties: bool = false
@@ -25,10 +25,10 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 	var __items: Array[Item] = []	
 	for i: int in __ids:
 		__items.append(Item.new("", __init_props.duplicate(true)))
-	__manager.append_items(__items)
+	__mod_item.append_items(__items)
 	if __open_item_properties:
-		__manager.select_items(__items)
-		__manager.trigger.emit(Trigger.new(
+		__mod_item.select_items(__items)
+		__mod_item.trigger.emit(Trigger.new(
 			Trigger.TriggerTypes.ACTION,
 			&"items.dialog.selected_item_properties"
 		))

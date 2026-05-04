@@ -19,13 +19,13 @@ func check() -> bool:
 	__obj.free()
 	return checked
 
-func execute(__manager: ItemManager, __param: Dictionary) -> bool:
+func execute(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	if not checked:
-		printerr("Action: can't run action '%s' because it has not been checked by ActionManager." % alias)
+		printerr("Action: can't run action '%s' because it has not been checked by ActionModule." % alias)
 		return false
 	var __obj: Object = Object.new()
 	var __result: bool = false
 	__obj.set_script(src)
-	__result = __obj.run(__manager, __param)
+	__result = __obj.run(__mod_item, __param)
 	__obj.free()
 	return __result

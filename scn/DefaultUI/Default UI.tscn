@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://box8byd3uky85" path="res://src/UI/DefaultUI.gd" id="2_1pjss"]
 [ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/DefaultUI/theme/default.tres" id="2_ag2qf"]
 [ext_resource type="PackedScene" uid="uid://crtk73wxrxvkq" path="res://scn/DefaultUI/Panels/ItemListPanel.tscn" id="3_dbx2o"]
-[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/UI/DefaultUI/Manager/DialogManager.gd" id="3_vodya"]
+[ext_resource type="Script" uid="uid://bwxtawgolorsm" path="res://src/UI/DefaultUI/Module/DialogModule.gd" id="3_vodya"]
 [ext_resource type="PackedScene" uid="uid://dfv228qdvucjj" path="res://scn/DefaultUI/Dialogs/ItemProperties.tscn" id="4_efg31"]
 [ext_resource type="PackedScene" uid="uid://bbae2ckb24yn8" path="res://scn/DefaultUI/Dialogs/Confirmation.tscn" id="5_j8r87"]
 [ext_resource type="PackedScene" uid="uid://yiyymio1q8vs" path="res://scn/DefaultUI/Dialogs/Message.tscn" id="6_0uej8"]
-[ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/UI/DefaultUI/Manager/MenuManager.gd" id="7_ma4em"]
+[ext_resource type="Script" uid="uid://bwyef4g1l0om3" path="res://src/UI/DefaultUI/Module/MenuModule.gd" id="7_ma4em"]
 [ext_resource type="PackedScene" uid="uid://bsmf80bu51od0" path="res://scn/DefaultUI/Panels/ItemOverviewPanel.tscn" id="8_efg31"]
 [ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/UI/DefaultUI/Menu.gd" id="8_uf6ba"]
 [ext_resource type="Resource" uid="uid://ceslm53byufwy" path="res://res/DefaultUI/menus/items/ItemMenu.tres" id="9_bb540"]
@@ -27,7 +27,7 @@ size_flags_vertical = 3
 theme = ExtResource("2_ag2qf")
 script = ExtResource("2_1pjss")
 
-[node name="DIALOG_MANAGER" type="Node" parent="." unique_id=1938092817 node_paths=PackedStringArray("spawn_node")]
+[node name="DIALOG_MODULE" type="Node" parent="." unique_id=1938092817 node_paths=PackedStringArray("spawn_node")]
 unique_name_in_owner = true
 script = ExtResource("3_vodya")
 spawn_node = NodePath("..")
@@ -38,7 +38,7 @@ default = Dictionary[StringName, PackedScene]({
 })
 metadata/_custom_type_script = "uid://bwxtawgolorsm"
 
-[node name="MENU_MANAGER" type="Node" parent="." unique_id=325520232]
+[node name="MENU_MODULE" type="Node" parent="." unique_id=325520232]
 unique_name_in_owner = true
 script = ExtResource("7_ma4em")
 default = Array[ExtResource("8_uf6ba")]([ExtResource("9_bb540"), ExtResource("10_l62gj"), ExtResource("11_c3758"), ExtResource("12_e5mym")])

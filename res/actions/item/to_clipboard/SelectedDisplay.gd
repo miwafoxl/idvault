@@ -2,9 +2,9 @@ extends Object
 
 ## Retrieves valid string from selected items and set them to clipboard,
 ## separated into spaces.
-func run(__manager: ItemManager, __param: Dictionary) -> bool:
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	var __display: PackedStringArray = []
-	for __item: Item in __manager.selected_items:
+	for __item: Item in __mod_item.selected_items:
 		var __string: String = __item.get_valid_string_display_or_empty()
 		if not __string.is_empty():
 			__display.append(__string)

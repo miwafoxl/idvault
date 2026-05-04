@@ -2,20 +2,18 @@ extends Node
 class_name Application
 
 @export var default_ui: PackedScene
-@export var item_manager: ItemManager
-@export var action_manager: ActionManager
-
 @onready var testing = $Testing
+
 var ui: UI = null
 
 func swap_ui(__ui: PackedScene) -> void:
 	var __node: UI = __ui.instantiate()
 	ui = __node
-	ui.give_managers({
-		"item": item_manager })
+	ui.modules({
+		"item": %ITEM_MODULE })
 	ui.trigger.connect(process_trigger)
-	item_manager.stage_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
-	item_manager.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
+	%ITEM_MODULE.stage_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
+	%ITEM_MODULE.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
 	add_child(ui, true)
 
 func ui_request(__request: StringName, __param: Dictionary) -> void:
@@ -27,7 +25,7 @@ func process_trigger(__tr: Trigger) -> void:
 		return
 	match __tr.type:
 		Trigger.TriggerTypes.ACTION:
-			action_manager.run(__tr.relevant_id, __tr.parameters)
+			%ACTION_MODULE.run(__tr.relevant_id, __tr.parameters)
 		Trigger.TriggerTypes.UI_REQUEST:
 			ui_request(__tr.relevant_id, __tr.parameters)
 		_:
@@ -35,9 +33,9 @@ func process_trigger(__tr: Trigger) -> void:
 				Trigger.TriggerTypes.keys()[__tr.type])
 
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default, true)
-	action_manager.trigger.connect(process_trigger)
-	item_manager.trigger.connect(process_trigger)
+	%ACTION_MODULE.append_actions(%ACTION_MODULE.default, true)
+	%ACTION_MODULE.trigger.connect(process_trigger)
+	%ITEM_MODULE.trigger.connect(process_trigger)
 	swap_ui(default_ui)
 	var __disable_test: bool = true
 	var __test_results: Array = [] if __disable_test else testing.do_tests()

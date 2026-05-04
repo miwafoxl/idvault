@@ -2,7 +2,7 @@ extends Resource
 class_name Query
 
 var raw_query: String = "";
-var manager: ItemManager
+var mod_item: ItemModule
 var items: Array[Item]
 
 var filtered: Array[Item]
@@ -78,7 +78,7 @@ func parse_split(__split: PackedStringArray) -> Dictionary[String, Parsed]:
 		if __descriptor_str.left(1) in ["-", "!"]:
 			__negated = true
 			__descriptor_str = __descriptor_str.right(-1)
-		__descriptor_cx = manager.get_from_cache("by_descriptor_alias", __descriptor_str)
+		__descriptor_cx = mod_item.get_from_cache("by_descriptor_alias", __descriptor_str)
 		if __descriptor_cx.is_empty():
 			error_query = [__query_str, ParseError.DESCRIPTOR_NOT_FOUND]
 			break
@@ -148,11 +148,11 @@ func filter_items_by_parsed(__items: Array[Item], \
 			__positive_matches.append(__id)
 	for __item: Item in __items:
 		var __match: bool = true
-		var __cache: Array = manager.get_from_cache_matched("by_links", __positive_matches.map(
+		var __cache: Array = mod_item.get_from_cache_matched("by_links", __positive_matches.map(
 			func(id: String): return "%s@%s" % [id, __item.id] ))
 		var __cache_negated: Array = []
 		if not __negative_matches.is_empty():
-			__cache_negated = manager.get_from_cache_matched("by_links",  __negative_matches.map(
+			__cache_negated = mod_item.get_from_cache_matched("by_links",  __negative_matches.map(
 			func(id: String): return "%s@%s" % [id, __item.id] ))
 	
 		if __cache.is_empty():
@@ -176,10 +176,10 @@ func filter_items_by_parsed(__items: Array[Item], \
 	return __filtered
 
 func _init(__raw_query: String, __items: Array[Item], \
-		__manager: ItemManager, __exclusive: bool = true) -> void:
+		__mod_item: ItemModule, __exclusive: bool = true) -> void:
 	self.raw_query = __raw_query.strip_edges().strip_escapes()
 	self.items = __items
-	self.manager = __manager
+	self.mod_item = __mod_item
 	if __items.is_empty():
 		printerr("Query: received no items to filter")
 	else: process(__exclusive)

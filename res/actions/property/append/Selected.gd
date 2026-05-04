@@ -1,10 +1,10 @@
 extends Object
 
 ## Append properties to selected items
-func run(__manager: ItemManager, __param: Dictionary) -> bool:
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	# Every item in __args is a property
 	var __properties: Array[Property] = []
-	if __manager.selected_items.is_empty():
+	if __mod_item.selected_items.is_empty():
 		push_warning("items.append.property_to_selected: Nothing selected")
 		return false
 	#region Parameter processing
@@ -22,14 +22,14 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 				-> properties" % __key)
 	#endregion Parameter processing
 	var __success: bool = true
-	for __item: Item in __manager.selected_items: # TODO: Make this less destructive in case it fails
+	for __item: Item in __mod_item.selected_items: # TODO: Make this less destructive in case it fails
 		if not __item.append_properties(__properties):
 			__success = false
 	
 	if __success: # TODO: reload_cache only affected items
-		__manager.reload_cache(__manager.unordered_items)
-		__manager.stage_updated.emit()
-		__manager.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
+		__mod_item.reload_cache(__mod_item.unordered_items)
+		__mod_item.stage_updated.emit()
+		__mod_item.trigger.emit(Trigger.new(  # TODO: Temporary. Actions shoudn't trigger UI
 			Trigger.TriggerTypes.UI_REQUEST, # requests directly, but not calling this trigger
 			&"dialog:item_properties"))      # here won't update the item_preperties window.
 	return __success

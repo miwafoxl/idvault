@@ -1,5 +1,5 @@
-extends Manager
-class_name ItemManager
+extends Module
+class_name ItemModule
 
 @export var unordered_items: Array[Item] = [];
 @export var selected_items: Array[Item] = [];
@@ -48,7 +48,7 @@ func append_properties_to_item(__item_arr_indexes: Array[int], \
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id < __items_size: 
-				printerr("Item Manager: Failed to append property to item %s (larger than \
+				printerr("ItemModule: Failed to append property to item %s (larger than \
 				items array size (%s))" % [__item_id, __items_size])
 				__err = false
 				break
@@ -134,8 +134,8 @@ func remove_items_unordered_index(__item_arr_indexes: Array[int]) -> bool:
 	if not __item_arr_indexes.is_empty():
 		for __item_id: int in __item_arr_indexes:
 			if __item_id >= __items_size: 
-				printerr("Item Manager: Failed to remove item %s (larger than \
-				items array size (%s))" % [__item_id, __items_size])
+				printerr("ItemModule::remove_items_unordered_index: Failed to remove " + \
+				"item %s (larger than items array size (%s))" % [__item_id, __items_size])
 				return false
 			unordered_items.set(__item_id, null)
 		clean_entries()
@@ -168,24 +168,24 @@ func get_from_cache(__cache_library: String, __head: String) -> Array:
 	var __head_arr: Array = []
 	var __cache_lib: Dictionary
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager::get_from_cache: non-existent cache '%s'. Returning empty array." % __cache_library)
+		printerr("ItemModule::get_from_cache: non-existent cache '%s'. Returning empty array." % __cache_library)
 		return []
 	__cache_lib = item_cache.get(__cache_library, {})
 	if not __cache_lib.is_empty():
 		__head_arr = __cache_lib.get(__head, [])
 	if __head_arr == []: pass
-		#printerr("ItemManager: cache '%s/%s' not found. Returning empty array." % [__cache_library, __head])
+		#printerr("ItemModule: cache '%s/%s' not found. Returning empty array." % [__cache_library, __head])
 	return __head_arr
 
 func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Array:
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager::get_from_cache_many: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		printerr("ItemModule::get_from_cache_many: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
 	var __head_arr: Array
 	for __header: String in __head:
 		var __get: Array = (item_cache.get(__cache_library) as Dictionary).get(__header, [])
 		if __get.is_empty():
-			printerr("ItemManager::get_from_cache_many: Invalid cache header '%s' in library '%s'. Returning empty array." % \
+			printerr("ItemModule::get_from_cache_many: Invalid cache header '%s' in library '%s'. Returning empty array." % \
 				[__header, __cache_library])
 			continue
 		__head_arr.append(__get)
@@ -193,7 +193,7 @@ func get_from_cache_many(__cache_library: String, __head: Array[String]) -> Arra
 
 func get_from_cache_matched(__cache_library: String, __match_string: Array) -> Array:
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager::get_from_cache_matched: Invalid cache library '%s'. Returning empty array." % __cache_library)
+		printerr("ItemModule::get_from_cache_matched: Invalid cache library '%s'. Returning empty array." % __cache_library)
 		return []
 	var __matched_keys: Array = []
 	var __head_arr: Array = []
@@ -210,7 +210,7 @@ func get_from_cache_matched(__cache_library: String, __match_string: Array) -> A
 
 func get_count_from_cache_matched(__cache_library: String, __match_string: String) -> int:
 	if not item_cache.has(__cache_library):
-		printerr("ItemManager::get_count_from_cache_matched: Invalid cache " + \
+		printerr("ItemModule::get_count_from_cache_matched: Invalid cache " + \
 		"library '%s'. Returning empty array." % __cache_library)
 		return 0
 	var __library: Dictionary = item_cache.get(__cache_library)
@@ -340,7 +340,8 @@ func get_staged_item_index(__indexes: Array) -> Array[Item]:
 		var __ref: WeakRef = staged_items.get(__stage_ids[__idx], null)
 		var __item: Item = null
 		if __ref == null or __ref.get_ref() == null:
-			printerr("Item Manager: Failed to get reference for item in stage index %s" % __idx)
+			printerr("ItemModule::get_staged_item_index: Failed to get reference " + \
+			"for item in stage index %s" % __idx)
 			continue
 		__item = __ref.get_ref()
 		__items.append(__item)
@@ -352,7 +353,8 @@ func get_staged_item_by_id(__item_ids: Array[String]) -> Array[Item]:
 		var __ref: WeakRef = staged_items.get(__id, null)
 		var __item: Item = null
 		if __ref == null or __ref.get_ref() == null: 
-			printerr("Item Manager: Failed to get reference for staged item id %s" % __id)
+			printerr("ItemModule::get_staged_item_by_id: Failed to get reference " + \
+			"for staged item id %s" % __id)
 			continue
 		__item = __ref.get_ref()
 		__items.append(__item)
@@ -430,8 +432,9 @@ func cache_retrieve_link_network(__items: Array[Item]) -> Dictionary:
 					"linker_item_id": __linker_ref.get_ref()
 				})
 	else: # Get common between all items
-		printerr("cache_retrieve_link_network: __size > 1 not implemented")
-	if __fail: printerr("ItemManager: Failed to identify ids %s for link network" % __fail)
+		printerr("ItemModule::cache_retrieve_link_network: __size > 1 not implemented")
+	if __fail: printerr("ItemModule::cache_retrieve_link_network: Failed to " + \
+		"identify ids %s for link network" % __fail)
 	return __network
 
 #endregion CACHE LINK NETWORK
