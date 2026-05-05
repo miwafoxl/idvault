@@ -122,8 +122,11 @@ func append_items(__entries: Array[Item]) -> bool:
 func remove_items_unordered(__items: Array[Item]) -> void:
 	for __item: Item in __items:
 		var __unord_idx: int = unordered_items.find(__item)
-		if __unord_idx == -1: continue
+		if __unord_idx == -1: 
+			continue
 		unordered_items.set(__unord_idx, null)
+		if selected_items.has(__item):
+			selected_items.erase(__item)
 		if staged_items.has(__item.id):
 			staged_items.erase(__item.id)
 	clean_entries()
@@ -335,7 +338,7 @@ func get_stage_size() -> int:
 func get_staged_item_index(__indexes: Array) -> Array[Item]:
 	var __items: Array[Item] = []
 	var __stage_ids: Array[String] = staged_items.keys()
-	if __indexes.is_empty(): return __items
+	if __indexes.is_empty() or __stage_ids.is_empty(): return __items
 	for __idx: int in __indexes:
 		var __ref: WeakRef = staged_items.get(__stage_ids[__idx], null)
 		var __item: Item = null
