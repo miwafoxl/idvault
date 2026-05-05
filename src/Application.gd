@@ -2,8 +2,6 @@ extends Node
 class_name Application
 
 @export var default_ui: PackedScene
-@onready var testing = $Testing
-
 var ui: UI = null
 
 func swap_ui(__ui: PackedScene) -> void:
