@@ -31,13 +31,9 @@ func process_trigger(__tr: Trigger) -> void:
 				Trigger.TriggerTypes.keys()[__tr.type])
 
 func _ready() -> void:
-	%ACTION_MODULE.append_actions(%ACTION_MODULE.default, true)
+	%ACTION_MODULE.append_actions(%ACTION_MODULE.default)
 	%ACTION_MODULE.trigger.connect(process_trigger)
 	%ITEM_MODULE.trigger.connect(process_trigger)
+	%TEST_MODULE.append_tests(%TEST_MODULE.tests)
+	%TEST_MODULE.do_tests()
 	swap_ui(default_ui)
-	var __disable_test: bool = true
-	var __test_results: Array = [] if __disable_test else testing.do_tests()
-	if __test_results.is_empty():
-		print(["All tests passed", "Tests disabled"][__disable_test as int])
-	else:
-		printerr("Test failed: ", __test_results)
