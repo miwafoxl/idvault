@@ -14,13 +14,15 @@ func should_swap(__bound_1: Vector3i, __bound_2: Vector3i) -> bool:
 func get_type_as_string() -> StringName:
 	return &"PROPERTY.TYPES.RANGED_DATE"
 
-func _init(__range: Array[Vector3i], __indefinite: bool = false) -> void:
+func _init(__range: Array[Vector3i] = [Vector3i.ZERO, Vector3i.ZERO], \
+		__indefinite: bool = false) -> void:
 	var __bound_1: Vector3i = __range[0];
 	var __bound_2: Vector3i = __range[1];
 	self.indefinite_end = __indefinite
 	self.start_date = __bound_1
 	self.end_date = __bound_2
+	super.flush_id()
 	if should_swap(__bound_1, __bound_2) and not __indefinite:
 		self.start_date = __bound_2
 		self.end_date = __bound_1
-	self.id = RandomString.new("P_").value
+	

@@ -7,7 +7,7 @@ class_name Descriptor
 func get_type_as_string() -> StringName:
 	return &"PROPERTY.TYPES.DESCRIPTOR"
 
-func _init(__alias: String, __priority: int = 0) -> void:
+func _init(__alias: String = "", __priority: int = 0) -> void:
 	self.alias = __alias
 	self.priority = __priority
-	self.id = RandomString.new("P_").value
+	super.flush_id()

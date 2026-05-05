@@ -22,8 +22,9 @@ func get_difference(__yyyymmdd: Vector3i) -> int:
 func get_type_as_string() -> StringName:
 	return &"PROPERTY.TYPES.DATE"
 
-func _init(__yyyymmdd: Vector3i, __description: String = "", __utc: int = 0) -> void:
+func _init(__yyyymmdd: Vector3i = Vector3i.ZERO, __description: String = "", \
+		__utc: int = 0) -> void:
 	self.yyyymmdd = __yyyymmdd
 	self.utc = __utc
 	self.description = __description
-	self.id = RandomString.new("P_").value
+	super.flush_id()

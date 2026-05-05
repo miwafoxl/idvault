@@ -19,4 +19,4 @@ func _init(__type: ParameterTypes = ParameterTypes.NUMBER, __order: int = 0, \
 	self.param_id = __id
 	self.order = __order
 	self.type = __type
-	self.id = RandomString.new("P_").value
+	super.flush_id()
