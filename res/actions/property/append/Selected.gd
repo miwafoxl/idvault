@@ -5,7 +5,7 @@ func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 	# Every item in __args is a property
 	var __properties: Array[Property] = []
 	if __mod_item.selected_items.is_empty():
-		push_warning("items.append.property_to_selected: Nothing selected")
+		push_warning("property.append.selected: Nothing selected")
 		return false
 	#region Parameter processing
 	for __key: String in __param:
@@ -18,12 +18,14 @@ func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
 				if __properties.is_empty(): 
 					return false
 			_:
-				push_warning("items.append.property_to_selected: invalid key '%s'\
+				push_warning("property.append.selected: invalid key '%s'\
 				-> properties" % __key)
 	#endregion Parameter processing
 	var __success: bool = true
 	for __item: Item in __mod_item.selected_items: # TODO: Make this less destructive in case it fails
-		if not __item.append_properties(__properties):
+		var __props: Array[Property] = __properties.duplicate_deep(Resource.DeepDuplicateMode.DEEP_DUPLICATE_ALL)
+		for __prop: Property in __props: __prop.flush_id()
+		if not __item.append_properties(__props):
 			__success = false
 	
 	if __success: # TODO: reload_cache only affected items
