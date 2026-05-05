@@ -1,6 +1,7 @@
 extends Module
 class_name TestModule
 
+@export var enabled: bool = true
 @export var mod_item: ItemModule
 @export var mod_action: ActionModule
 @export var tests: Array[Test] = [];
