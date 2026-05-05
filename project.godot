@@ -20,10 +20,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 KeyboardModifiers="*uid://d1p6olc3jg60n"
+ThreadPool="*uid://dy08ukqt252uf"
 
 [display]
 
 window/vsync/vsync_mode=0
+
+[editor]
+
+script/templates_search_path="res://src/Templates"
 
 [input]
 
