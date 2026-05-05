@@ -21,5 +21,8 @@ func serialize(__dict: Dictionary) -> void:
 	for __key: String in __dict.keys():
 		self.set(__key, __dict[__key])
 
+func flush_id() -> void:
+	self.id = RandomString.new("P_").value
+
 @abstract
 func get_type_as_string() -> StringName

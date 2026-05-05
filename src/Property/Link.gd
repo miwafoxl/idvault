@@ -22,11 +22,11 @@ func remove_parameter(__rm_parameter_id: Array[String]) -> bool:
 func get_type_as_string() -> StringName:
 	return &"PROPERTY.TYPES.LINK"
 
-func _init(__link_to_id: String, __link_from_id: String = "",
+func _init(__link_to_id: String = "", __link_from_id: String = "",
 		__parameters: Dictionary[String, Variant] = {},
 		__user_created: bool = false) -> void:
 	self.from_id = __link_from_id
 	self.to_id = __link_to_id
 	self.user_created = __user_created
 	append_parameter(__parameters)
-	self.id = RandomString.new("P_").value
+	super.flush_id()

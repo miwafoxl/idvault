@@ -18,12 +18,12 @@ func check() -> bool:
 	__obj.free()
 	return checked
 
-func execute(__mod_item: ItemModule, __mod_action: ActionModule) -> bool:
+func execute(__mod_item: ItemModule, __mod_action: ActionModule) -> int:
 	if not checked:
 		printerr("Test: can't run test '%s' because it has not been checked by TestModule." % name)
 		return false
 	var __obj: Object = Object.new()
-	var __result: bool = false
+	var __result: int = -1
 	__obj.set_script(src)
 	__result = __obj.run(__mod_item, __mod_action)
 	__obj.free()

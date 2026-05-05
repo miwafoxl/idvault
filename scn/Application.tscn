@@ -26,7 +26,17 @@
 [ext_resource type="Resource" uid="uid://ccts7mjdabkm4" path="res://res/actions/property/edit/ApplyBulk.tres" id="24_s2ijd"]
 [ext_resource type="Resource" uid="uid://dco4oygq8k33m" path="res://res/actions/item/select/ByItemID_Toggle.tres" id="25_bnnxs"]
 [ext_resource type="Resource" uid="uid://bpam0ndoe46cb" path="res://res/actions/item/stage/Query.tres" id="26_33pya"]
+[ext_resource type="Resource" uid="uid://yc51y0od1y5y" path="res://res/actions/property/remove/SelectedIndex.tres" id="27_62eh1"]
 [ext_resource type="Resource" uid="uid://dvnlmjildicpb" path="res://res/actions/item/reorder/ByPropertyIndex.tres" id="27_bnnxs"]
+[ext_resource type="Script" uid="uid://bwcr6qhpp7jso" path="res://src/Module/TestModule.gd" id="28_sg3l2"]
+[ext_resource type="Script" uid="uid://dk5ap4k1krdoj" path="res://src/Test.gd" id="29_ldrk5"]
+[ext_resource type="Resource" uid="uid://b67jtg3he0ew8" path="res://tests/AddItem.tres" id="30_0slqf"]
+[ext_resource type="Resource" uid="uid://cswrli0odojoj" path="res://tests/Add10Items.tres" id="31_0slqf"]
+[ext_resource type="Resource" uid="uid://cwoqktkpc2uqr" path="res://tests/Add100Items.tres" id="32_pucfs"]
+[ext_resource type="Resource" uid="uid://dskv65xrnyeio" path="res://tests/Add500Items.tres" id="33_s2ijd"]
+[ext_resource type="Resource" uid="uid://07f8b4uwo1ck" path="res://tests/GiveProperty.tres" id="34_bnnxs"]
+[ext_resource type="Resource" uid="uid://cahoopsvklw1a" path="res://tests/Add50ItemsGiveProperty.tres" id="35_33pya"]
+[ext_resource type="Resource" uid="uid://m027eluh0rir" path="res://tests/GivePropertyThenRemove.tres" id="37_v4htx"]
 
 [node name="APPLICATION" type="Node" unique_id=363368971]
 script = ExtResource("1_tbfir")
@@ -37,10 +47,18 @@ metadata/_custom_type_script = "uid://by3xvk1tboofk"
 unique_name_in_owner = true
 script = ExtResource("2_xwlb1")
 mod_item = NodePath("../ITEM_MODULE")
-default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd"), ExtResource("25_bnnxs"), ExtResource("26_33pya"), ExtResource("27_bnnxs")])
+default = Array[ExtResource("3_1v7vn")]([ExtResource("4_gl6yv"), ExtResource("5_1bq3j"), ExtResource("6_5yf8b"), ExtResource("7_sg3l2"), ExtResource("8_2nqum"), ExtResource("9_ldrk5"), ExtResource("10_0slqf"), ExtResource("11_pucfs"), ExtResource("12_s2ijd"), ExtResource("13_bnnxs"), ExtResource("14_33pya"), ExtResource("15_62eh1"), ExtResource("16_v4htx"), ExtResource("17_ajmq0"), ExtResource("18_4w571"), ExtResource("19_qonqs"), ExtResource("22_0slqf"), ExtResource("23_pucfs"), ExtResource("24_s2ijd"), ExtResource("25_bnnxs"), ExtResource("26_33pya"), ExtResource("27_bnnxs"), ExtResource("27_62eh1")])
 metadata/_custom_type_script = "uid://cf1bf1qjt8op7"
 
 [node name="ITEM_MODULE" type="Node" parent="." unique_id=1855138344]
 unique_name_in_owner = true
 script = ExtResource("24_1v7vn")
 metadata/_custom_type_script = "uid://htdxvtahxgnw"
+
+[node name="TEST_MODULE" type="Node" parent="." unique_id=1243284954 node_paths=PackedStringArray("mod_item", "mod_action")]
+unique_name_in_owner = true
+script = ExtResource("28_sg3l2")
+mod_item = NodePath("../ITEM_MODULE")
+mod_action = NodePath("../ACTION_MODULE")
+tests = Array[ExtResource("29_ldrk5")]([ExtResource("30_0slqf"), ExtResource("31_0slqf"), ExtResource("32_pucfs"), ExtResource("33_s2ijd"), ExtResource("34_bnnxs"), ExtResource("35_33pya"), ExtResource("37_v4htx")])
+metadata/_custom_type_script = "uid://bwcr6qhpp7jso"
