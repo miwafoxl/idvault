@@ -1,7 +1,25 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# res/actions/item/remove/ByItemID.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
 extends Object
 
 ## Removes items by ID
-func run(__manager: ItemManager, __param: Dictionary) -> bool: 
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool: 
 	var __item_ids: Array[String]
 	var __rm_indexes: Array[int]
 	#region Parameter processing
@@ -16,8 +34,8 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 				push_warning("items.remove.by_item_id: invalid key '%s'\
 				-> item_id" % __key)
 	#endregion Parameter processing
-	var __get_id: Array[Item] = __manager.get_item_by_id(__item_ids)
+	var __get_id: Array[Item] = __mod_item.get_item_by_id(__item_ids)
 	for __item: Item in __get_id:
-		var __idx: int = __manager.unordered_items.find(__item)
+		var __idx: int = __mod_item.unordered_items.find(__item)
 		__rm_indexes.append(__idx)
-	return __manager.remove_items_unordered_index(__rm_indexes)
+	return __mod_item.remove_items_unordered_index(__rm_indexes)

@@ -9,7 +9,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_iywll")
-title = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_TITLE")
+title = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_HEADER")
 alt = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_ALT")
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=1052199156]
@@ -33,7 +33,8 @@ columns = 2
 layout_mode = 2
 text = "WIDGET.DISPLAY_EDIT.TITLE"
 
-[node name="LINE_TITLE" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1045855981]
+[node name="LINE_HEADER" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1045855981]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -42,5 +43,30 @@ layout_mode = 2
 text = "WIDGET.DISPLAY_EDIT.ALT"
 
 [node name="LINE_ALT" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1348862395]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="TXT_BRIEF" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1271557977]
+layout_mode = 2
+text = "WIDGET.DISPLAY_EDIT.BRIEF"
+
+[node name="LINE_BRIEF" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=53513234]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "WIDGET.DISPLAY_EDIT.BRIEF_PLACEHOLDER"
+
+[node name="TXT_TEXT" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=239409047]
+layout_mode = 2
+size_flags_vertical = 0
+text = "WIDGET.DISPLAY_EDIT.TEXT"
+
+[node name="LINE_TEXT" type="TextEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=749806674]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "WIDGET.DISPLAY_EDIT.TEXT_PLACEHOLDER"
+wrap_mode = 1
+scroll_fit_content_height = true

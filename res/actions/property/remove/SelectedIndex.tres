@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://yc51y0od1y5y"]
+
+[ext_resource type="Script" uid="uid://b475asnp2gx0l" path="res://src/Action.gd" id="1_1mi4i"]
+[ext_resource type="Script" uid="uid://v2bgw3rnt0v8" path="res://res/actions/property/remove/SelectedIndex.gd" id="2_e5ucn"]
+
+[resource]
+script = ExtResource("1_1mi4i")
+alias = &"property.remove.selected_index"
+author = "idvault"
+src = ExtResource("2_e5ucn")
+metadata/_custom_type_script = "uid://b475asnp2gx0l"

@@ -1,44 +1,39 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# Application.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
 extends Node
 class_name Application
 
 @export var default_ui: PackedScene
-@export var item_manager: ItemManager
-@export var action_manager: ActionManager
-@export var menu_manager: MenuManager
-
-@onready var testing = $Testing
 var ui: UI = null
 
 func swap_ui(__ui: PackedScene) -> void:
 	var __node: UI = __ui.instantiate()
-	if not ui == null:
-		if ui.is_connected(&"request_menu", popup_menu):
-			ui.disconnect(&"request_menu", popup_menu)
-		ui.free()
 	ui = __node
-	ui.give_managers({
-		"item": item_manager })
-	ui.request_menu.connect(popup_menu)
+	ui.modules({
+		"item": %ITEM_MODULE })
 	ui.trigger.connect(process_trigger)
-	item_manager.stage_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
-	item_manager.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
+	%ITEM_MODULE.stage_updated.connect(ui.update, ConnectFlags.CONNECT_DEFERRED)
+	%ITEM_MODULE.selection_updated.connect(ui.update_selection, ConnectFlags.CONNECT_DEFERRED)
 	add_child(ui, true)
 
-func ui_request(__id: StringName, __param: Dictionary) -> void:
-	ui.request(__id, __param)
-
-func popup_menu(__id: StringName, __param: Dictionary = {}, \
-		__position: Vector2i = DisplayServer.mouse_get_position()) -> void:
-	var __menu: ContextMenu = menu_manager.retrieve_menu(__id, __param)
-	if __menu == null:
-		printerr("No menu with id '%s'" % __id)
-	#print_debug(__id, __param)
-	add_child(__menu)
-	__menu.action_query.connect(menu_manager.menu_action_callback, \
-			ConnectFlags.CONNECT_DEFERRED)
-	__menu.set_position(__position)
-	__menu.set_force_native(true)
-	__menu.popup()
+func ui_request(__request: StringName, __param: Dictionary) -> void:
+	ui.request(__request, __param)
 
 func process_trigger(__tr: Trigger) -> void:
 	if (__tr == null) or (__tr.relevant_id.is_empty()):
@@ -46,9 +41,7 @@ func process_trigger(__tr: Trigger) -> void:
 		return
 	match __tr.type:
 		Trigger.TriggerTypes.ACTION:
-			action_manager.run(__tr.relevant_id, __tr.parameters)
-		Trigger.TriggerTypes.MENU:
-			popup_menu(__tr.relevant_id, __tr.parameters)
+			%ACTION_MODULE.run(__tr.relevant_id, __tr.parameters)
 		Trigger.TriggerTypes.UI_REQUEST:
 			ui_request(__tr.relevant_id, __tr.parameters)
 		_:
@@ -56,15 +49,9 @@ func process_trigger(__tr: Trigger) -> void:
 				Trigger.TriggerTypes.keys()[__tr.type])
 
 func _ready() -> void:
-	action_manager.append_actions(action_manager.default, true)
-	menu_manager.append_menus(menu_manager.default, false)
-	action_manager.trigger.connect(process_trigger)
-	menu_manager.trigger.connect(process_trigger)
-	item_manager.trigger.connect(process_trigger)
+	%ACTION_MODULE.append_actions(%ACTION_MODULE.default)
+	%ACTION_MODULE.trigger.connect(process_trigger)
+	%ITEM_MODULE.trigger.connect(process_trigger)
+	%TEST_MODULE.append_tests(%TEST_MODULE.tests)
+	%TEST_MODULE.do_tests()
 	swap_ui(default_ui)
-	var __disable_test: bool = true
-	var __test_results: Array = [] if __disable_test else testing.do_tests()
-	if __test_results.is_empty():
-		print(["All tests passed", "Tests disabled"][__disable_test as int])
-	else:
-		printerr("Test failed: ", __test_results)

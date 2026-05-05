@@ -1,7 +1,25 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# res/actions/item/select/ByItemIndex_Append.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
 extends Object
 
 ## Append items to selection by Item index. If items aren't existent, nothing happens.
-func run(__manager: ItemManager, __param: Dictionary) -> bool: 
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool: 
 	var __item_ids: Array[int]
 	var __select_indexes: Array[int]
 	var __nothing_selected: bool = false
@@ -21,6 +39,6 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 				-> item_idx, only_if_nothing_selected" % __key)
 	#endregion Parameter processing
 	if __nothing_selected:
-		if __manager.selected_items.is_empty(): return true
-	__manager.select_items_at_stage_index(__select_indexes)
+		if __mod_item.selected_items.is_empty(): return true
+	__mod_item.select_items_at_stage_index(__select_indexes)
 	return true

@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://dfv228qdvucjj"]
 
 [ext_resource type="Script" uid="uid://b1nklbx53sbji" path="res://src/UI/DefaultUI/Dialog/ItemPropertiesDialog.gd" id="1_0c17t"]
-[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/theme/DefaultUI/default.tres" id="1_m2jxb"]
+[ext_resource type="Theme" uid="uid://echxjbibbbbf" path="res://res/DefaultUI/theme/default.tres" id="1_m2jxb"]
 [ext_resource type="PackedScene" uid="uid://4lnrxhsq4rg4" path="res://scn/DefaultUI/Widgets/EditableList.tscn" id="3_m2jxb"]
 
 [node name="ITEM_PROPERTIES" type="Window" unique_id=1098095428]
 oversampling_override = 1.0
 title = "DIALOG.ITEM_PROPERTIES.TITLE"
 position = Vector2i(0, 36)
-size = Vector2i(600, 500)
+size = Vector2i(450, 500)
 unresizable = true
 theme = ExtResource("1_m2jxb")
 script = ExtResource("1_0c17t")
@@ -48,6 +48,7 @@ layout_mode = 2
 alignment = 2
 
 [node name="BUT_APPLY" type="Button" parent="MARGINC/VBOX_C/HBOX_C" unique_id=1500355513]
+unique_name_in_owner = true
 layout_mode = 2
 text = "DIALOG.GENERAL.APPLY"
 

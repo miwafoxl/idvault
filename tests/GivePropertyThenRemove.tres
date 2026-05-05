@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Test" format=3 uid="uid://m027eluh0rir"]
+
+[ext_resource type="Script" uid="uid://dk5ap4k1krdoj" path="res://src/Test.gd" id="1_gcikp"]
+[ext_resource type="Script" uid="uid://ctv6lstjyqiet" path="res://tests/GivePropertyThenRemove.gd" id="2_1g3mp"]
+
+[resource]
+script = ExtResource("1_gcikp")
+name = &"Add item, give a property and remove that property"
+src = ExtResource("2_1g3mp")
+metadata/_custom_type_script = "uid://dk5ap4k1krdoj"

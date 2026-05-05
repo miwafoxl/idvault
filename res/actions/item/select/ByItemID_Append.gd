@@ -1,7 +1,25 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# res/actions/item/select/ByItemID_Append.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
 extends Object
 
 ## Append selection of items by Item ID. If items aren't existent, nothing happens.
-func run(__manager: ItemManager, __param: Dictionary) -> bool: 
+func run(__mod_item: ItemModule, __param: Dictionary) -> bool: 
 	var __item_ids: Array[String]
 	var __nothing_selected: bool = false
 	#region Parameter processing
@@ -20,7 +38,7 @@ func run(__manager: ItemManager, __param: Dictionary) -> bool:
 				-> item_id, only_if_nothing_selected" % __key)
 	#endregion Parameter processing
 	if __nothing_selected:
-		if __manager.selected_items.is_empty(): return true
-	var __get_id: Array[Item] = __manager.get_item_by_id(__item_ids)
-	__manager.select_items(__get_id, true)
+		if __mod_item.selected_items.is_empty(): return true
+	var __get_id: Array[Item] = __mod_item.get_item_by_id(__item_ids)
+	__mod_item.select_items(__get_id, true)
 	return true

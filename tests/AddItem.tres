@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Test" format=3 uid="uid://b67jtg3he0ew8"]
+
+[ext_resource type="Script" uid="uid://dk5ap4k1krdoj" path="res://src/Test.gd" id="1_ij5o0"]
+[ext_resource type="Script" uid="uid://lh36brnk6dnt" path="res://tests/AddItem.gd" id="2_48q5r"]
+
+[resource]
+script = ExtResource("1_ij5o0")
+name = &"Add and remove a single item"
+src = ExtResource("2_48q5r")
+metadata/_custom_type_script = "uid://dk5ap4k1krdoj"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Menu" format=3 uid="uid://cgolyyl2lalt4"]
+
+[ext_resource type="Script" uid="uid://cw8bgstjifmjv" path="res://src/UI/DefaultUI/Menu.gd" id="1_ph7w0"]
+[ext_resource type="Script" uid="uid://blsju8uheflcn" path="res://res/DefaultUI/menus/property/AddProperty.gd" id="2_b203p"]
+
+[resource]
+script = ExtResource("1_ph7w0")
+alias = &"property.add_property"
+src = ExtResource("2_b203p")
+metadata/_custom_type_script = "uid://cw8bgstjifmjv"

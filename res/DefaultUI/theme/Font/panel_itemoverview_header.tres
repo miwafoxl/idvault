@@ -1,0 +1,6 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://d2s73pg551rdx"]
+
+[ext_resource type="FontFile" uid="uid://bgxq435l0unep" path="res://res/DefaultUI/theme/Font/Miranda_Sans/static/MirandaSans-Bold.ttf" id="1_mc0t0"]
+
+[resource]
+font = ExtResource("1_mc0t0")

@@ -1,3 +1,21 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# RangedEdit.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
 extends PropertyWidget
 class_name RangedEditWidget
 
@@ -14,7 +32,7 @@ const DAYS_IN_MONTHS: Array[int] = [ 31,29,31,30,31,30,31,31,30,31,30,31 ]
 
 func deserialize(__property: Property) -> void:
 	var __prop: RangedDate = __property
-	related_prop_id = __prop.id
+	related_id = __prop.id
 	indefinite.set_pressed(__prop.indefinite_end)
 	# Day deserialize
 	day_start.text = str(__prop.start_date.z) if __prop.start_date.z > 0 else ""
@@ -67,15 +85,3 @@ func set_disabled_end_date(__disabled: bool) -> void:
 	day_end.set_editable(not __disabled)
 	year_end.set_editable(not __disabled)
 	month_end.set_disabled(__disabled)
-
-func collect() -> Dictionary:
-	var __collected: Dictionary = {}
-	if marked_for_deletion:
-		__collected = {"rem": {
-			related_prop_id: marked_for_deletion
-		}}
-	elif check_if_changed():
-		__collected = {"mod": {
-			related_prop_id: get_as_property().deserialized(false)
-		}}
-	return __collected

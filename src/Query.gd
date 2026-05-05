@@ -1,8 +1,26 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# Query.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
 extends Resource
 class_name Query
 
 var raw_query: String = "";
-var manager: ItemManager
+var mod_item: ItemModule
 var items: Array[Item]
 
 var filtered: Array[Item]
@@ -78,7 +96,7 @@ func parse_split(__split: PackedStringArray) -> Dictionary[String, Parsed]:
 		if __descriptor_str.left(1) in ["-", "!"]:
 			__negated = true
 			__descriptor_str = __descriptor_str.right(-1)
-		__descriptor_cx = manager.get_from_cache("by_descriptor_alias", __descriptor_str)
+		__descriptor_cx = mod_item.get_from_cache("by_descriptor_alias", __descriptor_str)
 		if __descriptor_cx.is_empty():
 			error_query = [__query_str, ParseError.DESCRIPTOR_NOT_FOUND]
 			break
@@ -138,30 +156,48 @@ func filter_items_by_parsed(__items: Array[Item], \
 		__exclusive: bool = true, __log: bool = true) -> Array[Item]:
 	var __filtered: Array[Item]
 	var __miss: int = 0
+	var __positive_matches: Array[String] = []
+	var __negative_matches: Array[String] = []
+	for __id: String in __parsed_query.keys():
+		var __parsed: Parsed = __parsed_query[__id]
+		if __parsed.is_negated:
+			__negative_matches.append(__id)
+		else:
+			__positive_matches.append(__id)
 	for __item: Item in __items:
-		var __remaining_matches: Array = __parsed_query.keys()
-		var __cx: Array = manager.get_from_cache_matched("by_links", ["@%s" % __item.id])
-		if (__cx.is_empty()): # or (__cx[3] not in __remaining_matches): 
-			__miss += 1
-			continue
-		var __from: String = __cx[3] # Link.from
-		__remaining_matches.erase(__from)
-		if __exclusive and not __remaining_matches.is_empty(): continue
-		__filtered.append(__item)
+		var __match: bool = true
+		var __cache: Array = mod_item.get_from_cache_matched("by_links", __positive_matches.map(
+			func(id: String): return "%s@%s" % [id, __item.id] ))
+		var __cache_negated: Array = []
+		if not __negative_matches.is_empty():
+			__cache_negated = mod_item.get_from_cache_matched("by_links",  __negative_matches.map(
+			func(id: String): return "%s@%s" % [id, __item.id] ))
+	
+		if __cache.is_empty():
+			__match = not __negative_matches.is_empty()
+		if not __cache_negated.is_empty():
+			__match = false
+			
+		#print_debug("%s: +%s -%s -> %s" % [__item.id, __cache.size(), __cache_negated.size(), __match])
+		
+		if __match: __filtered.append(__item)
+		else: __miss += 1
 	if __log:
 		var __usec: int = Time.get_ticks_usec() - start_ms
-		var __took_string: String = "Took %s %s" % [__usec, ["usec", "ms"][(__usec >= 1000) as int]]
-		print_debug("Query: Filtered %s items with %s misses. Took %s usec." % [
-			__filtered.size(), __miss, Time.get_ticks_usec() - start_ms
+		var __ms: bool = __usec >= 1000
+		__usec = __usec >> 10 if __ms else __usec
+		var __took_string: String = "Took %s %s" % [__usec, ["usec", "ms"][__ms as int]]
+		print_debug("Query: Filtered %s items with %s misses. %s" % [
+			__filtered.size(), __miss, __took_string
 		])
 		print_parsed(__parsed_query.values())
 	return __filtered
 
 func _init(__raw_query: String, __items: Array[Item], \
-		__manager: ItemManager, __exclusive: bool = true) -> void:
+		__mod_item: ItemModule, __exclusive: bool = true) -> void:
 	self.raw_query = __raw_query.strip_edges().strip_escapes()
 	self.items = __items
-	self.manager = __manager
+	self.mod_item = __mod_item
 	if __items.is_empty():
 		printerr("Query: received no items to filter")
 	else: process(__exclusive)

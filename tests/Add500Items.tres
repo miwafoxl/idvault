@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Test" format=3 uid="uid://dskv65xrnyeio"]
+
+[ext_resource type="Script" uid="uid://dk5ap4k1krdoj" path="res://src/Test.gd" id="1_l7a6l"]
+[ext_resource type="Script" uid="uid://c7qtgunbxuhnq" path="res://tests/Add500Items.gd" id="2_yllcg"]
+
+[resource]
+script = ExtResource("1_l7a6l")
+name = &"Add and remove 500 items"
+src = ExtResource("2_yllcg")
+metadata/_custom_type_script = "uid://dk5ap4k1krdoj"

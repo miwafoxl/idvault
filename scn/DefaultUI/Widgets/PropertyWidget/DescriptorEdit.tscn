@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1brfe50g6pit" path="res://src/UI/DefaultUI/Widget/PropertyWidget/DescriptorEdit.gd" id="1_fck80"]
 
-[node name="DESCRIPTOR_EDIT" type="PanelContainer" unique_id=1940872918 node_paths=PackedStringArray("alias", "short", "long")]
+[node name="DESCRIPTOR_EDIT" type="PanelContainer" unique_id=1940872918]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -10,9 +10,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 script = ExtResource("1_fck80")
-alias = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_ALIAS")
-short = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/LINE_SHORT")
-long = NodePath("VBOX_C/MARGIN_C/VBOX_C/GRID_C/TEXT_LONG")
 
 [node name="VBOX_C" type="VBoxContainer" parent="." unique_id=798033856]
 layout_mode = 2
@@ -29,35 +26,26 @@ layout_mode = 2
 [node name="GRID_C" type="GridContainer" parent="VBOX_C/MARGIN_C/VBOX_C" unique_id=308451975]
 layout_mode = 2
 theme_override_constants/h_separation = 40
-columns = 2
+columns = 4
 
 [node name="TXT_ALIAS" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1773891633]
 layout_mode = 2
 text = "WIDGET.DESCRIPTOR_EDIT.ALIAS"
 
 [node name="LINE_ALIAS" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1045855981]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "WIDGET.DESCRIPTOR_EDIT.ALIAS_PLACEHOLDER"
 
-[node name="TXT_SHORT" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=966374119]
+[node name="TXT_PRIORITY" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=966374119]
 layout_mode = 2
-text = "WIDGET.DESCRIPTOR_EDIT.SHORT"
+text = "WIDGET.DESCRIPTOR_EDIT.PRIORITY"
 
-[node name="LINE_SHORT" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1348862395]
+[node name="LINE_PRIORITY" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1348862395]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "WIDGET.DESCRIPTOR_EDIT.SHORT_PLACEHOLDER"
-
-[node name="TXT_LONG" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=247437778]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "WIDGET.DESCRIPTOR_EDIT.LONG"
-
-[node name="TEXT_LONG" type="TextEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=28871705]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-size_flags_vertical = 3
-placeholder_text = "WIDGET.DESCRIPTOR_EDIT.LONG_PLACEHOLDER"
-wrap_mode = 1
+text = "0"
+placeholder_text = "WIDGET.DESCRIPTOR_EDIT.PRIORITY_PLACEHOLDER"
+middle_mouse_paste_enabled = false
+virtual_keyboard_type = 2

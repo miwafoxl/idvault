@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Test" format=3 uid="uid://cahoopsvklw1a"]
+
+[ext_resource type="Script" uid="uid://dk5ap4k1krdoj" path="res://src/Test.gd" id="1_py6yq"]
+[ext_resource type="Script" uid="uid://b6l37a8kbxdfq" path="res://tests/Add50ItemsGiveProperty.gd" id="2_711k7"]
+
+[resource]
+script = ExtResource("1_py6yq")
+name = &"Add 50 items and give all of them property"
+src = ExtResource("2_711k7")
+metadata/_custom_type_script = "uid://dk5ap4k1krdoj"
