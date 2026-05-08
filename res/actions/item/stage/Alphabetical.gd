@@ -25,13 +25,7 @@ func order(a: Item, b: Item) -> bool:
 	if a_text.is_empty() and !b_text.is_empty(): return false
 	if !a_text.is_empty() and b_text.is_empty(): return true
 	
-	for i: int in a_text.length():
-		var __a_char: int = a_text.unicode_at(i)
-		for u: int in b_text.length():
-			var __b_char: int = b_text.unicode_at(i)
-			if __a_char > __b_char: return true
-			else: return false
-	return false
+	return a_text.naturalnocasecmp_to(b_text) > 0
 
 ## Stage items in alphabetically
 func run(__mod_item: ItemModule, __param: Dictionary) -> bool:
