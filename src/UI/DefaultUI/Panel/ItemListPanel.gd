@@ -133,3 +133,11 @@ func _on_query_button_button_down() -> void:
 			Trigger.TriggerTypes.ACTION,
 			&"items.stage.alphabetical", {}
 		))
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.FETCH,
+		&"staged_items_page", {
+			"_tag": TAG_STAGED_ITEMS_PAGE,
+			"page_size": 100,
+			"page_index": selected_page
+		}
+	))
