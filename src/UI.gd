@@ -30,3 +30,8 @@ func update_selection() -> void
 
 @abstract
 func request(__request: StringName, __param: Dictionary) -> void
+
+func receive_fetch(__fetch_res: Dictionary) -> void:
+	var __nodes: Array[Node] = self.get_children(true)
+	for __child: Node in __nodes:
+		__child.propagate_call(&"receive_fetch", [__fetch_res])
