@@ -1,0 +1,27 @@
+# GNU General Public License, version 2 (GPL-2.0-only) notice
+# ---------------------------------------------------------------
+# res/fetches/Selected.gd
+# ---------------------------------------------------------------
+# Copyright (C) 2026   Amanda Severo   Contact: miwafoxl@proton.me
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see https://www.gnu.org/licenses/.
+
+extends Object
+
+## Returns RefCounted references of selected items
+func run(__mod_item: ItemModule, __param: Dictionary) -> Dictionary:
+	var __dict: Dictionary = {
+		"items": __mod_item.selected_items,
+		"network": __mod_item.cache_retrieve_link_network(__mod_item.selected_items)
+	}
+	return __dict
