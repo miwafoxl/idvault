@@ -37,6 +37,12 @@
 [ext_resource type="Resource" uid="uid://07f8b4uwo1ck" path="res://tests/GiveProperty.tres" id="34_bnnxs"]
 [ext_resource type="Resource" uid="uid://cahoopsvklw1a" path="res://tests/Add50ItemsGiveProperty.tres" id="35_33pya"]
 [ext_resource type="Resource" uid="uid://m027eluh0rir" path="res://tests/GivePropertyThenRemove.tres" id="37_v4htx"]
+[ext_resource type="Script" uid="uid://dh5a1n8tit4w8" path="res://src/Module/FetchModule.gd" id="38_ajmq0"]
+[ext_resource type="Script" uid="uid://4juhx14prgbl" path="res://src/Fetch.gd" id="39_qonqs"]
+[ext_resource type="Resource" uid="uid://7xbfg12pb8ok" path="res://res/fetches/Unordered.tres" id="40_hg2lc"]
+[ext_resource type="Resource" uid="uid://d0oqn71a6t06a" path="res://res/fetches/SelectedID.tres" id="41_hg2lc"]
+[ext_resource type="Resource" uid="uid://ct1v28qbtqyyc" path="res://res/fetches/StagedItemsPage.tres" id="42_1m14j"]
+[ext_resource type="Resource" uid="uid://cnsnme5xvt0g0" path="res://res/fetches/Selected.tres" id="43_g87cj"]
 
 [node name="APPLICATION" type="Node" unique_id=363368971]
 script = ExtResource("1_tbfir")
@@ -58,7 +64,15 @@ metadata/_custom_type_script = "uid://htdxvtahxgnw"
 [node name="TEST_MODULE" type="Node" parent="." unique_id=1243284954 node_paths=PackedStringArray("mod_item", "mod_action")]
 unique_name_in_owner = true
 script = ExtResource("28_sg3l2")
+enabled = true
 mod_item = NodePath("../ITEM_MODULE")
 mod_action = NodePath("../ACTION_MODULE")
 tests = Array[ExtResource("29_ldrk5")]([ExtResource("30_0slqf"), ExtResource("31_0slqf"), ExtResource("32_pucfs"), ExtResource("33_s2ijd"), ExtResource("34_bnnxs"), ExtResource("35_33pya"), ExtResource("37_v4htx")])
 metadata/_custom_type_script = "uid://bwcr6qhpp7jso"
+
+[node name="FETCH_MODULE" type="Node" parent="." unique_id=1925106364 node_paths=PackedStringArray("mod_item")]
+unique_name_in_owner = true
+script = ExtResource("38_ajmq0")
+mod_item = NodePath("../ITEM_MODULE")
+default = Array[ExtResource("39_qonqs")]([ExtResource("40_hg2lc"), ExtResource("41_hg2lc"), ExtResource("42_1m14j"), ExtResource("43_g87cj")])
+metadata/_custom_type_script = "uid://dh5a1n8tit4w8"

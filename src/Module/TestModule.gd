@@ -19,7 +19,8 @@
 extends Module
 class_name TestModule
 
-@export var enabled: bool = true
+@export var enabled: bool
+@export var show_time_bench: bool
 @export var mod_item: ItemModule
 @export var mod_action: ActionModule
 @export var tests: Array[Test] = [];
@@ -70,7 +71,8 @@ func do_tests(__tests: Array[StringName] = loaded.keys()) -> void:
 		__failed.append("'%s' at procedure %s"  % [__name, __proc_index])
 	if __failed.is_empty():
 		print("TestModule: All tests passed.")
-		print_rich("TestModule: Time Benchmark:\n- %s" % \
+		if show_time_bench:
+			print_rich("TestModule: Time Benchmark:\n- %s" % \
 			"\n- ".join(bench_results))
 	else:
 		printerr("TestModule: One or more tests failed:\n- %s" % \
@@ -95,6 +97,8 @@ func run(__test_name: StringName) -> int:
 		match __tr.type:
 			Trigger.TriggerTypes.ACTION:
 				__act.run(__tr.relevant_id, __tr.parameters)
+			Trigger.TriggerTypes.UI_REQUEST:
+				pass
 			_:
 				printerr("TestModule::__process_trigger: Invalid trigger type '%s'" % \
 					Trigger.TriggerTypes.keys()[__tr.type])

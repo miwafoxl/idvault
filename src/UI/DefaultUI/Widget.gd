@@ -25,3 +25,6 @@ signal trigger(tr: Trigger)
 
 func update() -> void:
 	pass
+
+func receive_fetch(__fetch_res: Dictionary) -> void:
+	pass

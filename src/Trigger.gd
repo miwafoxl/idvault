@@ -33,5 +33,6 @@ enum TriggerTypes {
 	TRIGGER,
 	NONE,
 	ACTION,
+	FETCH,
 	UI_REQUEST,
 }

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Fetch" format=3 uid="uid://d0oqn71a6t06a"]
+
+[ext_resource type="Script" uid="uid://4juhx14prgbl" path="res://src/Fetch.gd" id="1_6h4hc"]
+[ext_resource type="Script" uid="uid://cwhvd1anjxg6a" path="res://res/fetches/SelectedID.gd" id="2_0fmjv"]
+
+[resource]
+script = ExtResource("1_6h4hc")
+alias = &"selected_id"
+author = "idvault"
+src = ExtResource("2_0fmjv")
+metadata/_custom_type_script = "uid://4juhx14prgbl"

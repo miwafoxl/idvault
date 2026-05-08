@@ -25,6 +25,49 @@ class_name DefaultUI_ItemListPanel
 @export var selected_page: int = 0
 @export var total_pages: int = 0
 
+const TAG_SELECTED_ITEM_IDS: String = "itemlist:selected_item_id"
+const TAG_STAGED_ITEMS_PAGE: String = "itemlist:staged_items_page"
+
+#region OVERRIDES
+
+func _ready() -> void:
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.FETCH,
+		&"selected_id", {
+			"_tag": TAG_SELECTED_ITEM_IDS,
+		}
+	))
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.FETCH,
+		&"staged_items_page", {
+			"_tag": TAG_STAGED_ITEMS_PAGE,
+			"page_size": 100,
+			"page_index": selected_page
+		}
+	))
+
+func receive_fetch(__fetch_res: Dictionary) -> void:
+	match __fetch_res.keys()[0]:
+		TAG_SELECTED_ITEM_IDS:
+			var __value: Array[String] = __fetch_res.values()[0]
+			selected_item_id = __value
+			update()
+		TAG_STAGED_ITEMS_PAGE:
+			var __value: Dictionary = __fetch_res.values()[0]
+			total_pages = __value.get("total_pages", 0)
+			items_ref = __value.get("items", [])
+			update()
+
+func update_selection() -> void:
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.FETCH,
+		&"selected_id", {
+			"_tag": TAG_SELECTED_ITEM_IDS,
+		}
+	))
+
+#endregion OVERRIDES
+
 func interaction_item_display_click(__item_id: String) -> void:
 	var __action: StringName
 	if selected_item_id.is_empty():
@@ -42,9 +85,9 @@ func interaction_item_display_click(__item_id: String) -> void:
 		__action, {"item_id": [__item_id]}
 	))
 
-func update(__selected_items_id: Array[String] = []) -> void:
+func update() -> void:
 	update_item_display()
-	update_selected_items(__selected_items_id)
+	update_selected_items(selected_item_id)
 
 func update_selected_items(__selected: Array[String] = []) -> void:
 	selected_item_id = __selected
@@ -90,3 +133,11 @@ func _on_query_button_button_down() -> void:
 			Trigger.TriggerTypes.ACTION,
 			&"items.stage.alphabetical", {}
 		))
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.FETCH,
+		&"staged_items_page", {
+			"_tag": TAG_STAGED_ITEMS_PAGE,
+			"page_size": 100,
+			"page_index": selected_page
+		}
+	))
