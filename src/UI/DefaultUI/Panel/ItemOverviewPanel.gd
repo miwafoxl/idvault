@@ -23,6 +23,16 @@ class_name DefaultUI_ItemOverview
 @export var items_network: Dictionary = {}
 @export var selected: int = 0
 
+const TAG_SELECTED_ITEMS: String = "itemoverview:selected_items"
+
+func receive_fetch(__fetch_res: Dictionary) -> void:
+	match __fetch_res.keys()[0]:
+		TAG_SELECTED_ITEMS:
+			var __value: Dictionary = __fetch_res.values()[0]
+			items_ref = __value.get("items", [])
+			items_network = __value.get("network", {})
+			update()
+
 func update() -> void:
 	var __count: int = items_ref.size()
 	if __count > 0:
