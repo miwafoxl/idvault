@@ -42,6 +42,14 @@ func update() -> void:
 	update_counter(__count)
 	update_view()
 
+func update_selection() -> void:
+	trigger.emit(Trigger.new(
+		Trigger.TriggerTypes.FETCH,
+		&"selected_items", {
+			"_tag": TAG_SELECTED_ITEMS
+		}
+	))
+
 func update_view(__selected: int = selected) -> void:
 	if items_ref.is_empty(): return
 	var __item: Item = items_ref[selected]
