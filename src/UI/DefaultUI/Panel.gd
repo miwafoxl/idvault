@@ -23,6 +23,11 @@ class_name DefaultUI_Panel
 @warning_ignore("unused_signal")
 signal trigger(tr: Trigger)
 
+@abstract
+func update() -> void
 
-func update() -> void:
+func update_selection() -> void:
+	pass
+
+func receive_fetch(__fetch_res: Dictionary) -> void:
 	pass
