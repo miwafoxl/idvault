@@ -75,26 +75,25 @@ func update_selection() -> void:
 
 #endregion OVERRIDES
 
-func interaction_item_display_click(__item_id: String) -> void:
-	var __action: StringName
-	if selected_item_id.is_empty():
-		__action = &"items.select.by_item_id"
-	else:
-		if KeyboardModifiers.is_shift_modifier:
-			if __item_id in selected_item_id:
-				__action = &"items.deselect.by_item_id"
-			else:
-				__action = &"items.select.by_item_id_append"
-		else:
-			__action = &"items.select.by_item_id"
-	trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.ACTION,
-		__action, {"item_id": [__item_id]}
-	))
+#func interaction_item_display_click(__item_id: String) -> void:
+	#var __action: StringName
+	#if selected_item_id.is_empty():
+		#__action = &"items.select.by_item_id"
+	#else:
+		#if KeyboardModifiers.is_shift_modifier:
+			#if __item_id in selected_item_id:
+				#__action = &"items.deselect.by_item_id"
+			#else:
+				#__action = &"items.select.by_item_id_append"
+		#else:
+			#__action = &"items.select.by_item_id"
+	#trigger.emit(Trigger.new(
+		#Trigger.TriggerTypes.ACTION,
+		#__action, {"item_id": [__item_id]}
+	#))
 
 func update() -> void:
-	update_item_display()
-	update_selected_items(selected_item_id)
+	pass
 
 func update_selected_items(__selected: Array[String] = []) -> void:
 	selected_item_id = __selected
