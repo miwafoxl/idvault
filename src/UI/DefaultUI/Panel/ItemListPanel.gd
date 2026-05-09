@@ -58,12 +58,12 @@ func receive_fetch(__fetch_res: Dictionary) -> void:
 		TAG_SELECTED_ITEM_IDS:
 			var __value: Array[String] = __fetch_res.values()[0]
 			selected_item_id = __value
-			update()
+			update_selected_items(selected_item_id)
 		TAG_STAGED_ITEMS_PAGE:
 			var __value: Dictionary = __fetch_res.values()[0]
 			total_pages = __value.get("total_pages", 0)
 			items_ref = __value.get("items", [])
-			update()
+			update_item_display(sort_mode)
 
 func update_selection() -> void:
 	trigger.emit(Trigger.new(
