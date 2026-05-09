@@ -53,8 +53,8 @@ func update_selection() -> void:
 func update_view(__selected: int = selected) -> void:
 	if items_ref.is_empty(): return
 	var __item: Item = items_ref[selected]
-	for __control: Control in [%BOX_C_DISPLAY, %BOX_C_DESC_CONTENT,
-								%TXT_BRIEF, %TXT_ALT]:
+	for __control: Control in [%BOX_C_DISPLAY, %BOX_C_DESC_CONTENT, 
+								%TXT_ALT]:
 		__control.set_visible(false)
 	if __item.properties.is_empty(): return
 	for __prop: Property in __item.properties:
@@ -67,9 +67,6 @@ func update_view(__selected: int = selected) -> void:
 				if not __display.alt == "":
 					%TXT_ALT.set_text(__display.alt)
 					%TXT_ALT.set_visible(true)
-				if not __display.brief == "":
-					%TXT_BRIEF.set_text(__display.brief)
-					%TXT_BRIEF.set_visible(true)
 				if not __display.text == "":
 					%TXT_CONTENT.set_text(__display.text)
 					%BOX_C_DESC_CONTENT.set_visible(true)

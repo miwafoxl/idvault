@@ -24,9 +24,16 @@ class_name DefaultUI_ItemListPanel
 @export var selected_item_id: Array[String] = []
 @export var selected_page: int = 0
 @export var total_pages: int = 0
+@export var sort_mode: SortTypes = SortTypes.ITEM_DISPLAY
 
 const TAG_SELECTED_ITEM_IDS: String = "itemlist:selected_item_id"
 const TAG_STAGED_ITEMS_PAGE: String = "itemlist:staged_items_page"
+
+enum SortTypes {
+	ITEM_ID,
+	ITEM_DISPLAY,
+	ITEM_SORT_NAME,
+}
 
 #region OVERRIDES
 
@@ -51,12 +58,12 @@ func receive_fetch(__fetch_res: Dictionary) -> void:
 		TAG_SELECTED_ITEM_IDS:
 			var __value: Array[String] = __fetch_res.values()[0]
 			selected_item_id = __value
-			update()
+			update_selected_items(selected_item_id)
 		TAG_STAGED_ITEMS_PAGE:
 			var __value: Dictionary = __fetch_res.values()[0]
 			total_pages = __value.get("total_pages", 0)
 			items_ref = __value.get("items", [])
-			update()
+			update_item_display(sort_mode)
 
 func update_selection() -> void:
 	trigger.emit(Trigger.new(
@@ -68,26 +75,25 @@ func update_selection() -> void:
 
 #endregion OVERRIDES
 
-func interaction_item_display_click(__item_id: String) -> void:
-	var __action: StringName
-	if selected_item_id.is_empty():
-		__action = &"items.select.by_item_id"
-	else:
-		if KeyboardModifiers.is_shift_modifier:
-			if __item_id in selected_item_id:
-				__action = &"items.deselect.by_item_id"
-			else:
-				__action = &"items.select.by_item_id_append"
-		else:
-			__action = &"items.select.by_item_id"
-	trigger.emit(Trigger.new(
-		Trigger.TriggerTypes.ACTION,
-		__action, {"item_id": [__item_id]}
-	))
+#func interaction_item_display_click(__item_id: String) -> void:
+	#var __action: StringName
+	#if selected_item_id.is_empty():
+		#__action = &"items.select.by_item_id"
+	#else:
+		#if KeyboardModifiers.is_shift_modifier:
+			#if __item_id in selected_item_id:
+				#__action = &"items.deselect.by_item_id"
+			#else:
+				#__action = &"items.select.by_item_id_append"
+		#else:
+			#__action = &"items.select.by_item_id"
+	#trigger.emit(Trigger.new(
+		#Trigger.TriggerTypes.ACTION,
+		#__action, {"item_id": [__item_id]}
+	#))
 
 func update() -> void:
-	update_item_display()
-	update_selected_items(selected_item_id)
+	pass
 
 func update_selected_items(__selected: Array[String] = []) -> void:
 	selected_item_id = __selected
@@ -98,23 +104,42 @@ func update_selected_items(__selected: Array[String] = []) -> void:
 			__item_widget.display_selected = false
 		__item_widget.update_color()
 
-func update_item_display() -> void:
+func update_item_display(__sort: SortTypes = SortTypes.ITEM_SORT_NAME, \
+		__reverse: bool = false) -> void:
+	var __display_widget: Array[ItemDisplayWidget] = []
 	for __item: ItemDisplayWidget in %VBOX_C.get_children(false):
 		__item.queue_free()
 	for __stage_id: int in items_ref.size():
 		var __item: Item = items_ref[__stage_id]
 		var __item_widget: ItemDisplayWidget = widget_item.instantiate()
-		var __item_title: Array[Display] = __item.retrieve_displays()
+		var __item_display: Array[Display] = __item.retrieve_displays()
+		var __item_title: Display = __item_display[0]
 		__item_widget.related_stage_id = __stage_id
 		__item_widget.related_id = __item.id
-		if not __item_title.is_empty():
-			__item_widget.title = __item_title[0].header
-			__item_widget.subtitle = __item_title[0].alt
+		if __item_display.is_empty():
+			__item_widget.set_name(__item.id)
+			__item_widget.title = __item.id
 		else:
-			__item_widget.title = str(__item.id)
+			var __node_name: String = ""
+			__item_widget.title = __item_title.header
+			__item_widget.subtitle = __item_title.alt
+			match __sort:
+				SortTypes.ITEM_DISPLAY:
+					__node_name = ("%s_%s" % [__item_title.get_any_valid_str(), __item.id]) \
+					.validate_node_name()
+				SortTypes.ITEM_SORT_NAME:
+					__node_name = ("%s_%s" % [__item_title.sort_name, __item.id]) \
+					.validate_node_name()
+				_:
+					__node_name = __item.id
+			__item_widget.set_name(__node_name)
 		__item_widget.trigger.connect(trigger.emit)
 		__item_widget.update()
-		%VBOX_C.add_child(__item_widget)
+		__display_widget.append(__item_widget)
+	__display_widget.sort()
+	if not __reverse: __display_widget.reverse()
+	for __display: ItemDisplayWidget in __display_widget:
+		%VBOX_C.add_child(__display)
 
 func _on_new_item_button_button_down() -> void:
 	trigger.emit(Trigger.new(

@@ -47,15 +47,15 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TXT_BRIEF" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1271557977]
+[node name="TXT_SORT" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=1271557977]
 layout_mode = 2
-text = "WIDGET.DISPLAY_EDIT.BRIEF"
+text = "WIDGET.DISPLAY_EDIT.SORT_NAME"
 
-[node name="LINE_BRIEF" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=53513234]
+[node name="LINE_SORT" type="LineEdit" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=53513234]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "WIDGET.DISPLAY_EDIT.BRIEF_PLACEHOLDER"
+placeholder_text = "WIDGET.DISPLAY_EDIT.SORT_NAME_PLACEHOLDER"
 
 [node name="TXT_TEXT" type="Label" parent="VBOX_C/MARGIN_C/VBOX_C/GRID_C" unique_id=239409047]
 layout_mode = 2
